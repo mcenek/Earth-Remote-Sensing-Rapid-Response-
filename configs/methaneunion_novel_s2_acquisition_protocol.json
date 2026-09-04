@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_any_methaneunion_raster_access",
+  "scope": "Training-only acquisition and raster adjudication of the 1,632 geographically novel MethaneUnion Sentinel-2 candidates; no released MethaneUnion test raster, MARS folds 0/1/2, official test, protected, or external outcome access.",
+  "source": {
+    "repo_id": "yuyao42/MethaneUnion",
+    "revision": "e654cd777f85d701a4aff2894f513dcdf6981531",
+    "license": "CC-BY-NC-4.0",
+    "transport": "huggingface_hub native Xet, one archive at a time",
+    "archives_total_bytes": 156173577972,
+    "archives": [
+      {"name": "dataset_part_001.tar.gz", "bytes": 4447453592, "sha256": "6e1a81d81681b17832a5430b7ad32d4794c7011c028bf7cf1563d0fb7e8d935e"},
+      {"name": "dataset_part_002.tar.gz", "bytes": 4444767593, "sha256": "1859b29aabda962b91552ae72903440396b66d6e1592094211a574c11ad9b72b"},
+      {"name": "dataset_part_003.tar.gz", "bytes": 4446399583, "sha256": "487354229e4277bd9c871ede415591176937e9c8252c7da87fdd254d406298da"},
+      {"name": "dataset_part_004.tar.gz", "bytes": 4445227461, "sha256": "ab0f9973e2ae9615a95e45adebe3b4e509811bd1f4174b19ab6b07be9484e451"},
+      {"name": "dataset_part_005.tar.gz", "bytes": 4446601212, "sha256": "3f402bde6560115bb452a915cc79704c63d6e978eb43b1d7a04fad1c395b821a"},
+      {"name": "dataset_part_006.tar.gz", "bytes": 4440141456, "sha256": "b96cbe1e6f4d44c662fcaaca09bb437db1cf36863e9eb9a2065e0008fe52bf14"},
+      {"name": "dataset_part_007.tar.gz", "bytes": 4437872752, "sha256": "ceaab42ae0ad761367ebbe0ccc608605d5e88647902a74c9847b6e387c036a09"},
+      {"name": "dataset_part_008.tar.gz", "bytes": 4442134086, "sha256": "53335440bc899e16d8e90c95b154babc9d717fda7ce9f96bba407b1e435756f4"},
+      {"name": "dataset_part_009.tar.gz", "bytes": 4442681951, "sha256": "bcf6f8edf78a396016f2780277e2bc73a6ec65f4c06f958ef52d60df0bdf0343"},
+      {"name": "dataset_part_010.tar.gz", "bytes": 4444316066, "sha256": "a718e6326a6b211452d518074ec7bf22a61f9acdf4aa871d730f2b7c56cabb8b"},
+      {"name": "dataset_part_011.tar.gz", "bytes": 4441142625, "sha256": "871e868f30bafabf86fc95d8f41b910b1160354eaec0f6fc7225a3bd0825646b"},
+      {"name": "dataset_part_012.tar.gz", "bytes": 4449540761, "sha256": "9e9ac9477c00a277c74f8f1fba57e2c9b5032ca4bbad87255b6923ef914c5ffd"},
+      {"name": "dataset_part_013.tar.gz", "bytes": 4475774495, "sha256": "9352730ce85bf3cf8711e4205d1e0930432b814264c101897df66e320f4c3824"},
+      {"name": "dataset_part_014.tar.gz", "bytes": 4480670986, "sha256": "9ca481dc350487754dab07853aba03958149b18f5fbc77323fbfe020c394846a"},
+      {"name": "dataset_part_015.tar.gz", "bytes": 4484614204, "sha256": "9b0eecb897ed2cda624905369e6eeed37c261d6c65e0c17f2c9f2f795c04b24a"},
+      {"name": "dataset_part_016.tar.gz", "bytes": 4480913600, "sha256": "b7a24f13062d186792f63ccc945e18f788543e6c1be861f14a096d8ea65ee544"},
+      {"name": "dataset_part_017.tar.gz", "bytes": 4477446106, "sha256": "b34e6d37c3c426031e0504adca64c8a6252282af4a4d71edacff60f13d7f4ba8"},
+      {"name": "dataset_part_018.tar.gz", "bytes": 4474184149, "sha256": "d766fc093c21f955028bbdd5a0aa72ce7ef8f45ea2a86cdf3994dd329b1c1673"},
+      {"name": "dataset_part_019.tar.gz", "bytes": 4474679010, "sha256": "761e68ae216efe69c7d5eee90e6b699d3c3e8aea07d306981f4730667ff31a17"},
+      {"name": "dataset_part_020.tar.gz", "bytes": 4472473813, "sha256": "33b65d277b0e6ba28046af8257d63dbf199475e7a99b5e5da3de693bed9d0ed1"},
+      {"name": "dataset_part_021.tar.gz", "bytes": 4478561349, "sha256": "107905dcda32498187fe838eec7b4e1c4719dfc0635b96676a0b7b37e1761a14"},
+      {"name": "dataset_part_022.tar.gz", "bytes": 4481824424, "sha256": "de254ff5468740ed5f4178602eb8a448daf8914d051296a4af7e1f069dd4002c"},
+      {"name": "dataset_part_023.tar.gz", "bytes": 4476802781, "sha256": "fb9e4932e71461e22b3505e9639181a8649cac3c3ace99cadd537b5f62ade559"},
+      {"name": "dataset_part_024.tar.gz", "bytes": 4473251177, "sha256": "e18827bdc523545959246af0af6a165992906e912d2fa291cf8257b2586a3a69"},
+      {"name": "dataset_part_025.tar.gz", "bytes": 4466607353, "sha256": "644bd1a2cf2c555ccab062f54ff406a6ee852a7faf6e8773664984cfdd8ccc79"},
+      {"name": "dataset_part_026.tar.gz", "bytes": 4463951874, "sha256": "e568c2e66843ed00cd4e2266ede1c4447d8fa3c57e98c03094d0dbf7c2b21510"},
+      {"name": "dataset_part_027.tar.gz", "bytes": 4468931881, "sha256": "8f892aa5ffbbe122b23365bd683c5228f48267cf6789a38ad814126ce553661f"},
+      {"name": "dataset_part_028.tar.gz", "bytes": 4463725357, "sha256": "b3088dc3c33c481112b85123f891f695e3ff188f0d4d0f8af59259a43f8e9704"},
+      {"name": "dataset_part_029.tar.gz", "bytes": 4467368902, "sha256": "970ee7180288702e6f8365cba66cf70146d15abc259741fdc4f5a55cbe9f65e4"},
+      {"name": "dataset_part_030.tar.gz", "bytes": 4461449812, "sha256": "76fe5b7d5dc49d834263e093c4977da572a4ab07fab4fd163b96b20a862f359b"},
+      {"name": "dataset_part_031.tar.gz", "bytes": 4463121584, "sha256": "9213bdb97f06b0fda1ec6a499ca15b7633f8d1a8855f3cb3c5e01940c94bf7a6"},
+      {"name": "dataset_part_032.tar.gz", "bytes": 4461409268, "sha256": "404d74174fac826cbba4242f964d0f4c191cf490be1cf378e8ee691c83811ff2"},
+      {"name": "dataset_part_033.tar.gz", "bytes": 4467004492, "sha256": "cedb960640677236efad35752d9b904878b84b093ba7ff3c6e842fbcd477307f"},
+      {"name": "dataset_part_034.tar.gz", "bytes": 4467454028, "sha256": "ff65a42dfc5d0aab067b34e37a6b3f149bed6b21548f55574a3830a13647dc22"},
+      {"name": "dataset_part_035.tar.gz", "bytes": 4463078189, "sha256": "802421a96378e08437b8c04ddd6938219169bd9fa5806e5d1629fd69e23e9fc6"}
+    ]
+  },
+  "inputs": {
+    "candidate_inventory": {
+      "path": "reports/acquisition/methaneunion_novel_s2_candidates.json",
+      "bytes": 60349,
+      "sha256": "75de61872080ed2d6182aaa2e863f8ec7caf41fb28a6009bb077106693795439"
+    },
+    "metadata_audit": {
+      "path": "reports/acquisition/methaneunion_metadata_audit.json",
+      "bytes": 5135,
+      "sha256": "1e7f3bbbe13ef38c5c6b31c9063839f173b2b6268ef646cbe1d3be0c5d55d931"
+    },
+    "training_manifest": {
+      "path": ".research/external/MethaneUnion-release/datasets/geo_split/480m_GSD/train.csv",
+      "bytes": 5656552,
+      "sha256": "4333a0edb9ff49bb19cdedf0e77489816daf3bc3a568725146301a8619132d46"
+    },
+    "forbidden_test_manifest_identity_only": {
+      "path": ".research/external/MethaneUnion-release/datasets/geo_split/480m_GSD/test.csv",
+      "bytes": 1345740,
+      "sha256": "7e4fd2586029641f862f28f27146c84e47791b9095cfc58d8823d2008c93c65f"
+    }
+  },
+  "frozen_counts": {
+    "rows": 1632,
+    "assets": 6528,
+    "rows_by_label": {"0": 806, "1": 826},
+    "metadata_group_summary": {
+      "distance_km_inclusive": 25.0,
+      "coordinates": 56,
+      "connected_groups": 36,
+      "groups_with_label": {"0": 36, "1": 32},
+      "mixed_label_groups": 32,
+      "maximum_coordinates_per_group": 6,
+      "maximum_rows_per_group": 192
+    }
+  },
+  "geography": {
+    "group_km": 25.0,
+    "algorithm": "connected components under inclusive pairwise haversine distance",
+    "role": "training-group identity and all later resampling; never count rows or coordinates as independent evidence"
+  },
+  "raster_contract": {
+    "product": "Sentinel-2 L2A surface reflectance",
+    "source_band_order": ["B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B8A", "B09", "B11", "B12"],
+    "selected_zero_based_band_indices": [1, 2, 3, 7, 10, 11],
+    "selected_bands": ["B02", "B03", "B04", "B08", "B11", "B12"],
+    "frame_shape": [12, 48, 48],
+    "frames": ["target", "reference90", "reference365"],
+    "minimum_valid_fraction_per_frame": 0.70,
+    "valid_pixel_definition": "all six selected bands are finite and strictly positive",
+    "minimum_per_selected_band_standard_deviation": "strictly positive",
+    "grid_alignment": "target, both references, and dense mask must have identical shape, CRS, and affine transform",
+    "mask_semantics": "label 0 requires zero positive pixels; label 1 requires at least one positive pixel; finite and nonnegative values only",
+    "cloud_semantics": "no independent cloud QA is present in this release; the validity gate is radiometric support, not a clear-sky claim"
+  },
+  "extraction": {
+    "policy": "download, verify SHA-256 and size, stream only frozen members, write receipt, then delete that single archive before downloading the next",
+    "maximum_concurrent_archives": 1,
+    "maximum_member_bytes": 67108864,
+    "full_release_download_forbidden": true,
+    "preserve_all_12_source_bands": true
+  },
+  "negative_provenance": {
+    "classification": "event-centered near-plume background",
+    "required_dense_mask": "identically zero",
+    "deployment_fpr_claim_allowed": false,
+    "use": "hard-negative training only; independent CloudSEN12/no-emitter negatives remain required for deployment-FPR claims"
+  },
+  "gates": {
+    "minimum_usable_rows": 1200,
+    "minimum_usable_rows_per_label": 500,
+    "minimum_usable_25km_groups": 30,
+    "minimum_usable_25km_groups_per_label": 25,
+    "action_on_failure": "stop before model protocol; report exact exclusion boundary; do not replace the cohort silently"
+  },
+  "outputs": {
+    "raw_root": ".research/methaneunion_novel_s2/raw",
+    "scratch_root": ".research/methaneunion_novel_s2/archive_scratch",
+    "receipt_root": ".research/methaneunion_novel_s2/archive_receipts",
+    "row_adjudication": ".research/methaneunion_novel_s2/row_adjudication.json",
+    "report": "reports/acquisition/methaneunion_novel_s2_acquisition.json"
+  },
+  "access_boundaries": {
+    "allowed": ["frozen released training-manifest assets only"],
+    "forbidden": ["released MethaneUnion test rasters", "MARS folds 0/1/2", "official MARS test", "protected/external outcomes"],
+    "model_outcomes_during_acquisition": false
+  }
+}
