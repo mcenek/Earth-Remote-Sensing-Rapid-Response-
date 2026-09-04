@@ -186,3 +186,20 @@ def test_evaluate_gates_is_fail_closed() -> None:
     result = evaluate_gates(summary, gates)
     assert result["minimum_usable_rows"] is False
     assert all(value for key, value in result.items() if key != "minimum_usable_rows")
+
+
+def test_frozen_archive_inventory_is_complete_and_contiguous() -> None:
+    value = json.loads(
+        (ROOT / "configs/methaneunion_novel_s2_acquisition_protocol.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    archives = value["source"]["archives"]
+    assert len(archives) == 144
+    assert [item["name"] for item in archives] == [
+        f"dataset_part_{index:03d}.tar.gz" for index in range(1, 145)
+    ]
+    assert sum(int(item["bytes"]) for item in archives) == int(
+        value["source"]["archives_total_bytes"]
+    )
+    assert all(len(item["sha256"]) == 64 for item in archives)
