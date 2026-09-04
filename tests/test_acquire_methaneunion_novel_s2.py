@@ -25,6 +25,7 @@ from acquire_methaneunion_novel_s2 import (  # noqa: E402
     read_frozen_rows,
     stream_selected_archive,
 )
+from audit_methaneunion_archive_members import summarize  # noqa: E402
 
 
 def tiff_bytes(values: np.ndarray, transform=None) -> bytes:
@@ -203,3 +204,24 @@ def test_frozen_archive_inventory_is_complete_and_contiguous() -> None:
         value["source"]["archives_total_bytes"]
     )
     assert all(len(item["sha256"]) == 64 for item in archives)
+
+
+def test_archive_member_audit_reports_real_prefix_without_extracting() -> None:
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        candidates = root / "candidates.json"
+        candidates.write_text(json.dumps({"candidate_ids": [7]}), encoding="utf-8")
+        archive_path = root / "part.tar.gz"
+        names = [
+            "data/original/provided_split/train/emit/42/emit.tif",
+            "data/480m_GSD/s2/7/s2.tif",
+        ]
+        with tarfile.open(archive_path, "w:gz") as archive:
+            for name in names:
+                info = tarfile.TarInfo(name)
+                info.size = 1
+                archive.addfile(info, io.BytesIO(b"x"))
+        result = summarize(archive_path, candidates)
+        assert result["file_members"] == 2
+        assert result["first_480m_s2"] == [names[1]]
+        assert result["first_candidate_id_paths"] == [names[1]]

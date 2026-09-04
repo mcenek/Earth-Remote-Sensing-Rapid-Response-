@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scope": "Pre-raster archive member-name audit after the corrected 144-shard inventory was frozen",
+  "source": {
+    "repo_id": "yuyao42/MethaneUnion",
+    "revision": "e654cd777f85d701a4aff2894f513dcdf6981531",
+    "archive": "dataset_part_056.tar.gz",
+    "bytes": 6039657009,
+    "sha256": "4a6e3add1083a1414c8a803e018515ade0dff4b89e147745b3844896d22ba12d"
+  },
+  "audit": {
+    "regular_file_members": 2672,
+    "member_content_opened": false,
+    "raster_opened": false,
+    "top_prefix": "data/original/provided_split/train",
+    "top_prefix_members": 2672,
+    "representative_members": [
+      "data/original/provided_split/train/emit/51571/emit.tif",
+      "data/original/provided_split/train/emit/49090/emit.tif",
+      "data/original/provided_split/train/emit/41550/emit.tif"
+    ],
+    "480m_s2_members": 0,
+    "frozen_candidate_id_members": 0
+  },
+  "interpretation": "The real archive uses the documented data/... path root, while this shard contains only original/provided_split/train content. Its zero selected-member receipt is therefore expected and does not justify changing any frozen candidate path or selection rule."
+}
