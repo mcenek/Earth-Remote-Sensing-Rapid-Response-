@@ -1,0 +1,527 @@
+{
+  "bounds": {
+    "actual_network_bytes": 11010048,
+    "first_archive": 103,
+    "last_archive": 144,
+    "maximum_network_bytes": 11010048,
+    "maximum_prefix_bytes_per_archive": 262144
+  },
+  "generated_at_utc": "2026-09-05T00:07:55.388613+00:00",
+  "limitations": [
+    "Only the first TAR member is decoded from each compressed prefix.",
+    "A prefix cannot prove that later members are present or absent.",
+    "Results may prioritize full scans but cannot change the frozen candidate set."
+  ],
+  "results": [
+    {
+      "archive": "dataset_part_103.tar.gz",
+      "archive_bytes": 5959475671,
+      "first_member": "data/original/provided_split/test/emit/53651/emit.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5959475671",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_104.tar.gz",
+      "archive_bytes": 5888726841,
+      "first_member": "data/original/provided_split/test/emit/57308/emit_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5888726841",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_105.tar.gz",
+      "archive_bytes": 5897924156,
+      "first_member": "data/original/provided_split/test/emit/59296/emit_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5897924156",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_106.tar.gz",
+      "archive_bytes": 5899162140,
+      "first_member": "data/original/provided_split/test/emit/54313/emit_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5899162140",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_107.tar.gz",
+      "archive_bytes": 5956026501,
+      "first_member": "data/original/provided_split/test/emit/59763/emit_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5956026501",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_108.tar.gz",
+      "archive_bytes": 5953397910,
+      "first_member": "data/original/provided_split/test/emit/59492/emit_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5953397910",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_109.tar.gz",
+      "archive_bytes": 5953215038,
+      "first_member": "data/original/provided_split/test/emit/60979/emit_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5953215038",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_110.tar.gz",
+      "archive_bytes": 5035714421,
+      "first_member": "data/original/provided_split/test/emit/63765/emit_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5035714421",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_111.tar.gz",
+      "archive_bytes": 5291828166,
+      "first_member": "data/original/geo/train/s2/16817/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5291828166",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_112.tar.gz",
+      "archive_bytes": 5466274933,
+      "first_member": "data/original/geo/train/s2/76275/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5466274933",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_113.tar.gz",
+      "archive_bytes": 5360791177,
+      "first_member": "data/original/geo/train/s2/81058/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5360791177",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_114.tar.gz",
+      "archive_bytes": 5435139339,
+      "first_member": "data/original/geo/train/s2/90755/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5435139339",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_115.tar.gz",
+      "archive_bytes": 5295974258,
+      "first_member": "data/original/geo/train/s2/104171/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5295974258",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_116.tar.gz",
+      "archive_bytes": 5253046420,
+      "first_member": "data/original/geo/train/s2/111715/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5253046420",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_117.tar.gz",
+      "archive_bytes": 5053313835,
+      "first_member": "data/original/geo/train/s2/121842/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5053313835",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_118.tar.gz",
+      "archive_bytes": 5267736499,
+      "first_member": "data/original/geo/train/s2/172660/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5267736499",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_119.tar.gz",
+      "archive_bytes": 5299364364,
+      "first_member": "data/original/geo/train/s2/215075/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5299364364",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_120.tar.gz",
+      "archive_bytes": 5247326326,
+      "first_member": "data/original/geo/train/s2/226989/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5247326326",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_121.tar.gz",
+      "archive_bytes": 5056479127,
+      "first_member": "data/original/geo/train/s2/235967/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5056479127",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_122.tar.gz",
+      "archive_bytes": 5050738664,
+      "first_member": "data/original/geo/train/s2/236907/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5050738664",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_123.tar.gz",
+      "archive_bytes": 5178831845,
+      "first_member": "data/original/geo/train/s2/244132/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5178831845",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_124.tar.gz",
+      "archive_bytes": 5165187211,
+      "first_member": "data/original/geo/train/s2/252297/s2.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5165187211",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_125.tar.gz",
+      "archive_bytes": 5032274545,
+      "first_member": "data/original/geo/train/s2/13687/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5032274545",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_126.tar.gz",
+      "archive_bytes": 5252599343,
+      "first_member": "data/original/geo/train/s2/17940/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5252599343",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_127.tar.gz",
+      "archive_bytes": 5433904663,
+      "first_member": "data/original/geo/train/s2/77483/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5433904663",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_128.tar.gz",
+      "archive_bytes": 5293581281,
+      "first_member": "data/original/geo/train/s2/85761/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5293581281",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_129.tar.gz",
+      "archive_bytes": 5338360106,
+      "first_member": "data/original/geo/train/s2/92550/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5338360106",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_130.tar.gz",
+      "archive_bytes": 5211894373,
+      "first_member": "data/original/geo/train/s2/105068/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5211894373",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_131.tar.gz",
+      "archive_bytes": 5130732388,
+      "first_member": "data/original/geo/train/s2/112612/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5130732388",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_132.tar.gz",
+      "archive_bytes": 5045876841,
+      "first_member": "data/original/geo/train/s2/124754/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5045876841",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_133.tar.gz",
+      "archive_bytes": 5104612524,
+      "first_member": "data/original/geo/train/s2/188842/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5104612524",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_134.tar.gz",
+      "archive_bytes": 5103565389,
+      "first_member": "data/original/geo/train/s2/217873/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5103565389",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_135.tar.gz",
+      "archive_bytes": 5097839412,
+      "first_member": "data/original/geo/train/s2/229008/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5097839412",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_136.tar.gz",
+      "archive_bytes": 4986738946,
+      "first_member": "data/original/geo/train/s2/119164/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/4986738946",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_137.tar.gz",
+      "archive_bytes": 4996794243,
+      "first_member": "data/original/geo/train/s2/238687/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/4996794243",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_138.tar.gz",
+      "archive_bytes": 5021361813,
+      "first_member": "data/original/geo/train/s2/245284/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5021361813",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_139.tar.gz",
+      "archive_bytes": 5036600848,
+      "first_member": "data/original/geo/train/s2/254920/s2_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5036600848",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_140.tar.gz",
+      "archive_bytes": 5095133253,
+      "first_member": "data/original/geo/train/s2/14801/s2_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5095133253",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_141.tar.gz",
+      "archive_bytes": 5333406128,
+      "first_member": "data/original/geo/train/s2/61182/s2_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5333406128",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_142.tar.gz",
+      "archive_bytes": 5401536507,
+      "first_member": "data/original/geo/train/s2/78567/s2_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5401536507",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_143.tar.gz",
+      "archive_bytes": 5211025057,
+      "first_member": "data/original/geo/train/s2/87796/s2_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5211025057",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    },
+    {
+      "archive": "dataset_part_144.tar.gz",
+      "archive_bytes": 5311815594,
+      "first_member": "data/original/geo/train/s2/93614/s2_pre_pre.tif",
+      "prefix_bytes_read": 262144,
+      "transport": {
+        "content_length": "262144",
+        "content_range": "bytes 0-262143/5311815594",
+        "final_url_scheme": "https",
+        "status_code": 206
+      }
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Bounded first-member ordering diagnostic; not a complete membership audit",
+  "source": {
+    "repo_id": "yuyao42/MethaneUnion",
+    "revision": "e654cd777f85d701a4aff2894f513dcdf6981531"
+  }
+}
