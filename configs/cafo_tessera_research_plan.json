@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "advisor_directed_pilot_planning",
+  "date": "2026-09-11",
+  "advisor": "Martin",
+  "sequence": ["CAFO coordinate audit", "Sentinel-2 baseline and controlled improvement", "freeze chosen baseline", "TESSERA-only comparison", "Sentinel-2 plus TESSERA fusion", "regional then national screening"],
+  "facility_inventory": "EarthRemoteSensingRapidResponse/Polygon_CSV_Files/iowa_cafos_2024_arcgis_api.csv",
+  "inventory_authorship": "Huang association not yet confirmed",
+  "inventory_scope": "Iowa inventory candidates; regulatory CAFO status and historical activity require review",
+  "facility_label": "known inventory location; not date-specific methane truth",
+  "split": {
+    "rotations": 5,
+    "train_fold": "rotation index",
+    "validation_folds": "other four folds",
+    "approximate_train_fraction": 0.2,
+    "grouping": "geographic connected components; repeated dates remain with facility",
+    "planning_buffer_km": 2,
+    "planning_max_square_crop_width_m": 1280,
+    "caveat": "2km prevents overlap for these square footprints under local metric geometry; it does not prove ecological independence",
+    "selection": "tune/calibrate inside each 20% training pool; label any model selection using outer scores as development",
+    "aggregation": "report each rotation and facility-group uncertainty; each facility evaluated four times is not four independent facilities"
+  },
+  "sentinel": {
+    "pilot_year": 2024,
+    "year_status": "provisional; inventory filename is not observation-date truth",
+    "catalog": "https://earth-search.aws.element84.com/v1",
+    "collection": "sentinel-2-l2a",
+    "bands": ["blue", "green", "red", "nir", "swir16", "swir22", "scl"],
+    "guard": "L2A requires verified adapter; never feed directly into frozen L1C benchmark models",
+    "selection": "quality/date/coverage only; never model success or outer validation labels"
+  },
+  "tessera": {
+    "role": "annual feature representation for facility classification and optional spatial context fusion",
+    "first_version_candidate": "v1.1, subject to ROI/year availability and pinned revision",
+    "year": "match baseline observation window for retrospective study",
+    "temporal_guard": "annual embedding may include later acquisitions; no prospective per-date claim using future evidence",
+    "comparison": "same facilities, controls, rotations, coverage subset and tuning budget; report excluded coverage",
+    "experiments": ["frozen embeddings with small classifier", "frozen baseline plus embedding feature fusion"],
+    "not_claimed": "methane-specific labels or date-specific plume confirmation"
+  },
+  "metrics": ["known-facility coverage among observable sites", "observation/abstention rate", "detections per surveyed area", "unlisted detections pending source review", "facility precision/recall only with reviewed facility controls", "plume AP and IoU only with independent date-specific annotations"],
+  "out_of_inventory": "unlabeled candidate, possibly another methane source; neither automatic false positive nor automatic true methane detection",
+  "nationwide_scan": "long-term objective; regional compute/coverage/error pilot first",
+  "meeting_exceptions": {"dates_2026": ["2026-10-02", "2026-11-13", "2026-12-04"], "advisor_unavailable": "10:20-11:10", "action": "meet earlier; exact start and timezone not specified; no calendar event created"}
+}

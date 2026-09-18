@@ -1,0 +1,37 @@
+{
+  "scope": "metadata feasibility only, not selected training images",
+  "source_sha256": "5571bb76d2f012de70a0022cdf5fe38f65a9d17d9908752e164872062b272d38",
+  "endpoint": "https://earth-search.aws.element84.com/v1/search",
+  "collection": "sentinel-2-l2a",
+  "year": 2024,
+  "year_status": "planning assumption matching inventory filename",
+  "max_queries": 3,
+  "max_bytes_per_response": 1048576,
+  "raster_bytes_downloaded": 0,
+  "queries": [
+    {
+      "facility_id": "56216",
+      "latitude": 41.47134,
+      "longitude": -92.37455,
+      "url": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&limit=2&bbox=-92.37465%2C41.471239999999995%2C-92.37445%2C41.47144&datetime=2024-01-01T00%3A00%3A00Z%2F2024-12-31T23%3A59%3A59Z",
+      "status": "failed",
+      "error": "URLError: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
+    },
+    {
+      "facility_id": "56217",
+      "latitude": 40.92031,
+      "longitude": -95.67438,
+      "url": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&limit=2&bbox=-95.67448%2C40.92021%2C-95.67428%2C40.920410000000004&datetime=2024-01-01T00%3A00%3A00Z%2F2024-12-31T23%3A59%3A59Z",
+      "status": "failed",
+      "error": "URLError: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
+    },
+    {
+      "facility_id": "56218",
+      "latitude": 42.58492,
+      "longitude": -92.91373,
+      "url": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&limit=2&bbox=-92.91383%2C42.58481999999999%2C-92.91363%2C42.58502&datetime=2024-01-01T00%3A00%3A00Z%2F2024-12-31T23%3A59%3A59Z",
+      "status": "failed",
+      "error": "URLError: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
+    }
+  ]
+}

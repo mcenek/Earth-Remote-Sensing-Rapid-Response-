@@ -1,0 +1,54 @@
+{
+  "buffer_km": 2.0,
+  "coordinate_assumption": "Latitude/Longitude interpreted as geographic degrees; source datum needs confirmation",
+  "facility_count": 12703,
+  "fold_counts": [
+    2541,
+    2541,
+    2541,
+    2540,
+    2540
+  ],
+  "group_count": 4244,
+  "included_facilities": 12703,
+  "input_rows": 14155,
+  "label_semantics": "known facility inventory, no methane labels",
+  "largest_group": 1770,
+  "rotation_counts": [
+    {
+      "rotation": 0,
+      "train": 2541,
+      "validate": 10162
+    },
+    {
+      "rotation": 1,
+      "train": 2541,
+      "validate": 10162
+    },
+    {
+      "rotation": 2,
+      "train": 2541,
+      "validate": 10162
+    },
+    {
+      "rotation": 3,
+      "train": 2540,
+      "validate": 10163
+    },
+    {
+      "rotation": 4,
+      "train": 2540,
+      "validate": 10163
+    }
+  ],
+  "rotations": 5,
+  "seed": 20260911,
+  "source_sha256": "5571bb76d2f012de70a0022cdf5fe38f65a9d17d9908752e164872062b272d38",
+  "status": "planning_only_not_frozen_scientific_split",
+  "status_counts": {
+    "Active": 12703,
+    "Inactive": 1452
+  },
+  "unique_facilities": 14155,
+  "warning": "largest geographic component may cause fold imbalance"
+}

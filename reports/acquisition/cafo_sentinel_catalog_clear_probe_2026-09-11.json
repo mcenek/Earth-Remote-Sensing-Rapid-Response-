@@ -1,0 +1,929 @@
+{
+  "scope": "metadata feasibility only, not selected training images",
+  "source_sha256": "5571bb76d2f012de70a0022cdf5fe38f65a9d17d9908752e164872062b272d38",
+  "endpoint": "https://earth-search.aws.element84.com/v1/search",
+  "collection": "sentinel-2-l2a",
+  "year": 2024,
+  "year_status": "planning assumption matching inventory filename",
+  "max_queries": 3,
+  "max_bytes_per_response": 1048576,
+  "raster_bytes_downloaded": 0,
+  "queries": [
+    {
+      "facility_id": "56216",
+      "latitude": 41.47134,
+      "longitude": -92.37455,
+      "url": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&limit=2&bbox=-92.37465%2C41.471239999999995%2C-92.37445%2C41.47144&datetime=2024-01-01T00%3A00%3A00Z%2F2024-12-31T23%3A59%3A59Z&query=%7B%22eo%3Acloud_cover%22%3A+%7B%22lt%22%3A+20.0%7D%7D",
+      "status": "ok",
+      "bytes_received": 43034,
+      "more_items_available": true,
+      "items": [
+        {
+          "id": "S2B_15TWG_20241221_0_L2A",
+          "datetime": "2024-12-21T17:12:04.759000Z",
+          "cloud_cover": 16.456209,
+          "collection": "sentinel-2-l2a",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/B02.tif",
+              "bands": [
+                {
+                  "name": "blue",
+                  "common_name": "blue",
+                  "description": "Blue (band 2)",
+                  "center_wavelength": 0.49,
+                  "full_width_half_max": 0.098
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/B03.tif",
+              "bands": [
+                {
+                  "name": "green",
+                  "common_name": "green",
+                  "description": "Green (band 3)",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.045
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/B08.tif",
+              "bands": [
+                {
+                  "name": "nir",
+                  "common_name": "nir",
+                  "description": "NIR 1 (band 8)",
+                  "center_wavelength": 0.842,
+                  "full_width_half_max": 0.145
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/B04.tif",
+              "bands": [
+                {
+                  "name": "red",
+                  "common_name": "red",
+                  "description": "Red (band 4)",
+                  "center_wavelength": 0.665,
+                  "full_width_half_max": 0.038
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "scl": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/SCL.tif",
+              "bands": null,
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint8",
+                  "spatial_resolution": 20
+                }
+              ]
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/B11.tif",
+              "bands": [
+                {
+                  "name": "swir16",
+                  "common_name": "swir16",
+                  "description": "SWIR 1 (band 11)",
+                  "center_wavelength": 1.61,
+                  "full_width_half_max": 0.143
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "swir22": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WG/2024/12/S2B_15TWG_20241221_0_L2A/B12.tif",
+              "bands": [
+                {
+                  "name": "swir22",
+                  "common_name": "swir22",
+                  "description": "SWIR 2 (band 12)",
+                  "center_wavelength": 2.19,
+                  "full_width_half_max": 0.242
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "S2C_15TWF_20241206_1_L2A",
+          "datetime": "2024-12-06T17:12:46.640000Z",
+          "cloud_cover": 0.001168,
+          "collection": "sentinel-2-l2a",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B02.tif",
+              "bands": [
+                {
+                  "name": "B02",
+                  "common_name": "blue",
+                  "center_wavelength": 0.49,
+                  "full_width_half_max": 0.098
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B03.tif",
+              "bands": [
+                {
+                  "name": "B03",
+                  "common_name": "green",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.045
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B08.tif",
+              "bands": [
+                {
+                  "name": "B08",
+                  "common_name": "nir",
+                  "center_wavelength": 0.842,
+                  "full_width_half_max": 0.145
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B04.tif",
+              "bands": [
+                {
+                  "name": "B04",
+                  "common_name": "red",
+                  "center_wavelength": 0.665,
+                  "full_width_half_max": 0.038
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "scl": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/SCL.tif",
+              "bands": null,
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint8",
+                  "spatial_resolution": 20
+                }
+              ]
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B11.tif",
+              "bands": [
+                {
+                  "name": "B11",
+                  "common_name": "swir16",
+                  "center_wavelength": 1.61,
+                  "full_width_half_max": 0.143
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "swir22": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B12.tif",
+              "bands": [
+                {
+                  "name": "B12",
+                  "common_name": "swir22",
+                  "center_wavelength": 2.19,
+                  "full_width_half_max": 0.242
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "facility_id": "56217",
+      "latitude": 40.92031,
+      "longitude": -95.67438,
+      "url": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&limit=2&bbox=-95.67448%2C40.92021%2C-95.67428%2C40.920410000000004&datetime=2024-01-01T00%3A00%3A00Z%2F2024-12-31T23%3A59%3A59Z&query=%7B%22eo%3Acloud_cover%22%3A+%7B%22lt%22%3A+20.0%7D%7D",
+      "status": "ok",
+      "bytes_received": 43501,
+      "more_items_available": true,
+      "items": [
+        {
+          "id": "S2A_14TQL_20241219_0_L2A",
+          "datetime": "2024-12-19T17:22:25.764000Z",
+          "cloud_cover": 0.001334,
+          "collection": "sentinel-2-l2a",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/B02.tif",
+              "bands": [
+                {
+                  "name": "blue",
+                  "common_name": "blue",
+                  "description": "Blue (band 2)",
+                  "center_wavelength": 0.49,
+                  "full_width_half_max": 0.098
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/B03.tif",
+              "bands": [
+                {
+                  "name": "green",
+                  "common_name": "green",
+                  "description": "Green (band 3)",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.045
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/B08.tif",
+              "bands": [
+                {
+                  "name": "nir",
+                  "common_name": "nir",
+                  "description": "NIR 1 (band 8)",
+                  "center_wavelength": 0.842,
+                  "full_width_half_max": 0.145
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/B04.tif",
+              "bands": [
+                {
+                  "name": "red",
+                  "common_name": "red",
+                  "description": "Red (band 4)",
+                  "center_wavelength": 0.665,
+                  "full_width_half_max": 0.038
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "scl": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/SCL.tif",
+              "bands": null,
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint8",
+                  "spatial_resolution": 20
+                }
+              ]
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/B11.tif",
+              "bands": [
+                {
+                  "name": "swir16",
+                  "common_name": "swir16",
+                  "description": "SWIR 1 (band 11)",
+                  "center_wavelength": 1.61,
+                  "full_width_half_max": 0.143
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "swir22": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/14/T/QL/2024/12/S2A_14TQL_20241219_0_L2A/B12.tif",
+              "bands": [
+                {
+                  "name": "swir22",
+                  "common_name": "swir22",
+                  "description": "SWIR 2 (band 12)",
+                  "center_wavelength": 2.19,
+                  "full_width_half_max": 0.242
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "S2A_15TTF_20241219_0_L2A",
+          "datetime": "2024-12-19T17:22:25.491000Z",
+          "cloud_cover": 0.001231,
+          "collection": "sentinel-2-l2a",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/B02.tif",
+              "bands": [
+                {
+                  "name": "blue",
+                  "common_name": "blue",
+                  "description": "Blue (band 2)",
+                  "center_wavelength": 0.49,
+                  "full_width_half_max": 0.098
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/B03.tif",
+              "bands": [
+                {
+                  "name": "green",
+                  "common_name": "green",
+                  "description": "Green (band 3)",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.045
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/B08.tif",
+              "bands": [
+                {
+                  "name": "nir",
+                  "common_name": "nir",
+                  "description": "NIR 1 (band 8)",
+                  "center_wavelength": 0.842,
+                  "full_width_half_max": 0.145
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/B04.tif",
+              "bands": [
+                {
+                  "name": "red",
+                  "common_name": "red",
+                  "description": "Red (band 4)",
+                  "center_wavelength": 0.665,
+                  "full_width_half_max": 0.038
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "scl": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/SCL.tif",
+              "bands": null,
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint8",
+                  "spatial_resolution": 20
+                }
+              ]
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/B11.tif",
+              "bands": [
+                {
+                  "name": "swir16",
+                  "common_name": "swir16",
+                  "description": "SWIR 1 (band 11)",
+                  "center_wavelength": 1.61,
+                  "full_width_half_max": 0.143
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "swir22": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/TF/2024/12/S2A_15TTF_20241219_0_L2A/B12.tif",
+              "bands": [
+                {
+                  "name": "swir22",
+                  "common_name": "swir22",
+                  "description": "SWIR 2 (band 12)",
+                  "center_wavelength": 2.19,
+                  "full_width_half_max": 0.242
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "facility_id": "56218",
+      "latitude": 42.58492,
+      "longitude": -92.91373,
+      "url": "https://earth-search.aws.element84.com/v1/search?collections=sentinel-2-l2a&limit=2&bbox=-92.91383%2C42.58481999999999%2C-92.91363%2C42.58502&datetime=2024-01-01T00%3A00%3A00Z%2F2024-12-31T23%3A59%3A59Z&query=%7B%22eo%3Acloud_cover%22%3A+%7B%22lt%22%3A+20.0%7D%7D",
+      "status": "ok",
+      "bytes_received": 43083,
+      "more_items_available": true,
+      "items": [
+        {
+          "id": "S2B_15TWH_20241221_0_L2A",
+          "datetime": "2024-12-21T17:11:50.470000Z",
+          "cloud_cover": 17.114027,
+          "collection": "sentinel-2-l2a",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/B02.tif",
+              "bands": [
+                {
+                  "name": "blue",
+                  "common_name": "blue",
+                  "description": "Blue (band 2)",
+                  "center_wavelength": 0.49,
+                  "full_width_half_max": 0.098
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/B03.tif",
+              "bands": [
+                {
+                  "name": "green",
+                  "common_name": "green",
+                  "description": "Green (band 3)",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.045
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/B08.tif",
+              "bands": [
+                {
+                  "name": "nir",
+                  "common_name": "nir",
+                  "description": "NIR 1 (band 8)",
+                  "center_wavelength": 0.842,
+                  "full_width_half_max": 0.145
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/B04.tif",
+              "bands": [
+                {
+                  "name": "red",
+                  "common_name": "red",
+                  "description": "Red (band 4)",
+                  "center_wavelength": 0.665,
+                  "full_width_half_max": 0.038
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "scl": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/SCL.tif",
+              "bands": null,
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint8",
+                  "spatial_resolution": 20
+                }
+              ]
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/B11.tif",
+              "bands": [
+                {
+                  "name": "swir16",
+                  "common_name": "swir16",
+                  "description": "SWIR 1 (band 11)",
+                  "center_wavelength": 1.61,
+                  "full_width_half_max": 0.143
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "swir22": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WH/2024/12/S2B_15TWH_20241221_0_L2A/B12.tif",
+              "bands": [
+                {
+                  "name": "swir22",
+                  "common_name": "swir22",
+                  "description": "SWIR 2 (band 12)",
+                  "center_wavelength": 2.19,
+                  "full_width_half_max": 0.242
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "bits_per_sample": 15,
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "S2C_15TVH_20241206_1_L2A",
+          "datetime": "2024-12-06T17:12:21.374000Z",
+          "cloud_cover": 0.005914,
+          "collection": "sentinel-2-l2a",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/B02.tif",
+              "bands": [
+                {
+                  "name": "B02",
+                  "common_name": "blue",
+                  "center_wavelength": 0.49,
+                  "full_width_half_max": 0.098
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/B03.tif",
+              "bands": [
+                {
+                  "name": "B03",
+                  "common_name": "green",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.045
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/B08.tif",
+              "bands": [
+                {
+                  "name": "B08",
+                  "common_name": "nir",
+                  "center_wavelength": 0.842,
+                  "full_width_half_max": 0.145
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/B04.tif",
+              "bands": [
+                {
+                  "name": "B04",
+                  "common_name": "red",
+                  "center_wavelength": 0.665,
+                  "full_width_half_max": 0.038
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 10,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "scl": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/SCL.tif",
+              "bands": null,
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint8",
+                  "spatial_resolution": 20
+                }
+              ]
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/B11.tif",
+              "bands": [
+                {
+                  "name": "B11",
+                  "common_name": "swir16",
+                  "center_wavelength": 1.61,
+                  "full_width_half_max": 0.143
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            },
+            "swir22": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VH/2024/12/S2C_15TVH_20241206_1_L2A/B12.tif",
+              "bands": [
+                {
+                  "name": "B12",
+                  "common_name": "swir22",
+                  "center_wavelength": 2.19,
+                  "full_width_half_max": 0.242
+                }
+              ],
+              "raster_bands": [
+                {
+                  "nodata": 0,
+                  "data_type": "uint16",
+                  "spatial_resolution": 20,
+                  "scale": 0.0001,
+                  "offset": -0.1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scene_cloud_max": 20.0
+}
