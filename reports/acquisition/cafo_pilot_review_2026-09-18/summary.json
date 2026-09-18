@@ -1,0 +1,18 @@
+{
+  "planned_sites": 6,
+  "attempted_sites": 4,
+  "complete_sites": 3,
+  "quality_rejected_sites": 1,
+  "unattempted_after_stop": 2,
+  "raster_files_verified": 22,
+  "budget": {
+    "limit_bytes": 104857600,
+    "charged_bytes": 31981568,
+    "received_bytes": 31809998,
+    "remaining_bytes": 72876032
+  },
+  "added_response_payload_this_turn": 20799950,
+  "metadata_response_bytes_this_turn": 130034,
+  "supervised_training_performed": false,
+  "unreviewed_inventory_labels_only": true
+}

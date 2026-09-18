@@ -1,4 +1,5 @@
 import io
+import json
 from pathlib import Path
 import sys
 
@@ -8,6 +9,22 @@ import tifffile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
 from acquire_cafo_cog_pilot import read_window, georeference
+
+
+def test_failed_selected_facility_returns_nonzero_and_preserves_receipt(tmp_path, monkeypatch):
+    from acquire_cafo_cog_pilot import main
+    catalog = tmp_path/'catalog.json'
+    catalog.write_text(json.dumps({'queries':[{'facility_id':'second', 'items':[
+        {'id':'scene', 'datetime':'2024-01-01', 'cloud_cover':0,
+         'collection':'sentinel-2-l2a', 'assets':{}}]}]}))
+    output = tmp_path/'output'
+    monkeypatch.setattr(sys, 'argv', ['pilot','--catalog',str(catalog),'--output-dir',str(output),
+                                     '--cache-dir',str(tmp_path/'cache'),'--facility-id','second'])
+    assert main()==1
+    receipt = json.loads((output/'report.json').read_text())
+    assert receipt['facility_id']=='second'
+    assert receipt['status']=='stopped'
+    assert receipt['budget']['charged_bytes']==0
 
 
 def test_native_crop_crosses_compression_tiles_without_resampling():

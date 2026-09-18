@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
-  "status": "advisor_directed_pilot_planning",
+  "status": "facility_recovery_pilot_started_stopped_at_crop_quality_gate",
+  "execution_update": "2026-09-18: user authorized facility experiment; three complete crops, one quality rejection, two unattempted. No trained classifier yet.",
+  "latest_handoff": "reports/acquisition/cafo_pilot_review_2026-09-18/README.md",
   "date": "2026-09-11",
   "advisor": "Martin",
   "sequence": ["CAFO coordinate audit", "Sentinel-2 baseline and controlled improvement", "freeze chosen baseline", "TESSERA-only comparison", "Sentinel-2 plus TESSERA fusion", "regional then national screening"],

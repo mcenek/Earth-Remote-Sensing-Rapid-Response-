@@ -1,6 +1,6 @@
 """One-location COG pilot with persistent bounded HTTP range reads.
 
-Selects the lowest catalog scene-cloud candidate for facility 56216; this is
+Selects the lowest catalog scene-cloud candidate for a specified facility; this is
 engineering selection only. Reads crop SCL before six observed spectral bands.
 No methane labels, model fitting, archive downloads or automatic retries.
 """
@@ -95,11 +95,12 @@ def main():
     parser.add_argument('--catalog', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--cache-dir', type=Path, required=True)
+    parser.add_argument('--facility-id', default='56216')
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=False)
     budget = Budget(args.cache_dir, limit_bytes=100*1024*1024)
     catalog = json.loads(args.catalog.read_text(encoding='utf-8'))
-    query = next(q for q in catalog['queries'] if q['facility_id']=='56216')
+    query = next(q for q in catalog['queries'] if q['facility_id']==args.facility_id)
     item = min(query['items'], key=lambda i: (i['cloud_cover'], i['id']))
     report = {'facility_id': query['facility_id'], 'item_id': item['id'], 'datetime': item['datetime'],
               'scope': 'one-location engineering crop pilot; no training labels',
@@ -173,7 +174,8 @@ def main():
         report['budget'] = budget.snapshot()
         write_json(args.output_dir/'report.json', report)
     print(json.dumps({'status': report['status'], 'budget': report['budget'], 'error': report.get('error')}))
+    return 0 if report['status']=='crop_complete_pending_visual_review' else 1
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

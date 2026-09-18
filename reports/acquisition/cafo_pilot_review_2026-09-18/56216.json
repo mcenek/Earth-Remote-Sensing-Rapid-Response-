@@ -1,0 +1,120 @@
+{
+  "facility_id": "56216",
+  "item_id": "S2C_15TWF_20241206_1_L2A",
+  "datetime": "2024-12-06T17:12:46.640000Z",
+  "scope": "one-location engineering crop pilot; no training labels",
+  "selection": "lowest catalog scene cloud among previously bounded candidates",
+  "catalog_sha256": "3791ab548094cbb2f9f611db32e3df3ffb92dd74d42d5d82843ce79de03d5322",
+  "crop_width_m": 1280,
+  "methane_truth_available": false,
+  "status": "crop_complete_pending_visual_review",
+  "bands": {
+    "scl": {
+      "shape": [
+        64,
+        64
+      ],
+      "resolution_m": 20.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/SCL.tif",
+      "scale": null,
+      "offset": null,
+      "nodata": 0,
+      "sha256": "62d5b797126c873af3138ab08a8b53b2920255dde5e29927256c50985b69f10a"
+    },
+    "blue": {
+      "shape": [
+        128,
+        128
+      ],
+      "resolution_m": 10.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B02.tif",
+      "scale": 0.0001,
+      "offset": -0.1,
+      "nodata": 0,
+      "sha256": "2e236c62e918a69084f193b2a4e0c0aca77461520716451be6678e32128ccd38"
+    },
+    "green": {
+      "shape": [
+        128,
+        128
+      ],
+      "resolution_m": 10.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B03.tif",
+      "scale": 0.0001,
+      "offset": -0.1,
+      "nodata": 0,
+      "sha256": "9974dbf48ff896157fd3089550639886494e0766f8bf0443d7712917f039616c"
+    },
+    "red": {
+      "shape": [
+        128,
+        128
+      ],
+      "resolution_m": 10.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B04.tif",
+      "scale": 0.0001,
+      "offset": -0.1,
+      "nodata": 0,
+      "sha256": "91634c7cbdc883b8986c05b0af853cf6ae20d971db864c094925e9b4de58d0c8"
+    },
+    "nir": {
+      "shape": [
+        128,
+        128
+      ],
+      "resolution_m": 10.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B08.tif",
+      "scale": 0.0001,
+      "offset": -0.1,
+      "nodata": 0,
+      "sha256": "f078b30207616517c3ad76e0038de2d7546618a7f042cfc8a8d9cb0615537443"
+    },
+    "swir16": {
+      "shape": [
+        64,
+        64
+      ],
+      "resolution_m": 20.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B11.tif",
+      "scale": 0.0001,
+      "offset": -0.1,
+      "nodata": 0,
+      "sha256": "dd5a33ba5c8604d7619e3266453811416345ef4c888e37547aa921e079ca8342"
+    },
+    "swir22": {
+      "shape": [
+        64,
+        64
+      ],
+      "resolution_m": 20.0,
+      "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/WF/2024/12/S2C_15TWF_20241206_1_L2A/B12.tif",
+      "scale": 0.0001,
+      "offset": -0.1,
+      "nodata": 0,
+      "sha256": "236b69a693ef397e2fed04c59d6cfc765d8c9024cdbf17f335f20be58589d6d1"
+    }
+  },
+  "crs": "EPSG:32615",
+  "bbox_projected": [
+    551580,
+    4590640,
+    552860,
+    4591920
+  ],
+  "coordinate_assumption": "CSV latitude/longitude treated as WGS84; inventory datum unconfirmed",
+  "scl_counts": {
+    "4": 20,
+    "5": 4076
+  },
+  "strict_clear_fraction": 1.0,
+  "budget": {
+    "limit_bytes": 104857600,
+    "charged_bytes": 11010048,
+    "received_bytes": 11010048,
+    "remaining_bytes": 93847552
+  },
+  "local_verification": {
+    "raster_hash_grid_radiometry_and_offline_replay_count": 7,
+    "network_disabled_during_replay": true
+  }
+}

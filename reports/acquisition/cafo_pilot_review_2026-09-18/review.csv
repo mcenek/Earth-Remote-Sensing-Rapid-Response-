@@ -1,0 +1,7 @@
+facility_id,group_id,fold,inventory_presence,reviewed_facility_label,methane_label,reviewer,review_notes,status,clear_fraction,image_date,preview
+56216,iowa_cafo_group_0001,2,1,,,,,complete_engineering_crop,1.0,2024-12-06T17:12:46.640000Z,56216.png
+56217,iowa_cafo_group_0002,2,1,,,,,complete_engineering_crop,1.0,2024-12-19T17:22:25.491000Z,56217.png
+56218,iowa_cafo_group_0003,1,1,,,,,complete_engineering_crop,1.0,2024-12-06T17:12:21.374000Z,56218.png
+56222,iowa_cafo_group_0006,0,1,,,,,rejected_crop_quality,0.36474609375,2024-12-09T17:21:58.300000Z,
+56225,iowa_cafo_group_0008,3,1,,,,,not_attempted_after_stop,,,
+56220,iowa_cafo_group_0005,4,1,,,,,not_attempted_after_stop,,,

@@ -1,0 +1,39 @@
+{
+  "scope": "engineering observability pilot, not a classifier evaluation",
+  "selection": "First facility by existing ID-sorted manifest in each previously unrepresented fold (0,3,4). No outcome-based selection. Existing 56216/56217/56218 retained.",
+  "new_sites": [
+    {
+      "facility_id": "56222",
+      "group_id": "iowa_cafo_group_0006",
+      "fold": "0",
+      "latitude": "42.95344",
+      "longitude": "-96.19602",
+      "operation_status": "Active",
+      "state": "IA"
+    },
+    {
+      "facility_id": "56225",
+      "group_id": "iowa_cafo_group_0008",
+      "fold": "3",
+      "latitude": "41.244",
+      "longitude": "-95.31234",
+      "operation_status": "Active",
+      "state": "IA"
+    },
+    {
+      "facility_id": "56220",
+      "group_id": "iowa_cafo_group_0005",
+      "fold": "4",
+      "latitude": "40.77613",
+      "longitude": "-95.61406",
+      "operation_status": "Active",
+      "state": "IA"
+    }
+  ],
+  "total_sites": 6,
+  "cumulative_imagery_cap_bytes": 104857600,
+  "shared_cache": "outputs/cafo_pilot_2026-09-11/range_cache",
+  "stop": "First acquisition failure or crop SCL clear fraction below 0.9 or total cap; no retries or replacement sites.",
+  "catalog": "max three requests, two candidates each, 1 MiB response cap; scene cloud <20%, 2024 retained for consistency",
+  "scientific_limit": "Convenience pilot with one or two facilities per fold; cannot estimate national success or classifier performance."
+}

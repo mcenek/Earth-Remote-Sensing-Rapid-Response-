@@ -1,4 +1,4 @@
-"""Bounded metadata-only Sentinel-2 discovery at three active CAFO locations.
+"""Bounded metadata-only Sentinel-2 discovery at up to five active CAFO locations.
 
 No raster downloads, pagination, labels or training. L2A is a prospective
 facility-imagery source, not a substitute for the frozen MARS L1C contract.
@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--csv', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--cloud-max', type=float)
+    parser.add_argument('--facility-ids', nargs='+', help='At most five explicit inventory IDs')
     args = parser.parse_args()
     if args.cloud_max is not None and not 0 <= args.cloud_max <= 100:
         raise ValueError('cloud-max must be in [0,100]')
@@ -27,12 +28,21 @@ def main():
         raise FileExistsError('Preserve existing catalog evidence')
     with args.csv.open(encoding='utf-8-sig', newline='') as source:
         rows = sorted((r for r in csv.DictReader(source) if r['opStatus'].strip().lower() == 'active'),
-                      key=lambda r: r['progid'])[:3]
+                      key=lambda r: r['progid'])
+    if args.facility_ids:
+        if len(args.facility_ids)>5 or len(set(args.facility_ids))!=len(args.facility_ids):
+            raise ValueError('Need one to five unique facility IDs')
+        selected = {r['progid']: r for r in rows if r['progid'] in args.facility_ids}
+        if len(selected)!=len(args.facility_ids):
+            raise ValueError('Requested IDs must all be active inventory records')
+        rows = [selected[key] for key in args.facility_ids]
+    else:
+        rows = rows[:3]
     report = {'scope': 'metadata feasibility only, not selected training images',
               'source_sha256': hashlib.sha256(args.csv.read_bytes()).hexdigest(),
               'endpoint': ENDPOINT, 'collection': 'sentinel-2-l2a',
               'year': 2024, 'year_status': 'planning assumption matching inventory filename',
-              'max_queries': 3, 'max_bytes_per_response': MAX_RESPONSE,
+              'max_queries': len(rows), 'max_bytes_per_response': MAX_RESPONSE,
               'raster_bytes_downloaded': 0, 'queries': []}
     report['scene_cloud_max'] = args.cloud_max
     for row in rows:
@@ -68,11 +78,13 @@ def main():
         except Exception as error:
             entry.update(status='failed', error=f'{type(error).__name__}: {error}')
         report['queries'].append(entry)
+        if entry['status']=='failed':
+            break
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open('x', encoding='utf-8') as stream:
         json.dump(report, stream, indent=2, allow_nan=False)
         stream.write('\n')
-    print(json.dumps({'queries': len(rows), 'successful': sum(q['status']=='ok' for q in report['queries']),
+    print(json.dumps({'planned_queries': len(rows), 'queries': len(report['queries']), 'successful': sum(q['status']=='ok' for q in report['queries']),
                       'raster_bytes_downloaded': 0}))
 
 
