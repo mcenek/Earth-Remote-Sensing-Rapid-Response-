@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "scope": "bounded local-only Georgia EMIT/Sentinel crop repair preparation",
+  "acquisition": "20241020T170504",
+  "emit_peak_latlon": [34.27989, -84.36325],
+  "current_cached_scene": {
+    "scene_id": "S2B_16SGC_20241020_0_L2A",
+    "path": "C:/Users/joshu/PROJECTS/REMOTE-SENSING/Earth-Remote-Sensing-Rapid-Response-/EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/emit-v002-2026-07/EMIT_L2B_CH4PLM_002_20241020T170504_003677/S2B_16SGC_20241020_0_L2A.s2.tif",
+    "crs": "EPSG:32616",
+    "shape": [256, 256],
+    "transform": [20.0, 0.0, 735480.0, 0.0, -20.0, 3791260.0],
+    "footprint_lonlat": [-84.44469567106569, 34.18851471103067, -84.38776242846706, 34.23581327846963],
+    "peak_contained": false
+  },
+  "needed_context": {
+    "target_crs": "EPSG:32616",
+    "peak_utm16_xy_m": [742728.1871498856, 3796337.4303278113],
+    "recommended_256x256_20m_bounds_m": [740168.1871498856, 3793777.4303278113, 745288.1871498856, 3798897.4303278113],
+    "recommended_pixel_size_m": 20,
+    "purpose": "re-read five Sentinel bands plus QA/SCL around the verified EMIT peak, then reproject/intersect against native ENH/SENS/UNCERT/PLM"
+  },
+  "inspected_locations": [
+    "C:/Users/joshu/PROJECTS/REMOTE-SENSING/ersrr-ordinal-win (known JSON/CSV/MD manifests and targeted filenames)",
+    "C:/Users/joshu/PROJECTS/REMOTE-SENSING/Earth-Remote-Sensing-Rapid-Response- (known manifests and targeted filenames)",
+    ".../EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/emit-v002-2026-07 (known cached pair manifests and exact S2B_16SGC_20241020 pattern)",
+    ".../outputs/GTM_Model6/GTM_Model6_native_pair_readiness_20260922_v3/manifest.json"
+  ],
+  "local_candidates": [],
+  "finding": "larger source not found in inspected locations",
+  "qualification": "This does not establish that no larger local source exists outside the inspected roots/patterns.",
+  "next_operation": "If a local larger S2B_16SGC_20241020 raster or COG cache is identified, read only the recommended projected window and its QA/SCL counterpart; verify exact geometry overlap and native common support before replacing the crop.",
+  "byte_estimate": null,
+  "byte_estimate_reason": "No larger local source/header or COG block map was found, so a grounded range-read estimate is unavailable."
+}

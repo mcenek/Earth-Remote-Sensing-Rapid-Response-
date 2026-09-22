@@ -1,0 +1,297 @@
+{
+  "tool": "GTM_Model6_repair_native_pair.py",
+  "scene_id": "S2B_16SGC_20241020_0_L2A",
+  "manifest_sha256": "a8a270c815cd4b107452edb8dbe96cd2761658b9716e1cde77526eedaef29d4d",
+  "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_16SGC_20241020_0_L2A",
+  "peak_lonlat": [
+    -84.36325,
+    34.27989
+  ],
+  "peak_projected": [
+    742728.1871498856,
+    3796337.4303278113
+  ],
+  "bbox_projected": [
+    740160.0,
+    3793780.0,
+    745280.0,
+    3798900.0
+  ],
+  "status": "header_probe_complete",
+  "mode": "probe",
+  "assets": {
+    "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/SCL.tif",
+      "metadata": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 20
+        }
+      ],
+      "probe": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/SCL.tif",
+        "epsg": 32616,
+        "shape": [
+          5490,
+          5490
+        ],
+        "resolution_m": 20.0,
+        "bounds": [
+          699960.0,
+          3690240.0,
+          809760.0,
+          3800040.0
+        ],
+        "transform": [
+          20.0,
+          0.0,
+          699960.0,
+          0.0,
+          -20.0,
+          3800040.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "dtype": "uint8",
+        "tiled": true,
+        "crop_compressed_tile_bytes": 34938,
+        "crop_range_block_upper_bound": 1
+      }
+    },
+    "blue": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B02.tif",
+      "metadata": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": -0.1
+        }
+      ],
+      "probe": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B02.tif",
+        "epsg": 32616,
+        "shape": [
+          10980,
+          10980
+        ],
+        "resolution_m": 10.0,
+        "bounds": [
+          699960.0,
+          3690240.0,
+          809760.0,
+          3800040.0
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          699960.0,
+          0.0,
+          -10.0,
+          3800040.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "dtype": "uint16",
+        "tiled": true,
+        "crop_compressed_tile_bytes": 2764658,
+        "crop_range_block_upper_bound": 12
+      }
+    },
+    "green": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B03.tif",
+      "metadata": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": -0.1
+        }
+      ],
+      "probe": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B03.tif",
+        "epsg": 32616,
+        "shape": [
+          10980,
+          10980
+        ],
+        "resolution_m": 10.0,
+        "bounds": [
+          699960.0,
+          3690240.0,
+          809760.0,
+          3800040.0
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          699960.0,
+          0.0,
+          -10.0,
+          3800040.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "dtype": "uint16",
+        "tiled": true,
+        "crop_compressed_tile_bytes": 2944592,
+        "crop_range_block_upper_bound": 13
+      }
+    },
+    "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B04.tif",
+      "metadata": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": -0.1
+        }
+      ],
+      "probe": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B04.tif",
+        "epsg": 32616,
+        "shape": [
+          10980,
+          10980
+        ],
+        "resolution_m": 10.0,
+        "bounds": [
+          699960.0,
+          3690240.0,
+          809760.0,
+          3800040.0
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          699960.0,
+          0.0,
+          -10.0,
+          3800040.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "dtype": "uint16",
+        "tiled": true,
+        "crop_compressed_tile_bytes": 2900556,
+        "crop_range_block_upper_bound": 12
+      }
+    },
+    "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B11.tif",
+      "metadata": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 20,
+          "scale": 0.0001,
+          "offset": -0.1
+        }
+      ],
+      "probe": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B11.tif",
+        "epsg": 32616,
+        "shape": [
+          5490,
+          5490
+        ],
+        "resolution_m": 20.0,
+        "bounds": [
+          699960.0,
+          3690240.0,
+          809760.0,
+          3800040.0
+        ],
+        "transform": [
+          20.0,
+          0.0,
+          699960.0,
+          0.0,
+          -20.0,
+          3800040.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "dtype": "uint16",
+        "tiled": true,
+        "crop_compressed_tile_bytes": 3244428,
+        "crop_range_block_upper_bound": 14
+      }
+    },
+    "swir22": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B12.tif",
+      "metadata": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 20,
+          "scale": 0.0001,
+          "offset": -0.1
+        }
+      ],
+      "probe": {
+        "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/16/S/GC/2024/10/S2B_16SGC_20241020_0_L2A/B12.tif",
+        "epsg": 32616,
+        "shape": [
+          5490,
+          5490
+        ],
+        "resolution_m": 20.0,
+        "bounds": [
+          699960.0,
+          3690240.0,
+          809760.0,
+          3800040.0
+        ],
+        "transform": [
+          20.0,
+          0.0,
+          699960.0,
+          0.0,
+          -20.0,
+          3800040.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "dtype": "uint16",
+        "tiled": true,
+        "crop_compressed_tile_bytes": 785154,
+        "crop_range_block_upper_bound": 4
+      }
+    }
+  },
+  "stac": {
+    "id": "S2B_16SGC_20241020_0_L2A",
+    "datetime": "2024-10-20T16:34:04.191000Z",
+    "saved_path": "outputs\\GTM_Model6\\GTM_Model6_georgia_crop_probe_20260922\\GTM_Model6_stac_item.json",
+    "sha256": "8a5146f280a56f357d978476a5fc67247ff153b5a17ee5dd0a56bee7caa04430"
+  },
+  "budget": {
+    "attempt_limit_bytes": 12582912,
+    "attempt_charged_bytes": 2621440,
+    "attempt_received_bytes": 1594322,
+    "attempt_remaining_bytes": 9961472,
+    "shared": {
+      "limit_bytes": 104857600,
+      "charged_bytes": 34603008,
+      "received_bytes": 33404320,
+      "remaining_bytes": 70254592
+    }
+  }
+}

@@ -1,0 +1,1551 @@
+{
+  "schema_version": 2,
+  "tool_version": "v3",
+  "scope": "local-only native EMIT/Sentinel readiness; six cached scenes; rasterio bounded windows; no network",
+  "strict_timing_hours": 6.0,
+  "acquisitions": [
+    {
+      "stamp": "2024-10-20T17:05:04+00:00",
+      "manifest": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\manifest.json",
+      "manifest_sha256": "a8a270c815cd4b107452edb8dbe96cd2761658b9716e1cde77526eedaef29d4d",
+      "scenes": [
+        {
+          "scene_id": "S2B_16SGC_20241020_0_L2A",
+          "datetime": "2024-10-20T16:34:04.191000+00:00",
+          "lag_hours": -0.517,
+          "timing_threshold_hours": 6.0,
+          "strict_timing_pass": true,
+          "s2": {
+            "crs": "EPSG:32616",
+            "shape": [
+              256,
+              256
+            ],
+            "transform": [
+              20.0,
+              0.0,
+              735480.0,
+              0.0,
+              -20.0,
+              3791260.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "stack": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\S2B_16SGC_20241020_0_L2A.s2.tif",
+            "stack_sha256_actual": "c567cea7a39db0fed94847e9f8e7034a15771f6dfdea0566750d8e3ce0f1e7e2",
+            "stack_sha256_manifest": "c567cea7a39db0fed94847e9f8e7034a15771f6dfdea0566750d8e3ce0f1e7e2",
+            "stack_hash_matches_manifest": true,
+            "mask": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\S2B_16SGC_20241020_0_L2A.plume_mask.tif",
+            "mask_sha256_actual": "758bc2ec82cb1f204edce00ece1b0e8112cc0f861d7983002319d50c3f94168e",
+            "mask_sha256_manifest": "758bc2ec82cb1f204edce00ece1b0e8112cc0f861d7983002319d50c3f94168e",
+            "mask_hash_matches_manifest": true,
+            "cached_mask_positive_pixels": 65536,
+            "cloud_pct": 0.007976,
+            "roi_clear_pct": 100.0
+          },
+          "footprint_lonlat": [
+            -84.44469567106569,
+            34.18851471103067,
+            -84.38776242846706,
+            34.23581327846963
+          ],
+          "native_grid_alignment_ok": true,
+          "native_products": {
+            "enh": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003.tif",
+              "sha256": "0b36f5ec6b03faaed3e81124d4582517d293a1f597fbb6f97db7c03e239eb7c3",
+              "shape": [
+                1999,
+                2173
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -85.1101770470007,
+                0.0,
+                -0.000542232520256367,
+                34.7123177276544,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -85.1101770470007,
+                33.62839491966192,
+                -83.93190578048362,
+                34.7123177276544
+              ],
+              "window": [
+                878,
+                1227,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "sens": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4SENS_002_20241020T170504_2429411_003.tif",
+              "sha256": "25187bcf123d20d854963bf30277575d9c2f0aec95f2cec96eeda18daa0bbadf",
+              "shape": [
+                1999,
+                2173
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -85.1101770470007,
+                0.0,
+                -0.000542232520256367,
+                34.7123177276544,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "unitless",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -85.1101770470007,
+                33.62839491966192,
+                -83.93190578048362,
+                34.7123177276544
+              ],
+              "window": [
+                878,
+                1227,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "uncert": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4UNCERT_002_20241020T170504_2429411_003.tif",
+              "sha256": "109672b11c7fb0943b2e33c6dcce27543af7f3cb1b483c2c335e48eff6d2ba92",
+              "shape": [
+                1999,
+                2173
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -85.1101770470007,
+                0.0,
+                -0.000542232520256367,
+                34.7123177276544,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -85.1101770470007,
+                33.62839491966192,
+                -83.93190578048362,
+                34.7123177276544
+              ],
+              "window": [
+                878,
+                1227,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "plm": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\EMIT_L2B_CH4PLM_002_20241020T170504_003677.tif",
+              "sha256": "3422bcc8b8774a2ad439a3f6219cc57aedb124414940c39e220aea1bdccafa63",
+              "shape": [
+                607,
+                572
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -84.57119792186587,
+                0.0,
+                -0.000542232520256367,
+                34.37667579761571,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -84.57119792186587,
+                34.04754065782009,
+                -84.26104092027923,
+                34.37667579761571
+              ],
+              "window": [
+                259,
+                233,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "common_support_pixels": 8705,
+          "geometry_inside_pixels": 8716,
+          "common_support_fraction": 0.998738,
+          "native_plume_positive_pixels": 5822,
+          "native_peak_latlon": [
+            34.27989,
+            -84.36325
+          ],
+          "peak_in_s2_footprint": false,
+          "uncertainty_nonnegative_fraction": 1.0,
+          "sensitivity_finite_fraction": 1.0,
+          "sensitivity_admissibility": "metadata-defined units; no threshold assumed",
+          "fail_reasons": [
+            "native_peak_outside_s2_footprint"
+          ]
+        },
+        {
+          "scene_id": "S2A_16SGD_20241025_0_L2A",
+          "datetime": "2024-10-25T16:33:49.352000+00:00",
+          "lag_hours": 119.479,
+          "timing_threshold_hours": 6.0,
+          "strict_timing_pass": false,
+          "s2": {
+            "crs": "EPSG:32616",
+            "shape": [
+              256,
+              256
+            ],
+            "transform": [
+              20.0,
+              0.0,
+              735480.0,
+              0.0,
+              -20.0,
+              3791260.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "stack": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\S2A_16SGD_20241025_0_L2A.s2.tif",
+            "stack_sha256_actual": "e4f73789c64db8114245c6851f9b9a0ec338f7acc36f7ace831fec5fd97ab11c",
+            "stack_sha256_manifest": "e4f73789c64db8114245c6851f9b9a0ec338f7acc36f7ace831fec5fd97ab11c",
+            "stack_hash_matches_manifest": true,
+            "mask": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\S2A_16SGD_20241025_0_L2A.plume_mask.tif",
+            "mask_sha256_actual": "758bc2ec82cb1f204edce00ece1b0e8112cc0f861d7983002319d50c3f94168e",
+            "mask_sha256_manifest": "758bc2ec82cb1f204edce00ece1b0e8112cc0f861d7983002319d50c3f94168e",
+            "mask_hash_matches_manifest": true,
+            "cached_mask_positive_pixels": 65536,
+            "cloud_pct": 4.884705,
+            "roi_clear_pct": 100.0
+          },
+          "footprint_lonlat": [
+            -84.44469567106569,
+            34.18851471103067,
+            -84.38776242846706,
+            34.23581327846963
+          ],
+          "native_grid_alignment_ok": true,
+          "native_products": {
+            "enh": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003.tif",
+              "sha256": "0b36f5ec6b03faaed3e81124d4582517d293a1f597fbb6f97db7c03e239eb7c3",
+              "shape": [
+                1999,
+                2173
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -85.1101770470007,
+                0.0,
+                -0.000542232520256367,
+                34.7123177276544,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -85.1101770470007,
+                33.62839491966192,
+                -83.93190578048362,
+                34.7123177276544
+              ],
+              "window": [
+                878,
+                1227,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "sens": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4SENS_002_20241020T170504_2429411_003.tif",
+              "sha256": "25187bcf123d20d854963bf30277575d9c2f0aec95f2cec96eeda18daa0bbadf",
+              "shape": [
+                1999,
+                2173
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -85.1101770470007,
+                0.0,
+                -0.000542232520256367,
+                34.7123177276544,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "unitless",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -85.1101770470007,
+                33.62839491966192,
+                -83.93190578048362,
+                34.7123177276544
+              ],
+              "window": [
+                878,
+                1227,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "uncert": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4UNCERT_002_20241020T170504_2429411_003.tif",
+              "sha256": "109672b11c7fb0943b2e33c6dcce27543af7f3cb1b483c2c335e48eff6d2ba92",
+              "shape": [
+                1999,
+                2173
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -85.1101770470007,
+                0.0,
+                -0.000542232520256367,
+                34.7123177276544,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -85.1101770470007,
+                33.62839491966192,
+                -83.93190578048362,
+                34.7123177276544
+              ],
+              "window": [
+                878,
+                1227,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "plm": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\EMIT_L2B_CH4PLM_002_20241020T170504_003677.tif",
+              "sha256": "3422bcc8b8774a2ad439a3f6219cc57aedb124414940c39e220aea1bdccafa63",
+              "shape": [
+                607,
+                572
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -84.57119792186587,
+                0.0,
+                -0.000542232520256367,
+                34.37667579761571,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -84.57119792186587,
+                34.04754065782009,
+                -84.26104092027923,
+                34.37667579761571
+              ],
+              "window": [
+                259,
+                233,
+                89,
+                106
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -84.44485774464614,
+                0.0,
+                -0.000542232520256367,
+                34.236237574869314,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "common_support_pixels": 8705,
+          "geometry_inside_pixels": 8716,
+          "common_support_fraction": 0.998738,
+          "native_plume_positive_pixels": 5822,
+          "native_peak_latlon": [
+            34.27989,
+            -84.36325
+          ],
+          "peak_in_s2_footprint": false,
+          "uncertainty_nonnegative_fraction": 1.0,
+          "sensitivity_finite_fraction": 1.0,
+          "sensitivity_admissibility": "metadata-defined units; no threshold assumed",
+          "fail_reasons": [
+            "timing_exceeds_threshold",
+            "native_peak_outside_s2_footprint"
+          ]
+        }
+      ]
+    },
+    {
+      "stamp": "2024-11-30T18:03:10+00:00",
+      "manifest": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\manifest.json",
+      "manifest_sha256": "9d200585f9f0afc0fb24a35511c50b6adad1709163c142f66b38d95fbbd314bc",
+      "scenes": [
+        {
+          "scene_id": "S2B_13RFQ_20241120_0_L2A",
+          "datetime": "2024-11-20T17:45:20.867000+00:00",
+          "lag_hours": -240.297,
+          "timing_threshold_hours": 6.0,
+          "strict_timing_pass": false,
+          "s2": {
+            "crs": "EPSG:32613",
+            "shape": [
+              256,
+              256
+            ],
+            "transform": [
+              20.0,
+              0.0,
+              687420.0,
+              0.0,
+              -20.0,
+              3427780.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "stack": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\S2B_13RFQ_20241120_0_L2A.s2.tif",
+            "stack_sha256_actual": "c58d62a7d4dd163afda299d0107ac92718ec3761eabf63d2738257bb430b3a56",
+            "stack_sha256_manifest": "c58d62a7d4dd163afda299d0107ac92718ec3761eabf63d2738257bb430b3a56",
+            "stack_hash_matches_manifest": true,
+            "mask": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\S2B_13RFQ_20241120_0_L2A.plume_mask.tif",
+            "mask_sha256_actual": "1b6e6b7629e95adaa32640a98b05170123a9ea8df38718e87fd4aa42869fab0a",
+            "mask_sha256_manifest": "1b6e6b7629e95adaa32640a98b05170123a9ea8df38718e87fd4aa42869fab0a",
+            "mask_hash_matches_manifest": true,
+            "cached_mask_positive_pixels": 38387,
+            "cloud_pct": 0.00152,
+            "roi_clear_pct": 100.0
+          },
+          "footprint_lonlat": [
+            -103.03855638233148,
+            30.921658479064487,
+            -102.98403131641497,
+            30.96865426132332
+          ],
+          "native_grid_alignment_ok": true,
+          "native_products": {
+            "enh": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007.tif",
+              "sha256": "74948c32d866ad49c23bc6dae8a28c873204abe61a47d22095f425f829a73894",
+              "shape": [
+                1895,
+                2250
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.507584226779,
+                0.0,
+                -0.000542232520256367,
+                31.2501630858175,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.507584226779,
+                30.222632459931685,
+                -102.28756105620218,
+                31.2501630858175
+              ],
+              "window": [
+                519,
+                864,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804447,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "sens": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007\\EMIT_L2B_CH4SENS_002_20241130T180310_2433512_007.tif",
+              "sha256": "97db40a6750412c357ff572ae8b233eb9bf489268fbcc8f45941cc813a2b11c6",
+              "shape": [
+                1895,
+                2250
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.507584226779,
+                0.0,
+                -0.000542232520256367,
+                31.2501630858175,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "unitless",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.507584226779,
+                30.222632459931685,
+                -102.28756105620218,
+                31.2501630858175
+              ],
+              "window": [
+                519,
+                864,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804447,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "uncert": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007\\EMIT_L2B_CH4UNCERT_002_20241130T180310_2433512_007.tif",
+              "sha256": "d4ac6043c9ebb391eac5e201bb26200fe8aec091ae1c58e76b2013ef07895b20",
+              "shape": [
+                1895,
+                2250
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.507584226779,
+                0.0,
+                -0.000542232520256367,
+                31.2501630858175,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.507584226779,
+                30.222632459931685,
+                -102.28756105620218,
+                31.2501630858175
+              ],
+              "window": [
+                519,
+                864,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804447,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "plm": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\EMIT_L2B_CH4PLM_002_20241130T180310_003723.tif",
+              "sha256": "9cbab08b61a08401503419abae599968ca60912ff76fe03a5ae246fb3476dbe2",
+              "shape": [
+                375,
+                311
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.09548751138416,
+                0.0,
+                -0.000542232520256367,
+                31.04682589072139,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.09548751138416,
+                30.843488695625254,
+                -102.92685319758444,
+                31.04682589072139
+              ],
+              "window": [
+                144,
+                104,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804472,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "common_support_pixels": 8416,
+          "geometry_inside_pixels": 8416,
+          "common_support_fraction": 1.0,
+          "native_plume_positive_pixels": 3100,
+          "native_peak_latlon": [
+            30.98799,
+            -102.98677
+          ],
+          "peak_in_s2_footprint": false,
+          "uncertainty_nonnegative_fraction": 1.0,
+          "sensitivity_finite_fraction": 1.0,
+          "sensitivity_admissibility": "metadata-defined units; no threshold assumed",
+          "fail_reasons": [
+            "timing_exceeds_threshold",
+            "native_peak_outside_s2_footprint"
+          ]
+        },
+        {
+          "scene_id": "S2B_13RFQ_20241210_0_L2A",
+          "datetime": "2024-12-10T17:45:22.284000+00:00",
+          "lag_hours": 239.703,
+          "timing_threshold_hours": 6.0,
+          "strict_timing_pass": false,
+          "s2": {
+            "crs": "EPSG:32613",
+            "shape": [
+              256,
+              256
+            ],
+            "transform": [
+              20.0,
+              0.0,
+              687420.0,
+              0.0,
+              -20.0,
+              3427780.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "stack": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\S2B_13RFQ_20241210_0_L2A.s2.tif",
+            "stack_sha256_actual": "9b7290b869e2eb32eb43d37ef6b83589b71d5b9ef1256335f6afaad97287fb9a",
+            "stack_sha256_manifest": "9b7290b869e2eb32eb43d37ef6b83589b71d5b9ef1256335f6afaad97287fb9a",
+            "stack_hash_matches_manifest": true,
+            "mask": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\S2B_13RFQ_20241210_0_L2A.plume_mask.tif",
+            "mask_sha256_actual": "1b6e6b7629e95adaa32640a98b05170123a9ea8df38718e87fd4aa42869fab0a",
+            "mask_sha256_manifest": "1b6e6b7629e95adaa32640a98b05170123a9ea8df38718e87fd4aa42869fab0a",
+            "mask_hash_matches_manifest": true,
+            "cached_mask_positive_pixels": 38387,
+            "cloud_pct": 8.547224,
+            "roi_clear_pct": 100.0
+          },
+          "footprint_lonlat": [
+            -103.03855638233148,
+            30.921658479064487,
+            -102.98403131641497,
+            30.96865426132332
+          ],
+          "native_grid_alignment_ok": true,
+          "native_products": {
+            "enh": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007.tif",
+              "sha256": "74948c32d866ad49c23bc6dae8a28c873204abe61a47d22095f425f829a73894",
+              "shape": [
+                1895,
+                2250
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.507584226779,
+                0.0,
+                -0.000542232520256367,
+                31.2501630858175,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.507584226779,
+                30.222632459931685,
+                -102.28756105620218,
+                31.2501630858175
+              ],
+              "window": [
+                519,
+                864,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804447,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "sens": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007\\EMIT_L2B_CH4SENS_002_20241130T180310_2433512_007.tif",
+              "sha256": "97db40a6750412c357ff572ae8b233eb9bf489268fbcc8f45941cc813a2b11c6",
+              "shape": [
+                1895,
+                2250
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.507584226779,
+                0.0,
+                -0.000542232520256367,
+                31.2501630858175,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "unitless",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.507584226779,
+                30.222632459931685,
+                -102.28756105620218,
+                31.2501630858175
+              ],
+              "window": [
+                519,
+                864,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804447,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "uncert": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241130T180310_2433512_007\\EMIT_L2B_CH4UNCERT_002_20241130T180310_2433512_007.tif",
+              "sha256": "d4ac6043c9ebb391eac5e201bb26200fe8aec091ae1c58e76b2013ef07895b20",
+              "shape": [
+                1895,
+                2250
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.507584226779,
+                0.0,
+                -0.000542232520256367,
+                31.2501630858175,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.507584226779,
+                30.222632459931685,
+                -102.28756105620218,
+                31.2501630858175
+              ],
+              "window": [
+                519,
+                864,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804447,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "plm": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20241130T180310_003723\\EMIT_L2B_CH4PLM_002_20241130T180310_003723.tif",
+              "sha256": "9cbab08b61a08401503419abae599968ca60912ff76fe03a5ae246fb3476dbe2",
+              "shape": [
+                375,
+                311
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -103.09548751138416,
+                0.0,
+                -0.000542232520256367,
+                31.04682589072139,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -103.09548751138416,
+                30.843488695625254,
+                -102.92685319758444,
+                31.04682589072139
+              ],
+              "window": [
+                144,
+                104,
+                87,
+                102
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -103.0390953292775,
+                0.0,
+                -0.000542232520256367,
+                30.968744407804472,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "common_support_pixels": 8416,
+          "geometry_inside_pixels": 8416,
+          "common_support_fraction": 1.0,
+          "native_plume_positive_pixels": 3100,
+          "native_peak_latlon": [
+            30.98799,
+            -102.98677
+          ],
+          "peak_in_s2_footprint": false,
+          "uncertainty_nonnegative_fraction": 1.0,
+          "sensitivity_finite_fraction": 1.0,
+          "sensitivity_admissibility": "metadata-defined units; no threshold assumed",
+          "fail_reasons": [
+            "timing_exceeds_threshold",
+            "native_peak_outside_s2_footprint"
+          ]
+        }
+      ]
+    },
+    {
+      "stamp": "2025-09-22T20:49:33+00:00",
+      "manifest": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\manifest.json",
+      "manifest_sha256": "9583ff0c302da8530437413d6f94c0fd9c35b2c1d7796e8df2c9a758928f584d",
+      "scenes": [
+        {
+          "scene_id": "S2C_13SGR_20250921_0_L2A",
+          "datetime": "2025-09-21T17:45:16.844000+00:00",
+          "lag_hours": -27.071,
+          "timing_threshold_hours": 6.0,
+          "strict_timing_pass": false,
+          "s2": {
+            "crs": "EPSG:32613",
+            "shape": [
+              256,
+              256
+            ],
+            "transform": [
+              20.0,
+              0.0,
+              775600.0,
+              0.0,
+              -20.0,
+              3573560.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "stack": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\S2C_13SGR_20250921_0_L2A.s2.tif",
+            "stack_sha256_actual": "5a349b897a81519edb92dbdb653fd8a4a8adcf6cdf64568acb0785e9a478ab43",
+            "stack_sha256_manifest": "5a349b897a81519edb92dbdb653fd8a4a8adcf6cdf64568acb0785e9a478ab43",
+            "stack_hash_matches_manifest": true,
+            "mask": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\S2C_13SGR_20250921_0_L2A.plume_mask.tif",
+            "mask_sha256_actual": "b17ee282a39e701f910409a7e98aa14733090bb86823f5fd79c78a2cda7a485f",
+            "mask_sha256_manifest": "b17ee282a39e701f910409a7e98aa14733090bb86823f5fd79c78a2cda7a485f",
+            "mask_hash_matches_manifest": true,
+            "cached_mask_positive_pixels": 2651,
+            "cloud_pct": 0.235096,
+            "roi_clear_pct": 100.0
+          },
+          "footprint_lonlat": [
+            -102.0758042870076,
+            32.21753163357746,
+            -102.02003515267947,
+            32.264929111578176
+          ],
+          "native_grid_alignment_ok": true,
+          "native_products": {
+            "enh": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006.tif",
+              "sha256": "394601c51dbfdff7ad14ce6080220f2f226c2f5b793f9e61ad40e132b0686680",
+              "shape": [
+                1886,
+                2278
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.613442800876,
+                0.0,
+                -0.000542232520256367,
+                32.566703645,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.613442800876,
+                31.54405311179649,
+                -101.37823711973199,
+                32.566703645
+              ],
+              "window": [
+                556,
+                991,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.26522236373746,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "sens": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006\\EMIT_L2B_CH4SENS_002_20250922T204933_2526514_006.tif",
+              "sha256": "64c985fde29428480a75d0a1638ad7aba0788c4cb7ba57617656723fe51398df",
+              "shape": [
+                1886,
+                2278
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.613442800876,
+                0.0,
+                -0.000542232520256367,
+                32.566703645,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "unitless",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.613442800876,
+                31.54405311179649,
+                -101.37823711973199,
+                32.566703645
+              ],
+              "window": [
+                556,
+                991,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.26522236373746,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "uncert": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006\\EMIT_L2B_CH4UNCERT_002_20250922T204933_2526514_006.tif",
+              "sha256": "692eb005daecd4f82294ff3b95cdee0721329a3b888981b0f201f42bbee341f7",
+              "shape": [
+                1886,
+                2278
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.613442800876,
+                0.0,
+                -0.000542232520256367,
+                32.566703645,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.613442800876,
+                31.54405311179649,
+                -101.37823711973199,
+                32.566703645
+              ],
+              "window": [
+                556,
+                991,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.26522236373746,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "plm": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\EMIT_L2B_CH4PLM_002_20250922T204933_003374.tif",
+              "sha256": "d360a6e246ef018d65c712feaaa4029319f215103e0db387254e60e20ad3c309",
+              "shape": [
+                221,
+                222
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.10808209199706,
+                0.0,
+                -0.000542232520256367,
+                32.30100971007433,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.10808209199706,
+                32.181176323097674,
+                -101.98770647250015,
+                32.30100971007433
+              ],
+              "window": [
+                66,
+                59,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.265222363737415,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "common_support_pixels": 8487,
+          "geometry_inside_pixels": 8519,
+          "common_support_fraction": 0.996244,
+          "native_plume_positive_pixels": 220,
+          "native_peak_latlon": [
+            32.24272,
+            -102.04762
+          ],
+          "peak_in_s2_footprint": true,
+          "uncertainty_nonnegative_fraction": 1.0,
+          "sensitivity_finite_fraction": 1.0,
+          "sensitivity_admissibility": "metadata-defined units; no threshold assumed",
+          "fail_reasons": [
+            "timing_exceeds_threshold"
+          ]
+        },
+        {
+          "scene_id": "S2B_14SKA_20250923_0_L2A",
+          "datetime": "2025-09-23T17:35:04.388000+00:00",
+          "lag_hours": 20.759,
+          "timing_threshold_hours": 6.0,
+          "strict_timing_pass": false,
+          "s2": {
+            "crs": "EPSG:32613",
+            "shape": [
+              256,
+              256
+            ],
+            "transform": [
+              20.0,
+              0.0,
+              775600.0,
+              0.0,
+              -20.0,
+              3573560.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "stack": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\S2B_14SKA_20250923_0_L2A.s2.tif",
+            "stack_sha256_actual": "9bef5059ec149d81968c9d382698cb694fa73def85be48e7d77fc650bce83420",
+            "stack_sha256_manifest": "9bef5059ec149d81968c9d382698cb694fa73def85be48e7d77fc650bce83420",
+            "stack_hash_matches_manifest": true,
+            "mask": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\emit-v002-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\S2B_14SKA_20250923_0_L2A.plume_mask.tif",
+            "mask_sha256_actual": "b17ee282a39e701f910409a7e98aa14733090bb86823f5fd79c78a2cda7a485f",
+            "mask_sha256_manifest": "b17ee282a39e701f910409a7e98aa14733090bb86823f5fd79c78a2cda7a485f",
+            "mask_hash_matches_manifest": true,
+            "cached_mask_positive_pixels": 2651,
+            "cloud_pct": 1.022147,
+            "roi_clear_pct": 100.0
+          },
+          "footprint_lonlat": [
+            -102.0758042870076,
+            32.21753163357746,
+            -102.02003515267947,
+            32.264929111578176
+          ],
+          "native_grid_alignment_ok": true,
+          "native_products": {
+            "enh": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006.tif",
+              "sha256": "394601c51dbfdff7ad14ce6080220f2f226c2f5b793f9e61ad40e132b0686680",
+              "shape": [
+                1886,
+                2278
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.613442800876,
+                0.0,
+                -0.000542232520256367,
+                32.566703645,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.613442800876,
+                31.54405311179649,
+                -101.37823711973199,
+                32.566703645
+              ],
+              "window": [
+                556,
+                991,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.26522236373746,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "sens": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006\\EMIT_L2B_CH4SENS_002_20250922T204933_2526514_006.tif",
+              "sha256": "64c985fde29428480a75d0a1638ad7aba0788c4cb7ba57617656723fe51398df",
+              "shape": [
+                1886,
+                2278
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.613442800876,
+                0.0,
+                -0.000542232520256367,
+                32.566703645,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "unitless",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.613442800876,
+                31.54405311179649,
+                -101.37823711973199,
+                32.566703645
+              ],
+              "window": [
+                556,
+                991,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.26522236373746,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "uncert": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20250922T204933_2526514_006\\EMIT_L2B_CH4UNCERT_002_20250922T204933_2526514_006.tif",
+              "sha256": "692eb005daecd4f82294ff3b95cdee0721329a3b888981b0f201f42bbee341f7",
+              "shape": [
+                1886,
+                2278
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.613442800876,
+                0.0,
+                -0.000542232520256367,
+                32.566703645,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.613442800876,
+                31.54405311179649,
+                -101.37823711973199,
+                32.566703645
+              ],
+              "window": [
+                556,
+                991,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.26522236373746,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "plm": {
+              "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20250922T204933_003374\\EMIT_L2B_CH4PLM_002_20250922T204933_003374.tif",
+              "sha256": "d360a6e246ef018d65c712feaaa4029319f215103e0db387254e60e20ad3c309",
+              "shape": [
+                221,
+                222
+              ],
+              "count": 1,
+              "dtype": "float32",
+              "crs": "EPSG:4326",
+              "transform": [
+                0.000542232520256367,
+                0.0,
+                -102.10808209199706,
+                0.0,
+                -0.000542232520256367,
+                32.30100971007433,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "nodata": -9999.0,
+              "units": "ppm m",
+              "units_source": "GDAL metadata item",
+              "bounds": [
+                -102.10808209199706,
+                32.181176323097674,
+                -101.98770647250015,
+                32.30100971007433
+              ],
+              "window": [
+                66,
+                59,
+                88,
+                104
+              ],
+              "window_transform": [
+                0.000542232520256367,
+                0.0,
+                -102.07609037330194,
+                0.0,
+                -0.000542232520256367,
+                32.265222363737415,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "common_support_pixels": 8487,
+          "geometry_inside_pixels": 8519,
+          "common_support_fraction": 0.996244,
+          "native_plume_positive_pixels": 220,
+          "native_peak_latlon": [
+            32.24272,
+            -102.04762
+          ],
+          "peak_in_s2_footprint": true,
+          "uncertainty_nonnegative_fraction": 1.0,
+          "sensitivity_finite_fraction": 1.0,
+          "sensitivity_admissibility": "metadata-defined units; no threshold assumed",
+          "fail_reasons": [
+            "timing_exceeds_threshold"
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "cached_scene_count": 6,
+    "strict_timing_scene_count": 1,
+    "strict_engineering_pair_ready": false,
+    "national_data_readiness_claim": false,
+    "independent_acquisition_count": 3
+  }
+}

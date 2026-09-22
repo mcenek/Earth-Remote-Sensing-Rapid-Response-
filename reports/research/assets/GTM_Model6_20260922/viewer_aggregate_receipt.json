@@ -1,0 +1,35 @@
+{
+  "scope": "Display frozen run-wide statistics next to case scores; no new evaluation or predictions",
+  "revisions": [
+    {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\experiment.json",
+      "before_sha256": "52d1ab9defbf694f52e57fcd7d06691958731f8b63c66ef59a1a1238f469bb6f",
+      "after_sha256": "fa0781b478af8e075e9a45db5c1ca15b2ff74b89efd3f761d4f6f85f96e49764",
+      "backup": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model6\\GTM_Model6_followup_verification_20260922\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean.before_aggregate.json"
+    },
+    {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_S128\\experiment.json",
+      "before_sha256": "ef4b35dd55d2f7b885e23fb434cb4cac0c1decd8c3bfe403779b567a4731b749",
+      "after_sha256": "3dd9f36eab1abc7006137e3dc8703501e4ddb4f7b0e227a92326e9e57b072ea7",
+      "backup": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model6\\GTM_Model6_followup_verification_20260922\\GTM_Model6_mapper_mars_pilot_20260922_r5_S128.before_aggregate.json"
+    },
+    {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_S16\\experiment.json",
+      "before_sha256": "b112ad8af9045c01aa56c1693b8a2f98f4d9e5be1ad109ec2356797c4cf6eebd",
+      "after_sha256": "eafc42059d5e1656aa2578c2529fa120ef4c7b9b03f5d57ba575973abb70118f",
+      "backup": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model6\\GTM_Model6_followup_verification_20260922\\GTM_Model6_mapper_mars_pilot_20260922_r5_S16.before_aggregate.json"
+    },
+    {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_S32\\experiment.json",
+      "before_sha256": "4d86cc5986718c4e9a0aa876aaccebc5bb4367edcfd45d1dd15a323c67d22f49",
+      "after_sha256": "8677b27fcbb176b246bf9950d13a7ae60e03e58f75fc13a7ab9b372b86b8eea1",
+      "backup": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model6\\GTM_Model6_followup_verification_20260922\\GTM_Model6_mapper_mars_pilot_20260922_r5_S32.before_aggregate.json"
+    },
+    {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_S64\\experiment.json",
+      "before_sha256": "3e18cd23cc1b4d3cf5e1da307fa7bf8fccf88db1dbabba1d32fa15a4dfab0791",
+      "after_sha256": "ed0d541038431ecb7e3721f24c7999ee8ef30af653e701a62870e96b84fc6bb7",
+      "backup": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model6\\GTM_Model6_followup_verification_20260922\\GTM_Model6_mapper_mars_pilot_20260922_r5_S64.before_aggregate.json"
+    }
+  ]
+}

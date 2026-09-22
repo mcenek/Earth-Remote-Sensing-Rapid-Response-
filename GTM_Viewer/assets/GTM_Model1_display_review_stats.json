@@ -1,0 +1,50 @@
+[
+  {
+    "model": "compact",
+    "scene": "20230203T171519_20230203T172113_T14RMU",
+    "threshold": 0.01,
+    "predicted_fraction": 1.0,
+    "reference_support": 0.092041015625,
+    "tp": 816,
+    "fp": 692,
+    "fn": 0,
+    "tn": 0,
+    "iou": 0.5411140583554377
+  },
+  {
+    "model": "compact",
+    "scene": "20230410T172859_20230410T174507_T13RFQ",
+    "threshold": 0.01,
+    "predicted_fraction": 0.99969482421875,
+    "reference_support": 0.10931396484375,
+    "tp": 480,
+    "fp": 1311,
+    "fn": 0,
+    "tn": 0,
+    "iou": 0.26800670016750416
+  },
+  {
+    "model": "physics",
+    "scene": "20230203T171519_20230203T172113_T14RMU",
+    "threshold": 0.05,
+    "predicted_fraction": 0.9989013671875,
+    "reference_support": 0.092041015625,
+    "tp": 816,
+    "fp": 692,
+    "fn": 0,
+    "tn": 0,
+    "iou": 0.5411140583554377
+  },
+  {
+    "model": "physics",
+    "scene": "20230410T172859_20230410T174507_T13RFQ",
+    "threshold": 0.05,
+    "predicted_fraction": 0.98553466796875,
+    "reference_support": 0.10931396484375,
+    "tp": 470,
+    "fp": 1309,
+    "fn": 10,
+    "tn": 2,
+    "iou": 0.26271660145332587
+  }
+]

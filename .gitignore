@@ -30,6 +30,7 @@ pnpm-debug.log*
 *.pem
 *.key
 *.jsonl
+!research/GTM_Model6/manifests/GTM_Model6_*.jsonl
 
 # OS/editor noise
 .DS_Store

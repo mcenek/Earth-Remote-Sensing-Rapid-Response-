@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scope": "bounded read-only research readiness gate; no training, download, or held-out label opening",
+  "config_sha256": "893323cb9a524179af37df90a09515d930300b447117b1153a31a29ec485074f",
+  "available_ram_gib": 4.14111328125,
+  "legacy_contract": {
+    "verified_hashes": true,
+    "runtime_load_verified": false,
+    "inference_performed": false,
+    "tensorflow_installed": false,
+    "available_ram_gib_at_check": 4.317985534667969
+  },
+  "current_model6_inventory": {
+    "records": 77,
+    "datasets": {
+      "MARS": 68,
+      "EMIT": 9
+    },
+    "connected_groups": 17,
+    "positive_groups": 11,
+    "partitions": {
+      "EMIT/fold_0": 2,
+      "EMIT/fold_3": 1,
+      "EMIT/fold_4": 6,
+      "MARS/fold_0": 35,
+      "MARS/fold_1": 13,
+      "MARS/fold_2": 9,
+      "MARS/fold_3": 8,
+      "MARS/fold_4": 3
+    },
+    "excluded": 3,
+    "emit_records_are_positive_only": true,
+    "negative_cap": 32,
+    "interpretation": "capped readiness inventory; the completed pilots used their frozen 173-record manifest"
+  },
+  "completed_pilots": [
+    {
+      "run_id": "GTM_Model6_plume_01",
+      "summary_sha256": "9972eeeeab84c93675632a2ae7a27b15a150338f95353f584c0e7ada2acd5d6d",
+      "mean": {
+        "reviewed_MARS_pixel_precision": 0.013772116391147556,
+        "reviewed_MARS_pixel_IoU": 0.013285386445251788,
+        "MARS_negative_mean_predicted_fraction": 0.08898505958625706,
+        "EMIT_positive_support_recall": 0.2852267723469837,
+        "EMIT_precision": null,
+        "EMIT_false_positive_rate": null,
+        "nationally_validated": false
+      }
+    },
+    {
+      "run_id": "GTM_Model6_plume_evidence_02",
+      "summary_sha256": "d6d9f2a4db8d04a696d1cd34dbdceb7a97f6c01854b5577f60bdaf4593619e4a",
+      "mean": {
+        "reviewed_MARS_pixel_precision": 0.028892147820557622,
+        "reviewed_MARS_pixel_IoU": 0.026654863515049018,
+        "MARS_negative_mean_predicted_fraction": 0.050602002804153896,
+        "EMIT_positive_support_recall": 0.07280933509467195,
+        "EMIT_precision": null,
+        "EMIT_false_positive_rate": null,
+        "nationally_validated": false
+      }
+    }
+  ],
+  "gates": {
+    "legacy_artifact_identity": true,
+    "legacy_runtime_inference_available": false,
+    "quantitative_emit_target_available_in_current_model6_cohort": false,
+    "cafo_supervised_methane_rotation_ready": false,
+    "new_real_pilot_authorized": false,
+    "promotion_candidate_available": false
+  },
+  "decision": "Do not launch another Model6 sweep on the current nine EMIT-positive cohort. Resolve quantitative EMIT target/provenance and CAFO controls first; retain the existing pilots as failed engineering evidence.",
+  "limitations": [
+    "The current Model6 EMIT records use positive-only footprint support; exterior pixels are unknown.",
+    "The 36 reviewed MARS positives are concentrated in two connected groups.",
+    "The local CAFO inventory has no date-specific plume labels or reviewed facility negatives.",
+    "Legacy checkpoint inference is not runtime-verified in this environment."
+  ]
+}

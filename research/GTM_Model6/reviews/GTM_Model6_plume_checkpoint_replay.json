@@ -1,0 +1,36 @@
+{
+  "scene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+  "checkpoints": [
+    {
+      "window": 16,
+      "max_abs_error": 0.0,
+      "training_overlap": false
+    },
+    {
+      "window": 32,
+      "max_abs_error": 0.0,
+      "training_overlap": false
+    },
+    {
+      "window": 64,
+      "max_abs_error": 0.0,
+      "training_overlap": false
+    },
+    {
+      "window": 128,
+      "max_abs_error": 0.0,
+      "training_overlap": false
+    }
+  ],
+  "mean_max_abs_error": 0.0,
+  "mean_mask_agreement": 1.0,
+  "native_iou": 0.5487364620938628,
+  "additional_EMIT_replay": {
+    "run": "GTM_Model6_plume_evidence_02",
+    "scene": "emit25km-0032",
+    "window": 128,
+    "max_abs_error": 0,
+    "mask_agreement": 1,
+    "training_overlap": false
+  }
+}

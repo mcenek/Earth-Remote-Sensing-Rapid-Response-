@@ -1,0 +1,43 @@
+{
+  "diagnostic_only": true,
+  "source_hashes_match": true,
+  "no_training_or_retuning": true,
+  "views": {
+    "full": {
+      "rows": 43529,
+      "baseline_ap": 0.6410196024104218,
+      "candidate_ap": 0.6761016429002372,
+      "baseline_iou": 0.3243651485849355,
+      "candidate_iou": 0.37996355770303547,
+      "baseline_tp_fp_fn": [
+        1796305,
+        2668518,
+        1073087
+      ],
+      "candidate_tp_fp_fn": [
+        1437181,
+        913692,
+        1431545
+      ],
+      "max_abs_report_difference": 0.0
+    },
+    "test_only_sites": {
+      "rows": 15655,
+      "baseline_ap": 0.45027380014908475,
+      "candidate_ap": 0.46702729261517734,
+      "baseline_iou": 0.17156194293902416,
+      "candidate_iou": 0.2924622462140781,
+      "baseline_tp_fp_fn": [
+        210483,
+        875886,
+        140494
+      ],
+      "candidate_tp_fp_fn": [
+        166435,
+        217508,
+        185139
+      ],
+      "max_abs_report_difference": 0.0
+    }
+  }
+}

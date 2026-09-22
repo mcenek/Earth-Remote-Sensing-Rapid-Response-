@@ -1,83 +1,70 @@
-# Earth Remote Sensing Rapid Response (ERSRR)
+# ERSRR — Sentinel-to-EMIT methane plume detection restart
 
-ERSRR is a research system for detecting and segmenting methane plumes in multi-temporal Sentinel-2 imagery. The current publication candidate is **v5.1**, a 9,358,256-parameter shared tri-temporal U-Net using T, T-90, and T-365 imagery, two MBMP physics maps, dense segmentation, and a fixed small context head. It is a research model, not an operational detector or physical concentration/flux estimator.
+**Active research: GTM_Model6. The objective is nationwide US Sentinel-only plume extent and candidate-source detection supervised by EMIT; current reconstruction runs are diagnostics and do not prove detection success.**
 
-On the sealed 20,789-crop MethaneS2CM location test, v5.1 achieved scene AP 0.8180, AUROC 0.8276, recall 0.3778, false-positive rate 0.0607, pixel AP 0.2083, Dice 0.3125, and IoU 0.1852. It substantially exceeded released MARS-S2L's zero-shot ranking, recall, and dense overlap on the same test, with paired 25 km bootstrap support, but MARS-S2L had lower FPR at an almost-zero 0.0052 recall. Across-the-board superiority is therefore **not** established, and no threshold may be retuned from the test result. See the [research dossier](reports/ERSRR_RESEARCH_REPORT.html), [research ledger](docs/RESEARCH_LEDGER.md), and [paper outline](docs/PAPER_OUTLINE.md).
+Latest (2026-09-22): **the corrected mapper produces visible predictions but still fails the quality gate.** Fixed positive-patch sampling and inconsistent viewer scoring support; ran one bounded R5 development follow-up with four independent context branches. Its pooled IoU is 2.1485%, precision 2.2487% and recall 32.5182% on 65 reused MARS cases. All three plume cases and the two worst false-positive controls were visually inspected. [Verification report and actual outputs](reports/research/GTM_Model6_followup_verification_2026-09-22.md) · [Open R5 mean](http://127.0.0.1:8766/?experiment=GTM_Model6_mapper_mars_pilot_20260922_r5_mean&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare). R5 reused existing imagery; a subsequent targeted data repair transferred 9.02 MiB under the existing cap. This is mask supervision only; quantitative EMIT upscaling and source localization remain unproven.
 
-The retired v3 campaign remains an important negative result: on its separate geographically isolated MARS cohort, ERSRR reduced mean FPR from 9.48% for released MARS-S2L to 3.67%, but mean recall fell from 64.18% to 31.94%. V4.3 later improved strict-cohort AP/AUROC/FPR point estimates but still lost recall and overlap. These studies are preserved rather than overwritten.
+Data progress after the training run: [one corrected Georgia crop](reports/research/assets/GTM_Model6_20260922/georgia_acquisition.json) now covers the native EMIT peak with near-time Sentinel imagery. This used 9.02 MiB including the header probe and kept cumulative charges at 40.5/100 MiB. Quantitative target QA, a temporal reference and independent observations remain necessary before an EMIT-trained mapper/upscaler run.
 
-The original capstone was created by Eduardo Gonon, Kincaid Larson, Kevin Nguyen, and Hung-Nghi Vu for Dr. Cenek, advised by Dr. Nuxoll.
+Earlier full-scene pilots have four independent context models across five group-held-out folds, with all 173 cases exported per run. Their pooled MARS IoUs are 1.33% and 2.67%; EMIT support coverage is 28.52% and 7.28%. Both failed. Their cohort and scored support differ from R5, so the numbers do not establish a ranking against R5. [Pilot report](reports/research/assets/GTM_Model6_20260922/earlier_unconstrained_report.md) · [Follow-up report](reports/research/assets/GTM_Model6_20260922/earlier_evidence_report.md).
 
-## Publication architecture and evidence
+Earlier EMIT-only diagnostic: four context models and their mean across three native US acquisitions nearly tied nearest-neighbor overall. [Native diagnostic review](research/GTM_Model6/reviews/GTM_Model6_native_review.md). This remains controlled 120→60 m reconstruction, not Sentinel detection or validated 20 m detail.
 
-- `EarthRemoteSensingRapidResponse/methanes2cm_v5_model.py` defines the shared tri-temporal v5/v5.1 architecture.
-- `EarthRemoteSensingRapidResponse/methanes2cm_adapter.py` enforces the 12-page TIFF, band, reflectance, mask, and comparator contracts.
-- `tools/train_methanes2cm_v5.py` implements the frozen fitting/development and three-seed campaign.
-- `tools/aggregate_methanes2cm_v5_1.py` freezes ensemble calibration, thresholds, dense averaging, spatial cross-fitting, and uncertainty.
-- `tools/acquire_methanes2cm_v5_test.py` and `tools/evaluate_methanes2cm_v5_1_test.py` implement the precommitted one-shot location-test boundary.
-- `tools/analyze_methanes2cm_v5_1_test_posthoc.py` applies only already-frozen thresholds and cannot select a test operating rule.
-- `tools/evaluate_mars_v4_3_strict.py` preserves the paired v4.3 versus released MARS-S2L strict comparison.
-- `tools/build_research_report.py` regenerates the self-contained HTML dossier from committed machine-readable evidence.
+The first run used 13 US observations in 11 spatial groups. EMIT-only reconstruction reduced mean held-out MAE from 132.01 to 121.66 (7.8%); adding Sentinel worsened MAE to 135.18. These are deliberately degraded legacy aggregates, not native EMIT or independent 20 m truth. See the [run and visual review](research/GTM_Model6/reviews/GTM_Model6_reconstruction_review.md) and [actual predictions](http://127.0.0.1:8766/?experiment=GTM_Model6_emit_only_f0#compare).
 
-V5.1 inputs are two MBMP maps plus six Sentinel-2 L2A bands for each of T, T-90, and T-365. MethaneS2CM lacks wind and per-pixel cloud masks; frozen L1C comparators therefore use documented wind imputation and an unavailable-cloud zero channel. L1C/MARS, L2A/MethaneS2CM, and EMIT studies remain explicitly separated.
+The goal is nationwide US Sentinel-2 plume extent and candidate methane-source ranking, supervised by valid EMIT observations. The design uses Martin's 0°/15°/30°/45° rotations with and without mirroring, independent 16/32/64/128 context branches, segmentation heads, and mandatory native georeferenced review. EMIT is never an inference input. CAFO/oil locations corroborate candidates; Gaussian source localization requires source and wind supervision.
 
-## Setup
+## Start here
 
-Python 3.11 is recommended. TensorFlow 2.16+ ships Keras 3; native Windows GPU support is unavailable, so use WSL2 for GPU work or run CPU-only.
+New software preparation: [previous-team baseline and paired comparison commands](research/GTM_Baselines/README.md). The exact April web-model weights are recovered and hash pinned; the comparison harness is verified on tiny fixtures and three existing cached scenes. Actual legacy inference is deferred for RAM and TensorFlow runtime availability, so this is not a legacy-vs-Model6 performance result.
 
-```bash
-python3.11 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+1. [Active workspace and next steps](research/GTM_Model6/README.md)
+2. [Architecture design](docs/GTM_Model6_multiscale_reconstruction_design.md) · [Google Doc](https://docs.google.com/document/d/1g7JtVt-BammYKuymoBimqXqjnRcdK1oFsgo-WAWY-H0/edit)
+3. [Current research journal](research/GTM_Model6/GTM_Model6_journal.md)
+4. [Honest retrospective](reports/research/GTM_Model0_honest_research_retrospective.md)
+5. [Historical archive index](archive/README.md)
+
+The current [Martin traceability report](reports/research/SUMMER_RESEARCH_MARTIN_TRACEABILITY_2026-09-22.md) and [bounded research gate](reports/research/GTM_Model6_research_gates_2026-09-22_v2.md) explain the corrected objective, blockers and why the same nine EMIT-positive cases are not being retrained.
+
+## Active commands
+
+From this checkout, with a working Python 3.11+ interpreter:
+
+```powershell
+python research/GTM_Model6/GTM_Model6.py status
+python research/GTM_Model6/GTM_Model6.py validate
+.\GTM_Model0_OpenViewer.cmd
 ```
 
-On Windows PowerShell, activate with `.\.venv\Scripts\Activate.ps1` if the environment was created natively on Windows.
+The Model6 commands use only the Python standard library. They read the active configuration and local source locations; they do not download imagery, load old checkpoints, or train. The viewer starts on localhost:8766. It distinguishes the untrained Model6 study from archived experiments.
 
-## Reproduce the frozen report and checks
+The first implementation pass is a verified US observation manifest: pairing times, native EMIT resolution, band order, nodata, independent site groups and real spatial context. Existing imagery remains in its original locations and is referenced through the [source catalog](research/GTM_Model6/GTM_Model6_data_sources.json). Available files are not automatically approved training examples.
 
-```bash
-python tools/ersrr.py status
-python tools/ersrr.py audit
-.venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python tools/build_research_report.py
-```
+## Repository layout
 
-The one-shot test must not be rerun as a tuning loop. Its immutable result is `reports/experiments/methanes2cm_v5_1_location_test.json`; the post-hoc diagnostic verifies frozen report/cache identities before rewriting its explicitly exploratory report. Checkpoints, HDF5 packs, imagery, and prediction caches are intentionally ignored by Git.
+| Location | Role |
+|---|---|
+| `research/GTM_Model6/` | Only active model research workspace: configuration, status, journal, manifests and visual-review protocol |
+| `GTM_Viewer/` and `GTM_Model0_OpenViewer.*` | Shared local experiment viewer |
+| `docs/GTM_Model6_multiscale_reconstruction_design.md` | Active design |
+| `archive/` | Historical navigation and the previous project README |
+| `EarthRemoteSensingRapidResponse/` | Existing datasets, adapters and historical models; not the active training entry point |
+| `tools/`, `configs/`, `reports/experiments/` | Historical experiments and reusable audited utilities; Model6 does not automatically invoke them |
+| `reports/research/` | Audit evidence and historical preparation notes |
+| `outputs/GTM_Model6/` | Ignored run artifacts: checkpoints, predictions, manifests, metrics and complete visual review sheets |
+| `outputs/GTM_viewer_bundles/` | Real viewer exports, including archived experiments |
+| `ERSRR_Website/` | Historical web API; not the local viewer or Model6 inference service |
 
-## Acquire an EMIT V002 pilot pair
+Historical files remain at their original paths because their imports, manifests and hashes are evidence. Archived does not mean deleted or scientifically worthless. The released MARS baseline and limited successful components remain comparison candidates; v5.1 is retired as a plume mapper.
 
-The collector uses public NASA CMR V002 plume geometry and public Element 84 Sentinel-2 L2A COGs. It writes bracketing 256 x 256 image stacks, physical plume masks, SHA-256 hashes, and a provenance manifest into ignored acquisition directories.
+## Research rules
 
-```bash
-python tools/acquire_v002_pilot.py \
-  EMIT_L2B_CH4PLM_002_20250922T204933_003374 \
-  --batch emit-v002-2026-07 --temporal-mode bracketing
-```
+- US-only primary study. Split original sites/acquisitions before augmentation; eight views are not eight independent observations.
+- Use controlled EMIT reconstruction only as a diagnostic. Do not feed a target back as its own input. A 20 m grid is not proof of 20 m methane information.
+- Missing methane pixels are unknown, not background. Facility coordinates are not dated methane or exact source labels.
+- Keep original validation images; transformed validation is a separate per-parent robustness analysis.
+- No promotion without reference overlays, negative/failure examples and stitched-map review.
+- No automatic training, bulk download or publication. The existing cumulative CAFO imagery cap remains 100 MiB.
+- Preserve raw data and frozen historical outcomes. A previously opened test set is not a fresh confirmation set.
 
-The protected EMIT concentration COG still requires an Earthdata login. The public polygon is a segmentation label, not a concentration raster, so the collector never manufactures a legacy six-band regression tile. See `docs/DATA_ACQUISITION.md` for the full contract.
-
-Create the tracked, token-free batch integrity record with:
-
-```bash
-python tools/summarize_v002_batch.py
-```
-
-## Run the web API
-
-Create the local research artifact first, then configure Earth Engine credentials outside the repository and run:
-
-```bash
-python ERSRR_Website/server.py
-```
-
-`GET /health` reports artifact and Earth Engine readiness. Inference uses JSON `POST /sentinel`; prediction routes return an explicit `503` when either dependency is unavailable.
-
-## Data and Git policy
-
-- The curated legacy dataset remains tracked for reproducibility.
-- Raw acquisition batches, generated predictions, temporary rasters, model artifacts, audit output, and frontend dependencies are ignored.
-- Do not commit credentials, Earthdata cookies, protected download URLs containing tokens, or bulk imagery.
-- Add a manifest and dataset contract before promoting any new batch into a curated split.
-
-The complete research narrative and quantitative results are generated at `reports/ERSRR_RESEARCH_REPORT.html`. Human-readable paper planning stays in `docs/RESEARCH_LEDGER.md` and `docs/PAPER_OUTLINE.md`; those notes distinguish preregistered decisions, frozen primary results, and post-hoc hypotheses.
+The original capstone was created by Eduardo Gonon, Kincaid Larson, Kevin Nguyen and Hung-Nghi Vu for Dr. Cenek, advised by Dr. Nuxoll. Their work and subsequent experiments remain credited in the archive.

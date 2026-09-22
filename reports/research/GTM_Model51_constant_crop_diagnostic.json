@@ -1,0 +1,45 @@
+{
+  "diagnostic_only": true,
+  "threshold": 0.4,
+  "observable_pixels": 21219466,
+  "dense_vs_flat_changed_pixels": 36299,
+  "dense_vs_flat_agreement": 0.9982893537471678,
+  "rules": {
+    "cached_dense": {
+      "tp": 2025788,
+      "fp": 8187251,
+      "fn": 724974,
+      "tn": 10281453,
+      "iou": 0.1852062161564445,
+      "pixel_precision": 0.19835310528041653,
+      "pixel_recall": 0.7364461192934904
+    },
+    "constant_crop_mean": {
+      "tp": 2023664,
+      "fp": 8190034,
+      "fn": 727098,
+      "tn": 10278670,
+      "iou": 0.1849649696420626,
+      "pixel_precision": 0.19813235127962467,
+      "pixel_recall": 0.7356739696127836
+    },
+    "whole_crop_if_scene_positive": {
+      "tp": 1038347,
+      "fp": 3627376,
+      "fn": 1712415,
+      "tn": 14841328,
+      "iou": 0.16279782594857622,
+      "pixel_precision": 0.22254793094232125,
+      "pixel_recall": 0.3774761320681324
+    },
+    "every_pixel_positive": {
+      "tp": 2750762,
+      "fp": 18468704,
+      "fn": 0,
+      "tn": 0,
+      "iou": 0.12963389370872952,
+      "pixel_precision": 0.12963389370872952,
+      "pixel_recall": 1.0
+    }
+  }
+}

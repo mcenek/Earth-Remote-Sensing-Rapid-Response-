@@ -1,3 +1,5 @@
+> **HISTORICAL — retired from the active workflow.** The clean-slate study is [GTM_Model6](../research/GTM_Model6/README.md). This document preserves earlier decisions; language such as current, active or publication candidate below describes that earlier study. See the [retrospective](../reports/research/GTM_Model0_honest_research_retrospective.md).
+
 # ERSRR Research Improvement Plan
 
 > **Goal:** turn this capstone into a publishable research contribution on methane plume

@@ -1,0 +1,6 @@
+{
+  "status": "superseded_contract_v2",
+  "reason": "The exact-context implementation was subsequently repaired with explicit positive-weighted BCE and a branchwise loss receipt.",
+  "replacement": "GTM_Model6_mapper_synthetic_smoke_2026-09-22_v3.json",
+  "real_accuracy_claim": false
+}

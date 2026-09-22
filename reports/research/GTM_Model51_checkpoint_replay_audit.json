@@ -1,0 +1,109 @@
+{
+  "diagnostic_only": true,
+  "no_training": true,
+  "checkpoint_hashes_match": true,
+  "packed_truth_and_validity_match": true,
+  "precision_note": "CPU float32 replay compared with historical CUDA autocast inference cached as float16; numerical identity is not expected.",
+  "checkpoints": [
+    {
+      "seed": 1101,
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\artifacts\\methanes2cm_v5_1_seed1101.pt",
+      "sha256": "7b648548cc62ca3f6d428df2cf427e373fba5a7bdcf03aabada68bf6f1cfc446",
+      "mean_spatial_std": 0.004239463247358799
+    },
+    {
+      "seed": 2202,
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\artifacts\\methanes2cm_v5_1_seed2202.pt",
+      "sha256": "f6bb7e8f549bb81b176c34a2635db37408bb8367c1db4d06e6657ce460cf74ec",
+      "mean_spatial_std": 0.003504799911752343
+    },
+    {
+      "seed": 3303,
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\artifacts\\methanes2cm_v5_1_seed3303.pt",
+      "sha256": "b67f2b1a1f9a591cb4848ffd6f0c1249ec359f0e21f553d83b0f0ec4c34ca29f",
+      "mean_spatial_std": 0.001165720634162426
+    }
+  ],
+  "samples": [
+    {
+      "sample_id": 86360,
+      "scene_outcome": "TP",
+      "max_abs_error": 0.000408172607421875,
+      "mean_abs_error": 0.0001274461392313242,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.0016653727507218719,
+      "replay_positive_fraction": 1.0,
+      "reference_positive_fraction": 0.2451171875
+    },
+    {
+      "sample_id": 83106,
+      "scene_outcome": "TP",
+      "max_abs_error": 0.0003914833068847656,
+      "mean_abs_error": 0.00013235840015113354,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.002202706877142191,
+      "replay_positive_fraction": 1.0,
+      "reference_positive_fraction": 0.0986328125
+    },
+    {
+      "sample_id": 82448,
+      "scene_outcome": "FP",
+      "max_abs_error": 0.0004139542579650879,
+      "mean_abs_error": 0.00013287627371028066,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.001359323039650917,
+      "replay_positive_fraction": 1.0,
+      "reference_positive_fraction": 0.0
+    },
+    {
+      "sample_id": 97322,
+      "scene_outcome": "FP",
+      "max_abs_error": 0.0004393458366394043,
+      "mean_abs_error": 0.00014480948448181152,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.0015130871906876564,
+      "replay_positive_fraction": 1.0,
+      "reference_positive_fraction": 0.0
+    },
+    {
+      "sample_id": 98104,
+      "scene_outcome": "FN",
+      "max_abs_error": 0.00043702125549316406,
+      "mean_abs_error": 0.00013993855100125074,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.0020019891671836376,
+      "replay_positive_fraction": 1.0,
+      "reference_positive_fraction": 0.9970703125
+    },
+    {
+      "sample_id": 87344,
+      "scene_outcome": "FN",
+      "max_abs_error": 0.0006043612957000732,
+      "mean_abs_error": 0.0003925187629647553,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.01278166938573122,
+      "replay_positive_fraction": 0.0,
+      "reference_positive_fraction": 0.09375
+    },
+    {
+      "sample_id": 83149,
+      "scene_outcome": "TN",
+      "max_abs_error": 9.59206372499466e-05,
+      "mean_abs_error": 6.100662358221598e-05,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 0.0006067762733437121,
+      "replay_positive_fraction": 0.0,
+      "reference_positive_fraction": 0.0
+    },
+    {
+      "sample_id": 83072,
+      "scene_outcome": "TN",
+      "max_abs_error": 2.7061323635280132e-06,
+      "mean_abs_error": 9.198998895953991e-07,
+      "threshold_agreement": 1.0,
+      "replay_spatial_std": 4.125490158912726e-05,
+      "replay_positive_fraction": 0.0,
+      "reference_positive_fraction": 0.0
+    }
+  ]
+}

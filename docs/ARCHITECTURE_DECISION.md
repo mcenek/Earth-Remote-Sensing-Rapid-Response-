@@ -1,3 +1,5 @@
+> **HISTORICAL — retired from the active workflow.** The clean-slate study is [GTM_Model6](../research/GTM_Model6/README.md). This document preserves earlier decisions; language such as current, active or publication candidate below describes that earlier study. See the [retrospective](../reports/research/GTM_Model0_honest_research_retrospective.md).
+
 # ADR: segmentation-first research architecture
 
 - Status: superseded for primary research by `ARCHITECTURE_DECISION_V3.md`; retained as the legacy engineering baseline

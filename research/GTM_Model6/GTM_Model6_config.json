@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "model_id": "GTM_Model6",
+  "lifecycle": "pilot_complete_not_promoted",
+  "objective": "sentinel_plume_extent_and_candidate_source_detection",
+  "geography": "United States",
+  "design": "docs/GTM_Model6_multiscale_reconstruction_design.md",
+  "advisor_traceability": {
+    "martin_primary_objective": "nationwide Sentinel-only candidate screening supervised by valid EMIT methane observations",
+    "cafo_inventory_role": "acquisition_anchor_and_facility_recovery_context_not_date_specific_methane_label",
+    "huang_attribution": "unverified_for_local_iowa_csv",
+    "martin_rotation_protocol": "one_geographic_fold_train_and_four_folds_validate; blocked_until_facility_controls_and_date_specific_plume_labels",
+    "completed_model6_split": "ordinary_group_held_out_approximately_80_percent_fit_and_20_percent_holdout; not_the_martin_cafo_rotation"
+  },
+  "research_tracks": {
+    "plume_mapping": "Sentinel target_reference to EMIT plume extent and quantitative enhancement where valid support exists",
+    "facility_recovery": "geographic CAFO sampling_and_candidate_association with reviewed controls",
+    "nationwide_screening": "frozen Sentinel-only tiled inference with candidate provenance and human source review"
+  },
+  "next_architecture": {
+    "name": "multiscale_sentinel_emit_mapper",
+    "implementation": "research/GTM_Model6/GTM_Model6_mapper.py",
+    "contract_version": 2,
+    "branches": [
+      "S16",
+      "S32",
+      "S64",
+      "S128"
+    ],
+    "context_contract": "each branch receives an exact native context crop; no resizing a smaller crop to fabricate context",
+    "prediction_window": 16,
+    "heads": [
+      "dense_plume_probability",
+      "masked_emit_enhancement"
+    ],
+    "loss": "support_masked positive_weighted BCE plus Dice_or_focal_Tversky and log_Huber_quantitative_EMIT_regression",
+    "branch_supervision": "mean of independent branch losses; fused loss weight zero in real-data mapper r5",
+    "fusion": "arithmetic mean of branch logits, sigmoid after fusion",
+    "merger": "uniform_logit_mean_first; learned_merger_only_from_train_partition_out_of_fold_predictions",
+    "synthetic_role": "Gaussian_or_WRF_style_pretraining_and_plumbing_only",
+    "source_head": "deferred_until_verified_source_coordinates_and_wind"
+  },
+  "approved_manifest": null,
+  "initial_checkpoint": null,
+  "inputs": {
+    "sentinel_bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B11",
+      "B12"
+    ],
+    "target_reference_pair": true,
+    "temporal_features": 16,
+    "explicit_validity_masks": true,
+    "emit_supervision_only": true,
+    "emit_exterior": "unknown_ignored",
+    "evidence_followup_channel": "prior evidence-constrained pilot used a seventeenth Sentinel SWIR evidence channel; mapper r5 uses first 16 only, with stored channel 17 used only as an analytic baseline"
+  },
+  "output": {
+    "quantity": "plume_probability_mask",
+    "working_grid_m": 10,
+    "native_input_file_grid": "200x200_at_10m_preserved_real_context",
+    "fine_resolution_validated": false,
+    "nationally_validated": false
+  },
+  "augmentation": {
+    "rotation_degrees": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "horizontal_mirror": [
+      false,
+      true
+    ],
+    "order": "mirror_then_rotate",
+    "views_per_parent": 8,
+    "materialize_copies": false
+  },
+  "branches": {
+    "context_windows_pixels": [
+      16,
+      32,
+      64,
+      128
+    ],
+    "architecture": "compact_residual_unet",
+    "independent_weights": true,
+    "implemented": true
+  },
+  "merger": {
+    "method": "spatially_weighted_convolutional_merger",
+    "training_predictions": "training_partition_out_of_fold",
+    "implemented": false
+  },
+  "source": {
+    "method": "gaussian_heatmap_and_wind_aligned_fit",
+    "requires_verified_source_labels": true,
+    "implemented": false
+  },
+  "evaluation": {
+    "first_task": "sentinel_mask_detection_pilot",
+    "primary_validation_augmented": false,
+    "parent_groups_split_before_augmentation": true,
+    "outer_folds": 5,
+    "outer_split": "group_held_out_by_25km_and_acquisition_before_augmentation",
+    "inner_threshold_calibration": false,
+    "fixed_cutoff": 0.5,
+    "eligible_records": 173,
+    "eligible_record_breakdown": {
+      "MARS": {
+        "positive": 36,
+        "negative_controls": 128
+      },
+      "EMIT": {
+        "positive_only": 9
+      }
+    },
+    "connected_groups": 16,
+    "fold_sizes_records": [
+      82,
+      67,
+      9,
+      8,
+      7
+    ],
+    "protocol_confirmed_with_advisor": false,
+    "visual_review_required": true,
+    "new_confirmation_cohort_required": true
+  },
+  "execution": {
+    "training_implemented": true,
+    "automatic_training": false,
+    "downloads_enabled": false,
+    "initial_smoke_limit_minutes": 20,
+    "existing_cafo_imagery_cap_mib": 100
+  },
+  "paths": {
+    "data_sources": "research/GTM_Model6/GTM_Model6_data_sources.json",
+    "run_root": "outputs/GTM_Model6",
+    "viewer_bundles": "outputs/GTM_viewer_bundles",
+    "visual_review_template": "research/GTM_Model6/reviews/GTM_Model6_visual_review_template.md"
+  },
+  "blockers": [
+    "Mapper r5 repaired positive sampling and export support, but failed visual and precision gates on the reused 65-case MARS development fold (pooled IoU 2.1485%, precision 2.2487%). Do not treat this as an EMIT-trained upscaler or fresh confirmation.",
+    "Native pairing audit v3 rejects all six original cached pairs under the 6-hour/peak policy. One subsequent Georgia target crop was repaired; quantitative target QA, an appropriate temporal reference and independent observations are still required. Both 2025 Texas crops contain the peak but are time-lagged.",
+    "The repaired Georgia pair passes local geometry/hash checks but is not training-approved: reconcile the already-applied BOA flag with literal Sentinel offset metadata, define native quantitative QA, and verify the separate EMIT plume outline; PLM > 0 is not a plume label.",
+    "The completed 173-case exploratory manifest is not a representative or fresh US confirmation cohort; reviewed positives occupy only two connected groups.",
+    "Treat the 200x200 native input file grid as context; SWIR is 20m and EMIT is nominally 60m, so file-grid context is not resolution validation.",
+    "Both bounded plume pilots failed promotion: excess background activation and missed EMIT support. Obtain independent positive pairs and representative negatives before further sweeps.",
+    "Obtain independent fine methane truth before claiming validated 20 m detail.",
+    "Verify source labels and wind before evaluating emission-origin accuracy."
+  ]
+}

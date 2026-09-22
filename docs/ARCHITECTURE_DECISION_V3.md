@@ -1,3 +1,5 @@
+> **HISTORICAL — retired from the active workflow.** The clean-slate study is [GTM_Model6](../research/GTM_Model6/README.md). This document preserves earlier decisions; language such as current, active or publication candidate below describes that earlier study. See the [retrospective](../reports/research/GTM_Model0_honest_research_retrospective.md).
+
 # ADR: full-resolution proposal-aware methane detector v3
 
 - Status: accepted for the next leakage-safe research experiment; not approved for deployment

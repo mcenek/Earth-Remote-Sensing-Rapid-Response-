@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "model_id": "GTM_Model6",
+  "approval_status": "candidates_only",
+  "path_base": "repository_root",
+  "sources": [
+    {
+      "id": "georgia_native_pair_crop_repair_20260922",
+      "candidate_paths": ["outputs/GTM_Model6/GTM_Model6_georgia_crop_repair_20260922"],
+      "type": "one_near_time_sentinel_crop_for_native_emit_pairing_diagnostic",
+      "approved_for_model6": false,
+      "limitations": [
+        "One target acquisition only; no independent evaluation cohort",
+        "Peak-centered 2.56 km crop; full plume containment is not assumed",
+        "Local QA verifies alignment and 2166/2180 common native pixels, but BOA-applied flag conflicts with literal offset; raw DN preserved and quantitative conversion unapproved",
+        "CH4PLM is continuous ppm m; positive-valued pixels are not a verified plume mask",
+        "Quantitative target QA, Sentinel temporal reference and grouped training split still required",
+        "Native 10/20 m input grids do not validate fine methane resolution"
+      ],
+      "next_action": "Resolve radiometry and native target QA using qa_v2; recover the provider plume outline, prepare temporal reference and independent positive/negative observations before training."
+    },
+    {
+      "id": "legacy_emit_sentinel",
+      "candidate_paths": [
+        "EarthRemoteSensingRapidResponse/Dataset"
+      ],
+      "type": "paired_legacy_rasters",
+      "approved_for_model6": false,
+      "reported_files": 102,
+      "band_order": [
+        "B2",
+        "B3",
+        "B4",
+        "B11",
+        "B12",
+        "EMIT_CH4"
+      ],
+      "limitations": [
+        "US eligibility and timestamp pairing unverified",
+        "EMIT -9999 nodata inconsistencies",
+        "Resampled target grids do not establish fine methane truth"
+      ],
+      "next_action": "Verify native observation provenance and build reviewed US manifest."
+    },
+    {
+      "id": "methanes2cm",
+      "candidate_paths": [
+        "EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/publication-v1/external/MethaneS2CM/l2a_location_split_32x32",
+        "../Earth-Remote-Sensing-Rapid-Response-/EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/publication-v1/external/MethaneS2CM/l2a_location_split_32x32"
+      ],
+      "type": "historical_classification_and_masks",
+      "approved_for_model6": false,
+      "limitations": [
+        "32x32 context only",
+        "Not paired quantitative EMIT upscaling truth",
+        "Location test already inspected"
+      ],
+      "next_action": "Retain for historical diagnostics; no automatic reuse as upscaling or fresh confirmation labels."
+    },
+    {
+      "id": "mars_s2l",
+      "candidate_paths": [
+        "EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/publication-v1/external/MARS-S2L",
+        "../Earth-Remote-Sensing-Rapid-Response-/EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/publication-v1/external/MARS-S2L"
+      ],
+      "type": "historical_methane_detection_benchmark",
+      "approved_for_model6": false,
+      "limitations": [
+        "Different detection/segmentation task",
+        "Opened historical evaluation cohorts",
+        "Quantitative units and native resolution require separate validation"
+      ],
+      "next_action": "Preserve released-model/reference comparisons and provenance."
+    },
+    {
+      "id": "cafo_pilot",
+      "candidate_paths": [
+        "outputs/cafo_pilot_2026-09-18",
+        "outputs/cafo_pilot_2026-09-11"
+      ],
+      "type": "us_sentinel_input_only",
+      "approved_for_model6": false,
+      "limitations": [
+        "No paired methane targets",
+        "Inventory presence is not dated emissions or exact source truth"
+      ],
+      "next_action": "Reuse inputs/provenance only; retain cumulative acquisition cap."
+    },
+    {
+      "id": "native_emit_v002_us",
+      "candidate_paths": [
+        "../Earth-Remote-Sensing-Rapid-Response-/EarthRemoteSensingRapidResponse/Data Collection/EMIT_Plumes/emit-v002-authenticated-2026-07"
+      ],
+      "type": "native_enhancement_uncertainty_sensitivity_plume",
+      "approved_for_model6": false,
+      "approved_for_native_emit_only_diagnostic": true,
+      "US_acquisitions": [
+        "20241020T170504",
+        "20241130T180310",
+        "20250922T204933"
+      ],
+      "limitations": [
+        "Only three independent US acquisitions",
+        "Aligned Sentinel cohort not established",
+        "No independent sub-native methane truth or source-origin labels"
+      ],
+      "next_action": "Expand verified native US observation cohort before further model complexity."
+    }
+  ]
+}

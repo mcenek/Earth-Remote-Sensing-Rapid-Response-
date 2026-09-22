@@ -1,0 +1,6 @@
+{
+  "status": "invalidated_contract_v1",
+  "reason": "The original smoke fed one 32x32 tensor to every branch; it did not prove distinct native S16/S32/S64/S128 context windows.",
+  "replacement": "GTM_Model6_mapper_synthetic_smoke_2026-09-22_v2.json",
+  "real_accuracy_claim": false
+}

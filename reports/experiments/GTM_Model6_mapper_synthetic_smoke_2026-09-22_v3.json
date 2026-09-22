@@ -1,0 +1,65 @@
+{
+  "scope": "synthetic fitting-only context-contract diagnostic; no real accuracy claim",
+  "contract_version": 2,
+  "seed": 20260922,
+  "device": "cpu",
+  "threads": 2,
+  "examples": 2,
+  "context_shapes": {
+    "S16": [
+      2,
+      16,
+      16,
+      16
+    ],
+    "S32": [
+      2,
+      16,
+      32,
+      32
+    ],
+    "S64": [
+      2,
+      16,
+      64,
+      64
+    ],
+    "S128": [
+      2,
+      16,
+      128,
+      128
+    ]
+  },
+  "prediction_shape": [
+    2,
+    1,
+    16,
+    16
+  ],
+  "input_channels": 16,
+  "steps": 24,
+  "real_data_opened": false,
+  "holdouts_opened": false,
+  "branches": [
+    "S16",
+    "S32",
+    "S64",
+    "S128"
+  ],
+  "fusion_mode": "logit_mean",
+  "branch_supervision": "mean branch losses plus fused loss",
+  "parameters": 1313720,
+  "initial_loss": 6.040031433105469,
+  "final_loss": 0.9497888088226318,
+  "final_training_only_iou": 1.0,
+  "final_training_only_enhancement_log1p_mae": 0.0595318078994751,
+  "plume_supported_pixels": 512,
+  "enhancement_supported_pixels": 512,
+  "learns": true,
+  "source_sha256": {
+    "tools\\run_GTM_Model6_mapper_synthetic_smoke.py": "295bf3a6ddfb62a1899b72ce421cc8c02221d1d9419b138804a0ef8a89ac9ff2",
+    "research\\GTM_Model6\\GTM_Model6_mapper.py": "71625d5ba53b0525431457c7c72d0c7aadf2e11da844ceb76fc020b56d3ba91b"
+  },
+  "passed": true
+}

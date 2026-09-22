@@ -1,0 +1,18 @@
+{
+  "seed": 20260922,
+  "steps": 400,
+  "threshold": 0.5,
+  "learning_rate": 0.0003,
+  "holdout_fold": 1,
+  "batch_size": 2,
+  "primary_method": "mean",
+  "scope": "reused development cohort; sampler/independent-loss repair; no new confirmation",
+  "source_hashes": {
+    "GTM_Model6_mapper.py": "71625d5ba53b0525431457c7c72d0c7aadf2e11da844ceb76fc020b56d3ba91b",
+    "GTM_Model6_mapper_data.py": "952e5c66f34f473d848fac2fb98b6dba082dd73fe39e84f964cc64d80b31cdda",
+    "GTM_Model6_plumes.py": "8be7f0407c584901ef2b8532a9fe09e78394bfe89cbf5ab870ab8dcd9b09c04d",
+    "GTM_Model6_plume_export.py": "9087156a3f3810fa88e841acbb8c6f3d2ec97f8dcf04365eb45bd7a0f0f2441a",
+    "train_GTM_Model6_mapper_mars_pilot.py": "08aeb80d1c75349b105bdbbf60dde601f5db43337db1cd9c9bc0eaf474c818ad"
+  },
+  "training_sanity_required": "GTM_Model6_mapper_training_sanity_20260922/receipt.json"
+}

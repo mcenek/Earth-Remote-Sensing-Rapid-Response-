@@ -1,0 +1,175 @@
+{
+  "scope": "four deterministic native-image examples from frozen MARS v3 diagnostic cache",
+  "dense_prediction": "inherited released MARS-S2L probability mask; scene gate is unchanged v3 stronger head",
+  "mask_thresholds": {
+    "Sentinel-2": 0.8,
+    "Landsat": 0.7
+  },
+  "minimum_connected_pixels": 100,
+  "selection_is_population_estimate": false,
+  "examples": [
+    {
+      "role": "successful_positive",
+      "sample_id": "d5d60f1e-1c7e-43ca-a1ba-2402d82fc690",
+      "group_id": "Te_N_13",
+      "label_state": "PLUME",
+      "sensor_family": "Sentinel-2",
+      "native_image": "data/test_2023/80/4fe857f8-6050-4187-b330-a053cbfe2c0a_d5d60f1e-1c7e-43ca-a1ba-2402d82fc690_s2.tif",
+      "baseline_scene_score": 0.9996979,
+      "candidate_scene_score": 0.9999570152054928,
+      "cached_baseline_tp_fp_fn": [
+        2132,
+        3039,
+        1
+      ],
+      "cached_candidate_tp_fp_fn": [
+        2104,
+        2026,
+        29
+      ],
+      "native_released_mask_tp_fp_fn": [
+        2109,
+        2110,
+        24
+      ],
+      "native_gated_mask_tp_fp_fn": [
+        2109,
+        2110,
+        24
+      ],
+      "native_pre_gate_predicted_pixels": 4219,
+      "cached_candidate_pre_gate_predicted_pixels": 4130,
+      "native_minus_cached_candidate_pre_gate_pixels": 89,
+      "native_released_mask_threshold": 0.8,
+      "native_released_mask_pixels": 4219,
+      "original_v3_scene_gate_cutoff": 0.75,
+      "original_v3_scene_gate_open_from_cached_score": true,
+      "pixel_truth_available": true,
+      "visual_layer": "native corrected RGB, dataset reference plume mask in cyan or explicit missing pixel annotation, inherited released-MARS mask before gate, and mask after unchanged v3 gate"
+    },
+    {
+      "role": "missed_positive",
+      "sample_id": "328c4920-4cb9-4645-8118-5e898e0f862d",
+      "group_id": "EMIT_CH4_PlumeComplex-1869",
+      "label_state": "PLUME",
+      "sensor_family": "Landsat",
+      "native_image": "data/test_2023/45/85dab4a1-d7b7-4718-8733-c567883ddde0_328c4920-4cb9-4645-8118-5e898e0f862d_s2.tif",
+      "baseline_scene_score": 0.00014026677,
+      "candidate_scene_score": 3.008067608879375e-05,
+      "cached_baseline_tp_fp_fn": [
+        0,
+        0,
+        234
+      ],
+      "cached_candidate_tp_fp_fn": [
+        0,
+        0,
+        234
+      ],
+      "native_released_mask_tp_fp_fn": [
+        0,
+        0,
+        234
+      ],
+      "native_gated_mask_tp_fp_fn": [
+        0,
+        0,
+        234
+      ],
+      "native_pre_gate_predicted_pixels": 0,
+      "cached_candidate_pre_gate_predicted_pixels": 0,
+      "native_minus_cached_candidate_pre_gate_pixels": 0,
+      "native_released_mask_threshold": 0.7,
+      "native_released_mask_pixels": 0,
+      "original_v3_scene_gate_cutoff": 0.75,
+      "original_v3_scene_gate_open_from_cached_score": false,
+      "pixel_truth_available": true,
+      "visual_layer": "native corrected RGB, dataset reference plume mask in cyan or explicit missing pixel annotation, inherited released-MARS mask before gate, and mask after unchanged v3 gate"
+    },
+    {
+      "role": "suppressed_false_alarm",
+      "sample_id": "6bc00dd0-5ecc-4314-b456-05aacea1a727",
+      "group_id": "MEX_017",
+      "label_state": "NO_PLUME",
+      "sensor_family": "Sentinel-2",
+      "native_image": "data/test_2023/59/273c8fae-4b14-4443-9f82-a16685c2e7ae_6bc00dd0-5ecc-4314-b456-05aacea1a727_s2.tif",
+      "baseline_scene_score": 0.9995255936482863,
+      "candidate_scene_score": 0.5298887891503667,
+      "cached_baseline_tp_fp_fn": [
+        0,
+        3005,
+        0
+      ],
+      "cached_candidate_tp_fp_fn": [
+        0,
+        754,
+        0
+      ],
+      "native_released_mask_tp_fp_fn": [
+        0,
+        792,
+        0
+      ],
+      "native_gated_mask_tp_fp_fn": [
+        0,
+        0,
+        0
+      ],
+      "native_pre_gate_predicted_pixels": 792,
+      "cached_candidate_pre_gate_predicted_pixels": 754,
+      "native_minus_cached_candidate_pre_gate_pixels": 38,
+      "native_released_mask_threshold": 0.8,
+      "native_released_mask_pixels": 792,
+      "original_v3_scene_gate_cutoff": 0.75,
+      "original_v3_scene_gate_open_from_cached_score": false,
+      "pixel_truth_available": false,
+      "visual_layer": "native corrected RGB, dataset reference plume mask in cyan or explicit missing pixel annotation, inherited released-MARS mask before gate, and mask after unchanged v3 gate"
+    },
+    {
+      "role": "background",
+      "sample_id": "003d6c09-fa99-475c-b739-473f96519767",
+      "group_id": "PB_16",
+      "label_state": "NO_PLUME",
+      "sensor_family": "Landsat",
+      "native_image": "data/test_2023/23/33b3ff57-55a9-4cc9-aa05-dbfc09a2933a_003d6c09-fa99-475c-b739-473f96519767_s2.tif",
+      "baseline_scene_score": 2.4511954e-05,
+      "candidate_scene_score": 1.4101171301566938e-05,
+      "cached_baseline_tp_fp_fn": [
+        0,
+        0,
+        0
+      ],
+      "cached_candidate_tp_fp_fn": [
+        0,
+        0,
+        0
+      ],
+      "native_released_mask_tp_fp_fn": [
+        0,
+        0,
+        0
+      ],
+      "native_gated_mask_tp_fp_fn": [
+        0,
+        0,
+        0
+      ],
+      "native_pre_gate_predicted_pixels": 0,
+      "cached_candidate_pre_gate_predicted_pixels": 0,
+      "native_minus_cached_candidate_pre_gate_pixels": 0,
+      "native_released_mask_threshold": 0.7,
+      "native_released_mask_pixels": 0,
+      "original_v3_scene_gate_cutoff": 0.75,
+      "original_v3_scene_gate_open_from_cached_score": false,
+      "pixel_truth_available": false,
+      "visual_layer": "native corrected RGB, dataset reference plume mask in cyan or explicit missing pixel annotation, inherited released-MARS mask before gate, and mask after unchanged v3 gate"
+    }
+  ],
+  "assets": {
+    "montage": "reports/research/assets/GTM_Model0_mars_dense_examples.png",
+    "cache": "../Earth-Remote-Sensing-Rapid-Response-/outputs/mars_paper_test_v3_diagnostic_cache.npz",
+    "manifest": "../Earth-Remote-Sensing-Rapid-Response-/EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs/publication-v1/external/MARS-S2L/paper_v3_sealed_test_samples.jsonl"
+  },
+  "checkpoint_sha256": "be634fb9e24dc4877f44c1ff9f69972e6f0453e30d70c0dc03677876340ef246",
+  "verification_note": "Native counts are compared to cached candidate pre-gate counts; nonzero deltas are retained as exact mismatches, not silently reconciled. Negative rows have no pixel truth and use the explicit scene-label diagnostic assumption."
+}

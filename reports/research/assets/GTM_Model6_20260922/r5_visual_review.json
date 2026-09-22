@@ -1,0 +1,16 @@
+{
+  "scope": "all plume cases + highest false-positive controls; output sanity review, not model selection",
+  "run": "GTM_Model6_mapper_mars_pilot_20260922_r5",
+  "all_scene_method_comparisons_verified": 325,
+  "selected_ids": [
+    "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+    "MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d",
+    "MARS_35027778-4dc9-494b-b876-fb8391c69a61",
+    "MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89",
+    "MARS_b2453f15-531e-4377-8576-f46fbd2234f7"
+  ],
+  "selected_rule": "all positives then two largest FP counts",
+  "image_sha256": "2630d550907a8b795469ca394ac76e47446e6b27d6f7876f212c1ab7124db403",
+  "image": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model6\\GTM_Model6_mapper_mars_pilot_20260922_r5\\visual_review.png",
+  "checkpoint_sha256": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4"
+}

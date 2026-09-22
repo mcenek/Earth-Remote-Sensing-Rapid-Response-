@@ -1,0 +1,24 @@
+[
+  {
+    "run": "GTM_Model6_plume_01",
+    "held_records": 173,
+    "checkpoint_hash_and_disjoint_group_checks": 20,
+    "max_mean_recombination_error": 0,
+    "all_per_scene_mean_confusion_counts_match": true,
+    "MARS_precision": 0.013772116391147556,
+    "MARS_iou": 0.013285386445251788,
+    "negative_scene_mean_pixel_activation": 0.08898505958625706,
+    "EMIT_positive_support_recall": 0.2852267723469837
+  },
+  {
+    "run": "GTM_Model6_plume_evidence_02",
+    "held_records": 173,
+    "checkpoint_hash_and_disjoint_group_checks": 20,
+    "max_mean_recombination_error": 0,
+    "all_per_scene_mean_confusion_counts_match": true,
+    "MARS_precision": 0.028892147820557622,
+    "MARS_iou": 0.026654863515049018,
+    "negative_scene_mean_pixel_activation": 0.0506020028041539,
+    "EMIT_positive_support_recall": 0.07280933509467195
+  }
+]

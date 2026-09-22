@@ -1,0 +1,322 @@
+{
+  "scope": "real training patches, deliberately memorized; no held-out accuracy",
+  "seed": 20260922,
+  "device": "cuda",
+  "steps": 300,
+  "learning_rate": 0.0003,
+  "branch_training": "independent losses, no fusion gradient",
+  "enhancement_trained": false,
+  "training_only_iou": 1.0,
+  "training_negative_activation": 0.0,
+  "per_branch_training_iou": {
+    "S16": 1.0,
+    "S32": 1.0,
+    "S64": 1.0,
+    "S128": 1.0
+  },
+  "gate_passed": true,
+  "training_seconds": 13.421999999991385,
+  "sampling_check": {
+    "draws": 64,
+    "positive_draws": 32,
+    "rejected_views": 19,
+    "positive_pixels": 2406,
+    "supported_pixels": 16384
+  },
+  "training_log": [
+    {
+      "step": 1,
+      "loss": 1.7992610931396484
+    },
+    {
+      "step": 26,
+      "loss": 0.9809156656265259
+    },
+    {
+      "step": 51,
+      "loss": 0.6703968048095703
+    },
+    {
+      "step": 76,
+      "loss": 0.5599716901779175
+    },
+    {
+      "step": 101,
+      "loss": 0.4809887409210205
+    },
+    {
+      "step": 126,
+      "loss": 0.4061363935470581
+    },
+    {
+      "step": 151,
+      "loss": 0.3324560523033142
+    },
+    {
+      "step": 176,
+      "loss": 0.2683470845222473
+    },
+    {
+      "step": 201,
+      "loss": 0.21409915387630463
+    },
+    {
+      "step": 226,
+      "loss": 0.1654701679944992
+    },
+    {
+      "step": 251,
+      "loss": 0.12230491638183594
+    },
+    {
+      "step": 276,
+      "loss": 0.09042464941740036
+    },
+    {
+      "step": 300,
+      "loss": 0.0661674290895462
+    }
+  ],
+  "observations": [
+    {
+      "id": "MARS_00c1d79c-6e3c-4d74-9e0b-f3490b0f44f4",
+      "dataset": "MARS",
+      "label": "PLUME",
+      "lon": -101.9814707985,
+      "lat": 32.264409015,
+      "site": "d2bbf10d-bac0-4fe9-b327-40a46c2b1958",
+      "target_scene": "S2A_MSIL1C_20230724T172901_N0509_R055_T13SGR_20230724T223213",
+      "reference_scene": "S2B_MSIL1C_20230719T172859_N0509_R055_T13SGR_20230719T205552",
+      "date": "2023-07-24 17:29:01+00:00",
+      "source": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\publication-v1\\external\\MARS-S2L\\data\\train_2023\\0\\d2bbf10d-bac0-4fe9-b327-40a46c2b1958_00c1d79c-6e3c-4d74-9e0b-f3490b0f44f4_s2.tif",
+      "hashes": {
+        "image": "8beadc5f4042f5146dfbaf7f2b147c89e33b92cfdbc26bfd23eecb931041b424",
+        "cloud_mask": "7f9ff53ebe0635867485d79951dbff5fc0d2c8b7464627d3a4cc04be83eda181",
+        "plume_mask": "ac445b21d7099a0e9a6141c8e4cc8cec48af43e601b1978b5792728c2afbd5d8"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "label_semantics": "reviewed MARS plume/no-plume; segmentation reference, not fine-resolution EMIT measurement",
+      "crs": "EPSG:32613",
+      "affine": [
+        10.0,
+        0.0,
+        784260.0,
+        0.0,
+        -10.0,
+        3573820.0
+      ],
+      "shape": [
+        16,
+        16
+      ],
+      "fully_labeled": true,
+      "known_pixels": 40000,
+      "positive_pixels": 390,
+      "valid_fraction": 1.0,
+      "group": "US_2005448d8c",
+      "partition": 0,
+      "crop_top_left": [
+        92,
+        91
+      ]
+    },
+    {
+      "id": "MARS_0dc38666-6246-4a0a-b16d-ae5d8455a23a",
+      "dataset": "MARS",
+      "label": "PLUME",
+      "lon": -101.76403555789489,
+      "lat": 31.8599035548458,
+      "site": "64b9c8ee-dd9f-44dd-a981-44018b41bab3",
+      "target_scene": "S2B_MSIL1C_20231123T172629_N0509_R012_T13SGR_20231123T210243",
+      "reference_scene": "S2B_MSIL1C_20231203T172709_N0509_R012_T13SGR_20231203T203649",
+      "date": "2023-11-23 17:26:29+00:00",
+      "source": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\publication-v1\\external\\MARS-S2L\\data\\train_2023\\26\\64b9c8ee-dd9f-44dd-a981-44018b41bab3_0dc38666-6246-4a0a-b16d-ae5d8455a23a_s2.tif",
+      "hashes": {
+        "image": "fb16903113b61a354e9842c9b3a8255da2ebe8e7aece8939a7a22b68a8a25de5",
+        "cloud_mask": "4fc3a45f576a645efb642346937f43e77b4c5df3a5da3b64d3270722ab3a963e",
+        "plume_mask": "6cf8ea4e09c96d12f14772418257ecd1578f9f57708fc1580c7f4b6afc420766"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "label_semantics": "reviewed MARS plume/no-plume; segmentation reference, not fine-resolution EMIT measurement",
+      "crs": "EPSG:32613",
+      "affine": [
+        10.0,
+        0.0,
+        806120.0,
+        0.0,
+        -10.0,
+        3529550.0
+      ],
+      "shape": [
+        16,
+        16
+      ],
+      "fully_labeled": true,
+      "known_pixels": 40000,
+      "positive_pixels": 3503,
+      "valid_fraction": 1.0,
+      "group": "US_2005448d8c",
+      "partition": 0,
+      "crop_top_left": [
+        92,
+        93
+      ]
+    },
+    {
+      "id": "MARS_edca44af-4508-4e31-b6c1-e0fe36ac2ed0",
+      "dataset": "MARS",
+      "label": "NO_PLUME",
+      "lon": -102.06221,
+      "lat": 31.7945217,
+      "site": "b2515fc2-d4ec-45c4-9838-4fbe08703bca",
+      "target_scene": "S2A_MSIL1C_20231009T172221_N0509_R012_T13SGR_20231009T221320",
+      "reference_scene": "S2A_MSIL1C_20231012T173241_N0509_R055_T13SGR_20231012T222123",
+      "date": "2023-10-09 17:22:21+00:00",
+      "source": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\publication-v1\\external\\MARS-S2L\\data\\train_2023\\44\\b2515fc2-d4ec-45c4-9838-4fbe08703bca_edca44af-4508-4e31-b6c1-e0fe36ac2ed0_s2.tif",
+      "hashes": {
+        "image": "bbf30d54b411f6cef8d61a30cd4db1c773e4d2101b135249c1745813f26debcb",
+        "cloud_mask": "d80e186611f13077139f2a792a8b32e7ea539db09d386f06d304d7facf306d8b"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "label_semantics": "reviewed MARS plume/no-plume; segmentation reference, not fine-resolution EMIT measurement",
+      "crs": "EPSG:32613",
+      "affine": [
+        10.0,
+        0.0,
+        778090.0,
+        0.0,
+        -10.0,
+        3521490.0
+      ],
+      "shape": [
+        16,
+        16
+      ],
+      "fully_labeled": true,
+      "known_pixels": 40000,
+      "positive_pixels": 0,
+      "valid_fraction": 1.0,
+      "group": "US_2005448d8c",
+      "partition": 0,
+      "crop_top_left": [
+        92,
+        92
+      ]
+    },
+    {
+      "id": "MARS_754a1066-e3e6-44a1-b6f4-3f253aa5af09",
+      "dataset": "MARS",
+      "label": "NO_PLUME",
+      "lon": -101.9814707985,
+      "lat": 32.264409015,
+      "site": "d2bbf10d-bac0-4fe9-b327-40a46c2b1958",
+      "target_scene": "S2B_MSIL1C_20230924T171939_N0509_R012_T13SGR_20230924T210635",
+      "reference_scene": "S2B_MSIL1C_20230927T173009_N0509_R055_T13SGR_20230927T211633",
+      "date": "2023-09-24 17:19:39+00:00",
+      "source": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\publication-v1\\external\\MARS-S2L\\data\\train_2023\\53\\d2bbf10d-bac0-4fe9-b327-40a46c2b1958_754a1066-e3e6-44a1-b6f4-3f253aa5af09_s2.tif",
+      "hashes": {
+        "image": "101091dbcb8da48cb3a26a47976814c3b22f66ba1ff35afab7f42f6cf9633cbf",
+        "cloud_mask": "7f9ff53ebe0635867485d79951dbff5fc0d2c8b7464627d3a4cc04be83eda181"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "label_semantics": "reviewed MARS plume/no-plume; segmentation reference, not fine-resolution EMIT measurement",
+      "crs": "EPSG:32613",
+      "affine": [
+        10.0,
+        0.0,
+        784270.0,
+        0.0,
+        -10.0,
+        3573820.0
+      ],
+      "shape": [
+        16,
+        16
+      ],
+      "fully_labeled": true,
+      "known_pixels": 40000,
+      "positive_pixels": 0,
+      "valid_fraction": 1.0,
+      "group": "US_2005448d8c",
+      "partition": 0,
+      "crop_top_left": [
+        92,
+        92
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "tp": 166,
+      "fp": 0,
+      "fn": 0,
+      "tn": 90,
+      "iou": 1.0,
+      "dice": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "evaluated_pixels": 256,
+      "source_valid_pixels": 256,
+      "support_fraction": 1.0,
+      "predicted_fraction": 0.6484375,
+      "truth_fraction": 0.6484375,
+      "negative_activation": 0.0
+    },
+    {
+      "tp": 171,
+      "fp": 0,
+      "fn": 0,
+      "tn": 85,
+      "iou": 1.0,
+      "dice": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "evaluated_pixels": 256,
+      "source_valid_pixels": 256,
+      "support_fraction": 1.0,
+      "predicted_fraction": 0.66796875,
+      "truth_fraction": 0.66796875,
+      "negative_activation": 0.0
+    },
+    {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 256,
+      "iou": 0.0,
+      "dice": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "evaluated_pixels": 256,
+      "source_valid_pixels": 256,
+      "support_fraction": 1.0,
+      "predicted_fraction": 0.0,
+      "truth_fraction": 0.0,
+      "negative_activation": 0.0
+    },
+    {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 256,
+      "iou": 0.0,
+      "dice": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "evaluated_pixels": 256,
+      "source_valid_pixels": 256,
+      "support_fraction": 1.0,
+      "predicted_fraction": 0.0,
+      "truth_fraction": 0.0,
+      "negative_activation": 0.0
+    }
+  ],
+  "checkpoint_sha256": "908bcb848ecc6304ac341122d040324e8c585b89e4cd5f9107cf65a1b2275189",
+  "source_hashes": {
+    "run_GTM_Model6_mapper_training_sanity.py": "ac1b7069bd4d6dc1c24bcd20fcf069719e0b1ac0fa71d00992ac057bf93ee14e",
+    "train_GTM_Model6_mapper_mars_pilot.py": "cf2996ce38ee1636cbecf18bab03d8456d732fb019b59bd17f1a680a48350f14",
+    "GTM_Model6_mapper.py": "71625d5ba53b0525431457c7c72d0c7aadf2e11da844ceb76fc020b56d3ba91b",
+    "GTM_Model6_mapper_data.py": "952e5c66f34f473d848fac2fb98b6dba082dd73fe39e84f964cc64d80b31cdda"
+  },
+  "viewer_bundle": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_training_sanity_20260922_mean"
+}

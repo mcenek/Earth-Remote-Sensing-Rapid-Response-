@@ -1,0 +1,492 @@
+{
+  "schema_version": 2,
+  "created_utc": "2026-09-22T16:36:35.814376+00:00",
+  "tool": "GTM_Model6_review_repaired_pair.py",
+  "source_sha256": "2e74d6c51f44b78b52cbf2920e50ce337dbafd0fccbf633afac6e8a0e51bf13c",
+  "status": "geometry_verified_radiometry_review_required",
+  "training_approved": false,
+  "network_used": false,
+  "scope": "one near-time observed pair; not an independent training cohort",
+  "acquisition_receipt_sha256": "2c4578e4c7025d6685812b9eacf8e880b80dfb158a83bee13853f015d26a407d",
+  "stac_sha256": "8a5146f280a56f357d978476a5fc67247ff153b5a17ee5dd0a56bee7caa04430",
+  "manifest_sha256": "a8a270c815cd4b107452edb8dbe96cd2761658b9716e1cde77526eedaef29d4d",
+  "scene_id": "S2B_16SGC_20241020_0_L2A",
+  "sentinel_minus_emit_hours": -0.5166136111111111,
+  "crop_bbox_epsg32616": [
+    741440.0,
+    3795060.0,
+    744000.0,
+    3797620.0
+  ],
+  "peak_in_crop": true,
+  "metadata_peak_lonlat": [
+    -84.36325,
+    34.27989
+  ],
+  "metadata_peak_xy": [
+    742728.1871498856,
+    3796337.4303278113
+  ],
+  "native_window_maximum_xy": [
+    742728.033767801,
+    3796337.1258419165
+  ],
+  "maximum_to_metadata_peak_m": 0.3409365394922775,
+  "strict_scl_clear_fraction": 1.0,
+  "bands": {
+    "scl": {
+      "sha256": "8cc3a5b67bcae7474c1829a4735eb862fb1c3eaef11843c1c32e76c776312059",
+      "shape": [
+        128,
+        128
+      ],
+      "crs": "EPSG:32616",
+      "transform": [
+        20.0,
+        0.0,
+        741440.0,
+        0.0,
+        -20.0,
+        3797620.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "raw_dn": {
+        "valid_pixels": 16384,
+        "min": 4.0,
+        "max": 6.0,
+        "mean": 4.06610107421875,
+        "negative_pixels": 0,
+        "positive_value_pixels": 16384
+      }
+    },
+    "blue": {
+      "sha256": "c7affc36d9ac1a4f77c4df3e0a5713e5776d32574b79d5e6f5b2d8997b203a23",
+      "shape": [
+        256,
+        256
+      ],
+      "crs": "EPSG:32616",
+      "transform": [
+        10.0,
+        0.0,
+        741440.0,
+        0.0,
+        -10.0,
+        3797620.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "raw_dn": {
+        "valid_pixels": 65536,
+        "min": 42.0,
+        "max": 10664.0,
+        "mean": 245.8723907470703,
+        "negative_pixels": 0,
+        "positive_value_pixels": 65536
+      },
+      "radiometry": {
+        "boa_offset_applied": true,
+        "literal_stac_scale": 0.0001,
+        "literal_stac_offset": -0.1,
+        "offset_metadata_conflict": true,
+        "literal_offset_negative_fraction": 0.9821014404296875,
+        "effective_reflectance_conversion_approved": false
+      }
+    },
+    "green": {
+      "sha256": "686c8080dd2174b39dc15aea27a19b3ab2034b6152a41ed5b292ab28faa19758",
+      "shape": [
+        256,
+        256
+      ],
+      "crs": "EPSG:32616",
+      "transform": [
+        10.0,
+        0.0,
+        741440.0,
+        0.0,
+        -10.0,
+        3797620.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "raw_dn": {
+        "valid_pixels": 65536,
+        "min": 49.0,
+        "max": 10888.0,
+        "mean": 407.7144317626953,
+        "negative_pixels": 0,
+        "positive_value_pixels": 65536
+      },
+      "radiometry": {
+        "boa_offset_applied": true,
+        "literal_stac_scale": 0.0001,
+        "literal_stac_offset": -0.1,
+        "offset_metadata_conflict": true,
+        "literal_offset_negative_fraction": 0.9735870361328125,
+        "effective_reflectance_conversion_approved": false
+      }
+    },
+    "red": {
+      "sha256": "021304f527019e901c30ba2e9855d1451b258c43909298f7df517faba35729f8",
+      "shape": [
+        256,
+        256
+      ],
+      "crs": "EPSG:32616",
+      "transform": [
+        10.0,
+        0.0,
+        741440.0,
+        0.0,
+        -10.0,
+        3797620.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "raw_dn": {
+        "valid_pixels": 65536,
+        "min": 24.0,
+        "max": 11552.0,
+        "mean": 330.2403869628906,
+        "negative_pixels": 0,
+        "positive_value_pixels": 65536
+      },
+      "radiometry": {
+        "boa_offset_applied": true,
+        "literal_stac_scale": 0.0001,
+        "literal_stac_offset": -0.1,
+        "offset_metadata_conflict": true,
+        "literal_offset_negative_fraction": 0.9622039794921875,
+        "effective_reflectance_conversion_approved": false
+      }
+    },
+    "swir16": {
+      "sha256": "7f27e2929fda44588fa08e8da3c994e55041021460c9d0be868fcd3fe7be7777",
+      "shape": [
+        128,
+        128
+      ],
+      "crs": "EPSG:32616",
+      "transform": [
+        20.0,
+        0.0,
+        741440.0,
+        0.0,
+        -20.0,
+        3797620.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "raw_dn": {
+        "valid_pixels": 16384,
+        "min": 44.0,
+        "max": 6509.0,
+        "mean": 1549.2606201171875,
+        "negative_pixels": 0,
+        "positive_value_pixels": 16384
+      },
+      "radiometry": {
+        "boa_offset_applied": true,
+        "literal_stac_scale": 0.0001,
+        "literal_stac_offset": -0.1,
+        "offset_metadata_conflict": true,
+        "literal_offset_negative_fraction": 0.0648193359375,
+        "effective_reflectance_conversion_approved": false
+      }
+    },
+    "swir22": {
+      "sha256": "c5bbeebae1c0663198aa82bbe3d6258ac9ea8020c7948972c0996aba236bc02b",
+      "shape": [
+        128,
+        128
+      ],
+      "crs": "EPSG:32616",
+      "transform": [
+        20.0,
+        0.0,
+        741440.0,
+        0.0,
+        -20.0,
+        3797620.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "raw_dn": {
+        "valid_pixels": 16384,
+        "min": 22.0,
+        "max": 4773.0,
+        "mean": 767.1094970703125,
+        "negative_pixels": 0,
+        "positive_value_pixels": 16384
+      },
+      "radiometry": {
+        "boa_offset_applied": true,
+        "literal_stac_scale": 0.0001,
+        "literal_stac_offset": -0.1,
+        "offset_metadata_conflict": true,
+        "literal_offset_negative_fraction": 0.83990478515625,
+        "effective_reflectance_conversion_approved": false
+      }
+    }
+  },
+  "native": {
+    "enh": {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003.tif",
+      "sha256": "0b36f5ec6b03faaed3e81124d4582517d293a1f597fbb6f97db7c03e239eb7c3",
+      "shape": [
+        1999,
+        2173
+      ],
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:4326",
+      "transform": [
+        0.000542232520256367,
+        0.0,
+        -85.1101770470007,
+        0.0,
+        -0.000542232520256367,
+        34.7123177276544,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "nodata": -9999.0,
+      "units": "ppm m",
+      "units_source": "GDAL metadata item",
+      "bounds": [
+        -85.1101770470007,
+        33.62839491966192,
+        -83.93190578048362,
+        34.7123177276544
+      ],
+      "window": [
+        775,
+        1351,
+        45,
+        53
+      ],
+      "window_transform": [
+        0.000542232520256367,
+        0.0,
+        -84.37762091213435,
+        0.0,
+        -0.000542232520256367,
+        34.29208752445572,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "window_statistics": {
+        "valid_pixels": 2166,
+        "min": -1463.2236328125,
+        "max": 22890.03515625,
+        "mean": 1610.471435546875,
+        "negative_pixels": 78,
+        "positive_value_pixels": 2088
+      }
+    },
+    "sens": {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4SENS_002_20241020T170504_2429411_003.tif",
+      "sha256": "25187bcf123d20d854963bf30277575d9c2f0aec95f2cec96eeda18daa0bbadf",
+      "shape": [
+        1999,
+        2173
+      ],
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:4326",
+      "transform": [
+        0.000542232520256367,
+        0.0,
+        -85.1101770470007,
+        0.0,
+        -0.000542232520256367,
+        34.7123177276544,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "nodata": -9999.0,
+      "units": "unitless",
+      "units_source": "GDAL metadata item",
+      "bounds": [
+        -85.1101770470007,
+        33.62839491966192,
+        -83.93190578048362,
+        34.7123177276544
+      ],
+      "window": [
+        775,
+        1351,
+        45,
+        53
+      ],
+      "window_transform": [
+        0.000542232520256367,
+        0.0,
+        -84.37762091213435,
+        0.0,
+        -0.000542232520256367,
+        34.29208752445572,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "window_statistics": {
+        "valid_pixels": 2166,
+        "min": 0.13339422643184662,
+        "max": 3.0337865352630615,
+        "mean": 0.8306758403778076,
+        "negative_pixels": 0,
+        "positive_value_pixels": 2166
+      }
+    },
+    "uncert": {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\CH4ENH\\EMIT_L2B_CH4ENH_002_20241020T170504_2429411_003\\EMIT_L2B_CH4UNCERT_002_20241020T170504_2429411_003.tif",
+      "sha256": "109672b11c7fb0943b2e33c6dcce27543af7f3cb1b483c2c335e48eff6d2ba92",
+      "shape": [
+        1999,
+        2173
+      ],
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:4326",
+      "transform": [
+        0.000542232520256367,
+        0.0,
+        -85.1101770470007,
+        0.0,
+        -0.000542232520256367,
+        34.7123177276544,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "nodata": -9999.0,
+      "units": "ppm m",
+      "units_source": "GDAL metadata item",
+      "bounds": [
+        -85.1101770470007,
+        33.62839491966192,
+        -83.93190578048362,
+        34.7123177276544
+      ],
+      "window": [
+        775,
+        1351,
+        45,
+        53
+      ],
+      "window_transform": [
+        0.000542232520256367,
+        0.0,
+        -84.37762091213435,
+        0.0,
+        -0.000542232520256367,
+        34.29208752445572,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "window_statistics": {
+        "valid_pixels": 2166,
+        "min": 415.1138916015625,
+        "max": 6724.87646484375,
+        "mean": 1262.6114501953125,
+        "negative_pixels": 0,
+        "positive_value_pixels": 2166
+      }
+    },
+    "plm": {
+      "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\EMIT_Plumes\\emit-v002-authenticated-2026-07\\EMIT_L2B_CH4PLM_002_20241020T170504_003677\\EMIT_L2B_CH4PLM_002_20241020T170504_003677.tif",
+      "sha256": "3422bcc8b8774a2ad439a3f6219cc57aedb124414940c39e220aea1bdccafa63",
+      "shape": [
+        607,
+        572
+      ],
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:4326",
+      "transform": [
+        0.000542232520256367,
+        0.0,
+        -84.57119792186587,
+        0.0,
+        -0.000542232520256367,
+        34.37667579761571,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "nodata": -9999.0,
+      "units": "ppm m",
+      "units_source": "GDAL metadata item",
+      "bounds": [
+        -84.57119792186587,
+        34.04754065782009,
+        -84.26104092027923,
+        34.37667579761571
+      ],
+      "window": [
+        156,
+        357,
+        45,
+        53
+      ],
+      "window_transform": [
+        0.000542232520256367,
+        0.0,
+        -84.37762091213435,
+        0.0,
+        -0.000542232520256367,
+        34.29208752445572,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "window_statistics": {
+        "valid_pixels": 2166,
+        "min": -1463.2236328125,
+        "max": 22890.03515625,
+        "mean": 1610.471435546875,
+        "negative_pixels": 78,
+        "positive_value_pixels": 2088
+      }
+    }
+  },
+  "common_native_pixels": 2166,
+  "geometry_native_pixels": 2180,
+  "common_native_fraction": 0.9935779816513761,
+  "plm": {
+    "interpretation": "continuous enhancement; no binary label derived",
+    "binary_label_created": false,
+    "statistics": {
+      "valid_pixels": 2166,
+      "min": -1463.2236328125,
+      "max": 22890.03515625,
+      "mean": 1610.471435546875,
+      "negative_pixels": 78,
+      "positive_value_pixels": 2088
+    },
+    "units": "ppm m",
+    "same_full_grid_as_enh": false,
+    "same_window_grid_as_enh": true,
+    "equal_to_enh_on_common_valid_pixels": true
+  },
+  "figure": "outputs\\GTM_Model6\\GTM_Model6_georgia_crop_repair_20260922\\qa_v2\\GTM_Model6_georgia_repaired_pair_scientific.png",
+  "remaining_gates": [
+    "Resolve already-applied BOA flag versus literal nonzero raster offset",
+    "Define native enhancement/uncertainty/sensitivity QA and target semantics",
+    "Acquire or identify a suitable Sentinel temporal reference",
+    "Independent grouped positive and reviewed-negative acquisitions"
+  ]
+}

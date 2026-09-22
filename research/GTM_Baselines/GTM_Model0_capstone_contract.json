@@ -1,0 +1,42 @@
+{
+  "id": "GTM_Model0_capstone_web_20260413",
+  "commit": "ce6844d4410b32ae4137ada9f7d44a271df9c192",
+  "source_path": "ERSRR_Website/server.py",
+  "source_sha256": "c443882cf735ecccc0c8309c5307a503a2a4c017845446f2b02dff0c73864d71",
+  "frozen_module": "GTM_Model0_capstone_20260413.py",
+  "frozen_sha256": "ba44cfae4cc8f4a97551e90c6c0e3767478b5e1eb89f330f9f1ebbd3ddca5918",
+  "checkpoint_path": "../Earth-Remote-Sensing-Rapid-Response-/EarthRemoteSensingRapidResponse/tmp/checkpoint_new.weights.h5",
+  "checkpoint_sha256": "37921517e99a9a4ac7cfb829a96c15a09924ffc57ac072c0507785712dd40759",
+  "checkpoint_git_blob": "0b34e01a4dbd117dec49611e4959ae123e9b4a1a",
+  "extracted_definitions": [
+    "Patches",
+    "PatchEncoder",
+    "mlp",
+    "transformer_block",
+    "decoder_block",
+    "create_vit_encoder_decoder"
+  ],
+  "input_bands": [
+    "B2",
+    "B3",
+    "B4",
+    "B11",
+    "B12"
+  ],
+  "input_shape": [
+    256,
+    256,
+    5
+  ],
+  "normalization": "Historical server predict_tiles: divide each tile by np.max(tile)+1e-6. This baseline does not use the standalone training x_max.npy.",
+  "output": "mask_output sigmoid; regression_output and product are separate diagnostic arrays",
+  "training_membership": "unknown; cannot claim legacy holdout",
+  "runtime_load_verified": false,
+  "notes": [
+    "Weight bytes match the original Git object. No model load or inference performed in this low-memory pass.",
+    "checkpoint.weights.h5 has different decoder shapes; it is not a substitute for checkpoint_new.weights.h5.",
+    "The standalone script and web server had different normalization; this pins the web baseline explicitly.",
+    "Training labels used a per-scene 90th percentile. They are not an independent reference for this comparison."
+  ],
+  "checkpoint_path_base": "repository root"
+}
