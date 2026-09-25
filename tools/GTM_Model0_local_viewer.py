@@ -11,6 +11,7 @@ import webbrowser
 ROOT=Path(__file__).resolve().parents[1]
 UI=ROOT/'GTM_Viewer'
 BUNDLES=ROOT/'outputs/GTM_viewer_bundles'
+PORTABLE=UI/'portable_bundles'
 DOCS=ROOT/'docs'
 
 def inside(root, relative):
@@ -24,7 +25,8 @@ def registry():
     indexed={e['id']:e for e in result['experiments']}
     warnings=[]
     bundle_ids=set()
-    for manifest in sorted(BUNDLES.glob('*/experiment.json')):
+    manifests=sorted(PORTABLE.glob('*/experiment.json'))+sorted(BUNDLES.glob('*/experiment.json'))
+    for manifest in manifests:
         try:
             if manifest.stat().st_size>50*1024*1024:
                 raise ValueError('Manifest exceeds 50 MiB')
@@ -39,7 +41,8 @@ def registry():
                     return value
                 if not inside(manifest.parent,value).is_file():
                     raise ValueError('Missing asset: '+value)
-                return 'bundle-assets/'+manifest.parent.name+'/'+value.replace('\\','/')
+                prefix='portable-bundles/' if manifest.parent.parent==PORTABLE else 'bundle-assets/'
+                return prefix+manifest.parent.name+'/'+value.replace('\\','/')
             for s in e['scenes']:
                 for k in ['rgb','emit','truthImage','predictionImage','probabilityImage','disagreementImage','observedImage','coarseImage','residualImage','reference90Rgb','reference365Rgb']:
                     if s.get(k): s[k]=asset(s[k])
@@ -57,7 +60,7 @@ def registry():
             if not experiment.get('status','').startswith('ARCHIVED'):
                 experiment['status']='ARCHIVED · '+experiment.get('status','Historical evidence')
     preferred=result.get('activeExperimentId','GTM_Model6')
-    result['activeExperimentId']=preferred if preferred in indexed else 'GTM_Model6'
+    result['activeExperimentId']=preferred if preferred in indexed else 'GTM_Model6_mapper_r5_portable' if 'GTM_Model6_mapper_r5_portable' in indexed else 'GTM_Model6'
     result['experiments']=list(indexed.values())
     result['local']={'bundleDirectory':str(BUNDLES),'warnings':warnings,'mode':'Local read-only viewer'}
     return result
@@ -73,6 +76,8 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if route.startswith('/bundle-assets/'):
                 path=inside(BUNDLES,route[len('/bundle-assets/'):])
+            elif route.startswith('/portable-bundles/'):
+                path=inside(PORTABLE,route[len('/portable-bundles/'):])
             elif route.startswith('/research-docs/'):
                 path=inside(DOCS,route[len('/research-docs/'):])
             else:

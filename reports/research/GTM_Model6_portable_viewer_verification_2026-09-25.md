@@ -1,0 +1,12 @@
+# Portable GTM visual review verification, 2026-09-25
+
+The committed viewer payload contains 42 files totaling 4,710,880 bytes (4.49 MiB), excluding `SHA256SUMS.txt`. There are five saved R5 MARS scenes and three saved EMIT-positive scenes. The scene PNGs and display grids are copied from the original ignored local export folders without changing their bytes. `GTM_Viewer/portable_bundles/SHA256SUMS.txt` records the committed payload hashes.
+
+## Repeat the end-to-end check
+
+1. From the repository root, start `python tools/GTM_Model0_local_viewer.py --open` and visit `http://127.0.0.1:8766/`. No `outputs/GTM_viewer_bundles` contents are required. With an empty local output folder, the default experiment is `GTM_Model6_mapper_r5_portable`.
+2. Open **Plume comparison** and select the R5 portable experiment. The first scene, `MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d`, shows an obvious missed reviewed plume: native IoU 0.0%, 257 native false-positive pixels and 7,744 native evaluated pixels. Select `MARS_2c6ef011-0729-42e2-b64f-10ff8207778b` to see a selected localized success (native IoU 38.8%); the run-wide header still says 2.15% IoU and 2.25% precision over 65 scenes.
+3. Select `GTM_Model6_emit_evidence_portable`, click **Side by side**, and choose `emit25km-0024`. The three aligned views show Sentinel imagery, orange saved predictions over a cyan EMIT outline, and the outline over imagery. The page reports EMIT support covered 4.6%; outside reference is **Unknown** and precision / IoU are **Not measured**. Switching to **Probability heatmap** shows continuous saved probabilities.
+4. Verify the payload from `GTM_Viewer/portable_bundles` with `sha256sum -c SHA256SUMS.txt` on Unix, or recompute `Get-FileHash -Algorithm SHA256` for a listed file in PowerShell. The grid and image URLs use `portable-bundles/<bundle>/<asset>` and should return HTTP 200.
+
+This check was performed in the local Edge viewer on 2026-09-25 with the online basemap disabled. The desktop view was visually inspected in overlay and side-by-side modes, including the EMIT positive-only labels. Python syntax, JavaScript syntax and `git diff --check` passed. A fresh-clone registry simulation with no local outputs selected the R5 portable bundle and loaded both sample manifests without warnings. The shown cases are deliberately diagnostic; they are not a sampled performance estimate or independent methane verification.

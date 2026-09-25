@@ -1,5 +1,7 @@
 # GTM experiment bundles
 
+For the small, saved Model6 visual samples that work from a fresh clone, see [Martin's visual review instructions](MARTIN_VISUAL_REVIEW.md). The two included bundles load automatically; no local experiment folder setup is needed.
+
 ## Methane reconstruction scenes
 
 Quantitative scenes use `scene.task: "methane_reconstruction"` and a continuous grid with explicit units. The additive grid fields are `observed`, `coarse`, `prediction`, `residual`, and optional `valid`, all row-major and aligned to `width` × `height`:

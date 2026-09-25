@@ -1,0 +1,389 @@
+{
+  "id": "GTM_Model6_mapper_r5_portable",
+  "name": "Model6 mapper r5 | mean | development | portable visual sample",
+  "lifecycle": "experimental",
+  "status": "FAILED QUALITY GATE",
+  "description": "Fixed mean of independent S16/S32/S64/S128 logits. Curated visual sample from saved predictions; selection is diagnostic, not statistically representative.",
+  "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. Portable subset; run-wide metrics, if shown, are from the complete original evaluation, not these displayed scenes.",
+  "decisionThreshold": 0.5,
+  "scenes": [
+    {
+      "id": "MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d",
+      "name": "MARS | Reviewed plume | 2023-06-04 | d303fa1d",
+      "task": "plume_segmentation",
+      "location": "31.748, -103.408 | United States",
+      "date": "2023-06-04",
+      "dataset": "MARS",
+      "label": "PLUME",
+      "positiveOnlyReference": false,
+      "bounds": [
+        [
+          31.738791168025383,
+          -103.41872383319114
+        ],
+        [
+          31.75709230052061,
+          -103.39730686146872
+        ]
+      ],
+      "rgb": "0001_rgb.png",
+      "truthImage": "0001_truth.png",
+      "predictionImage": "0001_prediction.png",
+      "probabilityImage": "0001_probability.png",
+      "grid": "0001_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "MARS reviewed plume mask",
+      "truthNote": "MARS reviewed mask; scoring intersects clear Sentinel and actual prediction support",
+      "referenceDate": "2023-06-04",
+      "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. The report headline describes the mean; its table identifies branch scores.",
+      "predictionSupportBounds": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "source": "678a4eab-ec67-4db7-acfb-4d4834d4ffd4_2d64f495-fd6b-491c-8614-69f7d303fa1d_s2.tif",
+      "checkpointHash": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4",
+      "predictionHash": "82a90ae6a74d04705a9862d3e65b768982d9eaa91690dd66b90bed92557e07eb",
+      "split": "Held MARS partition 1; group US_745e5fcc83; reused development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 0,
+        "fp": 257,
+        "fn": 461,
+        "tn": 7026,
+        "iou": 0.0,
+        "dice": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "evaluated_pixels": 7744,
+        "source_valid_pixels": 39849,
+        "support_fraction": 0.1936,
+        "predicted_fraction": 0.03318698347107438,
+        "truth_fraction": 0.05952995867768595,
+        "negative_activation": 0.035287656185637784
+      },
+      "candidatePoints": [
+        {
+          "lat": 31.748889752181235,
+          "lon": -103.40805293428096,
+          "score": 0.8852246999740601,
+          "pixels": 192,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 1
+    },
+    {
+      "id": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "name": "MARS | Reviewed plume | 2023-11-01 | 8207778b",
+      "task": "plume_segmentation",
+      "location": "32.134, -103.982 | United States",
+      "date": "2023-11-01",
+      "dataset": "MARS",
+      "label": "PLUME",
+      "positiveOnlyReference": false,
+      "bounds": [
+        [
+          32.124513356532056,
+          -103.99299716049046
+        ],
+        [
+          32.14272420478199,
+          -103.97159535458891
+        ]
+      ],
+      "rgb": "0000_rgb.png",
+      "truthImage": "0000_truth.png",
+      "predictionImage": "0000_prediction.png",
+      "probabilityImage": "0000_probability.png",
+      "grid": "0000_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "MARS reviewed plume mask",
+      "truthNote": "MARS reviewed mask; scoring intersects clear Sentinel and actual prediction support",
+      "referenceDate": "2023-11-01",
+      "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. The report headline describes the mean; its table identifies branch scores.",
+      "predictionSupportBounds": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "source": "952962a4-1c38-48b1-88de-b9493bb5d2d1_2c6ef011-0729-42e2-b64f-10ff8207778b_s2.tif",
+      "checkpointHash": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4",
+      "predictionHash": "901e8854dd27d91e30ed93d2222a6c1151193a2d7c79e84cac756aaac267e9bd",
+      "split": "Held MARS partition 1; group US_745e5fcc83; reused development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 348,
+        "fp": 192,
+        "fn": 358,
+        "tn": 6846,
+        "iou": 0.38752783964365256,
+        "dice": 0.5585874799357945,
+        "precision": 0.6444444444444445,
+        "recall": 0.49291784702549574,
+        "evaluated_pixels": 7744,
+        "source_valid_pixels": 40000,
+        "support_fraction": 0.1936,
+        "predicted_fraction": 0.06973140495867769,
+        "truth_fraction": 0.09116735537190082,
+        "negative_activation": 0.027280477408354646
+      },
+      "candidatePoints": [
+        {
+          "lat": 32.134483361335455,
+          "lon": -103.98318885622551,
+          "score": 0.8673948049545288,
+          "pixels": 326,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 32.136569920352414,
+          "lon": -103.98464998898939,
+          "score": 0.7025835514068604,
+          "pixels": 171,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 2
+    },
+    {
+      "id": "MARS_35027778-4dc9-494b-b876-fb8391c69a61",
+      "name": "MARS | Reviewed plume | 2023-11-21 | 91c69a61",
+      "task": "plume_segmentation",
+      "location": "31.349, -103.661 | United States",
+      "date": "2023-11-21",
+      "dataset": "MARS",
+      "label": "PLUME",
+      "positiveOnlyReference": false,
+      "bounds": [
+        [
+          31.33955186184311,
+          -103.67171013155627
+        ],
+        [
+          31.357811755954405,
+          -103.65043353353624
+        ]
+      ],
+      "rgb": "0002_rgb.png",
+      "truthImage": "0002_truth.png",
+      "predictionImage": "0002_prediction.png",
+      "probabilityImage": "0002_probability.png",
+      "grid": "0002_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "MARS reviewed plume mask",
+      "truthNote": "MARS reviewed mask; scoring intersects clear Sentinel and actual prediction support",
+      "referenceDate": "2023-11-21",
+      "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. The report headline describes the mean; its table identifies branch scores.",
+      "predictionSupportBounds": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "source": "5088a541-0b55-478f-9ce3-af130f0be24a_35027778-4dc9-494b-b876-fb8391c69a61_s2.tif",
+      "checkpointHash": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4",
+      "predictionHash": "ade750c2a061b82b14efc8e7510a6c4098ffc14a692b34f2069613e4632531c8",
+      "split": "Held MARS partition 1; group US_745e5fcc83; reused development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 144,
+        "fp": 220,
+        "fn": 202,
+        "tn": 7178,
+        "iou": 0.254416961130742,
+        "dice": 0.4056338028169014,
+        "precision": 0.3956043956043956,
+        "recall": 0.4161849710982659,
+        "evaluated_pixels": 7744,
+        "source_valid_pixels": 40000,
+        "support_fraction": 0.1936,
+        "predicted_fraction": 0.04700413223140496,
+        "truth_fraction": 0.0446797520661157,
+        "negative_activation": 0.029737766964044336
+      },
+      "candidatePoints": [
+        {
+          "lat": 31.348890702234048,
+          "lon": -103.6594405100845,
+          "score": 0.8959846496582031,
+          "pixels": 319,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 1
+    },
+    {
+      "id": "MARS_dac5deb4-0c1c-4040-9c12-c059c692bd04",
+      "name": "MARS | Reviewed no plume | 2022-12-16 | c692bd04",
+      "task": "plume_segmentation",
+      "location": "32.314, -103.718 | United States",
+      "date": "2022-12-16",
+      "dataset": "MARS",
+      "label": "NO_PLUME",
+      "positiveOnlyReference": false,
+      "bounds": [
+        [
+          32.304579414172814,
+          -103.72908649088643
+        ],
+        [
+          32.322833345671555,
+          -103.70759110122665
+        ]
+      ],
+      "rgb": "0020_rgb.png",
+      "truthImage": "0020_truth.png",
+      "predictionImage": "0020_prediction.png",
+      "probabilityImage": "0020_probability.png",
+      "grid": "0020_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "MARS reviewed plume mask",
+      "truthNote": "MARS reviewed mask; scoring intersects clear Sentinel and actual prediction support",
+      "referenceDate": "2022-12-16",
+      "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. The report headline describes the mean; its table identifies branch scores.",
+      "predictionSupportBounds": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "source": "a165f00b-f6d4-4523-8daf-81c4ec16e890_dac5deb4-0c1c-4040-9c12-c059c692bd04_s2.tif",
+      "checkpointHash": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4",
+      "predictionHash": "6392c2a707cd201b44dd365b61310b442d19a1537e8bfd41378781c53ace262c",
+      "split": "Held MARS partition 1; group US_745e5fcc83; reused development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 0,
+        "fp": 612,
+        "fn": 0,
+        "tn": 7132,
+        "iou": 0.0,
+        "dice": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "evaluated_pixels": 7744,
+        "source_valid_pixels": 40000,
+        "support_fraction": 0.1936,
+        "predicted_fraction": 0.07902892561983471,
+        "truth_fraction": 0.0,
+        "negative_activation": 0.07902892561983471
+      },
+      "candidatePoints": [
+        {
+          "lat": 32.31085121005132,
+          "lon": -103.71694610997082,
+          "score": 0.8454775214195251,
+          "pixels": 141,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 32.31373516164534,
+          "lon": -103.71669300790889,
+          "score": 0.8271229863166809,
+          "pixels": 316,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 2
+    },
+    {
+      "id": "MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89",
+      "name": "MARS | Reviewed no plume | 2023-01-25 | a8675c89",
+      "task": "plume_segmentation",
+      "location": "32.149, -103.995 | United States",
+      "date": "2023-01-25",
+      "dataset": "MARS",
+      "label": "NO_PLUME",
+      "positiveOnlyReference": false,
+      "bounds": [
+        [
+          32.14194246249984,
+          -104.00648314014559
+        ],
+        [
+          32.160151158746835,
+          -103.98507973370276
+        ]
+      ],
+      "rgb": "0034_rgb.png",
+      "truthImage": "0034_truth.png",
+      "predictionImage": "0034_prediction.png",
+      "probabilityImage": "0034_probability.png",
+      "grid": "0034_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "MARS reviewed plume mask",
+      "truthNote": "MARS reviewed mask; scoring intersects clear Sentinel and actual prediction support",
+      "referenceDate": "2023-01-25",
+      "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. The report headline describes the mean; its table identifies branch scores.",
+      "predictionSupportBounds": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "source": "30aa3215-da3e-43d9-855b-b3829c492efe_2a0831e4-fde7-40ea-8c39-eb0ea8675c89_s2.tif",
+      "checkpointHash": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4",
+      "predictionHash": "a628bba3ff683ae2193f429b82d4e89db027e5df09e589c9580667122138388d",
+      "split": "Held MARS partition 1; group US_745e5fcc83; reused development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 0,
+        "fp": 869,
+        "fn": 0,
+        "tn": 6875,
+        "iou": 0.0,
+        "dice": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "evaluated_pixels": 7744,
+        "source_valid_pixels": 40000,
+        "support_fraction": 0.1936,
+        "predicted_fraction": 0.11221590909090909,
+        "truth_fraction": 0.0,
+        "negative_activation": 0.11221590909090909
+      },
+      "candidatePoints": [
+        {
+          "lat": 32.15056331128499,
+          "lon": -103.99732531852955,
+          "score": 0.7942938208580017,
+          "pixels": 759,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 1
+    }
+  ],
+  "metricScope": "reused_development_fold",
+  "nativeAggregate": {
+    "tp": 492,
+    "fp": 21387,
+    "fn": 1021,
+    "tn": 480144,
+    "evaluated_pixels": 503044,
+    "iou": 0.02148471615720524,
+    "dice": 0.042065663474692205,
+    "precision": 0.022487316604963663,
+    "recall": 0.325181758096497,
+    "predicted_fraction": 0.04349321331732413,
+    "truth_fraction": 0.0030076891882221037,
+    "negative_activation": 0.04264342583010821,
+    "positive_scene_macro_iou": 0.21398160025813154,
+    "positive_scenes": 3,
+    "scenes": 65
+  },
+  "metrics": {
+    "Pooled native IoU": "2.15%",
+    "Precision": "2.25%",
+    "Recall": "32.52%",
+    "Development scenes": 65
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "id": "GTM_Model6_emit_evidence_portable",
+  "name": "Model6 | Evidence constrained | mean | portable visual sample",
+  "lifecycle": "experimental",
+  "status": "NOT PROMOTED | held-location development output; background activation and missed EMIT plumes",
+  "description": "Independent Sentinel-only plume segmentation; EMIT positive supervision + reviewed US controls. Curated visual sample from saved predictions; selection is diagnostic, not statistically representative.",
+  "notes": "Fixed 0.50 threshold. All held cases included. EMIT coverage is not verified specificity. See report and background failures before using candidate locations. Portable subset; run-wide metrics, if shown, are from the complete original evaluation, not these displayed scenes.",
+  "decisionThreshold": 0.5,
+  "scenes": [
+    {
+      "id": "emit25km-0024",
+      "name": "EMIT | EMIT positive support | 2023-06-04 | 5km-0024",
+      "task": "plume_segmentation",
+      "location": "31.818, -104.303 | United States",
+      "date": "2023-06-04",
+      "dataset": "EMIT",
+      "label": "POSITIVE_ONLY",
+      "positiveOnlyReference": true,
+      "bounds": [
+        [
+          31.80915337854855,
+          -104.31369188075013
+        ],
+        [
+          31.827311899881177,
+          -104.29242548415672
+        ]
+      ],
+      "rgb": "0164_rgb.png",
+      "truthImage": "0164_truth.png",
+      "predictionImage": "0164_prediction.png",
+      "probabilityImage": "0164_probability.png",
+      "grid": "0164_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "EMIT catalog plume outline (positive only)",
+      "truthNote": "Unknown exterior is excluded from comparison",
+      "referenceDate": "2023-06-04",
+      "notes": "Held-location development output; threshold frozen at 0.50 before fitting. EMIT exterior is unknown: support recall only; no verified FP/precision or IoU. Timing offset -0.28 h. 10m source file grid; Sentinel SWIR resolves about 20m and EMIT about 60m. Map reprojection is for display; report scores use source grid. Hotspots are candidate plume peaks, not verified emission origins.",
+      "source": "target.l1c.tif",
+      "checkpointHash": "56e446ce9fdd57acd3ff0848ad4eba44e4b63657632202976968dcf66530f5a3, f72c3caa43b632386115347cb9ce3f5316a0185966fabff3931dca3df3ddc69e, ba0452751262ea6a20789cf5cbce8c486f659ed883e3f6f6e4c2eb3d103833ec, c679ed0fe1edccbe8ae31b861fb343e42981a2c9f8c0ecfac7b4c37aa94ad7ae",
+      "predictionHash": "93d875508e87b1d69e0e6996361361c961a18ea868109e33431bfd979f4678fe",
+      "split": "Outer held partition 1; group US_745e5fcc83; historical development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 571,
+        "fp": 1637,
+        "fn": 9056,
+        "tn": 28736,
+        "iou": 0.05069247159090909,
+        "dice": 0.09649345162653147,
+        "precision": 0.2586050724637681,
+        "recall": 0.0593123506803781,
+        "area_ratio": 0.22935493923340605,
+        "predicted_fraction": 0.0552,
+        "reference_fraction": 0.240675,
+        "pixel_ap": 0.24496250701560984,
+        "interpretation": "EMIT footprint agreement proxy; fp is outside catalog, NOT verified false methane"
+      },
+      "candidatePoints": [],
+      "candidateCount": 0
+    },
+    {
+      "id": "emit25km-0049",
+      "name": "EMIT | EMIT positive support | 2023-12-24 | 5km-0049",
+      "task": "plume_segmentation",
+      "location": "32.083, -104.478 | United States",
+      "date": "2023-12-24",
+      "dataset": "EMIT",
+      "label": "POSITIVE_ONLY",
+      "positiveOnlyReference": true,
+      "bounds": [
+        [
+          32.07425024429683,
+          -104.48834286408955
+        ],
+        [
+          32.0923802458495,
+          -104.46704791920357
+        ]
+      ],
+      "rgb": "0168_rgb.png",
+      "truthImage": "0168_truth.png",
+      "predictionImage": "0168_prediction.png",
+      "probabilityImage": "0168_probability.png",
+      "grid": "0168_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "EMIT catalog plume outline (positive only)",
+      "truthNote": "Unknown exterior is excluded from comparison",
+      "referenceDate": "2023-12-24",
+      "notes": "Held-location development output; threshold frozen at 0.50 before fitting. EMIT exterior is unknown: support recall only; no verified FP/precision or IoU. Timing offset 0.16 h. 10m source file grid; Sentinel SWIR resolves about 20m and EMIT about 60m. Map reprojection is for display; report scores use source grid. Hotspots are candidate plume peaks, not verified emission origins.",
+      "source": "target.l1c.tif",
+      "checkpointHash": "50b2c263988eb3435bf0f855952085327a9a3487dd0189a4295094f0082a7ef4, 51e968ec817c3bdb343f6f33ca751a82c8fbcab8d653b01b4539af6d83faebaf, 8a8b6f33f4550f09a1851fcc5233949c7f385e20c52b95846261d9b612f72a3a, 50b6b274cf7744d5f2aa4dd57e218f9572a2f8daed82ac47b8524e71b0f227cf",
+      "predictionHash": "1fbca0e075410ff3c7515ee335b1b1777c3c6b5b569a0f4c1aadc5a3ee173fee",
+      "split": "Outer held partition 4; group US_0e9ca5602f; historical development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 687,
+        "fp": 2230,
+        "fn": 7510,
+        "tn": 29573,
+        "iou": 0.06588664045267095,
+        "dice": 0.12362785675724312,
+        "precision": 0.23551594103531026,
+        "recall": 0.08381115042088569,
+        "area_ratio": 0.3558619006953764,
+        "predicted_fraction": 0.072925,
+        "reference_fraction": 0.204925,
+        "pixel_ap": 0.21555860879039834,
+        "interpretation": "EMIT footprint agreement proxy; fp is outside catalog, NOT verified false methane"
+      },
+      "candidatePoints": [
+        {
+          "lat": 32.090637468549346,
+          "lon": -104.47028969061084,
+          "score": 0.9998590350151062,
+          "pixels": 301,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 32.08208135897167,
+          "lon": -104.4737298511817,
+          "score": 0.9984983801841736,
+          "pixels": 252,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 32.08716519234246,
+          "lon": -104.48143642173193,
+          "score": 0.9981716275215149,
+          "pixels": 780,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 32.08212880579018,
+          "lon": -104.48527952199795,
+          "score": 0.9874137043952942,
+          "pixels": 100,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 32.08525810035779,
+          "lon": -104.47837416611539,
+          "score": 0.9530174136161804,
+          "pixels": 115,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 5
+    },
+    {
+      "id": "emit25km-0069",
+      "name": "EMIT | EMIT positive support | 2024-10-04 | 5km-0069",
+      "task": "plume_segmentation",
+      "location": "32.754, -104.217 | United States",
+      "date": "2024-10-04",
+      "dataset": "EMIT",
+      "label": "POSITIVE_ONLY",
+      "positiveOnlyReference": true,
+      "bounds": [
+        [
+          32.74476161222553,
+          -104.22815754951162
+        ],
+        [
+          32.762934710843346,
+          -104.20665121648489
+        ]
+      ],
+      "rgb": "0172_rgb.png",
+      "truthImage": "0172_truth.png",
+      "predictionImage": "0172_prediction.png",
+      "probabilityImage": "0172_probability.png",
+      "grid": "0172_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "EMIT catalog plume outline (positive only)",
+      "truthNote": "Unknown exterior is excluded from comparison",
+      "referenceDate": "2024-10-04",
+      "notes": "Held-location development output; threshold frozen at 0.50 before fitting. EMIT exterior is unknown: support recall only; no verified FP/precision or IoU. Timing offset 1.04 h. 10m source file grid; Sentinel SWIR resolves about 20m and EMIT about 60m. Map reprojection is for display; report scores use source grid. Hotspots are candidate plume peaks, not verified emission origins.",
+      "source": "target.l1c.tif",
+      "checkpointHash": "56e446ce9fdd57acd3ff0848ad4eba44e4b63657632202976968dcf66530f5a3, f72c3caa43b632386115347cb9ce3f5316a0185966fabff3931dca3df3ddc69e, ba0452751262ea6a20789cf5cbce8c486f659ed883e3f6f6e4c2eb3d103833ec, c679ed0fe1edccbe8ae31b861fb343e42981a2c9f8c0ecfac7b4c37aa94ad7ae",
+      "predictionHash": "0359249f09d342be93b81aa71ca5b50df42dbcb92f54584f24cfc5430ca27a48",
+      "split": "Outer held partition 1; group US_745e5fcc83; historical development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 621,
+        "fp": 2011,
+        "fn": 7825,
+        "tn": 29543,
+        "iou": 0.05938605718657359,
+        "dice": 0.1121141000180538,
+        "precision": 0.23594224924012158,
+        "recall": 0.07352592943405162,
+        "area_ratio": 0.31162680558844424,
+        "predicted_fraction": 0.0658,
+        "reference_fraction": 0.21115,
+        "pixel_ap": 0.23199950523985707,
+        "interpretation": "EMIT footprint agreement proxy; fp is outside catalog, NOT verified false methane"
+      },
+      "candidatePoints": [],
+      "candidateCount": 0
+    }
+  ]
+}
