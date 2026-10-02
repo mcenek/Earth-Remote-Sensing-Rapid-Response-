@@ -1,0 +1,251 @@
+{
+  "status": "verified",
+  "builtDate": "2026-09-30",
+  "failureModes": [
+    "missing source",
+    "wrong case order",
+    "grid/image shape drift",
+    "native count drift",
+    "panel mismatch"
+  ],
+  "selection": [
+    "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+    "MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d",
+    "MARS_35027778-4dc9-494b-b876-fb8391c69a61",
+    "MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89",
+    "MARS_b2453f15-531e-4377-8576-f46fbd2234f7"
+  ],
+  "threshold": 0.5,
+  "caseCount": 6,
+  "nativeChecks": [
+    {
+      "id": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "rawPrediction": "outputs\\GTM_Model6\\GTM_Model6_mapper_mars_pilot_20260922_r5\\prediction_0000.npz",
+      "sha256": "901e8854dd27d91e30ed93d2222a6c1151193a2d7c79e84cac756aaac267e9bd",
+      "counts": {
+        "tp": 348,
+        "fp": 192,
+        "fn": 358,
+        "tn": 6846,
+        "evaluated_pixels": 7744
+      }
+    },
+    {
+      "id": "MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d",
+      "rawPrediction": "outputs\\GTM_Model6\\GTM_Model6_mapper_mars_pilot_20260922_r5\\prediction_0001.npz",
+      "sha256": "82a90ae6a74d04705a9862d3e65b768982d9eaa91690dd66b90bed92557e07eb",
+      "counts": {
+        "tp": 0,
+        "fp": 257,
+        "fn": 461,
+        "tn": 7026,
+        "evaluated_pixels": 7744
+      }
+    },
+    {
+      "id": "MARS_35027778-4dc9-494b-b876-fb8391c69a61",
+      "rawPrediction": "outputs\\GTM_Model6\\GTM_Model6_mapper_mars_pilot_20260922_r5\\prediction_0002.npz",
+      "sha256": "ade750c2a061b82b14efc8e7510a6c4098ffc14a692b34f2069613e4632531c8",
+      "counts": {
+        "tp": 144,
+        "fp": 220,
+        "fn": 202,
+        "tn": 7178,
+        "evaluated_pixels": 7744
+      }
+    },
+    {
+      "id": "MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89",
+      "rawPrediction": "outputs\\GTM_Model6\\GTM_Model6_mapper_mars_pilot_20260922_r5\\prediction_0034.npz",
+      "sha256": "a628bba3ff683ae2193f429b82d4e89db027e5df09e589c9580667122138388d",
+      "counts": {
+        "tp": 0,
+        "fp": 869,
+        "fn": 0,
+        "tn": 6875,
+        "evaluated_pixels": 7744
+      }
+    },
+    {
+      "id": "MARS_b2453f15-531e-4377-8576-f46fbd2234f7",
+      "rawPrediction": "outputs\\GTM_Model6\\GTM_Model6_mapper_mars_pilot_20260922_r5\\prediction_0012.npz",
+      "sha256": "a1fd937aa9e12d9c1ace24618e8c99c25db0e6cb1e8e7f6d63f68aab03068147",
+      "counts": {
+        "tp": 0,
+        "fp": 717,
+        "fn": 0,
+        "tn": 7027,
+        "evaluated_pixels": 7744
+      }
+    }
+  ],
+  "savedAggregate": {
+    "tp": 492,
+    "fp": 21387,
+    "fn": 1021,
+    "tn": 480144,
+    "evaluated_pixels": 503044,
+    "iou": 0.02148471615720524,
+    "dice": 0.042065663474692205,
+    "precision": 0.022487316604963663,
+    "recall": 0.325181758096497,
+    "predicted_fraction": 0.04349321331732413,
+    "truth_fraction": 0.0030076891882221037,
+    "negative_activation": 0.04264342583010821,
+    "positive_scene_macro_iou": 0.21398160025813154,
+    "positive_scenes": 3,
+    "scenes": 65
+  },
+  "sourceHashes": {
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_emit_2025_intake\\review.json": "79e037555b8f2165ef2384232c037224e4c7e7a532d9bad6b7bf6eaa14d41ff3",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\experiment.json": "fa0781b478af8e075e9a45db5c1ca15b2ff74b89efd3f761d4f6f85f96e49764",
+    "outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\swir_20260930\\input_readiness.json": "f3ad4de16b7484cb36a5ce1b8ff9a9f9c5332d3d391553686462ec4dbc270a9a",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_emit_2025_intake\\sentinel_rgb.png": "098a4c1c0d9d863ec1ee0de587c88932f2ab1e4c347ddfee8f7b6c3e6b3be4cc",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_emit_2025_intake\\mf.png": "8861bd9cbc0220859d5cffe05f2185745f0d2267bbe83010a40b7f9ff23bc989",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_emit_2025_intake\\mask.png": "04a11bd0010824fb243c1dcde902a99052b64da6ff17977d2e104dbeb561a4d9",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0000_rgb.png": "91444f513fb80ec16a658a4d38c39c3c4553706ff0f9449db7882210c74e1be2",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0000_grid.json": "8d42d1c8c86860e133a9ebf25131d133d2fa91e01ec48aa5ded5809d15fd90e9",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0001_rgb.png": "8ba19eff185581aa6fc0f83ad58d990c02fa253ee4264efec7bfbda7f9d5c42f",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0001_grid.json": "08c8de61d3475ffd52945f8f84f0e78d58131e64c98d7e33d0290c890f2db402",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0002_rgb.png": "0ff1fb272de8e5656165e26e08b2f29233d81d873ac04250fde71346e682a628",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0002_grid.json": "b02cdc0b3899aab6ba31f97f0b0ec209d7fda1f184586f06c53763436f586325",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0034_rgb.png": "71da9a07eb95632e62b5be9d9e184a57ef0566381fa103be502e13acd54acfa0",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0034_grid.json": "30cae1e55a0314306610a097c0ceb7011bede3b2db33d832252451c28cd29402",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0012_rgb.png": "7bb3ae5e7be82bf1eea3e74c79079c8831fb38c200a1df90b14b73629f94cbbc",
+    "outputs\\GTM_viewer_bundles\\GTM_Model6_mapper_mars_pilot_20260922_r5_mean\\0012_grid.json": "66beca35980f925594ff57fb5aa3471bc7288a4b4fcbed9f67942a4f287b6aaa"
+  },
+  "outputImages": {
+    "case_volusia_rgb.png": {
+      "sha256": "098a4c1c0d9d863ec1ee0de587c88932f2ab1e4c347ddfee8f7b6c3e6b3be4cc",
+      "size": [
+        368,
+        332
+      ]
+    },
+    "case_volusia_retrieval.png": {
+      "sha256": "9097adda851ed43d5a4a0187a07cbc7663e7190744d72845215bb445eb442765",
+      "size": [
+        368,
+        332
+      ]
+    },
+    "case_0000_rgb.png": {
+      "sha256": "2cd35dad65c8de972d8c93e5de0396b37533b939ec0c9b616c93c9e1cc0602b0",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0000_reference.png": {
+      "sha256": "7f39d805b93a384e7992accc96818e553e5e740142f6f5dcd25b5bfbeaa49d2a",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0000_prediction.png": {
+      "sha256": "a1ab3b6ebf36975cc6ec8130a2e879d7d1c2f72d1e10c6d33963a27d9919b274",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0001_rgb.png": {
+      "sha256": "cacc129f6515d44e91cd6ac875087be40495eab431fcda08d12f44292dbd9713",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0001_reference.png": {
+      "sha256": "bc76e44322399fe7c6d561754078a09ef36383ca25394c7717ba6959bca16228",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0001_prediction.png": {
+      "sha256": "9c6944d343166b59da79dcecc8fc6c1baf210482a292a26d390d95b251d964f6",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0002_rgb.png": {
+      "sha256": "d7f6c8b2efdd799d34810c83597b458a8d186ec283dd76fb792e26816b3f50ef",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0002_reference.png": {
+      "sha256": "452d4f2ec2f5e767905d3ef4c95fa8ea9e6042a4bf0655300b08e36f1f36a697",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0002_prediction.png": {
+      "sha256": "8c3f6379b1ca6b58912b2006a88aa93a5a1da50c4ae6b9380f477fd805ea709e",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0034_rgb.png": {
+      "sha256": "da8f8aa3422235248d06a9d1eb304bfa6f849ec8897eee74e03282ed32e80beb",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0034_reference.png": {
+      "sha256": "da8f8aa3422235248d06a9d1eb304bfa6f849ec8897eee74e03282ed32e80beb",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0034_prediction.png": {
+      "sha256": "ab5e4cadb96bb0cbe6d68a5b958f38927b567640fcd56a6dfe04b03caa942f5b",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0012_rgb.png": {
+      "sha256": "ca3b37716150c027b3e506b155c59c45f67a69363df0eaa13a2200e0cd851571",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0012_reference.png": {
+      "sha256": "ca3b37716150c027b3e506b155c59c45f67a69363df0eaa13a2200e0cd851571",
+      "size": [
+        160,
+        160
+      ]
+    },
+    "case_0012_prediction.png": {
+      "sha256": "05494786c3af4601a30a0a459fe8063413b611150f6466572c412eac33bc3b37",
+      "size": [
+        160,
+        160
+      ]
+    }
+  },
+  "dataJsSha256": "561cb2f2d19b292228e595bea5fe559e1197cea16babbce882b4e73f0aaaaa1c",
+  "pixelChecks": {
+    "volusiaMaskPixels": 1075,
+    "selectedDisplayValidPixels": [
+      4900,
+      4814,
+      4854,
+      4900,
+      4793
+    ],
+    "allPanelsAligned": true
+  },
+  "viewerLinkUpdate": "2026-10-02: links select the checked-in R5 sample, including all five Friday model scenes; saved images and native counts unchanged."
+}

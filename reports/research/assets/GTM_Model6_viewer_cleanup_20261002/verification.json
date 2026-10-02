@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-02",
+  "scope": "viewer cleanup and portable review; no model training or imagery transfer",
+  "package_checks": {
+    "checks": [
+      {
+        "case": "declared assets only",
+        "exit_code": 0,
+        "expected": 0,
+        "passed": true
+      },
+      {
+        "case": "fresh extraction on repeat",
+        "exit_code": 0,
+        "expected": 0,
+        "passed": true
+      },
+      {
+        "case": "traversal",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "absolute",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "backslash",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "drive",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "manifest collision",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "missing panel",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "duplicate panel",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "missing required stylesheet",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      },
+      {
+        "case": "linked required stylesheet",
+        "exit_code": 1,
+        "expected": "nonzero",
+        "passed": true
+      }
+    ],
+    "passed": 11,
+    "symlink": "passed",
+    "verified_payload_files": 26,
+    "fresh_extraction": "output\\viewer_cleanup_20261002\\package_e2e_final\\verified_extract_q_0zmfgb",
+    "old_extraction_preserved": true,
+    "unchanged_baseline_files": 52,
+    "metadata_only_changes": [
+      "GTM_Viewer/friday_20261002/assets/data.js",
+      "GTM_Viewer/friday_20261002/verification.json",
+      "GTM_Viewer/portable_bundles/GTM_Model6_mapper_r5_portable/experiment.json"
+    ],
+    "fresh_checkout": "output\\viewer_cleanup_20261002\\fresh_checkout_final",
+    "no_training_or_satellite_transfer": true
+  },
+  "http_checks": {
+    "server": "http://127.0.0.1:8768/",
+    "local_run_bundles": 0,
+    "registry_warnings": [],
+    "portable_experiments": [
+      "GTM_Model0_capstone_archive_portable",
+      "GTM_Model6_emit_evidence_portable",
+      "GTM_Model6_mapper_r5_portable"
+    ],
+    "portable_assets_checked": 47,
+    "intake_images_checked": 5,
+    "friday_payload_hashes_checked": 26,
+    "pdf_sha256": "afef870a108ab66a01397ae67f250a2d9dab75df423a127e1963059566611df0",
+    "result": "passed"
+  },
+  "browser_cases": [
+    {
+      "images": [
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        }
+      ],
+      "link": "../index.html?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "overflow": false,
+      "title": "Localized result"
+    },
+    {
+      "images": [
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        }
+      ],
+      "link": "../index.html?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d#compare",
+      "overflow": false,
+      "title": "Missed plume"
+    },
+    {
+      "images": [
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        }
+      ],
+      "link": "../index.html?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_35027778-4dc9-494b-b876-fb8391c69a61#compare",
+      "overflow": false,
+      "title": "Partial result"
+    },
+    {
+      "images": [
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        }
+      ],
+      "link": "../index.html?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89#compare",
+      "overflow": false,
+      "title": "False alarm 869"
+    },
+    {
+      "images": [
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        },
+        {
+          "complete": true,
+          "width": 160
+        }
+      ],
+      "link": "../index.html?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_b2453f15-531e-4377-8576-f46fbd2234f7#compare",
+      "overflow": false,
+      "title": "False alarm 717"
+    }
+  ],
+  "final_package": {
+    "zip": "output\\friday_20261002\\GTM_Model6_Friday_review_20261002.zip",
+    "bytes": 2481059,
+    "sha256": "2cd2ea3c2b611e5cf1696a0975df32ee2c49ec7bd9aa0770255f47b74b9ddfb4",
+    "files_verified": 26,
+    "extracted_for_browser_check": "output\\friday_20261002\\verified_extract_2wypakhy",
+    "cases": 6,
+    "no_training_or_satellite_transfer": true
+  },
+  "browser_additional_checks": [
+    "Volusia input view renders its five saved images; prediction explicitly unavailable",
+    "All five R5 cases load three image panels with no horizontal page overflow",
+    "Zoom applies the same scale(1.25) to all three panels; reset restores scale(1)",
+    "False alarm 717 link selects the intended scene and displays 717 native false positives",
+    "Team comparison renders original archive and portable R5 on a copy with no local run bundles",
+    "Intake Sentinel/EMIT switch changes the selected background; browser reports no script error"
+  ],
+  "screenshot_sha256": "8bfbdbcbd5a7d1ea07ffdb7f502723b4e0674e62df2594fb8b6bbf342fb89c73"
+}

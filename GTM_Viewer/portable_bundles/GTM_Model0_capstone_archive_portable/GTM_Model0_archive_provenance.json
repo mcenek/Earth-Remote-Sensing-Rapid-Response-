@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "historical_rendered_prediction",
+  "source": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\ERSRR_Website\\Predictions\\testprediction.tif",
+  "source_git_path": "ERSRR_Website/Predictions/testprediction.tif",
+  "source_git_blob": "ff471819d0c6240ee5343bc78d63b3bf07cdd882",
+  "first_commit": "ffbd96f41f9fae454bf21bc8536a9c3e05711321",
+  "archive_date": "2026-03-27",
+  "acquisition_date": null,
+  "source_sha256": "ed9edfdeb85046e240cdc60ee222d0a125651a9ee5ed2c7ec0ec7be12a7f18a2",
+  "raster": {
+    "shape": [
+      1450,
+      2018
+    ],
+    "crs": "EPSG:3857",
+    "affine": [
+      28.54570936075972,
+      0.0,
+      -12993768.841545373,
+      0.0,
+      -28.54570936075972,
+      5726561.705994328
+    ],
+    "bounds": [
+      -12993768.841545373,
+      5685170.427421226,
+      -12936163.60005536,
+      5726561.705994328
+    ],
+    "bounds_wgs84": [
+      -116.72501148676217,
+      45.402874719375156,
+      -116.20753479800341,
+      45.66333576617356
+    ]
+  },
+  "checkpoint_run_identity": "not recorded",
+  "raw_probability_available": false,
+  "matched_reference_available": false,
+  "notes": "Authentic original-team output committed March 27, 2026; acquisition date is unknown. Saved red RGBA visualization only, not raw probabilities or methane concentration. Contemporary rendering code used a 0.30 display cutoff; the saved run has no checkpoint receipt. The later April checkpoint is not attributed to this older result. Matching Sentinel input and methane ground truth are unverified. No accuracy or superiority comparison with Model6 can be calculated from this image.",
+  "unpaired_neighbor": {
+    "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\ERSRR_Website\\temp_s2.tif",
+    "sha256": "1b3625725dfc096b303eb14732082119426b99a53c45b29e571ef123c0edb9c7",
+    "crs": "EPSG:32611",
+    "shape": [
+      968,
+      1357
+    ],
+    "bounds": [
+      537360.0,
+      5032280.0,
+      564500.0,
+      5051640.0
+    ],
+    "bounds_wgs84": [
+      -116.52228434570996,
+      45.441066749075134,
+      -116.17272813290859,
+      45.61730014235853
+    ],
+    "disposition": "Not used as background: input pairing and date unverified"
+  },
+  "export_sha256": "429294bc49aeea47ac77217abf6f541603ded55dc15061515425ac6a6112a877",
+  "png_pixel_roundtrip_equal": true
+}

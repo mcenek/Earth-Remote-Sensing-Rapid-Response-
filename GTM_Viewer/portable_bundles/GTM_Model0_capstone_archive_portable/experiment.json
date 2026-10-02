@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "GTM_Model0_capstone_archive_portable",
+  "name": "Original capstone team | March 2026 archive | portable",
+  "lifecycle": "archived",
+  "status": "ARCHIVED ORIGINAL-TEAM OUTPUT | visual comparison only",
+  "description": "Recovered original-team red prediction overlay; distinct from our later U-Nets and Model6.",
+  "warning": "ARCHIVED RENDERING | fixed colors; no raw probabilities or matched ground truth",
+  "notes": "Authentic original-team output committed March 27, 2026; acquisition date is unknown. Saved red RGBA visualization only, not raw probabilities or methane concentration. Contemporary rendering code used a 0.30 display cutoff; the saved run has no checkpoint receipt. The later April checkpoint is not attributed to this older result. Matching Sentinel input and methane ground truth are unverified. No accuracy or superiority comparison with Model6 can be calculated from this image.",
+  "reportUrl": "GTM_Model0_archive_provenance.md",
+  "scenes": [
+    {
+      "id": "capstone_web_saved_20260327",
+      "name": "Original team | saved March 27, 2026",
+      "location": "United States | archive acquisition date unknown",
+      "date": null,
+      "bounds": [
+        [
+          45.402874719375156,
+          -116.72501148676217
+        ],
+        [
+          45.66333576617356,
+          -116.20753479800341
+        ]
+      ],
+      "outputKind": "rendered_archive",
+      "predictionImage": "GTM_Model0_original_team_overlay.png",
+      "predictionAvailable": true,
+      "predictionHash": "ed9edfdeb85046e240cdc60ee222d0a125651a9ee5ed2c7ec0ec7be12a7f18a2",
+      "source": "ERSRR_Website/Predictions/testprediction.tif | Git ff471819d0c6240ee5343bc78d63b3bf07cdd882",
+      "checkpointHash": "Saved run checkpoint unrecorded",
+      "resolution": "2018 x 1450 archived EPSG:3857 rendering",
+      "split": "Original team archive; training/test membership unknown",
+      "rgbNote": "Matching source imagery unverified",
+      "truthLabel": "No matched methane reference",
+      "truthNote": "No reference supplied for this saved run",
+      "notes": "Authentic original-team output committed March 27, 2026; acquisition date is unknown. Saved red RGBA visualization only, not raw probabilities or methane concentration. Contemporary rendering code used a 0.30 display cutoff; the saved run has no checkpoint receipt. The later April checkpoint is not attributed to this older result. Matching Sentinel input and methane ground truth are unverified. No accuracy or superiority comparison with Model6 can be calculated from this image."
+    }
+  ],
+  "sourceCommit": "ffbd96f41f9fae454bf21bc8536a9c3e05711321"
+}

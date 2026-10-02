@@ -1,0 +1,1401 @@
+{
+  "bounds": [
+    489440.0,
+    3222180.0,
+    493120.0,
+    3225500.0
+  ],
+  "crs": "EPSG:32617",
+  "rgb": "sentinel_rgb.png",
+  "retrieval": "mf.png",
+  "mask": "mask.png",
+  "location": {
+    "x": 490793.7398838752,
+    "y": 3222482.7464664225
+  },
+  "title": "Volusia landfill",
+  "offsetMinutes": 12.741833333333334,
+  "clearPercent": 98.6576741749607,
+  "fullPositive": "declared_positive.png",
+  "fullControl": "declared_control.png",
+  "retrievalRange": [
+    -0.6640294194221497,
+    0.7610442638397217
+  ],
+  "stretch": [
+    {
+      "band": "red",
+      "p2_dn": 210.0,
+      "p98_dn": 2076.0
+    },
+    {
+      "band": "green",
+      "p2_dn": 351.0,
+      "p98_dn": 1880.0
+    },
+    {
+      "band": "blue",
+      "p2_dn": 244.0,
+      "p98_dn": 1668.0
+    }
+  ],
+  "sourceSample": "EMIT_L1B_RAD_001_20250601T160231_2515211_020_Volusia_Solid_Waste_anagement_Division",
+  "sentinelId": "S2B_17RMN_20250601_0_L2A",
+  "display_shape": [
+    332,
+    368
+  ],
+  "display_spacing_m": 10,
+  "native_label_spacing_m": 60,
+  "native_positive_pixels": 1503,
+  "display_positive_pixels": 54108,
+  "ready_for_training": false,
+  "prediction": false,
+  "caveats": [
+    "No new model result.",
+    "RGB is raw DN stretched for display; scale/offset conflict remains.",
+    "Provider RGB is constant ones. Mask header nodata=0 leaves background validity unconfirmed.",
+    "Only RGB and SCL were acquired. NIR/SWIR/reference scene absent.",
+    "Timing passes 15 minutes but does not prove plume stationarity or spatial alignment.",
+    "39 historical US evaluation locations remain unresolved. Development inspection only."
+  ],
+  "acquisition": {
+    "sample": "EMIT_L1B_RAD_001_20250601T160231_2515211_020_Volusia_Solid_Waste_anagement_Division",
+    "sentinel_id": "S2B_17RMN_20250601_0_L2A",
+    "offset_minutes": 12.741833333333334,
+    "scope": "provider-mask-centered development context; not unbiased evaluation or fine-resolution ground truth",
+    "crop_rule": "full positive-mask bounding box plus listed location, 300 m margin, outward snapped to 20 m grid",
+    "bbox_projected": [
+      489440,
+      3222180,
+      493120,
+      3225500
+    ],
+    "crs": "EPSG:32617",
+    "budget_before": {
+      "limit_bytes": 104857600,
+      "charged_bytes": 86409350,
+      "received_bytes": 81947442,
+      "remaining_bytes": 18448250
+    },
+    "local_ceiling_bytes": 12582912,
+    "mode": "acquire-rgb",
+    "assets": {
+      "red": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B04.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Red - 10m",
+          "eo:bands": [
+            {
+              "name": "B04",
+              "common_name": "red",
+              "center_wavelength": 0.665,
+              "full_width_half_max": 0.038
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B04.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 3010359,
+          "crop_range_block_upper_bound": 13
+        },
+        "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\sentinel\\red.tif",
+        "shape": [
+          332,
+          368
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          489440.0,
+          0.0,
+          -10.0,
+          3225500.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "sha256": "359548212b73b36aa29bf6b54d978b1a11f8a2cc2475a95e0f236d9f77cfb5f4",
+        "raw_dn": true
+      },
+      "green": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B03.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Green - 10m",
+          "eo:bands": [
+            {
+              "name": "B03",
+              "common_name": "green",
+              "center_wavelength": 0.56,
+              "full_width_half_max": 0.045
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B03.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 2980934,
+          "crop_range_block_upper_bound": 12
+        },
+        "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\sentinel\\green.tif",
+        "shape": [
+          332,
+          368
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          489440.0,
+          0.0,
+          -10.0,
+          3225500.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "sha256": "269d82ad2ca767e78386ccf997d26bb5293ccfbe6f9033f893450ed8139527ad",
+        "raw_dn": true
+      },
+      "blue": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B02.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Blue - 10m",
+          "eo:bands": [
+            {
+              "name": "B02",
+              "common_name": "blue",
+              "center_wavelength": 0.49,
+              "full_width_half_max": 0.098
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B02.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 2930157,
+          "crop_range_block_upper_bound": 12
+        },
+        "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\sentinel\\blue.tif",
+        "shape": [
+          332,
+          368
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          489440.0,
+          0.0,
+          -10.0,
+          3225500.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "sha256": "6139dba6761e83da21f47dd9efd12cbf604de115188e7bf95b47a8da894b0fa9",
+        "raw_dn": true
+      }
+    },
+    "ready_for_training": false,
+    "status": "acquired_pending_visual_review",
+    "radiometry": "raw DN only; scale/offset metadata retained in receipt and not applied",
+    "preflight_sha256": "d5bde1c851783d8f76a8101cafd376526902972a5d0496d713899c3f34cdd039",
+    "budget_after": {
+      "limit_bytes": 104857600,
+      "charged_bytes": 98205830,
+      "received_bytes": 93743922,
+      "remaining_bytes": 6651770
+    }
+  },
+  "preflight": {
+    "sample": "EMIT_L1B_RAD_001_20250601T160231_2515211_020_Volusia_Solid_Waste_anagement_Division",
+    "sentinel_id": "S2B_17RMN_20250601_0_L2A",
+    "offset_minutes": 12.741833333333334,
+    "scope": "provider-mask-centered development context; not unbiased evaluation or fine-resolution ground truth",
+    "crop_rule": "full positive-mask bounding box plus listed location, 300 m margin, outward snapped to 20 m grid",
+    "bbox_projected": [
+      489440,
+      3222180,
+      493120,
+      3225500
+    ],
+    "crs": "EPSG:32617",
+    "budget_before": {
+      "limit_bytes": 104857600,
+      "charged_bytes": 86409350,
+      "received_bytes": 81947442,
+      "remaining_bytes": 18448250
+    },
+    "local_ceiling_bytes": 12582912,
+    "mode": "preflight",
+    "assets": {
+      "scl": {
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/SCL.tif",
+          "epsg": 32617,
+          "shape": [
+            5490,
+            5490
+          ],
+          "resolution_m": 20.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            399960.0,
+            0.0,
+            -20.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint8",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 54903,
+          "crop_range_block_upper_bound": 1
+        },
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/SCL.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Scene classification map (SCL)",
+          "gsd": 20,
+          "proj:shape": [
+            5490,
+            5490
+          ],
+          "proj:transform": [
+            20,
+            0,
+            399960,
+            0,
+            -20,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint8",
+              "spatial_resolution": 20
+            }
+          ],
+          "roles": [
+            "data"
+          ]
+        },
+        "path": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\sentinel\\scl.tif",
+        "shape": [
+          166,
+          184
+        ],
+        "transform": [
+          20.0,
+          0.0,
+          489440.0,
+          0.0,
+          -20.0,
+          3225500.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "sha256": "bc6207753c2485aefe5c09f4eeeb6421de8144855baf673836795086843862e8",
+        "raw_dn": true
+      },
+      "blue": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B02.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Blue - 10m",
+          "eo:bands": [
+            {
+              "name": "B02",
+              "common_name": "blue",
+              "center_wavelength": 0.49,
+              "full_width_half_max": 0.098
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B02.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 2930157,
+          "crop_range_block_upper_bound": 12
+        }
+      },
+      "green": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B03.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Green - 10m",
+          "eo:bands": [
+            {
+              "name": "B03",
+              "common_name": "green",
+              "center_wavelength": 0.56,
+              "full_width_half_max": 0.045
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B03.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 2980934,
+          "crop_range_block_upper_bound": 12
+        }
+      },
+      "red": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B04.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Red - 10m",
+          "eo:bands": [
+            {
+              "name": "B04",
+              "common_name": "red",
+              "center_wavelength": 0.665,
+              "full_width_half_max": 0.038
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B04.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 3010359,
+          "crop_range_block_upper_bound": 13
+        }
+      },
+      "nir": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B08.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "NIR 1 - 10m",
+          "eo:bands": [
+            {
+              "name": "B08",
+              "common_name": "nir",
+              "center_wavelength": 0.842,
+              "full_width_half_max": 0.145
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            399960,
+            0,
+            -10,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B08.tif",
+          "epsg": 32617,
+          "shape": [
+            10980,
+            10980
+          ],
+          "resolution_m": 10.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            399960.0,
+            0.0,
+            -10.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 3222933,
+          "crop_range_block_upper_bound": 13
+        }
+      },
+      "swir16": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B11.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "SWIR 1.6\u03bcm - 20m",
+          "eo:bands": [
+            {
+              "name": "B11",
+              "common_name": "swir16",
+              "center_wavelength": 1.61,
+              "full_width_half_max": 0.143
+            }
+          ],
+          "gsd": 20,
+          "proj:shape": [
+            5490,
+            5490
+          ],
+          "proj:transform": [
+            20,
+            0,
+            399960,
+            0,
+            -20,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 20,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B11.tif",
+          "epsg": 32617,
+          "shape": [
+            5490,
+            5490
+          ],
+          "resolution_m": 20.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            399960.0,
+            0.0,
+            -20.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 1618757,
+          "crop_range_block_upper_bound": 7
+        }
+      },
+      "swir22": {
+        "source": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B12.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "SWIR 2.2\u03bcm - 20m",
+          "eo:bands": [
+            {
+              "name": "B12",
+              "common_name": "swir22",
+              "center_wavelength": 2.19,
+              "full_width_half_max": 0.242
+            }
+          ],
+          "gsd": 20,
+          "proj:shape": [
+            5490,
+            5490
+          ],
+          "proj:transform": [
+            20,
+            0,
+            399960,
+            0,
+            -20,
+            3300000
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 20,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "probe": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/R/MN/2025/6/S2B_17RMN_20250601_0_L2A/B12.tif",
+          "epsg": 32617,
+          "shape": [
+            5490,
+            5490
+          ],
+          "resolution_m": 20.0,
+          "bounds": [
+            399960.0,
+            3190200.0,
+            509760.0,
+            3300000.0
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            399960.0,
+            0.0,
+            -20.0,
+            3300000.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dtype": "uint16",
+          "tiled": true,
+          "crop_compressed_tile_bytes": 799726,
+          "crop_range_block_upper_bound": 4
+        }
+      }
+    },
+    "ready_for_training": false,
+    "status": "preflight_complete",
+    "radiometry": "raw DN only; scale/offset metadata retained in receipt and not applied",
+    "scl_counts": {
+      "2": 61,
+      "4": 24548,
+      "5": 5167,
+      "6": 419,
+      "7": 342,
+      "8": 7
+    },
+    "clear_fraction": 0.9865767417496071,
+    "positive_area_clear_fraction": 0.9878021734309159,
+    "spectral_upper_bound_bytes": 15990784,
+    "rgb_upper_bound_bytes": 9699328,
+    "budget_after": {
+      "limit_bytes": 104857600,
+      "charged_bytes": 88506502,
+      "received_bytes": 84044594,
+      "remaining_bytes": 16351098
+    }
+  },
+  "native_review": {
+    "scope": "provider training observations and annotations; no model prediction",
+    "mask_policy": "Raw 0/1 codes preserved. Header nodata=0 conflicts with background encoding. Zero is unannotated, not a verified negative.",
+    "retrieval_units": "No physical units declared in downloaded rasters; show stored values only.",
+    "samples": [
+      {
+        "id": "EMIT_L1B_RAD_001_20250601T160231_2515211_020_Volusia_Solid_Waste_anagement_Division",
+        "location": "Volusia Solid Waste anagement Division",
+        "role": "declared_positive",
+        "declared_isplume": "True",
+        "sentinel_matches": [
+          {
+            "id": "S2B_17RMN_20250601_0_L2A",
+            "datetime": "2025-06-01T16:15:15.510000Z",
+            "offset_minutes": 12.741833333333334,
+            "cloud_cover": 19.27122
+          }
+        ],
+        "rasters": {
+          "mag1c": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32617",
+            "transform": [
+              60.0,
+              0.0,
+              483088.5916606223,
+              0.0,
+              -60.0,
+              3230160.2366293757,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              483088.5916606223,
+              3214800.2366293757,
+              498448.5916606223,
+              3230160.2366293757
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": -9999.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "mag1c"
+            ],
+            "min": 0.0,
+            "max": 0.7371026277542114,
+            "sha256": "cf8c29d7c67415c2dc27963f3bae25e7218fd79783a12f63a05a4d38b151764a"
+          },
+          "mf": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32617",
+            "transform": [
+              60.0,
+              0.0,
+              483088.5916606223,
+              0.0,
+              -60.0,
+              3230160.2366293757,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              483088.5916606223,
+              3214800.2366293757,
+              498448.5916606223,
+              3230160.2366293757
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": -9999.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "mf"
+            ],
+            "min": -0.6640294194221497,
+            "max": 0.7610442638397217,
+            "sha256": "28e6ece671d63dce8fbd6db09063c9b23aa947be6bdc36c05364243e6a64985f"
+          },
+          "plumemask": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "uint8",
+            "crs": "EPSG:32617",
+            "transform": [
+              60.0,
+              0.0,
+              483088.5916606223,
+              0.0,
+              -60.0,
+              3230160.2366293757,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              483088.5916606223,
+              3214800.2366293757,
+              498448.5916606223,
+              3230160.2366293757
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": 0.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "plumemask"
+            ],
+            "min": 0.0,
+            "max": 1.0,
+            "sha256": "0241a48b335ec1af9bca947117997f90a1dbec9c564d6103a6d94d00504fff1c"
+          },
+          "rgb": {
+            "shape": [
+              4,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32617",
+            "transform": [
+              60.0,
+              0.0,
+              483088.5916606223,
+              0.0,
+              -60.0,
+              3230160.2366293757,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              483088.5916606223,
+              3214800.2366293757,
+              498448.5916606223,
+              3230160.2366293757
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": 0.0,
+            "units": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "descriptions": [
+              "red",
+              "blue",
+              "green",
+              "valid_mask"
+            ],
+            "min": 1.0,
+            "max": 1.0,
+            "sha256": "ca53854b8b808bea165cf2cab861bd93f6d3409c91e098baae249e5e9567f1c9"
+          },
+          "wmf": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32617",
+            "transform": [
+              60.0,
+              0.0,
+              483088.5916606223,
+              0.0,
+              -60.0,
+              3230160.2366293757,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              483088.5916606223,
+              3214800.2366293757,
+              498448.5916606223,
+              3230160.2366293757
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": -9999.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "wmf"
+            ],
+            "min": -0.4279159605503082,
+            "max": 0.7065752148628235,
+            "sha256": "7c9fddd42eff0bf69fe471aaa2e0e749c703c4b85925f195e9ce6510cf43c449"
+          }
+        },
+        "all_native_grids_equal": true,
+        "source_coordinate_inside": true,
+        "location_pixel_col_row": [
+          128.41913705421484,
+          127.95816938255302
+        ],
+        "positive_pixels": 1503,
+        "total_pixels": 65536,
+        "positive_fraction": 0.0229339599609375,
+        "positive_bbox_projected": [
+          489748.5916606223,
+          3222540.2366293757,
+          492808.5916606223,
+          3225180.2366293757
+        ],
+        "positive_touches_edge": false,
+        "rgb_constant": true,
+        "rgb_status": "unavailable: constant arrays",
+        "mask_zero_is_confirmed_negative": false,
+        "ready_for_training": false,
+        "preview": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\review\\declared_positive.png"
+      },
+      {
+        "id": "EMIT_L1B_RAD_001_20250202T163833_2503311_030_Black_Oak_Landfill",
+        "location": "Black Oak Landfill",
+        "role": "declared_control",
+        "declared_isplume": "False",
+        "sentinel_matches": [],
+        "rasters": {
+          "mag1c": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32615",
+            "transform": [
+              60.0,
+              0.0,
+              540223.0348462753,
+              0.0,
+              -60.0,
+              4129501.6383060385,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              540223.0348462753,
+              4114141.6383060385,
+              555583.0348462753,
+              4129501.6383060385
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": -9999.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "mag1c"
+            ],
+            "min": 0.0,
+            "max": 0.1797839254140854,
+            "sha256": "bdf329aa81d3d13b4bd96c7568c1b24b631cc4e8fe944526227de7f7e7a708db"
+          },
+          "mf": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32615",
+            "transform": [
+              60.0,
+              0.0,
+              540223.0348462753,
+              0.0,
+              -60.0,
+              4129501.6383060385,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              540223.0348462753,
+              4114141.6383060385,
+              555583.0348462753,
+              4129501.6383060385
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": -9999.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "mf"
+            ],
+            "min": -0.2304486781358719,
+            "max": 0.16744042932987213,
+            "sha256": "b56e9752ba7dc6d0b7379fd0efe18d9665ff303bfdfde9afa4718f0f81cac851"
+          },
+          "plumemask": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "int8",
+            "crs": "EPSG:32615",
+            "transform": [
+              60.0,
+              0.0,
+              540223.0348462753,
+              0.0,
+              -60.0,
+              4129501.6383060385,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              540223.0348462753,
+              4114141.6383060385,
+              555583.0348462753,
+              4129501.6383060385
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": 0.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "plumemask"
+            ],
+            "min": 0.0,
+            "max": 0.0,
+            "sha256": "8f58d734e0252bcd1c074d4e2f321c14bcc2fb154a61f618641143213acdc726"
+          },
+          "rgb": {
+            "shape": [
+              4,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32615",
+            "transform": [
+              60.0,
+              0.0,
+              540223.0348462753,
+              0.0,
+              -60.0,
+              4129501.6383060385,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              540223.0348462753,
+              4114141.6383060385,
+              555583.0348462753,
+              4129501.6383060385
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": 0.0,
+            "units": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "descriptions": [
+              "red",
+              "blue",
+              "green",
+              "valid_mask"
+            ],
+            "min": 1.0,
+            "max": 1.0,
+            "sha256": "dc3422af55878c433bd905f6371a04d8e4718fc14d478d0d17cf029944408db2"
+          },
+          "wmf": {
+            "shape": [
+              1,
+              256,
+              256
+            ],
+            "dtype": "float32",
+            "crs": "EPSG:32615",
+            "transform": [
+              60.0,
+              0.0,
+              540223.0348462753,
+              0.0,
+              -60.0,
+              4129501.6383060385,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bounds": [
+              540223.0348462753,
+              4114141.6383060385,
+              555583.0348462753,
+              4129501.6383060385
+            ],
+            "resolution_m": [
+              60.0,
+              60.0
+            ],
+            "nodata": -9999.0,
+            "units": [
+              null
+            ],
+            "descriptions": [
+              "wmf"
+            ],
+            "min": -0.1811496764421463,
+            "max": 0.21256476640701294,
+            "sha256": "544f549f47a61320fba0a025a0d7178d474f5a2999e3af484a06464f8ceaa4fb"
+          }
+        },
+        "all_native_grids_equal": true,
+        "source_coordinate_inside": true,
+        "location_pixel_col_row": [
+          128.4741577456898,
+          127.60076710452267
+        ],
+        "positive_pixels": 0,
+        "total_pixels": 65536,
+        "positive_fraction": 0.0,
+        "positive_bbox_projected": null,
+        "positive_touches_edge": false,
+        "rgb_constant": true,
+        "rgb_status": "unavailable: constant arrays",
+        "mask_zero_is_confirmed_negative": false,
+        "ready_for_training": false,
+        "preview": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\outputs\\GTM_Model0_hf_pilot_20260925\\emit_followup\\review\\declared_control.png"
+      }
+    ]
+  },
+  "assets_sha256": {
+    "declared_control.png": "d097223fc7662e4a391f76a62f128e727a8d07b9c8b12389e6800616ea7fa3ca",
+    "declared_positive.png": "63f576c03ac83733f9140ae72af99736768bf3846f736cd290476f8a36dc9c23",
+    "mask.png": "04a11bd0010824fb243c1dcde902a99052b64da6ff17977d2e104dbeb561a4d9",
+    "mf.png": "8861bd9cbc0220859d5cffe05f2185745f0d2267bbe83010a40b7f9ff23bc989",
+    "paired_review.png": "caf578be407147a3e91dd569b6047cb57de72eca9c07728b60e3b3e5edbf6b58",
+    "sentinel_rgb.png": "098a4c1c0d9d863ec1ee0de587c88932f2ab1e4c347ddfee8f7b6c3e6b3be4cc"
+  }
+}

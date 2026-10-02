@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f1e9">
+  <meta name="description" content="Offline research review of GTM Model6 evidence, architecture, and Friday meeting decisions.">
+  <title>GTM Model6 | Friday research review</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="GTM Friday review home">GTM <span>/ research review</span></a>
+    <div class="top-actions">
+      <span class="offline"><span aria-hidden="true"></span> OFFLINE REVIEW</span>
+      <a id="brief-link" class="top-link" href="GTM_Model6_Friday_brief_20261002.pdf" download>Download brief <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">MODEL6 / FRIDAY RESEARCH REVIEW <span id="meeting-date"></span></p>
+        <h1 id="page-title">Visual evidence, then a decision.</h1>
+        <p id="summary" class="summary">Loading the offline research bundle.</p>
+      </div>
+      <div class="intro-actions">
+        <a href="#decisions" class="text-link">Meeting decisions <span aria-hidden="true">↘</span></a>
+        <span class="build-date" id="build-date"></span>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading workspace-heading">
+        <div>
+          <p class="eyebrow">01 / EVIDENCE DESK</p>
+          <h2 id="workspace-title">Image review</h2>
+        </div>
+        <div class="workspace-tools">
+          <span class="keyboard-hint">← → to change case</span>
+          <div class="zoom-tools" role="group" aria-label="Linked image zoom">
+            <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+            <output id="zoom-level" aria-live="off">100%</output>
+            <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" id="zoom-reset" class="reset-button">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="case-bar">
+        <div class="case-list" id="case-list" role="group" aria-label="Evidence cases"></div>
+        <div class="case-arrows" role="group" aria-label="Case navigation">
+          <button type="button" id="case-prev" aria-label="Previous case">←</button>
+          <button type="button" id="case-next" aria-label="Next case">→</button>
+        </div>
+      </div>
+      <div class="case-context">
+        <div class="case-heading">
+          <span id="case-kind" class="case-kind"></span>
+          <h3 id="case-title"></h3>
+          <span id="case-date" class="case-date"></span>
+        </div>
+        <p id="case-description"></p>
+      </div>
+      <div class="panel-grid" id="panel-grid" aria-label="Aligned case images"></div>
+      <div class="under-workspace">
+        <div class="case-lesson"><span class="field-label">READ THIS CASE AS</span><p id="case-lesson"></p></div>
+        <div class="case-details"><div id="case-metrics" class="case-metrics"></div><a id="full-viewer" href="../index.html" target="_blank" rel="noopener">Open original viewer <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <p id="prediction-notice" class="prediction-notice" hidden></p>
+      <div id="load-error" class="load-error" role="alert" hidden>The offline review data is unavailable. Keep <code>assets/data.js</code> beside this page and reopen the file.</div>
+    </section>
+
+    <section class="architecture" id="architecture" aria-labelledby="architecture-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">02 / SYSTEM DESIGN</p><h2 id="architecture-title">Model6 architecture</h2></div>
+        <a id="intake-link" class="text-link" href="../GTM_Model6_emit_2025_intake.html" target="_blank" rel="noopener">Open intake view <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="architecture-layout">
+        <figure class="architecture-figure"><a href="assets/GTM_Model6_architecture.svg" target="_blank" rel="noopener" aria-label="Open the full-size architecture diagram"><img id="architecture-image" alt="GTM Model6 architecture diagram"></a><figcaption id="architecture-caption"></figcaption></figure>
+        <div class="plan">
+          <span class="field-label">NEXT RESEARCH STEPS</span>
+          <div id="next-steps"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="decisions" id="decisions" aria-labelledby="decisions-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">03 / FRIDAY MEETING</p><h2 id="decisions-title">Decisions to make</h2></div>
+        <span class="section-aside">Use the evidence above to settle scope and sequence.</span>
+      </div>
+      <ol id="decision-list"></ol>
+    </section>
+
+    <footer><span>GTM Model6 · local research review</span><a href="#top">Back to top ↑</a></footer>
+  </main>
+  <script src="assets/data.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>

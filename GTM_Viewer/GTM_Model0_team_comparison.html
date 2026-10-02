@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capstone archive vs Model6 | GTM</title>
+  <meta name="description" content="Side-by-side visual inspection of an archived capstone overlay and current Model6 scene evidence, with provenance limits shown." />
+  <link rel="stylesheet" href="assets/leaflet.css">
+  <link rel="stylesheet" href="GTM_Model0_team_comparison.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <a class="brand" href="index.html">GTM <span>/ comparison</span></a>
+      <p class="eyebrow">LOCAL ARCHIVE REVIEW</p>
+    </div>
+    <a class="full-viewer" id="archive-viewer-link" href="index.html">Open archived experiment in full viewer ↗</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow">TWO SAVED OUTPUTS</p>
+        <h1>Capstone archive and Model6</h1>
+        <p class="lede">Inspect the archived team overlay beside a selected Model6 plume scene.</p>
+      </div>
+      <label class="context-toggle"><input id="map-context" type="checkbox"> Optional online map context</label>
+    </section>
+
+    <aside class="caution" role="note">
+      <strong>Visual comparison only.</strong> These are different scenes. The capstone archive has no raw probabilities, source RGB, matched reference, or shared native grid, so this page cannot rank the models. The archive label date is the saved commit date, not the image acquisition date.
+    </aside>
+
+    <section class="panels" aria-label="Model output comparison">
+      <article class="panel archive-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">ORIGINAL CAPSTONE TEAM · ARCHIVE</p>
+            <h2 id="archive-title">Archived prediction overlay</h2>
+            <p class="subhead" id="archive-subtitle">Loading the committed RGBA overlay…</p>
+          </div>
+          <span class="badge historical">FIXED RENDERING</span>
+        </div>
+        <div class="map-frame">
+          <div id="archive-map" class="map" aria-label="Archived prediction overlay on neutral map context"></div>
+          <div id="archive-state" class="map-state" role="status">Loading archive…</div>
+        </div>
+        <div class="legend"><span><i class="red-swatch"></i>Saved red RGBA overlay</span><span>Background imagery unavailable; map tiles are context only</span></div>
+        <details class="provenance">
+          <summary>Archive provenance and limits</summary>
+          <div id="archive-provenance" class="provenance-body"></div>
+        </details>
+      </article>
+
+      <article class="panel model-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">CURRENT MODEL6 · SAVED SCENE</p>
+            <h2>Model6 plume evidence</h2>
+            <p class="subhead">Orange is the prediction at its saved cutoff; cyan outlines the available reference.</p>
+          </div>
+          <span id="run-status" class="badge">Loading run status…</span>
+        </div>
+        <div class="selectors">
+          <label>Experiment<select id="experiment-select" disabled><option>Loading experiments…</option></select></label>
+          <label>Scene<select id="scene-select" disabled><option>Select an experiment first</option></select></label>
+          <a class="full-viewer" id="model-viewer-link" href="index.html">Open selected scene in full viewer ↗</a>
+        </div>
+        <div class="map-frame model-frame">
+          <div id="model-map" class="map" aria-label="Model6 Sentinel input with saved prediction and reference outline"></div>
+          <div id="model-state" class="map-state" role="status">Loading saved Model6 scenes…</div>
+        </div>
+        <div class="legend"><span><i class="orange-swatch"></i>Prediction ≥ saved threshold</span><span><i class="cyan-swatch"></i>Reference boundary</span><span>Only supported pixels are drawn</span><span>RGB is cached scene input; online tiles are context only</span></div>
+        <section class="scene-meta">
+          <div>
+            <h3 id="scene-heading">Select a scene</h3>
+            <p id="scene-notes" class="scene-notes">The selected Model6 scene will appear here.</p>
+          </div>
+          <div id="scene-metrics" class="metrics" aria-live="polite"></div>
+        </section>
+      </article>
+    </section>
+
+    <footer>
+      <a href="index.html">← Return to the full local experiment viewer</a>
+      <span>Online map tiles load only after you turn on the optional context switch.</span>
+    </footer>
+  </main>
+  <script src="assets/leaflet.js"></script>
+  <script src="GTM_Model0_team_comparison.js"></script>
+</body>
+</html>

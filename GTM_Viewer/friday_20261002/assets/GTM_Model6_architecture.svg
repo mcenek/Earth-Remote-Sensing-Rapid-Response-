@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="840" viewBox="0 0 1320 840" role="img" aria-labelledby="title desc">
+<title id="title">Martin's proposed multi-scale methane mapper</title>
+<desc id="desc">Sentinel target and reference images feed four independently trained models using 16, 32, 64 and 128 pixel context windows. They predict the same central area. A later combining model learns from predictions made at sites excluded from base-model training. EMIT supervises training at its native resolution. Current work tested the four branches and a fixed average; learned fusion, quantitative reconstruction and emission origin are not demonstrated.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 1L8 5L0 9" fill="none" stroke="#557062" stroke-width="1.6"/></marker><style>text{font-family:'Segoe UI',Arial,sans-serif;fill:#22362b}.title{font-size:32px;font-weight:700}.head{font-size:21px;font-weight:650}.copy{font-size:17px}.small{font-size:15px}.tag{font-size:14px;letter-spacing:1px;font-weight:700}.box{fill:#fff;stroke:#bccac0;stroke-width:1.5}.later{fill:#f4f5f0;stroke:#91a797;stroke-width:1.5;stroke-dasharray:7 5}.line{fill:none;stroke:#557062;stroke-width:2;marker-end:url(#arrow)}</style></defs>
+<rect width="1320" height="840" fill="#f6f5ef"/>
+<text x="40" y="52" class="title">Martin's multi-scale model</text>
+<text x="40" y="82" class="copy">Nationwide goal: use Sentinel imagery to flag possible methane plumes for review.</text>
+<rect x="40" y="112" width="1240" height="48" rx="7" fill="#e1eadf"/>
+<text x="60" y="141" class="copy">Tested so far: four branches + a fixed average. Proposed next: a separately trained combining model.</text>
+
+<rect x="40" y="274" width="236" height="151" rx="9" class="box"/>
+<text x="58" y="305" class="tag">INPUT AT INFERENCE</text>
+<text x="58" y="340" class="head">Sentinel-2 imagery</text>
+<text x="58" y="368" class="copy">Target + reference date</text>
+<text x="58" y="395" class="small">Verified bands, units and masks</text>
+<path d="M276 349H313M313 228V486" fill="none" stroke="#557062" stroke-width="2"/>
+<path d="M313 228H350" class="line"/><path d="M313 314H350" class="line"/><path d="M313 400H350" class="line"/><path d="M313 486H350" class="line"/>
+
+<text x="355" y="186" class="tag">TRAIN INDEPENDENTLY</text>
+<g class="box"><rect x="350" y="198" width="238" height="60" rx="8"/><rect x="350" y="284" width="238" height="60" rx="8"/><rect x="350" y="370" width="238" height="60" rx="8"/><rect x="350" y="456" width="238" height="60" rx="8"/></g>
+<text x="370" y="236" class="head">16 x 16 context</text><text x="370" y="322" class="head">32 x 32 context</text><text x="370" y="408" class="head">64 x 64 context</text><text x="370" y="494" class="head">128 x 128 context</text>
+<text x="352" y="545" class="small">Different surrounding areas;</text><text x="352" y="568" class="small">same central 16 x 16 output.</text>
+<path d="M588 228H621V486H588M588 314H621M588 400H621" fill="none" stroke="#557062" stroke-width="2"/>
+<path d="M621 349H672" class="line"/>
+
+<rect x="672" y="254" width="268" height="199" rx="9" class="later"/>
+<text x="692" y="283" class="tag">NEXT EXPERIMENT</text>
+<text x="692" y="318" class="head">Learned combiner</text>
+<text x="692" y="349" class="copy">Learn when to trust each scale</text>
+<text x="692" y="380" class="small">Train on base-model predictions</text><text x="692" y="403" class="small">from excluded sites, not their</text><text x="692" y="426" class="small">own training examples.</text>
+<path d="M940 349H984" class="line"/>
+
+<rect x="984" y="238" width="296" height="221" rx="9" class="later"/>
+<text x="1004" y="270" class="tag">INTENDED OUTPUT</text>
+<text x="1004" y="303" class="head">Plume evidence map</text>
+<text x="1004" y="333" class="copy">Plume region + confidence</text>
+<text x="1004" y="367" class="head">Methane enhancement</text>
+<text x="1004" y="397" class="small">Only with verified measured targets;</text><text x="1004" y="420" class="small">fine detail needs separate validation.</text>
+<text x="1004" y="444" class="small">Not yet demonstrated</text>
+
+<rect x="40" y="612" width="565" height="175" rx="9" class="box"/>
+<text x="60" y="643" class="tag">TRAINING AND VALIDATION</text>
+<text x="60" y="675" class="copy">Split by site before making eight rotation / mirror views.</text>
+<text x="60" y="705" class="copy">EMIT supplies supervision; it is not needed for the US scan.</text>
+<text x="60" y="735" class="small">For quantitative reconstruction, compare predictions averaged to</text><text x="60" y="759" class="small">EMIT's native grid. Upsampling labels alone cannot prove finer detail.</text>
+<rect x="639" y="612" width="641" height="175" rx="9" class="later"/>
+<text x="661" y="643" class="tag">AFTER PLUME MAPPING WORKS</text>
+<text x="661" y="675" class="copy">Fit a Gaussian-like plume pattern with wind to suggest an origin.</text>
+<text x="661" y="705" class="copy">Check against independent source labels and report uncertainty.</text>
+<text x="661" y="735" class="small">CAFO and oil-facility matches are corroboration, not methane truth.</text><text x="661" y="759" class="small">TESSERA is a later comparison on the same independent splits.</text>
+<text x="40" y="820" class="small">Solid = available components or evaluation rules. Dashed = proposed capability. Existing R5 results failed the quality gate.</text>
+</svg>

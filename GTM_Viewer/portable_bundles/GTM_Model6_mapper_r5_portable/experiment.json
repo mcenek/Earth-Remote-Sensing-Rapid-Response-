@@ -360,6 +360,88 @@
         }
       ],
       "candidateCount": 1
+    },
+    {
+      "id": "MARS_b2453f15-531e-4377-8576-f46fbd2234f7",
+      "name": "MARS | Reviewed no plume | 2023-10-27 | bd2234f7",
+      "task": "plume_segmentation",
+      "location": "31.420, -103.181 | United States",
+      "date": "2023-10-27",
+      "dataset": "MARS",
+      "label": "NO_PLUME",
+      "positiveOnlyReference": false,
+      "bounds": [
+        [
+          31.410364230928913,
+          -103.19117609177265
+        ],
+        [
+          31.42869905629653,
+          -103.16979590398418
+        ]
+      ],
+      "rgb": "0012_rgb.png",
+      "truthImage": "0012_truth.png",
+      "predictionImage": "0012_prediction.png",
+      "probabilityImage": "0012_probability.png",
+      "grid": "0012_grid.json",
+      "predictionAvailable": true,
+      "decisionThreshold": 0.5,
+      "truthLabel": "MARS reviewed plume mask",
+      "truthNote": "MARS reviewed mask; scoring intersects clear Sentinel and actual prediction support",
+      "referenceDate": "2023-10-27",
+      "notes": "Reused development fold; scenes excluded from this fit, but not a fresh confirmation set. Displayed method: mean. Evaluation and display use actual context support. No EMIT quantitative upscaling or national source-detection claim. The report headline describes the mean; its table identifies branch scores.",
+      "predictionSupportBounds": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "source": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\Earth-Remote-Sensing-Rapid-Response-\\EarthRemoteSensingRapidResponse\\Data Collection\\s2_emit_pairs\\publication-v1\\external\\MARS-S2L\\data\\train_2023\\83\\28ec7452-3cb2-449a-854f-8e1973170e71_b2453f15-531e-4377-8576-f46fbd2234f7_s2.tif",
+      "checkpointHash": "39f2ca29688f90394cbe78c4521d158968f1901e3c1255e88900cac8457eccc4",
+      "predictionHash": "a1fd937aa9e12d9c1ace24618e8c99c25db0e6cb1e8e7f6d63f68aab03068147",
+      "split": "Held MARS partition 1; group US_745e5fcc83; reused development data",
+      "resolution": "200x200 source grid (10m sampling) / 160x160 EPSG:3857 display",
+      "nativeMetrics": {
+        "tp": 0,
+        "fp": 717,
+        "fn": 0,
+        "tn": 7027,
+        "iou": 0.0,
+        "dice": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "evaluated_pixels": 7744,
+        "source_valid_pixels": 39800,
+        "support_fraction": 0.1936,
+        "predicted_fraction": 0.09258780991735537,
+        "truth_fraction": 0.0,
+        "negative_activation": 0.09258780991735537
+      },
+      "candidatePoints": [
+        {
+          "lat": 31.423405750409106,
+          "lon": -103.18330498908138,
+          "score": 0.9618434309959412,
+          "pixels": 229,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 31.41858289128856,
+          "lon": -103.18034755044395,
+          "score": 0.8312772512435913,
+          "pixels": 113,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        },
+        {
+          "lat": 31.42243076911493,
+          "lon": -103.17816940409699,
+          "score": 0.732300341129303,
+          "pixels": 135,
+          "label": "Predicted plume hotspot; emission origin unverified"
+        }
+      ],
+      "candidateCount": 3
     }
   ],
   "metricScope": "reused_development_fold",

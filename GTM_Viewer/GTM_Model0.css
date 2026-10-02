@@ -23,5 +23,12 @@
 @media(prefers-reduced-motion:reduce){.scene,.workspace-actions button{transition:none}}
 @media(max-width:760px){body:not(.scene-browser-open) .sidebar #scenes{display:none}.sidebar .scene-browser-toggle{margin:0}}
 [hidden]{display:none!important}
+.rendered-archive .analysis,.rendered-archive .compare-legend,.rendered-archive .map-legend,
+.rendered-archive label:has(#prediction-mode),.rendered-archive label:has(#prediction-mode-compare){display:none}
+.rendered-archive .observation-panel,.rendered-archive .truth-panel{display:none}
+.rendered-archive .triple{grid-template-columns:1fr;grid-template-rows:min(60vh,560px)}
+.rendered-archive .triple .prediction-panel{grid-column:1;grid-row:1}
+.rendered-archive #prediction-map,.rendered-archive #main-map{background:#e6eeef}
+.rendered-archive label:has(#compare-pred) .pred{background:#d22929}
 
 @media(min-width:761px){.triple:not(.overlay-layout) .observation-panel{order:1}.triple:not(.overlay-layout) .prediction-panel{order:2}.triple:not(.overlay-layout) .truth-panel{order:3}}

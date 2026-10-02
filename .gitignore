@@ -40,6 +40,7 @@ Thumbs.db
 
 # Generated reports and local run outputs
 reports/dataset_audit/
+/output/
 outputs/
 logs/
 /tmp/

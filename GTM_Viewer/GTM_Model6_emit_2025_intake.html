@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f1e9">
+  <title>EMIT intake review | GTM Model6</title>
+  <link rel="stylesheet" href="assets/leaflet.css">
+  <link rel="stylesheet" href="GTM_Model6_emit_2025_intake.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="GTM viewer home">GTM <span>/ field review</span></a>
+    <div class="top-meta"><span class="status-dot"></span> DATA INTAKE · TRAINING SPLIT</div>
+  </header>
+
+  <main>
+    <section class="heading">
+      <div>
+        <p class="eyebrow">EMIT HYPERSPECTRAL · SENTINEL-2 L2A PAIR</p>
+        <h1 id="title">Volusia landfill</h1>
+        <p class="lede">A local review of one provider-declared positive training observation and its near-time Sentinel scene.</p>
+      </div>
+      <a class="viewer-link" href="index.html">Open experiment viewer <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="facts" aria-label="Observation details">
+      <div><span class="fact-label">EMIT date</span><strong id="date">2025-06-01</strong></div>
+      <div><span class="fact-label">Scene gap</span><strong><span id="offset">12.7</span> min</strong></div>
+      <div><span class="fact-label">Sentinel crop clear</span><strong><span id="clear">98.7</span>%</strong></div>
+      <div class="fact-note">Native EMIT reference: 60 m<br>Sentinel-2 display: 10 m RGB</div>
+    </section>
+
+    <section class="workspace" aria-label="Paired observation map and controls">
+      <div class="map-column">
+        <div class="map-toolbar">
+          <div class="layer-switch" role="group" aria-label="Map background">
+            <button type="button" id="show-rgb" class="selected" aria-pressed="true">Sentinel RGB</button>
+            <button type="button" id="show-mf" aria-pressed="false">EMIT retrieval</button>
+          </div>
+          <button type="button" id="reset-view" class="quiet-button">Reset extent</button>
+        </div>
+        <div class="map-frame">
+          <div id="intake-map" role="img" aria-label="Local image map of the Volusia landfill Sentinel-2 observation"></div>
+          <div class="map-stamp"><span id="map-stamp">SENTINEL-2 RGB</span><span>LOCAL GRID · METRES</span></div>
+        </div>
+        <div class="map-foot">
+          <label class="toggle"><input id="mask-toggle" type="checkbox" checked><span class="checkmark"></span> Provider mask boundary</label>
+          <label class="opacity-control" for="opacity">Mask opacity <input id="opacity" type="range" min="0.15" max="1" step="0.05" value="0.9"><output id="opacity-value">90%</output></label>
+          <div class="retrieval-legend"><i></i><span>Matched-filter retrieval <small id="range">relative display range</small></span></div>
+        </div>
+      </div>
+      <aside class="readout">
+        <p class="eyebrow">WHAT THIS VIEW SHOWS</p>
+        <h2>One paired scene</h2>
+        <p>Switch between the Sentinel image and the EMIT retrieval. The cyan outline uses the provider annotation's raster coordinates. The dot marks the listed facility, not a verified emission origin.</p>
+        <div class="boundary-note"><span class="note-mark">i</span><p>This is an intake review, not a model result or a scored experiment.</p></div>
+        <dl class="scene-meta">
+          <div><dt>Sentinel item</dt><dd id="scene-id">S2B_17RMN_20250601_0_L2A</dd></div>
+          <div><dt>Pair timing</dt><dd>12.7 minutes from EMIT</dd></div>
+          <div><dt>Image scale</dt><dd>10 m pixels · metric scale below</dd></div>
+        </dl>
+        <p class="scale-hint">The scale bar measures the local image grid. It does not indicate the detail available in the native 60 m EMIT reference.</p>
+      </aside>
+    </section>
+
+    <section class="limits" aria-labelledby="limits-title">
+      <div class="limits-title"><p class="eyebrow">READ BEFORE INTERPRETING</p><h2 id="limits-title">Evidence and limits</h2></div>
+      <ul>
+        <li>Annotation over the actual Sentinel image, not a prediction.</li>
+        <li>A finer display adds no measured detail to the native 60 m EMIT reference.</li>
+        <li>Sentinel RGB is percentile-stretched raw DN; radiometry is not approved.</li>
+        <li>Provider RGB files are constant ones. A negative mask of zeros does not verify methane-free conditions.</li>
+        <li>No new model was trained for this review.</li>
+      </ul>
+    </section>
+
+    <section class="source-figures" aria-label="Full native provider images">
+      <details>
+        <summary><span><b>Full native training examples</b><small>Previews generated from the original provider retrievals and masks</small></span><span class="chevron" aria-hidden="true">⌄</span></summary>
+        <div class="figure-grid">
+          <figure><a id="positive-link"><img id="full-positive" alt="Full native positive: retrievals and plume annotation"></a><figcaption><b>Volusia: declared positive</b><span>Click to inspect the full-size figure</span></figcaption></figure>
+          <figure><a id="control-link"><img id="full-control" alt="Full native control: retrievals and zero-valued mask"></a><figcaption><b>Black Oak: declared control</b><span>Click to inspect the full-size figure</span></figcaption></figure>
+        </div>
+      </details>
+    </section>
+
+    <footer><span>Saved intake receipt: September 25. Target B11/B12 were added September 30; see the Friday review for current readiness.</span><a id="receipt-link" href="portable_bundles/GTM_Model6_emit_2025_intake/review.json">Open original data receipt ↗</a></footer>
+    <p id="load-error" class="load-error" role="status" hidden>Review assets could not be loaded. Open this page through the local viewer so its bundle files are available.</p>
+  </main>
+  <script src="assets/leaflet.js"></script>
+  <script src="GTM_Model6_emit_2025_intake.js"></script>
+</body>
+</html>
