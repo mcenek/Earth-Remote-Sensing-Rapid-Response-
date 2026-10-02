@@ -16,9 +16,11 @@ Windows users can also run `GTM_Model0_OpenViewer.cmd`. The viewer runs at `http
 
 - **Friday visual review:** six saved cases, linked image comparison, architecture diagram and a four-page handout.
 - **Original team vs ours:** the original team's saved rendering beside Model6 examples. They are different scenes with different evidence, so this is a visual comparison, not an accuracy ranking.
-- **Experiment viewer:** map overlays, reference masks, saved predictions and native scores. Checked-in samples work on a fresh clone; complete local exports appear when present.
+- **Experiment viewer:** connected US map, acquisition timeline and linked image comparison, with reference masks, saved predictions and native scores. Checked-in samples work on a fresh clone; complete local exports appear automatically as they are published.
 
 See [viewer instructions](GTM_Viewer/README.md) for the page addresses, offline review and packaging command. The [R5 verification report](reports/research/GTM_Model6_followup_verification_2026-09-22.md) explains the failure cases behind the scores.
+
+For a backend machine, follow the [live viewer setup](docs/GTM_Model0_live_viewer.md). It uses the same Python server and saved result format; no frontend build is required.
 
 ## Research and code
 

@@ -1,13 +1,74 @@
 'use strict';
 const $=id=>document.getElementById(id), esc=v=>String(v??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const registry=window.GTM_DATA;let experiment,scene,grid=null,view='map',loadToken=0,syncing=false,profileRow=null,mapMode='geo';const maps={},layers={},markers=[],basemaps={},homeZoom={};
-function allowedAsset(value){if(!value)return null;if(typeof value!=='string')throw Error('Asset must be a string');if(/^data:image\/(png|jpeg|webp);base64,/.test(value))return value;if(/^[\w./-]+$/.test(value)&&!value.includes('..')&&!value.startsWith('/'))return value;throw Error('Assets must be local relative paths or embedded PNG/JPEG/WebP images');}
-function validateExperiment(e){if(!e||typeof e.id!=='string'||typeof e.name!=='string'||!Array.isArray(e.scenes))throw Error('Need experiment id, name and scenes');if(e.reportUrl)allowedAsset(e.reportUrl);if(e.scenes.length>1000)throw Error('Bundle exceeds 1,000 scenes');if(new Set(e.scenes.map(s=>s.id)).size!==e.scenes.length)throw Error('Duplicate scene IDs');for(const s of e.scenes){if(s.coordinateSystem==='pixel'){const size=s.imageSize||[32,32];s.bounds=[[0,0],[size[0],size[1]]];}if(typeof s.id!=='string'||!Array.isArray(s.bounds)||s.bounds.length!==2||s.bounds.some(b=>!Array.isArray(b)||b.length!==2||b.some(v=>!Number.isFinite(v)))||s.bounds[0][0]>=s.bounds[1][0]||s.bounds[0][1]>=s.bounds[1][1]||(s.coordinateSystem!=='pixel'&&s.bounds.some(b=>Math.abs(b[0])>85||Math.abs(b[1])>180)))throw Error('Invalid scene bounds');['rgb','emit','truthImage','predictionImage','disagreementImage','observedImage','coarseImage','residualImage','reference90Rgb','reference365Rgb'].forEach(k=>allowedAsset(s[k]));if(s.grid&&typeof s.grid==='string')allowedAsset(s.grid);if(s.grid&&typeof s.grid!=='string')validateGrid(s.grid);else if(s.grid&&!/^[\w./-]+\.json$/.test(s.grid))throw Error('Invalid grid path');}return e;}
+let gridRequest, gridLoading = false, gridError = '', renderGeneration = 0;
+let assetStates = new Map();
+const cursors = {};
+function updateCursors(latlng) {
+  for (const id of ['original-map', 'prediction-map', 'truth-map']) {
+    if (!cursors[id]) cursors[id] = L.marker(latlng, {interactive: false, keyboard: false,
+      icon: L.divIcon({className: 'shared-cursor', iconSize: [24, 24], iconAnchor: [12, 12]})}).addTo(maps[id]);
+    else cursors[id].setLatLng(latlng);
+  }
+}
+function clearCursors() {
+  for (const id of Object.keys(cursors)) { cursors[id].remove(); delete cursors[id]; }
+}
+
+function allowedAsset(value) {
+  if (!value) return null;
+  if (typeof value !== 'string') throw Error('Asset must be a string');
+  if (/^data:image\/(png|jpeg|webp);base64,/.test(value)) return value;
+  const decoded = decodeURIComponent(value);
+  if (!decoded.startsWith('/') && !/[\\:#?\x00-\x1f]/.test(decoded) &&
+      !decoded.split('/').some(part => !part || part === '.' || part === '..')) return value;
+  throw Error('Assets must be local relative paths or embedded PNG/JPEG/WebP images');
+}
+
+function assetUrl(value) {
+  const path = allowedAsset(value);
+  if (!path || path.startsWith('data:')) return path;
+  const url = new URL(path, document.baseURI);
+  if (experiment?.live?.revision) url.searchParams.set('v', experiment.live.revision);
+  return url.href;
+}
+
+function validateExperiment(e) {
+  if (!e || typeof e.id !== 'string' || typeof e.name !== 'string' || !Array.isArray(e.scenes))
+    throw Error('Need experiment id, name and scenes');
+  if (e.reportUrl) allowedAsset(e.reportUrl);
+  if (e.scenes.length > 1000) throw Error('Bundle exceeds 1,000 scenes');
+  const ids = new Set();
+  for (const s of e.scenes) {
+    if (!s || typeof s.id !== 'string' || typeof s.name !== 'string') throw Error('Invalid scene');
+    if (ids.has(s.id)) throw Error('Duplicate scene IDs');
+    ids.add(s.id);
+    if (s.coordinateSystem === 'pixel') {
+      const size = s.imageSize || [32, 32];
+      if (!Array.isArray(size) || size.length !== 2 || size.some(n => !Number.isInteger(n) || n < 1))
+        throw Error('Invalid image dimensions');
+      s.bounds = [[0, 0], size];
+    }
+    if (!Array.isArray(s.bounds) || s.bounds.length !== 2 ||
+        s.bounds.some(b => !Array.isArray(b) || b.length !== 2 || b.some(v => !Number.isFinite(v))) ||
+        s.bounds[0][0] >= s.bounds[1][0] || s.bounds[0][1] >= s.bounds[1][1] ||
+        (s.coordinateSystem !== 'pixel' && s.bounds.some(b => Math.abs(b[0]) > 85 || Math.abs(b[1]) > 180)))
+      throw Error('Invalid scene bounds');
+    for (const key of ['rgb', 'emit', 'truthImage', 'predictionImage', 'probabilityImage',
+      'disagreementImage', 'observedImage', 'coarseImage', 'residualImage', 'reference90Rgb', 'reference365Rgb'])
+      allowedAsset(s[key]);
+    if (typeof s.grid === 'string') {
+      allowedAsset(s.grid);
+      if (!s.grid.endsWith('.json')) throw Error('Invalid grid path');
+    } else if (s.grid) validateGrid(s.grid);
+  }
+  return e;
+}
 function validateGrid(g){const n=g.width*g.height;if(!Number.isInteger(g.width)||!Number.isInteger(g.height)||g.width<1||g.height<1||n<1||n>1048576)throw Error('Invalid display grid size');const reconstruction=g.task==='methane_reconstruction';const keys=reconstruction?['observed','coarse','prediction','residual','valid']:['probability','truth','valid'];for(const key of keys){if(g[key]&&(g[key].length!==n||g[key].some(v=>v!==null&&!Number.isFinite(v))))throw Error('Invalid '+key+' grid');}if(reconstruction){if(typeof g.units!=='string'||!g.units.trim())throw Error('Reconstruction grid requires explicit units');if(!g.observed&&!g.coarse&&!g.prediction&&!g.residual)throw Error('Reconstruction grid has no continuous layers');}if(g.probability?.some(v=>v!==null&&(v<0||v>1)))throw Error('Probability outside [0,1]');if(g.truth?.some(v=>v!==null&&v!==0&&v!==1))throw Error('Truth mask must be 0/1/null');if(g.valid?.some(v=>v!==0&&v!==1))throw Error('Validity mask must be 0/1');return g;}
 function hasPred(s){return !!(s.task==='methane_reconstruction'?(s.predictionAvailable||s.predictionImage||typeof s.grid==='object'&&s.grid.prediction):(s.predictionImage||s.predictionAvailable||typeof s.grid==='object'&&s.grid.probability));}function isReconstruction(){return scene?.task==='methane_reconstruction'||grid?.task==='methane_reconstruction';}function text(id,v){$(id).textContent=v??'—';}
-function initMap(id){const pixel=mapMode==='pixel';const m=L.map(id,{crs:pixel?L.CRS.Simple:L.CRS.EPSG3857,zoomControl:false,zoomSnap:0.25,zoomDelta:0.5,maxZoom:pixel?8:20,minZoom:pixel?-6:3}).setView(pixel?[16,16]:[39,-98],pixel?2:4);L.control.zoom({position:'topright'}).addTo(m);if(!pixel){L.control.scale({position:'bottomleft',imperial:false}).addTo(m);basemaps[id]=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Geographic context © Esri and contributors'});if($('online-basemap').checked)basemaps[id].addTo(m);}layers[id]=[];maps[id]=m;m.on('mousemove',e=>inspectPixel(e.latlng,false));m.on('click',e=>inspectPixel(e.latlng,true));if(id!=='main-map')m.on('moveend',()=>{if(syncing||!$('linked').checked)return;syncing=true;for(const other of ['original-map','prediction-map','truth-map'])if(other!==id&&maps[other])maps[other].setView(m.getCenter(),m.getZoom()+(homeZoom[other]??m.getZoom())-(homeZoom[id]??m.getZoom()),{animate:false});syncing=false;});return m;}
+function initMap(id){const pixel=mapMode==='pixel';const m=L.map(id,{crs:pixel?L.CRS.Simple:L.CRS.EPSG3857,zoomControl:false,zoomSnap:0.25,zoomDelta:0.5,maxZoom:pixel?8:20,minZoom:pixel?-6:3}).setView(pixel?[16,16]:[39,-98],pixel?2:4);L.control.zoom({position:'topright'}).addTo(m);if(!pixel){L.control.scale({position:'bottomleft',imperial:false}).addTo(m);basemaps[id]=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Geographic context © Esri and contributors'});if($('online-basemap').checked)basemaps[id].addTo(m);}layers[id]=[];maps[id]=m;m.on('mousemove',e=>inspectPixel(e.latlng,false));m.on('click',e=>inspectPixel(e.latlng,true));m.on('mouseout',clearCursors);if(id!=='main-map')m.on('moveend',()=>{if(syncing||!$('linked').checked)return;syncing=true;for(const other of ['original-map','prediction-map','truth-map'])if(other!==id&&maps[other])maps[other].setView(m.getCenter(),m.getZoom()+(homeZoom[other]??m.getZoom())-(homeZoom[id]??m.getZoom()),{animate:false});syncing=false;});return m;}
 function ensureMapMode(next){if(mapMode===next)return;for(const m of Object.values(maps))m.remove();for(const k of Object.keys(basemaps))delete basemaps[k];markers.length=0;mapMode=next;['main-map','original-map','prediction-map','truth-map'].forEach(initMap);}
-function inspectPixel(latlng,select){if(!grid||!scene)return;const crs=maps['main-map'].options.crs,sw=crs.project(L.latLng(scene.bounds[0])),ne=crs.project(L.latLng(scene.bounds[1])),pt=crs.project(latlng),x=Math.floor((pt.x-sw.x)/(ne.x-sw.x)*grid.width),y=Math.floor((ne.y-pt.y)/(ne.y-sw.y)*grid.height);if(x<0||y<0||x>=grid.width||y>=grid.height)return;const i=y*grid.width+x,valid=!grid.valid||grid.valid[i];if(isReconstruction()){const u=grid.units||'units unknown',fmt=k=>valid&&grid[k]?.[i]!=null?grid[k][i].toFixed(3):'unknown',msg='Pixel '+x+', '+y+' · observed '+fmt('observed')+' · coarse '+fmt('coarse')+' · reconstructed '+fmt('prediction')+' · residual '+fmt('residual')+' '+u;text('pixel-inspector',msg);text('compare-pixel-inspector',msg);}else{const p=valid?grid.probability?.[i]:null,t=valid?grid.truth?.[i]:null;text('pixel-inspector','Pixel '+x+', '+y+' · p '+(p==null?'unknown':p.toFixed(4))+' · reference '+(t==null?'unknown':t===1?'positive':'negative'));text('compare-pixel-inspector',$('pixel-inspector').textContent);}if(select){profileRow=y;drawPlots();}}
+function inspectPixel(latlng,select){if(!grid||!scene)return;const crs=maps['main-map'].options.crs,sw=crs.project(L.latLng(scene.bounds[0])),ne=crs.project(L.latLng(scene.bounds[1])),pt=crs.project(latlng),x=Math.floor((pt.x-sw.x)/(ne.x-sw.x)*grid.width),y=Math.floor((ne.y-pt.y)/(ne.y-sw.y)*grid.height);if(x<0||y<0||x>=grid.width||y>=grid.height)return;updateCursors(latlng);const i=y*grid.width+x,valid=!grid.valid||grid.valid[i];if(isReconstruction()){const u=grid.units||'units unknown',fmt=k=>valid&&grid[k]?.[i]!=null?grid[k][i].toFixed(3):'unknown',msg='Pixel '+x+', '+y+' · observed '+fmt('observed')+' · coarse '+fmt('coarse')+' · reconstructed '+fmt('prediction')+' · residual '+fmt('residual')+' '+u;text('pixel-inspector',msg);text('compare-pixel-inspector',msg);}else{const p=valid?grid.probability?.[i]:null,t=valid?grid.truth?.[i]:null;text('pixel-inspector','Pixel '+x+', '+y+' · p '+(p==null?'unknown':p.toFixed(4))+' · reference '+(t==null?'unknown':t===1?'positive':'negative'));text('compare-pixel-inspector',$('pixel-inspector').textContent);}if(select){profileRow=y;drawPlots();}}
 function probabilityColor(p){const stops=[[68,1,84],[59,82,139],[33,145,140],[94,201,98],[253,231,37]],v=Math.min(3.99999,Math.max(0,p)*4),i=Math.floor(v),f=v-i;return stops[i].map((a,k)=>Math.round(a+(stops[i+1][k]-a)*f));}
 function reconstructionScale(){
  if(reconstructionRangeCache)return reconstructionRangeCache;
@@ -28,30 +89,246 @@ function makeReconstructionLayer(kind){
  ctx.putImageData(im,0,0);return c.toDataURL();
 }
 
-function overlay(id,url,opacity=1){if(!url||!scene)return;const l=L.imageOverlay(url,scene.bounds,{opacity,interactive:false}).addTo(maps[id]);layers[id].push(l);}
-function clearLayers(){for(const id of Object.keys(maps)){layers[id].forEach(l=>maps[id].removeLayer(l));layers[id]=[];}}
+function showAssetStatus() {
+  const states = [...assetStates.values()];
+  const failed = states.filter(s => s === 'error').length;
+  const pending = states.filter(s => s === 'loading').length;
+  let message = !scene ? 'No scene selected' : gridLoading ? 'Loading scene data…' :
+    gridError ? gridError : failed ? failed + ' image layer(s) could not load. Refresh to retry.' :
+    pending ? 'Loading imagery…' : states.length ? 'Scene imagery loaded' : 'No image layers available';
+  text('asset-status', message);
+  $('asset-status').dataset.state = gridError || failed ? 'error' : gridLoading || pending ? 'loading' : 'ready';
+  $('data-status').hidden = !(gridLoading || gridError || failed);
+  $('data-status').dataset.state = gridError || failed ? 'error' : 'loading';
+  text('data-status', message);
+}
+
+function overlay(id, url, opacity = 1) {
+  if (!url || !scene) return;
+  const generation = renderGeneration, key = id + ':' + url;
+  const layer = L.imageOverlay(assetUrl(url), scene.bounds, {opacity, interactive: false});
+  if (!url.startsWith('data:')) {
+    assetStates.set(key, 'loading');
+    for (const event of ['load', 'error']) layer.on(event, () => {
+      if (generation !== renderGeneration) return;
+      assetStates.set(key, event === 'load' ? 'ready' : 'error');
+      showAssetStatus();
+    });
+  } else assetStates.set(key, 'ready');
+  layers[id].push(layer.addTo(maps[id]));
+  showAssetStatus();
+}
+
+function clearLayers() {
+  clearCursors();
+  renderGeneration++;
+  assetStates = new Map();
+  for (const id of Object.keys(maps)) {
+    layers[id].forEach(layer => maps[id].removeLayer(layer));
+    layers[id] = [];
+  }
+  showAssetStatus();
+}
 function fit(){if(!scene)return;syncing=true;try{for(const [id,m] of Object.entries(maps)){m.fitBounds(scene.bounds,{padding:[16,16],maxZoom:mapMode==='pixel'?8:17,animate:false});homeZoom[id]=m.getZoom();}}finally{syncing=false;}}
 function updateURL(){const u=new URL(location.href);if(experiment)u.searchParams.set('experiment',experiment.id);if(scene)u.searchParams.set('scene',scene.id);else u.searchParams.delete('scene');u.hash=view;history.replaceState(null,'',u);}
-function switchView(next){view=['map','compare','experiments'].includes(next)?next:'map';for(const v of ['map','compare','experiments'])$(v+'-view').hidden=v!==view;document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('selected',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view));});updateURL();setTimeout(()=>{Object.values(maps).forEach(m=>m.invalidateSize());if(scene)fit();},0);}
+function switchView(next, push = false) {
+  const previous = location.href;
+  const names = ['national', 'map', 'compare', 'imagery', 'experiments'];
+  view = names.includes(next) ? next : 'national';
+  document.body.dataset.view = view;
+  for (const name of names) $(name + '-view').hidden = name !== view;
+  document.querySelectorAll('[data-view]').forEach(button => {
+    button.classList.toggle('selected', button.dataset.view === view);
+    button.setAttribute('aria-pressed', String(button.dataset.view === view));
+  });
+  updateURL();
+  if (push && previous !== location.href) {
+    const destination = location.href;
+    history.replaceState(null, '', previous);
+    history.pushState(null, '', destination);
+  }
+  setTimeout(() => {
+    Object.values(maps).forEach(map => map.invalidateSize());
+    if (scene && ['map', 'compare'].includes(view)) fit();
+    atlas.resize();
+  }, 0);
+}
 function experimentContext(e){const a=e.nativeAggregate;return e.name+' · '+e.status+(a&&e.metricScope==='reused_development_fold'?' · Run-wide IoU '+(a.iou*100).toFixed(2)+'%, precision '+(a.precision*100).toFixed(2)+'% ('+a.scenes+' scenes)':'');}
-function selectExperiment(id){const previousScene=scene?.id;experiment=registry.experiments.find(e=>e.id===id)||registry.experiments[0];$('experiment').value=experiment.id;$('threshold').value=Number.isFinite(experiment.decisionThreshold)?experiment.decisionThreshold:0.5;text('context',experimentContext(experiment));$('search').value='';$('filter').value='all';drawList();selectScene(experiment.scenes.find(s=>s.id===previousScene)?.id||experiment.scenes[0]?.id);drawExperimentCards();}
-function drawList(){const q=$('search').value.toLowerCase(),f=$('filter').value;const ss=experiment.scenes.filter(s=>(s.name+' '+s.id+' '+(s.location||'')).toLowerCase().includes(q)&&(f==='all'||f==='predictions'&&hasPred(s)||f==='paired'&&hasPred(s)&&(s.truthImage||s.grid)||f==='unscored'&&!hasPred(s)||['TP','FP','FN','TN'].includes(f)&&s.outcome===f));$('scenes').innerHTML=ss.map(s=>`<button class="scene ${scene?.id===s.id?'active':''}" data-scene="${esc(s.id)}">${(s.rgb||s.observedImage)?`<img src="${esc(s.rgb||s.observedImage)}" alt="Observed scene thumbnail">`:''}<span><b>${esc(s.name)}</b><small>${esc(s.location||s.id)}</small><small>${esc(s.date||'Date not recorded')} · ${hasPred(s)?'Prediction':'Input only'}</small></span></button>`).join('');text('count',ss.length+' / '+experiment.scenes.length);$('no-scenes').hidden=ss.length>0;document.querySelectorAll('[data-scene]').forEach(b=>b.onclick=()=>{selectScene(b.dataset.scene);document.body.classList.remove('scene-browser-open');$('scene-browser-toggle').setAttribute('aria-expanded','false');});}
-function sourceCard(title,url,description){return `<div class="source">${url?`<img src="${esc(url)}" alt="${esc(title)}">`:'<div class="missing">—</div>'}<span><strong>${esc(title)}</strong><small>${esc(description)}</small></span></div>`;}
-async function selectScene(id){const token=++loadToken;scene=experiment.scenes.find(s=>s.id===id)||null;grid=null;profileRow=null;$('threshold').value=scene?.decisionThreshold??experiment.decisionThreshold??0.5;ensureMapMode(scene?.coordinateSystem==='pixel'?'pixel':'geo');$('online-basemap').disabled=mapMode==='pixel';$('overview').disabled=mapMode==='pixel';text('overview',mapMode==='pixel'?'Pixel view · footprint unavailable':'US overview');updateURL();drawList();markers.forEach(x=>maps['main-map'].removeLayer(x));markers.length=0;for(const s of experiment.scenes.filter(x=>x.coordinateSystem!=='pixel')){const c=[(s.bounds[0][0]+s.bounds[1][0])/2,(s.bounds[0][1]+s.bounds[1][1])/2];const marker=L.circleMarker(c,{radius:5,color:'#fff',fillColor:'#008da1',fillOpacity:1,weight:2}).addTo(maps['main-map']).bindTooltip(s.name).on('click',()=>selectScene(s.id));markers.push(marker);}
-if(!scene){clearLayers();for(const m of Object.values(maps))m.setView([39,-98],4,{animate:false});$('map-empty').hidden=false;const preparation=experiment.id==='GTM_Model6';text('map-empty',preparation?'GTM Model6 design and status. Choose a saved Model6 run from the Experiment menu to inspect its predictions. Read the design document for the proposed architecture and remaining research requirements.':'This experiment has saved aggregate results, but no aligned image/prediction exports available here. Open Experiments to inspect the evidence.');text('scene-title',experiment.name);text('scene-subtitle',preparation?'Study overview · select a saved run for predictions':'No geographic prediction layer available');$('source-cards').innerHTML='';$('provenance').innerHTML='';text('limitations',experiment.notes);text('compare-notice',experiment.notes);renderGrid();return;}
- $('map-empty').hidden=true;text('scene-title',scene.name);text('scene-subtitle',[scene.location,scene.date].filter(Boolean).join(' · '));$('source-cards').innerHTML=scene.task==='methane_reconstruction'?sourceCard('Observed/native target',scene.observedImage,'Continuous methane column enhancement · '+(scene.units||'units unknown'))+sourceCard('Degraded coarse EMIT',scene.coarseImage||scene.emit,'Coarse observation · '+(scene.units||'units unknown'))+sourceCard('Reconstruction',scene.predictionImage,'Model output · '+(scene.units||'units unknown'))+sourceCard('Residual',scene.residualImage,'Prediction − observed · '+(scene.units||'units unknown')):sourceCard('Target Sentinel-2',scene.rgb,scene.rgbNote||'Observed input; display contrast only')+(scene.reference90Rgb?sourceCard('Temporal reference −90d',scene.reference90Rgb,'Nominal reference window; not methane ground truth'):'')+(scene.reference365Rgb?sourceCard('Temporal reference −365d',scene.reference365Rgb,'Nominal reference window; not methane ground truth'):'')+sourceCard(scene.emitLabel||'EMIT reference',scene.emit,scene.emitNote||'Not available for this scene')+'<div id="reference-card">'+sourceCard(scene.truthLabel||'Reference mask',scene.truthImage,scene.truthNote||'No independent annotation available')+'</div>';const p={Model:experiment.name,Scene:scene.id,Task:scene.task,Units:scene.units,Date:scene.date,Reference:scene.referenceDate,Grid:scene.resolution,Source:scene.source,Checkpoint:scene.checkpointHash,Split:scene.split,Coordinates:scene.coordinateSystem==='pixel'?'Image pixels; no verified footprint': 'Georeferenced',Location:scene.locationPoint?.join(', '),Score:scene.sceneScore,Decision:scene.outcome,PredictionCache:scene.predictionHash};$('provenance').innerHTML=Object.entries(p).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');text('limitations',scene.notes||experiment.notes);text('compare-notice',scene.notes||experiment.notes);if(scene.grid){try{const loadedGrid=validateGrid(typeof scene.grid==='string'?await fetch(scene.grid).then(r=>{if(!r.ok)throw Error('Display grid missing');return r.json();}):scene.grid);if(token!==loadToken)return;grid=loadedGrid;if(scene.task==='methane_reconstruction')grid.task='methane_reconstruction';}catch(e){if(token!==loadToken)return;grid=null;text('message',e.message);}}if(token!==loadToken)return;renderGrid();Object.values(maps).forEach(m=>m.invalidateSize());fit();}
-function makeLayer(kind){if(!grid)return null;const c=document.createElement('canvas');c.width=grid.width;c.height=grid.height;const ctx=c.getContext('2d'),im=ctx.createImageData(c.width,c.height),threshold=+$('threshold').value;for(let i=0;i<c.width*c.height;i++){if(grid.valid&&!grid.valid[i])continue;const p=grid.probability?.[i],t=grid.truth?.[i];let rgb=null,a=0;if(kind==='prediction'&&p!=null){if($('prediction-mode').value==='probability'){rgb=probabilityColor(p);a=240;}else if(p>=threshold){rgb=[255,135,35];a=230;}}if(kind==='truth'&&t===1){rgb=[0,225,230];const x=i%c.width,y=Math.floor(i/c.width);const edge=x===0||y===0||x===c.width-1||y===c.height-1||[i-1,i+1,i-c.width,i+c.width].some(j=>grid.truth[j]!==1);a=40;}if(kind==='error'&&p!=null&&t!=null){if(p>=threshold&&t===1){rgb=[240,179,55];a=180;}else if(p>=threshold&&t===0){rgb=[247,71,122];a=215;}else if(p<threshold&&t===1){rgb=[152,121,240];a=215;}}if(rgb){im.data.set([...rgb,a],i*4);}}ctx.putImageData(im,0,0);return c.toDataURL();}
-function renderGrid(){clearLayers();updateTaskUI();if(isReconstruction()){renderReconstruction();return;}const pred=grid?.probability?makeLayer('prediction'):scene?.predictionImage,truth=grid?.truth?makeLayer('truth'):(scene?.truthImage||scene?.emit),errors=grid?.probability&&grid?.truth?makeLayer('error'):scene?.disagreementImage;if($('reference-card'))$('reference-card').innerHTML=sourceCard(scene?.truthLabel||'Reference mask',truth,scene?.truthNote||'No reference annotation available');const alpha=+$('opacity').value;syncComparisonControls();$('prediction-mode-compare').value=$('prediction-mode').value;text('prediction-status',pred?($('prediction-mode').value==='probability'?'Probability 0–1 · threshold-independent':'Mask ≥ '+(+$('threshold').value).toFixed(2)):'Prediction unavailable');text('reference-status',truth?(scene?.truthLabel||'Paired reference · not independent truth'):'Reference unavailable');for(const id of Object.keys(maps))if(scene)overlay(id,scene.rgb);
+
+function updateRunSummary() {
+  const run = experiment.run;
+  const count = experiment.scenes.length;
+  const label = run ? run.state.charAt(0).toUpperCase() + run.state.slice(1) :
+    experiment.lifecycle === 'archived' ? 'Archived evidence' : 'Saved evidence';
+  $('run-progress').hidden = !run;
+  text('run-progress', run ? label + (run.progress ? ' · ' + run.progress.completed + ' / ' + run.progress.total + ' ' + run.progress.unit : '') : '');
+  $('run-progress').title = run?.message || '';
+  $('run-summary').innerHTML = '<strong>' + esc(label) + '<span>' + count + ' scenes</span></strong>' +
+    (run?.progress ? '<progress max="' + Math.max(1, run.progress.total) + '" value="' + run.progress.completed +
+      '" aria-label="Export progress"></progress><small>' + run.progress.completed + ' / ' + run.progress.total +
+      ' ' + esc(run.progress.unit) + '</small>' : '') +
+    (run?.message ? '<small>' + esc(run.message) + '</small>' : '');
+  text('context', experimentContext(experiment));
+}
+
+function populateExperiments() {
+  $('experiment').innerHTML = registry.experiments.map(e => '<option value="' + esc(e.id) + '">' +
+    (e.lifecycle === 'archived' ? '[Archived] ' : '') + esc(e.name) + '</option>').join('');
+  if (experiment) $('experiment').value = experiment.id;
+}
+
+function selectExperiment(id, requestedScene) {
+  const previousScene = requestedScene || scene?.id;
+  experiment = registry.experiments.find(e => e.id === id) || registry.experiments[0];
+  $('experiment').value = experiment.id;
+  $('search').value = '';
+  $('filter').value = 'all';
+  updateRunSummary();
+  selectScene(experiment.scenes.find(s => s.id === previousScene)?.id || experiment.scenes[0]?.id);
+  drawExperimentCards();
+}
+
+function drawList() {
+  const query = $('search').value.toLowerCase(), filter = $('filter').value;
+  const scenes = experiment.scenes.filter(s =>
+    (s.name + ' ' + s.id + ' ' + (s.location || '')).toLowerCase().includes(query) &&
+    (filter === 'all' || filter === 'predictions' && hasPred(s) ||
+      filter === 'paired' && hasPred(s) && (s.truthImage || s.grid) ||
+      filter === 'unscored' && !hasPred(s) || ['TP', 'FP', 'FN', 'TN'].includes(filter) && s.outcome === filter));
+  const scroll = $('scenes').scrollTop;
+  $('scenes').innerHTML = scenes.map(s => '<button class="scene ' + (scene?.id === s.id ? 'active' : '') +
+    '" aria-pressed="' + (scene?.id === s.id) + '" data-scene="' + esc(s.id) + '">' +
+    ((s.rgb || s.observedImage) ? '<img loading="lazy" src="' + esc(assetUrl(s.rgb || s.observedImage)) + '" alt="">' :
+      '<span class="scene-placeholder" aria-hidden="true">◌</span>') + '<span><b>' + esc(s.name) + '</b><small>' +
+    esc(s.location || s.id) + '</small><small>' + esc(s.date || 'Date not recorded') + ' · ' +
+    (hasPred(s) ? 'Prediction' : 'Input only') + '</small></span></button>').join('');
+  $('scenes').scrollTop = scroll;
+  text('count', scenes.length + ' / ' + experiment.scenes.length);
+  $('no-scenes').hidden = scenes.length > 0;
+  document.querySelectorAll('[data-scene]').forEach(button => button.onclick = () => {
+    selectScene(button.dataset.scene);
+    document.body.classList.remove('scene-browser-open');
+    $('scene-browser-toggle').setAttribute('aria-expanded', 'false');
+  });
+}
+
+function sourceCard(title, url, description) {
+  return '<div class="source">' + (url ? '<img src="' + esc(assetUrl(url)) + '" alt="' + esc(title) + '">' :
+    '<div class="missing">—</div>') + '<span><strong>' + esc(title) + '</strong><small>' + esc(description) + '</small></span></div>';
+}
+
+function captureMapViews() {
+  return Object.fromEntries(Object.entries(maps).map(([id, map]) => [id, {center: map.getCenter(), zoom: map.getZoom()}]));
+}
+
+function restoreMapViews(positions) {
+  syncing = true;
+  try {
+    for (const [id, position] of Object.entries(positions)) maps[id].setView(position.center, position.zoom, {animate: false});
+  } finally { syncing = false; }
+}
+
+async function selectScene(id, {preserveView = false} = {}) {
+  const token = ++loadToken;
+  gridRequest?.abort();
+  gridRequest = new AbortController();
+  const nextScene = experiment.scenes.find(s => s.id === id) || null;
+  const retain = preserveView && scene?.id === nextScene?.id &&
+    JSON.stringify(scene?.bounds) === JSON.stringify(nextScene?.bounds) && scene?.coordinateSystem === nextScene?.coordinateSystem;
+  const positions = retain ? captureMapViews() : null;
+  scene = nextScene;
+  grid = null;
+  gridError = '';
+  gridLoading = !!scene?.grid;
+  if (!retain) {
+    profileRow = null;
+    $('threshold').value = scene?.decisionThreshold ?? experiment.decisionThreshold ?? 0.5;
+  }
+  ensureMapMode(scene?.coordinateSystem === 'pixel' ? 'pixel' : 'geo');
+  clearLayers();
+  text('pixel-inspector', 'Hover a scene pixel to inspect values. Click to move the cross-section.');
+  $('online-basemap').disabled = mapMode === 'pixel';
+  $('overview').disabled = mapMode === 'pixel';
+  text('overview', mapMode === 'pixel' ? 'Image coordinates only' : 'US overview');
+  updateURL();
+  drawList();
+  markers.forEach(marker => maps['main-map'].removeLayer(marker));
+  markers.length = 0;
+  if (mapMode === 'geo') for (const item of experiment.scenes.filter(s => s.coordinateSystem !== 'pixel')) {
+    const center = [(item.bounds[0][0] + item.bounds[1][0]) / 2, (item.bounds[0][1] + item.bounds[1][1]) / 2];
+    markers.push(L.circleMarker(center, {radius: 4, color: '#fff', fillColor: '#276653', fillOpacity: 1, weight: 2})
+      .addTo(maps['main-map']).bindTooltip(esc(item.name)).on('click', () => selectScene(item.id)));
+  }
+  $('map-empty').hidden = !!scene;
+  text('scene-title', scene?.name || experiment.name);
+  text('scene-subtitle', scene ? [scene.location, scene.date].filter(Boolean).join(' · ') : 'No scene export available');
+  text('limitations', scene?.notes || experiment.notes || '');
+  text('compare-notice', scene?.notes || experiment.notes || '');
+  if (!scene) {
+    text('map-empty', experiment.run ? 'Waiting for the first scene export. New results will appear here automatically.' :
+      'No aligned imagery exported for this run. Open Runs to review its saved evidence.');
+    $('source-cards').innerHTML = '';
+    $('provenance').innerHTML = '';
+    renderGrid();
+    return;
+  }
+  $('source-cards').innerHTML = sourceCard('Target Sentinel-2', scene.rgb, scene.rgbNote || 'Observed input; display contrast only') +
+    (scene.reference90Rgb ? sourceCard('Temporal reference −90d', scene.reference90Rgb, 'Reference window, not methane truth') : '') +
+    (scene.reference365Rgb ? sourceCard('Temporal reference −365d', scene.reference365Rgb, 'Reference window, not methane truth') : '') +
+    (scene.emit ? sourceCard(scene.emitLabel || 'EMIT reference', scene.emit, scene.emitNote || 'Paired observation') : '') +
+    '<div id="reference-card">' + sourceCard(scene.truthLabel || 'Reference mask', scene.truthImage,
+      scene.truthNote || 'No independent annotation available') + '</div>';
+  const provenance = {Model: experiment.name, Scene: scene.id, Task: scene.task, Units: scene.units,
+    Date: scene.date, Reference: scene.referenceDate, Grid: scene.resolution, Source: scene.source,
+    Checkpoint: scene.checkpointHash, Split: scene.split,
+    Coordinates: scene.coordinateSystem === 'pixel' ? 'Image pixels; footprint unavailable' : 'Georeferenced',
+    Location: scene.locationPoint?.join(', '), 'Scene score': scene.sceneScore, Decision: scene.outcome, 'Prediction cache': scene.predictionHash};
+  $('provenance').innerHTML = Object.entries(provenance).filter(([, value]) => value != null)
+    .map(([key, value]) => '<dt>' + esc(key) + '</dt><dd>' + esc(value) + '</dd>').join('');
+
+  // Clear the previous scene immediately, including its scores and charts.
+  renderGrid();
+  Object.values(maps).forEach(map => map.invalidateSize());
+  if (positions) restoreMapViews(positions); else fit();
+  if (scene.grid) {
+    const controller = gridRequest;
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      let data = scene.grid;
+      if (typeof data === 'string') {
+        const response = await fetch(assetUrl(data), {cache: 'no-store', signal: controller.signal});
+        if (!response.ok) throw Error('HTTP ' + response.status);
+        data = await response.json();
+      }
+      const loaded = validateGrid(data);
+      if (token !== loadToken) return;
+      grid = loaded;
+      if (scene.task === 'methane_reconstruction') grid.task = 'methane_reconstruction';
+    } catch (error) {
+      if (token !== loadToken) return;
+      gridError = 'Pixel data unavailable (' + (error.name === 'AbortError' ? 'request timed out' : error.message) +
+        '). Saved images may still be visible; interactive pixel scores are unavailable.';
+    } finally { clearTimeout(timeout); }
+  }
+  if (token !== loadToken) return;
+  gridLoading = false;
+  // Do not reset the camera here: a user may already have panned while data loaded.
+  renderGrid();
+  showAssetStatus();
+}
+function makeLayer(kind){if(!grid)return null;const c=document.createElement('canvas');c.width=grid.width;c.height=grid.height;const ctx=c.getContext('2d'),im=ctx.createImageData(c.width,c.height),threshold=+$('threshold').value;for(let i=0;i<c.width*c.height;i++){if(grid.valid&&!grid.valid[i])continue;const p=grid.probability?.[i],t=grid.truth?.[i];let rgb=null,a=0;if(kind==='prediction'&&p!=null){if($('prediction-mode').value==='probability'){rgb=probabilityColor(p);a=240;}else if(p>=threshold){rgb=[255,135,35];a=230;}}if(kind==='truth'&&t===1){rgb=[0,225,230];const x=i%c.width,y=Math.floor(i/c.width);const edge=x===0||y===0||x===c.width-1||y===c.height-1||[i-1,i+1,i-c.width,i+c.width].some(j=>grid.truth[j]!==1);a=edge?240:30;}if(kind==='error'&&p!=null&&t!=null){if(p>=threshold&&t===1){rgb=[240,179,55];a=180;}else if(p>=threshold&&t===0){rgb=[247,71,122];a=215;}else if(p<threshold&&t===1){rgb=[152,121,240];a=215;}}if(rgb){im.data.set([...rgb,a],i*4);}}ctx.putImageData(im,0,0);return c.toDataURL();}
+function renderGrid(){clearLayers();updateTaskUI();if(isReconstruction()){renderReconstruction();return;}const pred=grid?.probability?makeLayer('prediction'):scene?.predictionImage,truth=grid?.truth?makeLayer('truth'):(scene?.truthImage||scene?.emit),errors=grid?.probability&&grid?.truth?makeLayer('error'):scene?.disagreementImage;if($('reference-card'))$('reference-card').innerHTML=sourceCard(scene?.truthLabel||'Reference mask',truth,scene?.truthNote||'No reference annotation available');const alpha=+$('opacity').value,referenceAlpha=+$('reference-opacity').value;text('reference-opacity-value',Math.round(referenceAlpha*100)+'%');$('reference-opacity').disabled=!truth;syncComparisonControls();$('prediction-mode-compare').value=$('prediction-mode').value;text('prediction-status',pred?($('prediction-mode').value==='probability'?'Model score 0–1 · uncalibrated':'Mask ≥ '+(+$('threshold').value).toFixed(2)):'Prediction unavailable');text('reference-status',truth?(scene?.truthLabel||'Paired reference · not independent truth'):'Reference unavailable');for(const id of Object.keys(maps))if(scene)overlay(id,scene.rgb);
 if(scene){
  for(const id of ['main-map','prediction-map']){
   if($('pred-toggle').checked)overlay(id,pred,alpha);
   if($('error-toggle').checked)overlay(id,errors,alpha);
-  if($('truth-toggle').checked){overlay(id,truth,1);drawTruthBoundary(id);}
+  if($('truth-toggle').checked){overlay(id,truth,referenceAlpha);drawTruthBoundary(id,referenceAlpha);}
  }
- overlay('truth-map',truth,1);drawTruthBoundary('truth-map');for(const id of ['main-map','prediction-map'])if($('pred-toggle').checked)for(const p of scene.candidatePoints||[]){if(Number.isFinite(p.lat)&&Number.isFinite(p.lon))layers[id].push(L.circleMarker([p.lat,p.lon],{radius:5,color:'#ff8b23',fillColor:'#fff',fillOpacity:1,weight:2}).addTo(maps[id]).bindTooltip(esc(p.label)+' score '+Number(p.score).toFixed(3)));}
+ overlay('truth-map',truth,referenceAlpha);drawTruthBoundary('truth-map',referenceAlpha);for(const id of ['main-map','prediction-map'])if($('pred-toggle').checked)for(const p of scene.candidatePoints||[]){if(Number.isFinite(p.lat)&&Number.isFinite(p.lon))layers[id].push(L.circleMarker([p.lat,p.lon],{radius:5,color:'#ff8b23',fillColor:'#fff',fillOpacity:1,weight:2}).addTo(maps[id]).bindTooltip(esc(p.label)+' score '+Number(p.score).toFixed(3)));}
  if($('bounds-toggle').checked)for(const id of Object.keys(maps))layers[id].push(L.rectangle(scene.bounds,{color:'#fff',dashArray:'5,5',weight:1,fill:false}).addTo(maps[id]));
 }
-for(const [id,on] of [['pred-toggle',!!pred],['truth-toggle',!!truth],['error-toggle',!!errors],['threshold',!!grid?.probability]]){$(id).disabled=!on;}$('reset-threshold').disabled=!grid?.probability;text('threshold-value',(+$('threshold').value).toFixed(2));if(scene&&pred)text('compare-notice',scene.notes||experiment.notes);if(scene&&!pred)text('compare-notice','Prediction unavailable for this scene. These maps show the available observations and reference layers. '+(scene.notes||''));let tp=0,fp=0,fn=0,tn=0,n=0;if(grid?.probability&&grid?.truth)for(let i=0;i<grid.width*grid.height;i++){if(grid.valid&&!grid.valid[i]||grid.probability[i]==null||grid.truth[i]==null)continue;n++;const p=grid.probability[i]>=+$('threshold').value,t=grid.truth[i]===1;if(p&&t)tp++;else if(p)fp++;else if(t)fn++;else tn++;}const positiveOnly=scene?.positiveOnlyReference===true;const vals=positiveOnly?{'Covered plume pixels':n?tp:null,'Missed plume pixels':n?fn:null,'Outside reference':'Unknown','False positives':'Not measured'}:{TP:n?tp:null,FP:n?fp:null,FN:n?fn:null,TN:n?tn:null};$('pixel-metrics').innerHTML=Object.entries(vals).map(([k,v])=>`<div class="metric"><span>${k}</span><strong>${v??'—'}</strong></div>`).join('');text('metric-note',positiveOnly?'EMIT positive support only. Exterior is unknown: precision, IoU and false-positive rate are not available. Coverage is not source verification.':n?`${n.toLocaleString()} jointly valid display pixels. IoU ${tp+fp+fn?(tp/(tp+fp+fn)).toFixed(3):'undefined (no positives)'}. Selected-crop agreement; not the aggregate held-out benchmark.`:'Pixel-level prediction and a valid reference mask are both required. No missing values are treated as negatives.');drawComparisonSummary({tp,fp,fn,tn,n});drawDiagnostics();drawPlots();}
+const support=atlas.supportImage();$('comparison-support').disabled=!support;if(support&&$('comparison-support').checked)for(const id of ['original-map','prediction-map','truth-map'])overlay(id,support);
+for(const [id,on] of [['pred-toggle',!!pred],['truth-toggle',!!truth],['error-toggle',!!errors],['threshold',!!grid?.probability]]){$(id).disabled=!on;}$('reset-threshold').disabled=!grid?.probability;text('threshold-value',(+$('threshold').value).toFixed(2));if(scene&&pred)text('compare-notice',scene.notes||experiment.notes);if(scene&&!pred)text('compare-notice','Prediction unavailable for this scene. These maps show the available observations and reference layers. '+(scene.notes||''));let tp=0,fp=0,fn=0,tn=0,n=0;if(grid?.probability&&grid?.truth)for(let i=0;i<grid.width*grid.height;i++){if(grid.valid&&!grid.valid[i]||grid.probability[i]==null||grid.truth[i]==null)continue;n++;const p=grid.probability[i]>=+$('threshold').value,t=grid.truth[i]===1;if(p&&t)tp++;else if(p)fp++;else if(t)fn++;else tn++;}const positiveOnly=scene?.positiveOnlyReference===true;const vals=positiveOnly?{'Covered plume pixels':n?tp:null,'Missed plume pixels':n?fn:null,'Outside reference':'Unknown','False positives':'Not measured'}:{TP:n?tp:null,FP:n?fp:null,FN:n?fn:null,TN:n?tn:null};$('pixel-metrics').innerHTML=Object.entries(vals).map(([k,v])=>`<div class="metric"><span>${k}</span><strong>${v??'—'}</strong></div>`).join('');text('metric-note',positiveOnly?'EMIT positive support only. Exterior is unknown: precision, IoU and false-positive rate are not available. Coverage is not source verification.':n?`${n.toLocaleString()} jointly valid display pixels. IoU ${tp+fp+fn?(tp/(tp+fp+fn)).toFixed(3):'undefined (no positives)'}. Selected-crop agreement; not the aggregate held-out benchmark.`:'Pixel-level prediction and a valid reference mask are both required. No missing values are treated as negatives.');drawComparisonSummary({tp,fp,fn,tn,n});drawDiagnostics();drawPlots();atlas.renderSelected();}
 function renderReconstruction(){
  reconstructionRangeCache=null;
  const u=grid?.units||scene?.units||'units unknown',alpha=+$('opacity').value,panels=!$('comparison-layout').classList.contains('overlay-layout');
@@ -76,16 +353,44 @@ function renderReconstruction(){
  document.querySelector('.map-legend').textContent='Continuous values: '+lo+' → '+hi+' '+u+'. Blank = unobserved.';
  const values=[];for(let i=0;i<(grid?.prediction?.length||0);i++)if(grid.valid?.[i]!==0&&grid.prediction[i]!=null&&grid.observed?.[i]!=null)values.push(grid.prediction[i]-grid.observed[i]);
  const n=values.length,mae=n?values.reduce((a,v)=>a+Math.abs(v),0)/n:null,rmse=n?Math.sqrt(values.reduce((a,v)=>a+v*v,0)/n):null;
- $('pixel-metrics').innerHTML=[['Observed pixels',n],['MAE',mae?.toFixed(2)||'—'],['RMSE',rmse?.toFixed(2)||'—'],['Units',u]].map(([k,v])=>'<div class="metric"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('');
- text('metric-note','Display-grid comparison on observed support. See run report for native-grid scores.');drawPlots();
+ $('pixel-metrics').innerHTML=[['Observed pixels',grid?n:'—'],['MAE',mae?.toFixed(2)||'—'],['RMSE',rmse?.toFixed(2)||'—'],['Units',u]].map(([k,v])=>'<div class="metric"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('');
+ text('metric-note','Display-grid comparison on observed support. See run report for native-grid scores.');drawPlots();atlas.renderSelected();
 }
  function drawPlots(){if(isReconstruction()){drawReconstructionPlots();return;}for(const id of ['histogram','profile']){const c=$(id),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#69808e';ctx.font='13px Segoe UI';if(!grid?.probability){ctx.fillText('Prediction raster not available',16,35);continue;}ctx.strokeStyle='#d4e0e6';ctx.beginPath();ctx.moveTo(30,10);ctx.lineTo(30,c.height-25);ctx.lineTo(c.width-12,c.height-25);ctx.stroke();if(id==='histogram'){const bins=Array(20).fill(0);grid.probability.forEach((p,i)=>{if(p!=null&&(!grid.valid||grid.valid[i]))bins[Math.min(19,Math.floor(p*20))]++;});const max=Math.max(...bins,1);ctx.fillStyle='#e99d3c';bins.forEach((v,i)=>ctx.fillRect(35+i*(c.width-55)/20,c.height-26-v/max*(c.height-45),(c.width-55)/20-3,v/max*(c.height-45)));ctx.fillStyle='#69808e';ctx.fillText('0',30,c.height-7);ctx.fillText('1 probability',c.width-92,c.height-7);}else{const y=profileRow??Math.floor(grid.height/2);for(const [key,color] of [['probability','#e99632'],['truth','#009eaf']]){if(!grid[key])continue;ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();let started=false;for(let x=0;x<grid.width;x++){const i=y*grid.width+x,v=grid[key][i];if(v==null||grid.valid&&!grid.valid[i]){started=false;continue;}const px=30+x/(grid.width-1)*(c.width-45),py=c.height-25-v*(c.height-40);if(!started)ctx.moveTo(px,py);else ctx.lineTo(px,py);started=true;}ctx.stroke();}ctx.fillStyle='#69808e';ctx.fillText('0',12,c.height-25);ctx.fillText('1',12,17);ctx.fillText('Pixel position →',c.width-115,c.height-5);}}}
 function drawReconstructionPlots(){for(const id of ['histogram','profile']){const c=$(id),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#69808e';ctx.font='13px Segoe UI';if(!grid){ctx.fillText('Reconstruction raster not available',16,35);continue;}const y=profileRow??Math.floor(grid.height/2),keys=id==='histogram'?['observed','coarse','prediction','residual']:['observed','coarse','prediction','residual'],colors=['#3c83c7','#e99d3c','#00a39e','#d64f66'];if(id==='histogram'){const all=[];keys.forEach(k=>(grid[k]||[]).forEach((v,i)=>{if(v!=null&&(!grid.valid||grid.valid[i]))all.push(v);}));const [lo,hi]=reconstructionScale();const bins=Array(20).fill(0);all.forEach(v=>bins[Math.min(19,Math.max(0,Math.floor((v-lo)/(hi-lo)*20)))]++);const max=Math.max(...bins,1);ctx.fillStyle='#6b9fb0';bins.forEach((v,i)=>ctx.fillRect(35+i*(c.width-55)/20,c.height-26-v/max*(c.height-45),(c.width-55)/20-3,v/max*(c.height-45)));ctx.fillText(lo.toFixed(2),30,c.height-7);ctx.fillText(hi.toFixed(2)+' '+(grid.units||''),c.width-120,c.height-7);}else{const [lo,hi]=reconstructionScale();keys.forEach((key,j)=>{if(!grid[key])return;ctx.strokeStyle=colors[j];ctx.lineWidth=2;ctx.beginPath();let started=false;for(let x=0;x<grid.width;x++){const i=y*grid.width+x,v=grid[key][i];if(v==null||grid.valid&&!grid.valid[i]){started=false;continue;}const px=30+x/(grid.width-1)*(c.width-45),py=c.height-25-(v-lo)/(hi-lo)*(c.height-40);if(!started)ctx.moveTo(px,py);else ctx.lineTo(px,py);started=true;}ctx.stroke();});ctx.fillStyle='#69808e';ctx.fillText(lo.toFixed(2),12,c.height-25);ctx.fillText(hi.toFixed(2),12,17);ctx.fillText('Continuous value · '+(grid.units||'units unknown'),c.width-190,c.height-5);}}}
 function drawExperimentCards(){$('experiments').innerHTML=registry.experiments.map(e=>`<article class="experiment-card"><div class="eyebrow">${esc(e.status)}</div><h2>${esc(e.name)}</h2><p>${esc(e.description||'')}</p>${e.metrics?`<table><thead><tr>${Object.keys(e.metrics).map(k=>`<th>${esc(k)}</th>`).join('')}</tr></thead><tbody><tr>${Object.values(e.metrics).map(v=>`<td>${esc(v)}</td>`).join('')}</tr></tbody></table>`:''}<p>${esc(e.notes)}</p><p class="readonly">${e.scenes.length} inspection scenes available · ${e.reportUrl?`<a href="${esc(allowedAsset(e.reportUrl))}">Evidence report ↗</a>`:esc(e.report||'Local export')}</p><button data-experiment="${esc(e.id)}">Open experiment</button></article>`).join('');document.querySelectorAll('[data-experiment]').forEach(b=>b.onclick=()=>{selectExperiment(b.dataset.experiment);switchView('map');});}
-function drawDiagnostics(){if(scene?.outputKind==='rendered_archive'){drawArchiveStatus();return;}if(!grid?.probability){text('scene-flag',experiment.warning||'Summary only: no pixel output selected.');text('diagnostics',experiment.warning||'Choose a scene with saved probability outputs.');text('map-diagnostics',experiment.warning||'No pixel prediction selected.');return;}const values=grid.probability.filter((p,i)=>p!=null&&(!grid.valid||grid.valid[i])),n=values.length,positives=values.filter(p=>p>=+$('threshold').value).length,support=grid.truth?.filter((t,i)=>t!=null&&(!grid.valid||grid.valid[i])).length||0;let lo=1,hi=0;for(const p of values){lo=Math.min(lo,p);hi=Math.max(hi,p);}const ratio=n?positives/n:0;const sceneRule=Number.isFinite(scene.sceneScore)?' Scene score '+scene.sceneScore.toFixed(4)+' / frozen cutoff '+Number(scene.sceneThreshold??experiment.sceneThreshold).toFixed(4)+' · '+(scene.outcome||'scene decision separate from pixel mask')+'.':'';const msg=(ratio>.95?'NEAR-ALL-POSITIVE MASK. ':'')+(ratio*100).toFixed(2)+'% of valid pixels ≥ '+(+$('threshold').value).toFixed(2)+'. Probability range '+lo.toFixed(3)+'–'+hi.toFixed(3)+'. Reference support '+(n?support/n*100:0).toFixed(1)+'%.'+sceneRule+' Heatmap colors cover the probability field; mask coverage is measured separately.';text('scene-flag',(ratio>.95?'MASK SATURATION · ':'PIXEL CHECK · ')+(ratio*100).toFixed(1)+'% positive at threshold '+(+$('threshold').value).toFixed(2)+(scene.outcome?' · Scene-level '+scene.outcome+' (separate decision)':''));text('diagnostics',msg);text('map-diagnostics',msg);$('diagnostics').classList.toggle('warning',ratio>.95);}
-async function refreshExperiments(){try{const next=await fetch('/api/experiments').then(r=>r.json());next.experiments.forEach(validateExperiment);const selected=experiment.id;registry.experiments=next.experiments;registry.local=next.local;$('experiment').innerHTML=registry.experiments.map(e=>'<option value="'+esc(e.id)+'">'+esc(e.name)+'</option>').join('');selectExperiment(selected);text('message',next.local?.warnings?.join('; ')||'Local experiment folder reloaded');}catch(e){text('message',e.message);}}
 
-function drawTruthBoundary(id){
+function drawDiagnostics() {
+  if (scene?.outputKind === 'rendered_archive') { drawArchiveStatus(); return; }
+  if (!grid?.probability) {
+    const label = gridLoading ? 'Loading pixel data' : gridError ? 'Pixel data unavailable' :
+      scene ? hasPred(scene) ? 'Saved image only · pixel scores unavailable' : 'Observation only · no model prediction' : 'No spatial export';
+    text('scene-flag', label);
+    text('diagnostics', gridError || scene?.notes || experiment.notes || label);
+    text('map-diagnostics', label);
+    return;
+  }
+  const values = grid.probability.filter((p, i) => p != null && (!grid.valid || grid.valid[i]));
+  const n = values.length, positives = values.filter(p => p >= +$('threshold').value).length;
+  const support = grid.truth?.filter((t, i) => t != null && (!grid.valid || grid.valid[i])).length || 0;
+  let lo = 1, hi = 0;
+  for (const value of values) { lo = Math.min(lo, value); hi = Math.max(hi, value); }
+  const ratio = n ? positives / n : 0;
+  const rule = Number.isFinite(scene.sceneScore) ? ' Scene score ' + scene.sceneScore.toFixed(4) +
+    ' / frozen cutoff ' + Number(scene.sceneThreshold ?? experiment.sceneThreshold).toFixed(4) +
+    ' · ' + (scene.outcome || 'separate scene decision') + '.' : '';
+  const message = (ratio > .95 ? 'NEAR-ALL-POSITIVE MASK. ' : '') + (ratio * 100).toFixed(2) +
+    '% of valid prediction pixels ≥ ' + (+$('threshold').value).toFixed(2) + '. Probability range ' +
+    lo.toFixed(3) + '–' + hi.toFixed(3) + '. Reference coverage on this support ' +
+    (n ? support / n * 100 : 0).toFixed(1) + '%.' + rule + ' Blank pixels are unscored.';
+  text('scene-flag', (ratio > .95 ? 'MASK SATURATION · ' : 'PIXEL CHECK · ') + (ratio * 100).toFixed(1) +
+    '% positive at threshold ' + (+$('threshold').value).toFixed(2) + (scene.outcome ? ' · Scene-level ' + scene.outcome : ''));
+  text('diagnostics', message);
+  text('map-diagnostics', message);
+  $('diagnostics').classList.toggle('warning', ratio > .95);
+}
+
+function drawTruthBoundary(id,opacity=1){
  if(!grid?.truth||!scene)return;
  const w=grid.width,h=grid.height,crs=maps[id].options.crs,sw=crs.project(L.latLng(scene.bounds[0])),ne=crs.project(L.latLng(scene.bounds[1]));
  const point=(x,y)=>crs.unproject(L.point(sw.x+x/w*(ne.x-sw.x),ne.y-y/h*(ne.y-sw.y)));
@@ -98,7 +403,7 @@ function drawTruthBoundary(id){
   if(!positive(x-1,y))edges.push([point(x,y+1),point(x,y)]);
  }
  if(!edges.length)return;
- for(const [color,weight] of [['#102833',5],['#38f5ed',2.5]])layers[id].push(L.polyline(edges,{color,weight,opacity:1,interactive:false,lineCap:'square',lineJoin:'miter'}).addTo(maps[id]));
+ for(const [color,weight] of [['#102833',5],['#38f5ed',2.5]])layers[id].push(L.polyline(edges,{color,weight,opacity,interactive:false,lineCap:'square',lineJoin:'miter'}).addTo(maps[id]));
 }
 function syncComparisonControls(){
  for(const [a,b] of [['compare-pred','pred-toggle'],['compare-truth','truth-toggle'],['compare-errors','error-toggle']]){$(a).checked=$(b).checked;}
@@ -109,10 +414,10 @@ function drawComparisonSummary({tp,fp,fn,tn,n}){
  const iou=tp+fp+fn?((tp/(tp+fp+fn))*100).toFixed(1)+'%':'—';
  const native=scene?.nativeMetrics, frozenThreshold=scene?.decisionThreshold??experiment.decisionThreshold??0.5;
  const frozenIoU=native&&Number.isFinite(native.iou)&&native.tp+native.fp+native.fn>0?(native.iou*100).toFixed(1)+'%':'—';
- const stats=scene?.positiveOnlyReference?[['EMIT support covered',tp+fn?((tp/(tp+fn))*100).toFixed(1)+'%':'—'],['Outside reference','Unknown'],['Precision / IoU','Not measured'],['Emission origin','Unverified']]:native&&Number.isInteger(native.evaluated_pixels)?[['Native IoU at '+frozenThreshold.toFixed(2),frozenIoU],['Display IoU at '+(+$('threshold').value).toFixed(2),n?iou:'—'],['Native FP pixels',native.fp.toLocaleString()],['Native evaluated pixels',native.evaluated_pixels.toLocaleString()]]:[['Display IoU',n?iou:'—'],['Predicted area',n?((tp+fp)/n*100).toFixed(1)+'%':'—'],['Ground-truth area',n?((tp+fn)/n*100).toFixed(1)+'%':'—'],['Scene decision',scene?.outcome||'Not recorded']];
+ const stats=scene?.positiveOnlyReference?[['EMIT support covered',tp+fn?((tp/(tp+fn))*100).toFixed(1)+'%':'—'],['Outside reference','Unknown'],['Precision / IoU','Not measured'],['Emission origin','Unverified']]:native&&Number.isInteger(native.evaluated_pixels)?[['Native IoU at '+Number(frozenThreshold).toFixed(2),frozenIoU],['Display IoU at '+(+$('threshold').value).toFixed(2),n?iou:'—'],['Native FP pixels',native.fp?.toLocaleString() ?? '—'],['Native evaluated pixels',native.evaluated_pixels.toLocaleString()]]:[['Display IoU',n?iou:'—'],['Predicted area',n?((tp+fp)/n*100).toFixed(1)+'%':'—'],['Ground-truth area',n?((tp+fn)/n*100).toFixed(1)+'%':'—'],['Scene decision',scene?.outcome||'Not recorded']];
  $('comparison-stats').innerHTML=stats.map(([k,v])=>'<div><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('');
  text('compare-scene-label',scene?experiment.name+' / '+scene.name:experiment.name+' / no spatial export');
- text('coordinate-note',scene?.coordinateSystem==='pixel'?'Native '+(grid?.width||32)+' × '+(grid?.height||32)+' pixels · geographic footprint unavailable':native?.evaluated_pixels!=null?'Georeferenced display · native scores cover '+native.evaluated_pixels.toLocaleString()+' / '+native.source_valid_pixels.toLocaleString()+' source-valid pixels; other pixels are unscored':'Georeferenced imagery · shared display grid');
+ text('coordinate-note',scene?.coordinateSystem==='pixel'?'Native '+(grid?.width||32)+' × '+(grid?.height||32)+' pixels · geographic footprint unavailable':native?.evaluated_pixels!=null?'Georeferenced display · native scores cover '+native.evaluated_pixels.toLocaleString()+' / '+(native.source_valid_pixels?.toLocaleString() ?? 'unknown')+' source-valid pixels; other pixels are unscored':'Georeferenced imagery · shared display grid');
  text('compare-pixel-inspector','Hover over imagery to inspect a pixel.');
  $('compare-empty').hidden=!!scene;
  text('compare-empty','No prediction imagery exported for this experiment yet. Its saved metrics are under Experiments.');
@@ -145,7 +450,7 @@ function drawArchiveStatus(){
  text('coordinate-note','Georeferenced saved rendering. Compare with Model6 visually; different scenes cannot establish model superiority.');
  text('compare-pixel-inspector','Pixel probabilities cannot be recovered from this colored export.');
 }
-function taskText(selector,value,on){const el=document.querySelector(selector);if(!el)return;if(!taskOriginals.has(el))taskOriginals.set(el,el.textContent);el.textContent=on?value:taskOriginals.get(el);}
+function taskText(selector,value,on){const el=document.querySelector(selector);if(!el)return;if(!taskOriginals.has(el))taskOriginals.set(el,el.innerHTML);if(on)el.textContent=value;else el.innerHTML=taskOriginals.get(el);}
 function taskLabel(id,label,on){const el=$(id).closest('label');if(!el)return;let span=el.querySelector('.task-label');if(!span){span=document.createElement('span');span.className='task-label';const texts=[...el.childNodes].filter(n=>n.nodeType===3);span.dataset.original=texts.map(n=>n.textContent).join('');texts.forEach(n=>n.remove());el.append(span);}span.textContent=on?label:span.dataset.original;}
 function updateTaskUI(){
  document.body.classList.toggle('rendered-archive',scene?.outputKind==='rendered_archive');
@@ -165,4 +470,62 @@ function updateTaskUI(){
  if(positiveOnly){const labels=document.querySelectorAll('.compare-legend span');labels[1].lastChild.textContent=' EMIT positive support';labels[2].lastChild.textContent=' Outside outline: unknown';labels[3].lastChild.textContent=' Missed positive support';}
 }
 
-try{if(!window.L)throw Error('Map library could not load');if(!registry?.experiments?.length)throw Error('Experiment registry is missing');registry.experiments.forEach(validateExperiment);['main-map','original-map','prediction-map','truth-map'].forEach(initMap);$('experiment').innerHTML=registry.experiments.map(e=>`<option value="${esc(e.id)}">${e.lifecycle==='archived'?'[Archived] ':''}${esc(e.name)}</option>`).join('');document.querySelector('.brand').onclick=e=>{e.preventDefault();switchView('map');};$('experiment').onchange=()=>selectExperiment($('experiment').value);$('search').oninput=drawList;$('filter').onchange=drawList;document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));for(const id of ['pred-toggle','truth-toggle','error-toggle','bounds-toggle','opacity','threshold','prediction-mode'])$(id).oninput=renderGrid;$('reset-threshold').onclick=()=>{$('threshold').value=scene?.decisionThreshold??experiment.decisionThreshold??0.5;renderGrid();};$('prediction-mode-compare').oninput=()=>{$('prediction-mode').value=$('prediction-mode-compare').value;renderGrid();};$('fit').onclick=fit;initComparisonControls();$('overview').onclick=()=>{switchView('map');setTimeout(()=>maps['main-map'].setView([39,-98],4),25);};$('import').onchange=async ev=>{try{const file=ev.target.files[0];if(!file)return;if(file.size>50*1024*1024)throw Error('Bundle exceeds 50 MiB');const parsed=JSON.parse(await file.text()),e=validateExperiment(parsed.experiment||parsed);if(registry.experiments.some(x=>x.id===e.id))throw Error('Experiment ID already exists');registry.experiments.push(e);const opt=document.createElement('option');opt.value=e.id;opt.textContent=e.name;$('experiment').append(opt);selectExperiment(e.id);text('message','Opened locally; nothing uploaded');}catch(e){text('message','Import failed: '+e.message);}finally{ev.target.value='';}};const query=new URLSearchParams(location.search),initialScene=query.get('scene'),initialView=location.hash.slice(1)||(query.has('experiment')?'compare':'map');text('local-folder',registry.local?.bundleDirectory||'outputs/GTM_viewer_bundles');text('message',registry.local?.warnings?.join('; ')||'');$('online-basemap').onchange=()=>{for(const [id,layer] of Object.entries(basemaps))$('online-basemap').checked?layer.addTo(maps[id]):maps[id].removeLayer(layer);};$('refresh-experiments').onclick=refreshExperiments;selectExperiment(query.get('experiment')||registry.activeExperimentId||registry.experiments[0].id);if(initialScene&&experiment.scenes.some(s=>s.id===initialScene))selectScene(initialScene);switchView(initialView);}catch(e){text('message',e.message);console.error(e);}
+
+try {
+  if (!window.L) throw Error('Map library could not load');
+  Object.assign(registry, viewerLive.validate(registry));
+  ['main-map', 'original-map', 'prediction-map', 'truth-map'].forEach(initMap);
+  populateExperiments();
+  document.querySelector('.brand').onclick = event => { event.preventDefault(); switchView('national', true); };
+  $('experiment').onchange = () => selectExperiment($('experiment').value);
+  $('search').oninput = drawList;
+  $('filter').onchange = drawList;
+  document.querySelectorAll('[data-view]').forEach(button => button.onclick = () => switchView(button.dataset.view, true));
+  for (const id of ['pred-toggle', 'truth-toggle', 'error-toggle', 'bounds-toggle', 'opacity', 'threshold', 'prediction-mode', 'reference-opacity', 'comparison-support'])
+    $(id).oninput = renderGrid;
+  $('reset-threshold').onclick = () => {
+    $('threshold').value = scene?.decisionThreshold ?? experiment.decisionThreshold ?? 0.5;
+    renderGrid();
+  };
+  $('prediction-mode-compare').oninput = () => { $('prediction-mode').value = $('prediction-mode-compare').value; renderGrid(); };
+  $('fit').onclick = fit;
+  initComparisonControls();
+  $('overview').onclick = () => { switchView('map'); setTimeout(() => maps['main-map'].setView([39, -98], 4), 25); };
+  $('import').onchange = async event => {
+    try {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 50 * 1024 * 1024) throw Error('Bundle exceeds 50 MiB');
+      const parsed = JSON.parse(await file.text()), entry = validateExperiment(parsed.experiment || parsed);
+      if (registry.experiments.some(item => item.id === entry.id)) throw Error('Experiment ID already exists');
+      registry.experiments.push(entry);
+      viewerLive.imports.set(entry.id, entry);
+      populateExperiments();
+      selectExperiment(entry.id);
+      text('message', 'Opened in this browser only. Nothing uploaded.');
+    } catch (error) { text('message', 'Import failed: ' + error.message); }
+    finally { event.target.value = ''; }
+  };
+  $('online-basemap').onchange = () => {
+    for (const [id, layer] of Object.entries(basemaps))
+      $('online-basemap').checked ? layer.addTo(maps[id]) : maps[id].removeLayer(layer);
+  };
+  const query = new URLSearchParams(location.search), initialView = location.hash.slice(1) || 'national';
+  text('local-folder', registry.local?.bundleDirectory || 'outputs/GTM_viewer_bundles');
+  text('message', registry.local?.warnings?.join(' · ') || '');
+  selectExperiment(query.get('experiment') || registry.activeExperimentId || registry.experiments[0].id, query.get('scene'));
+  switchView(initialView);
+  atlas.start();
+  viewerLive.start();
+  window.addEventListener('popstate', () => {
+    const state = new URLSearchParams(location.search), previousView = location.hash.slice(1);
+    if (state.get('experiment') !== experiment.id || state.get('scene') !== scene?.id)
+      selectExperiment(state.get('experiment'), state.get('scene'));
+    switchView(previousView);
+  });
+} catch (error) {
+  document.body.dataset.connection = 'offline';
+  text('live-status', 'Viewer could not start');
+  text('message', error.message);
+  console.error(error);
+}

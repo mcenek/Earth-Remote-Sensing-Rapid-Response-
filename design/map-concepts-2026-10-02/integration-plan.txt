@@ -1,0 +1,153 @@
+ERSRR: US map and experiment viewer
+Concept and integration plan | October 2, 2026
+
+DESIGN DECISION
+Use a calm dark research workspace with the map as the main working surface.
+Keep filters and saved scenes on the left; reveal the selected scene's evidence
+on the right. Use teal for selection/actions, cyan for reference annotation,
+orange for predictions, and explicit text for review outcomes.
+
+The two ImageGen concepts show connected states:
+- us-map-overview-v2.png: national navigation and selected-scene inspection.
+- scene-comparison-v1.png: detailed comparison with a geographic locator.
+
+These are generated UI concepts, not working screens or scientific figures.
+Cartography, satellite imagery, footprints, labels and hatching are illustrative.
+The selected scene's displayed metrics are drawn from saved R5 evidence; the
+rendered image is not that evidence. In particular, illustrative hatch geometry
+is not an accurate depiction of the measured 19.36% support. Implementation
+must use the actual imagery, reference arrays, support masks and geotransforms.
+The Volusia and Georgia entries are input reviews, not new model predictions.
+
+WORKFLOW
+1. Open US map. Search a place, coordinates or scene ID. Filter by acquisition
+   date, experiment/model, prediction availability and review outcome.
+2. Select a marker, cluster or list row. Keep the selected row, map position and
+   inspector synchronized. Clicking a cluster zooms to its constituent scenes.
+3. At national scale show scene centers and cluster counts. At close zoom show
+   the actual image footprint and aligned imagery/reference/prediction layers.
+   Do not draw oversized image footprints at national scale.
+4. Inspect the date, location, model/run, available layers and a compact preview.
+   Distinguish selected-scene metrics from whole-experiment metrics.
+5. Open in experiment viewer launches the exact saved scene and experiment in
+   a new browser tab, keeping the map's filters and position intact.
+6. Detailed review supports linked pan/zoom, a common cursor, side-by-side or
+   swipe views, independent reference/prediction opacity, and fit-to-scene.
+7. Show on US map returns to the same scene. Preserve state in URLs so a shared
+   link or reload retains the selected experiment, scene, filters and map view.
+
+EXISTING CONNECTIONS VERIFIED
+- The local service at http://127.0.0.1:8766/api/health responded.
+- /api/experiments returned 50 experiments during this check.
+- The R5 mean entry contains 65 scenes. Its portable diagnostic bundle contains
+  six scenes. Deduplicate portable/full copies by experiment lineage and scene
+  identity so they do not become duplicate observation markers.
+- The existing viewer reads experiment and scene query parameters and the
+  #compare hash. Its current code already preserves selection in the URL.
+- /bundle-assets/ and /portable-bundles/ serve existing saved image assets.
+- The UI is served from GTM_Viewer by tools/GTM_Model0_local_viewer.py.
+
+Verified example selection:
+experiment = GTM_Model6_mapper_mars_pilot_20260922_r5_mean
+scene = MARS_2c6ef011-0729-42e2-b64f-10ff8207778b
+
+Existing viewer URL:
+http://127.0.0.1:8766/?experiment=GTM_Model6_mapper_mars_pilot_20260922_r5_mean&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare
+
+PHASE 1: US MAP AND DIRECT VIEWER LINKS
+Add a US map navigation item and a separate map entry page on the existing local
+service, for example /us-map/index.html. The current server serves explicit file
+paths; add a deliberate redirect before relying on /us-map/ as shorthand.
+Keep the current scene map and comparison viewer usable throughout.
+If both navigation items remain, call the existing selected-scene map "Scene"
+so users can distinguish it from the national "US map".
+
+Use a small React/shadcn shell for the new controls, with MapLibre for the
+geographic canvas. Build its static output under GTM_Viewer/us-map/ so the
+existing Python service can serve it. No second production server is required.
+The current viewer can keep Leaflet while the national map uses MapLibre.
+A styled vector basemap and optional satellite layer need a documented provider,
+proper attribution, and an offline state that still displays cached scenes.
+
+Read the existing /api/experiments endpoint using absolute same-origin asset
+URLs; do not create another manually maintained experiment database. Add a small
+adapter for selection, dates, availability, source provenance and georeferencing.
+Deduplicate a saved observation across experiments on the map; expose its
+available model outputs in the inspector. Keep truly different acquisitions
+separate. Allow refresh without losing selection or resetting the camera.
+
+Construct viewer links with URL and URLSearchParams. Carry the canonical
+experiment and scene IDs and #compare. Use a real accessible anchor with
+target="_blank" and rel="noopener". This should work from localhost and the
+existing private host without hardcoding either origin.
+
+GEOGRAPHIC PLACEMENT
+The selected sample has these saved bounds in the existing viewer's lat/lon order:
+southwest: [32.124513356532056, -103.99299716049046]
+northeast: [32.14272420478199, -103.97159535458891]
+
+MapLibre/GeoJSON use longitude then latitude. For a verified, north-up image in
+the appropriate display projection, image-source corner order is top-left,
+top-right, bottom-right, bottom-left. Explicitly convert the adapter's axis and
+corner order. Reproject rotated or differently projected rasters into a verified
+display asset instead of stretching a screenshot to an approximate bounding box.
+Preserve the source geotransform and valid-data/support mask.
+
+A point coordinate alone does not establish an image footprint. Pixel-only
+experiments remain searchable in the scene list but cannot produce geographic
+overlays. If only a trusted point exists, show a point and label the footprint
+unavailable. Missing coordinates must never default to 0,0.
+The image center and a predicted hotspot must remain distinct from a verified
+emission-source location.
+
+PHASE 2: CONNECTED COMPARISON EXPERIENCE
+Bring the second concept's visual hierarchy into the existing comparison view.
+Reuse its saved arrays, synchronized maps and provenance instead of implementing
+a second scoring pipeline. Switching Mean/S16/S32/S64/S128 resolves the available
+run IDs for the same scene, and preserves geographic extent. Missing outputs
+show an explicit unavailable state. A basemap toggle must not change the data.
+
+Keep reviewed reference acquisition dates separate from temporal input dates.
+The Imagery tab can list available target/reference acquisitions, cloud/quality
+metadata, footprint and date gap. Initially it only browses saved inputs.
+Fresh inference is a later, separate action with an explicit selected model and
+input pair; merely browsing the map must not trigger model jobs.
+
+RESEARCH UX RULES
+- Default marker coloring to labeled review/evidence state. Offer a separate
+  model-score view, using "score" until calibration supports "probability".
+- Low model score is not proof of no methane. Input-only and unavailable data
+  use neutral states. Unmarked regions mean no result.
+- Keep false positives and misses as easy to find as selected successes.
+- Show run-wide status next to selected-scene metrics.
+- Never treat an unscored/invalid pixel as a reviewed negative.
+- Date navigation follows image acquisition dates, not training-run dates.
+- Keep the sidebar collapsible and inspector resizable. At smaller widths use
+  a bottom detail sheet; retain keyboard access and a visible list alternative.
+- Use short, restrained transitions for selecting scenes and opening panels.
+  Respect reduced-motion preferences.
+- Notes/review actions shown in the concept require a real persistence design
+  before they become enabled product controls.
+
+VERIFICATION FOR IMPLEMENTATION
+Use browser E2E checks of the actual workflow. Select the saved sample from
+both its marker and list row; open its exact viewer link in a new tab; verify
+run/scene selection after reload; return to the same map state.
+Check imagery alignment against saved geographic bounds and known landmarks.
+Exercise input-only, missing-reference, no-coordinate and failed-run cases;
+test filter reset, acquisition dates, clustering, branch switching, keyboard
+navigation, offline tiles, and a smaller viewport.
+Save repeatable artifacts: browser trace, full-screen screenshots, selected
+IDs/URL, map bounds, data revision when available, and a short results receipt.
+No implementation or model changes were made as part of this concept pass.
+
+TECHNICAL REFERENCES
+MapLibre georeferenced image source:
+https://maplibre.org/maplibre-gl-js/docs/API/classes/ImageSource/
+shadcn composable sidebar:
+https://ui.shadcn.com/docs/components/base/sidebar
+
+GENERATION
+Both concepts were made with the built-in image_gen tool. Exact generation
+prompts, the overview correction prompt and original output paths are saved
+in generation-prompts.json beside this plan.

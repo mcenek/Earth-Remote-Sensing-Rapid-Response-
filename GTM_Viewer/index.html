@@ -1,28 +1,106 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GTM | Local Experiment Viewer</title><meta name="description" content="Geographic inspection of methane model predictions and reference observations."><link rel="stylesheet" href="assets/leaflet.css"><link rel="stylesheet" href="GTM_Model0.css"><link rel="icon" href="GTM_Model0.svg"></head><body>
-<header><a class="brand" href="#map">GTM <span>/ Experiment Viewer</span></a><nav aria-label="Views"><button data-view="map" class="selected">Map & evidence</button><button data-view="compare">Plume comparison</button><button data-view="experiments">Experiments</button></nav><label class="online-option"><input type="checkbox" id="online-basemap"> Online basemap</label><a href="GTM_Model0_team_comparison.html">Original team vs ours</a><a href="MARTIN_VISUAL_REVIEW.md">Visual review guide ↗</a><a href="research-docs/GTM_Model6_multiscale_reconstruction_design.md">GTM Model6 design ↗</a><a href="GTM_Model0_visual_review.md">Historical sanity-check ↗</a><a class="history" href="GTM_Model0_experiment_history.html">Historical chart ↗</a></header>
-<div class="context"><span class="tag">LOCAL · READ ONLY</span><a href="friday_20261002/index.html">Friday visual review ↗</a><span id="context">Loading experiment registry…</span><span id="message" role="status"></span></div>
-<div id="scene-flag" class="scene-flag" role="status"></div><div class="layout"><aside class="sidebar"><button id="scene-browser-toggle" class="scene-browser-toggle" aria-expanded="false">Browse experiments & scenes</button><div class="eyebrow">WORKSPACE</div><label for="experiment">Experiment</label><select id="experiment"></select><label for="search">Find a scene</label><input id="search" placeholder="Scene ID or location"><div class="filter-row"><label for="filter">Evidence</label><select id="filter"><option value="all">All scenes</option><option value="predictions">Prediction available</option><option value="paired">Prediction + reference</option><option value="unscored">Input only</option><option value="TP">Scene true positives</option><option value="FP">Scene false positives</option><option value="FN">Scene false negatives</option><option value="TN">Scene true negatives</option></select></div><div class="list-title"><h2>Scenes</h2><span id="count"></span></div><div id="scenes"></div><div id="no-scenes" hidden>No matching scenes. Try another experiment or filter.</div><div class="sidebar-bottom"><button id="refresh-experiments">Reload experiment folder</button><p id="local-folder" class="micro"></p><button id="overview">US overview</button><label class="import">Open experiment bundle<input id="import" type="file" accept=".json,application/json"></label><a href="GTM_Model0_bundle_guide.md">Bundle format ↗</a></div></aside>
-<main><section id="map-view" class="view"><div class="map-area"><div id="main-map" class="map"></div><div class="map-title"><span id="scene-title">Select an observation</span><small id="scene-subtitle"></small></div><div class="basemap-note">Local imagery. Online geographic context is optional.</div><div class="map-legend"><div class="prob-scale">Probability<div></div><small>0　　　　0.5　　　　1</small></div><span><i class="pred"></i>Thresholded mask</span><span><i class="truth"></i>Reference label</span><span><i class="extra"></i>Extra prediction</span><span><i class="miss"></i>Missed reference</span></div><div id="map-empty" class="empty-map" hidden></div><div class="map-controls"><label>Display <select id="prediction-mode"><option value="mask">Thresholded mask</option><option value="probability">Probability heatmap</option></select></label><label><input id="pred-toggle" type="checkbox" checked> Prediction</label><label><input id="truth-toggle" type="checkbox" checked> Reference</label><label><input id="error-toggle" type="checkbox"> Disagreement</label><label><input id="bounds-toggle" type="checkbox"> Footprint</label><label>Opacity <input id="opacity" type="range" min="0" max="1" step="0.05" value="0.45"></label></div></div><aside class="evidence"><div class="eyebrow">SELECTED SCENE</div><h2>Source & evidence</h2><div id="source-cards"></div><h3>Provenance</h3><dl id="provenance"></dl><p id="pixel-inspector" class="pixel-inspector">Hover a scene pixel to inspect values. Click to move the cross-section.</p><div id="map-diagnostics" class="note"></div><div id="limitations" class="note"></div><h3>Cross-section</h3><canvas id="profile" width="360" height="140" aria-label="Prediction and reference across the middle row"></canvas><p class="micro">Selected row: amber probability, cyan binary reference. Not a methane concentration or flux estimate.</p></aside></section>
-<section id="compare-view" class="view" hidden>
-<div class="compare-toolbar"><div><div class="eyebrow">EXPERIMENT INSPECTION</div><h1>Prediction over ground truth</h1><p id="compare-scene-label" class="micro"></p></div><div class="workspace-actions"><button id="layout-overlay" aria-pressed="true">Overlay</button><button id="layout-panels" aria-pressed="false">Side by side</button><button id="fit">Fit scene</button></div></div>
-<div class="overlay-controls">
-<label><input id="compare-pred" type="checkbox" checked><i class="pred"></i>Prediction</label>
-<label><input id="compare-truth" type="checkbox" checked><i class="truth"></i>Ground-truth outline</label>
-<label><input id="compare-errors" type="checkbox">Disagreement</label>
-<label>Display <select id="prediction-mode-compare"><option value="mask">Thresholded mask</option><option value="probability">Probability heatmap</option></select></label>
-<label>Opacity <input id="compare-opacity" type="range" min="0" max="1" step="0.05" value="0.45"><output id="compare-opacity-value">45%</output></label>
-<label><input id="linked" type="checkbox" checked> Link zoom</label>
-</div>
-<div class="comparison-stats" id="comparison-stats"></div>
-<div class="triple overlay-layout" id="comparison-layout">
-<article class="prediction-panel"><div class="panel-heading"><h3>Prediction + ground truth</h3><span class="panel-badge">SAME PIXELS</span></div><p id="prediction-status" class="layer-status"></p><div class="canvas-wrap"><div id="prediction-map" class="compare-map"></div><div class="overlay-key"><span><i class="pred"></i>Model prediction</span><span><i class="truth"></i>Ground-truth boundary</span></div><div id="compare-empty" class="empty-map" hidden></div></div></article>
-<article class="observation-panel"><h3>Original Sentinel-2</h3><p class="layer-status">Observed input · contrast stretched</p><div id="original-map" class="compare-map"></div></article>
-<article class="truth-panel"><h3>Ground-truth reference</h3><p id="reference-status" class="layer-status"></p><div id="truth-map" class="compare-map"></div></article>
-</div>
-<div class="compare-legend"><span><i class="pred"></i>Prediction / correct overlap</span><span><i class="truth"></i>Ground truth</span><span><i class="extra"></i>False-positive pixels</span><span><i class="miss"></i>Missed plume pixels</span><span>Heatmap: purple 0 → teal 0.5 → yellow 1</span></div>
-<div class="comparison-readout"><span id="compare-pixel-inspector">Hover over imagery to inspect a pixel.</span><span id="coordinate-note"></span></div>
-<div class="analysis"><article><h3>Mask threshold</h3><label class="threshold">Threshold <input id="threshold" type="range" min="0.01" max="0.99" step="0.01" value="0.4"><output id="threshold-value">0.40</output></label><button id="reset-threshold" class="quiet-button">Reset to artifact threshold</button><p class="micro">Exploratory display only; the frozen benchmark stays unchanged.</p><canvas id="histogram" width="500" height="130" aria-label="Prediction probability histogram"></canvas></article><article><h3>Pixel agreement with ground truth</h3><div id="pixel-metrics" class="metric-grid"></div><p id="metric-note" class="micro"></p></article></div>
-<details class="comparison-details"><summary>Provenance & diagnostic details</summary><div id="compare-notice" class="note"></div><div class="diagnostic-strip" id="diagnostics"></div></details>
-</section>
-<section id="experiments-view" class="view" hidden><div class="page-title"><div class="eyebrow">EXPERIMENT REGISTRY</div><h1>Results, with their limits.</h1><p>Switch experiments without changing tools. Historical aggregate results and scene overlays are separate evidence.</p></div><div id="experiments"></div><div class="note">An EMIT-derived target is not automatically independent ground truth. A matching facility coordinate is not proof of methane emissions. Global benchmarks do not establish US performance.</div></section>
-</main></div><script src="assets/leaflet.js"></script><script src="GTM_Model0_bootstrap.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ERSRR | Methane Research</title>
+  <meta name="description" content="Inspect methane model runs, predictions, imagery, and their limits.">
+  <link rel="stylesheet" href="assets/leaflet.css"><link rel="stylesheet" href="GTM_Model0.css"><link rel="stylesheet" href="GTM_Model0_atlas.css"><link rel="icon" href="GTM_Model0.svg">
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="#national" aria-label="ERSRR Research, open US map"><img src="GTM_Model0.svg" alt=""><strong>ERSRR</strong><span>Research</span></a>
+    <nav class="primary-nav" aria-label="Views"><button data-view="national" class="selected">Map</button><button data-view="compare">Compare</button><button data-view="imagery">Imagery</button><button data-view="experiments">Experiments</button></nav>
+    <div class="header-links"><a id="open-viewer" class="review-link" href="#compare" target="_blank" rel="noopener">Open experiment viewer ↗</a><details class="more-links"><summary>More</summary><div class="more-menu"><a href="friday_20261002/index.html">Research review</a><a href="GTM_Model0_team_comparison.html">Original team comparison</a><a href="GTM_Model0_experiment_history.html">Historical chart</a><a href="MARTIN_VISUAL_REVIEW.md">Visual review guide</a><a href="research-docs/GTM_Model6_multiscale_reconstruction_design.md">Model6 design</a></div></details></div>
+  </header>
+  <div class="status-bar">
+    <span class="source-mark" aria-hidden="true"></span><span id="backend-name" class="backend-name">Experiment source</span>
+    <span id="live-status" role="status">Connecting to experiment results…</span><span class="status-divider" aria-hidden="true"></span>
+    <span class="updated-label">Checked <time id="live-updated">—</time></span><span id="run-progress" class="producer-progress" hidden></span>
+    <label class="auto-refresh"><input id="auto-refresh" type="checkbox" checked> Auto refresh</label>
+    <button id="refresh-experiments" class="text-button">Refresh now</button>
+    <button id="new-results" hidden>New results available</button><span id="message" role="status"></span>
+  </div>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Experiment and scene browser">
+      <button id="scene-browser-toggle" class="scene-browser-toggle" aria-expanded="false">Browse runs and scenes</button>
+      <div class="sidebar-content">
+        <div class="section-heading"><span class="eyebrow">RUN SELECTION</span></div>
+        <label for="experiment" class="field-label">Experiment</label><select id="experiment"></select>
+        <div id="run-summary" class="run-summary" role="status">Waiting for run details.</div>
+        <div class="scene-browser-heading"><span class="eyebrow">SCENE BROWSER</span><h2>Scenes <span id="count"></span></h2></div>
+        <label for="search" class="visually-hidden">Find a scene</label><input id="search" type="search" placeholder="Search scene or location">
+        <label for="filter" class="visually-hidden">Filter by available evidence</label>
+        <select id="filter" aria-label="Filter scenes by evidence"><option value="all">All scenes</option><option value="predictions">Prediction available</option><option value="paired">Prediction + reference</option><option value="unscored">Input only</option><option value="TP">Scene true positives</option><option value="FP">Scene false positives</option><option value="FN">Scene false negatives</option><option value="TN">Scene true negatives</option></select>
+        <div id="scenes" class="scenes"></div><div id="no-scenes" class="list-empty" hidden>No scenes match these filters. Choose another run or clear the search.</div>
+        <div class="sidebar-bottom"><button id="overview" class="quiet-button">US overview</button><label class="import">Open experiment bundle<input id="import" type="file" accept=".json,application/json"></label><details class="local-details"><summary>Local source details</summary><p id="local-folder" class="micro"></p><a href="GTM_Model0_bundle_guide.md">Bundle format ↗</a></details></div>
+      </div>
+    </aside>
+    <main>
+      <div class="workspace-meta"><span id="context"></span><span id="scene-flag" class="scene-flag" role="status"></span></div>
+      <div id="data-status" class="data-status" role="status" hidden></div>
+      <section id="national-view" class="view" aria-label="US research map" hidden>
+        <div class="atlas-layout">
+          <aside class="atlas-browser" aria-label="Map filters and saved observations">
+            <button id="atlas-browser-toggle" class="scene-browser-toggle" aria-expanded="false">Filters and saved scenes</button>
+            <div class="atlas-browser-content">
+              <label for="atlas-search">Find a location or scene</label><input id="atlas-search" type="search" placeholder="Location, coordinates or scene ID">
+              <label>Date range</label><div class="date-range"><input id="atlas-from" type="date" aria-label="Acquisition from"><input id="atlas-to" type="date" aria-label="Acquisition through"></div>
+              <label for="atlas-experiment">Model / experiment</label><select id="atlas-experiment"><option value="all">All saved experiments</option></select>
+              <label for="atlas-filter">Review status</label><select id="atlas-filter"><option value="all">All saved evidence</option><option value="partial">Plume overlap</option><option value="missed">Missed plume</option><option value="false-positive">False-positive pixels</option><option value="clear">No predicted / reference plume</option><option value="input">Input only</option><option value="unmapped">No geographic footprint</option></select>
+              <div class="atlas-list-heading"><h2>Saved scenes <span id="atlas-count"></span></h2><button id="atlas-reset" class="text-button">Clear filters</button></div>
+              <div id="atlas-scenes" class="atlas-scenes"></div><p id="atlas-empty" class="note" hidden>No saved scenes match these filters.</p>
+              <p id="atlas-scope" class="atlas-scope">Saved observations. Unmarked areas have no result.</p>
+            </div>
+          </aside>
+          <div class="atlas-workspace">
+            <div class="atlas-canvas"><div id="atlas-map" aria-label="US saved observations map"></div>
+              <div class="atlas-map-switch"><button id="atlas-offline" aria-pressed="true">Map</button><button id="atlas-satellite" aria-pressed="false">Satellite</button></div>
+              <div class="atlas-region-controls"><button id="atlas-home" title="Contiguous United States">US</button><button id="atlas-alaska">AK</button><button id="atlas-hawaii">HI</button><button id="atlas-fit">Fit scene</button></div>
+              <div class="atlas-map-note"><span id="atlas-map-status">Local boundaries · no tile download</span><span>Saved observations · unmarked areas have no result</span></div>
+              <div class="atlas-map-key"><span><i class="pred"></i>Plume overlap</span><span><i class="miss"></i>Miss / false alarm</span><span><i class="neutral"></i>Input or unscored</span></div>
+            </div>
+            <div class="atlas-timeline"><div><span>Acquisition date</span><strong id="atlas-date-label">No date selected</strong><div><button id="atlas-previous" aria-label="Previous acquisition">‹</button><button id="atlas-next" aria-label="Next acquisition">›</button></div></div><div class="acquisition-axis"><div class="acquisition-track"></div><div id="atlas-date-marks" role="group" aria-label="Saved acquisition dates"></div><input id="atlas-date" class="timeline-scrubber" type="range" min="0" max="0" value="0" aria-label="Acquisition date navigation" title="Use arrow keys to move between saved acquisitions"><div id="atlas-date-range"></div></div><div class="timeline-caption"><span id="atlas-date-count"></span><span>Dates reflect image acquisition</span></div></div>
+          </div>
+          <aside id="atlas-inspector" class="atlas-inspector" aria-label="Selected observation"><div class="inspector-heading"><h1 id="atlas-title">Select an observation</h1><span class="research-badge">Experimental</span></div><p id="atlas-location" class="micro"></p><p id="atlas-acquired"></p><label for="atlas-model">Available saved output</label><select id="atlas-model"></select>
+            <p id="atlas-selection-note" class="note" hidden>Selected observation is outside these filters.</p><div id="atlas-preview" class="atlas-preview"></div><div id="atlas-metrics" class="atlas-metrics"></div><p id="atlas-run-status" class="run-warning"></p>
+            <a id="atlas-open-viewer" class="primary-action" href="#compare" target="_blank" rel="noopener">Open in experiment viewer ↗</a><button id="atlas-compare" class="secondary-action">Compare here</button><button id="atlas-open-scene" class="text-button">Scene map and provenance</button>
+            <div class="atlas-layers"><h3>Layers</h3><label><input id="atlas-footprint" type="checkbox" checked> Image footprint</label><label><input id="atlas-reference" type="checkbox" checked> Reference annotation <i class="truth"></i></label><label><input id="atlas-prediction" type="checkbox" checked> Model prediction <i class="pred"></i></label><label><input id="atlas-support" type="checkbox" checked> No output <i class="no-output-key"></i></label></div>
+            <dl id="atlas-provenance"></dl><p id="atlas-note" class="note"></p>
+          </aside>
+        </div>
+      </section>
+      <section id="map-view" class="view" aria-label="Scene map">
+        <div class="map-area">
+          <div id="main-map" class="map"></div>
+          <div class="map-title"><span id="scene-title">Select an observation</span><small id="scene-subtitle"></small></div>
+          <div class="basemap-note">Local imagery · online geographic context optional</div>
+          <div class="map-legend"><div class="prob-scale">Model score<div></div><small>0 <span>0.5</span> 1</small></div><span><i class="pred"></i>Thresholded mask</span><span><i class="truth"></i>Reference label</span><span><i class="extra"></i>Extra prediction</span><span><i class="miss"></i>Missed reference</span></div>
+          <div id="map-empty" class="empty-map" hidden></div>
+          <div class="map-controls"><label>Display <select id="prediction-mode"><option value="mask">Thresholded mask</option><option value="probability">Model score heatmap</option></select></label><label><input id="pred-toggle" type="checkbox" checked> Prediction</label><label><input id="truth-toggle" type="checkbox" checked> Reference</label><label><input id="error-toggle" type="checkbox"> Disagreement</label><label><input id="bounds-toggle" type="checkbox"> Footprint</label><label>Opacity <input id="opacity" type="range" min="0" max="1" step="0.05" value="0.45"></label><label><input type="checkbox" id="online-basemap"> Online basemap</label></div>
+        </div>
+        <aside class="evidence" aria-label="Selected scene evidence"><div class="eyebrow">SELECTED SCENE</div><h2>Evidence and source</h2><div id="asset-status" role="status" class="asset-status"></div><div id="source-cards"></div><h3>Provenance</h3><dl id="provenance"></dl><p id="pixel-inspector" class="pixel-inspector">Hover a scene pixel to inspect values. Click to move the cross-section.</p><div id="map-diagnostics" class="note"></div><div id="limitations" class="note"></div><h3>Cross-section</h3><canvas id="profile" width="360" height="140" aria-label="Prediction and reference across the middle row"></canvas><p class="micro">Selected row: amber probability, cyan binary reference. Not a methane concentration or flux estimate.</p></aside>
+      </section>
+      <section id="compare-view" class="view compare-view" hidden>
+        <div class="compare-toolbar"><div><button class="text-button" data-view="national">← Back to US map</button><h1>Prediction and reference</h1><p id="compare-scene-label" class="micro"></p></div><div class="workspace-actions"><button id="layout-overlay" aria-pressed="false">Overlay</button><button id="layout-panels" aria-pressed="true">Side by side</button><button id="fit">Fit scene</button></div></div>
+        <div class="model-controls"><label for="comparison-experiment">Model</label><select id="comparison-experiment"></select><span>Branch</span><div id="comparison-branches" class="branch-controls"></div><label for="comparison-scene">Scene</label><select id="comparison-scene"></select></div>
+        <div class="overlay-controls"><label><input id="compare-pred" type="checkbox" checked><i class="pred"></i>Prediction</label><label><input id="compare-truth" type="checkbox" checked><i class="truth"></i>Reference outline</label><label><input id="compare-errors" type="checkbox"> Disagreement</label><label>Display <select id="prediction-mode-compare"><option value="mask">Thresholded mask</option><option value="probability">Model score heatmap</option></select></label><label>Opacity <input id="compare-opacity" type="range" min="0" max="1" step="0.05" value="0.45"><output id="compare-opacity-value">45%</output></label><label><input id="linked" type="checkbox" checked> Link zoom</label></div>
+        <div class="comparison-stats" id="comparison-stats"></div>
+        <div class="reference-controls"><label>Reference opacity <input id="reference-opacity" type="range" min="0" max="1" step="0.05" value="1"><output id="reference-opacity-value">100%</output></label><label><input id="comparison-support" type="checkbox" checked><i class="no-output-key"></i> Hatch pixels without model output</label></div>
+        <div class="triple" id="comparison-layout">
+          <article class="prediction-panel"><div class="panel-heading"><h3>Prediction + reference</h3><span class="panel-badge">SAME PIXELS</span></div><p id="prediction-status" class="layer-status"></p><div class="canvas-wrap"><div id="prediction-map" class="compare-map"></div><div class="overlay-key"><span><i class="pred"></i>Model prediction</span><span><i class="truth"></i>Reference boundary</span></div><div id="compare-empty" class="empty-map" hidden></div></div></article>
+          <article class="observation-panel"><h3>Original Sentinel-2</h3><p class="layer-status">Observed input · contrast stretched</p><div id="original-map" class="compare-map"></div></article>
+          <article class="truth-panel"><h3>Reference</h3><p id="reference-status" class="layer-status"></p><div id="truth-map" class="compare-map"></div></article>
+        </div>
+        <div class="compare-legend"><span><i class="pred"></i>Prediction / correct overlap</span><span><i class="truth"></i>Reference</span><span><i class="extra"></i>False-positive pixels</span><span><i class="miss"></i>Missed plume pixels</span><span>Heatmap: purple 0 → teal 0.5 → yellow 1</span></div>
+        <div class="comparison-readout"><span id="compare-pixel-inspector">Hover over imagery to inspect a pixel.</span><span id="coordinate-note"></span></div>
+        <div class="scene-summary"><div class="scene-locator"><div><h3>Location</h3><button data-view="national" class="text-button">Show on US map ↗</button></div><div id="locator-map" aria-label="Selected scene geographic locator"></div><p id="locator-note" class="micro"></p></div><div class="native-summary"><h3>This scene · saved native scores</h3><div id="native-scene-summary"></div></div><div class="run-summary-panel"><h3>Whole experiment</h3><div id="whole-run-summary"></div><a id="compare-open-viewer" class="primary-action" href="#compare" target="_blank" rel="noopener">Open experiment viewer ↗</a></div></div>
+        <div class="analysis"><article><h3>Mask threshold</h3><label class="threshold">Threshold <input id="threshold" type="range" min="0.01" max="0.99" step="0.01" value="0.4"><output id="threshold-value">0.40</output></label><button id="reset-threshold" class="quiet-button">Reset to artifact threshold</button><p class="micro">Exploratory display only; the frozen benchmark stays unchanged.</p><canvas id="histogram" width="500" height="130" aria-label="Prediction probability histogram"></canvas></article><article><h3>Pixel agreement with reference</h3><div id="pixel-metrics" class="metric-grid"></div><p id="metric-note" class="micro"></p></article></div>
+        <details class="comparison-details"><summary>Provenance and diagnostic details</summary><div id="compare-notice" class="note"></div><div class="diagnostic-strip" id="diagnostics"></div></details>
+      </section>
+      <section id="imagery-view" class="view imagery-view" hidden><div class="page-title"><button class="text-button" data-view="national">← Back to US map</button><h1>Saved imagery</h1><p id="imagery-description"></p></div><div id="imagery-layers" class="imagery-layers"></div><div id="imagery-metadata" class="note"></div></section>
+      <section id="experiments-view" class="view experiments-view" hidden><div class="page-title"><div class="eyebrow">EXPERIMENT REGISTRY</div><h1>Run results</h1><p>Historical aggregate results and scene overlays are separate evidence.</p></div><div id="experiments"></div><div class="note">An EMIT-derived target is not automatically independent ground truth. A matching facility coordinate is not proof of methane emissions. Global benchmarks do not establish US performance.</div></section>
+    </main>
+  </div>
+  <script src="assets/leaflet.js"></script><script src="assets/topojson-client.min.js"></script><script src="GTM_Model0_live.js"></script><script src="GTM_Model0_atlas.js"></script><script src="GTM_Model0_bootstrap.js"></script>
+</body>
+</html>

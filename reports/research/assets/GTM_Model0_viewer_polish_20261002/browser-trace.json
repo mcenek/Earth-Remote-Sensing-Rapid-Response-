@@ -1,0 +1,1901 @@
+{
+  "result": "passed",
+  "checkedAt": "2026-10-02T18:30:59.748Z",
+  "checks": [
+    {
+      "name": "first publication loads actual imagery",
+      "passed": true
+    },
+    {
+      "name": "next publication retains selection and controls",
+      "passed": true
+    },
+    {
+      "name": "zoom remains above fit after publication",
+      "passed": true
+    },
+    {
+      "name": "partial manifest retains saved evidence",
+      "passed": true
+    },
+    {
+      "name": "backend outage explicit",
+      "passed": true
+    },
+    {
+      "name": "automatic reconnect",
+      "passed": true
+    },
+    {
+      "name": "invalid grid explicit",
+      "passed": true
+    },
+    {
+      "name": "invalid image explicit",
+      "passed": true
+    },
+    {
+      "name": "repaired images recover",
+      "passed": true
+    },
+    {
+      "name": "US satellite remains clear",
+      "passed": true
+    },
+    {
+      "name": "phone has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "input only disables prediction",
+      "passed": true
+    },
+    {
+      "name": "shared pixel inspection",
+      "passed": true
+    },
+    {
+      "name": "separate tab opens exact scene",
+      "passed": true
+    },
+    {
+      "name": "Back navigation repaired",
+      "passed": true
+    },
+    {
+      "name": "archive has no false reference claim",
+      "passed": true
+    },
+    {
+      "name": "Mean prefers full export",
+      "passed": true
+    },
+    {
+      "name": "model branches remain distinct while portable copies are deduplicated",
+      "passed": true
+    }
+  ],
+  "steps": [
+    {
+      "step": "Filtered missed-plume marker selected; actual saved images loaded",
+      "time": "2026-10-02T17:22:45.057Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "missed",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 0,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "http://127.0.0.1:64037/portable-bundles/GTM_Model6_mapper_r5_portable/0001_rgb.png?v=7b12ca452dbd0702d369",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 0
+        },
+        {
+          "height": 0,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "http://127.0.0.1:64037/portable-bundles/GTM_Model6_mapper_r5_portable/0001_rgb.png?v=7b12ca452dbd0702d369",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 0
+        },
+        {
+          "height": 0,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "http://127.0.0.1:64037/portable-bundles/GTM_Model6_mapper_r5_portable/0001_rgb.png?v=7b12ca452dbd0702d369",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1996px",
+                "2006px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-998px, -1003px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 0
+        }
+      ],
+      "metrics": "Native IoU at 0.500.0%Display IoU at 0.500.0%Native FP pixels257Native evaluated pixels7,744",
+      "observations": "(1)",
+      "opacity": "0.45",
+      "referenceOpacity": "1",
+      "selectedRun": "GTM_Model6_mapper_r5_portable",
+      "selectedScene": "MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d",
+      "threshold": "0.5",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d&nlat=31.72817&nlon=-103.44727&nz=4.00&nf=missed#national",
+      "view": "national",
+      "warning": ""
+    },
+    {
+      "step": "Date marker click and keyboard next acquisition selected actual scenes",
+      "time": "2026-10-02T17:31:20.620Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 0,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "http://127.0.0.1:64037/portable-bundles/GTM_Model6_mapper_r5_portable/0002_rgb.png?v=7b12ca452dbd0702d369",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 0
+        },
+        {
+          "height": 0,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "http://127.0.0.1:64037/portable-bundles/GTM_Model6_mapper_r5_portable/0002_rgb.png?v=7b12ca452dbd0702d369",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 0
+        },
+        {
+          "height": 0,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "http://127.0.0.1:64037/portable-bundles/GTM_Model6_mapper_r5_portable/0002_rgb.png?v=7b12ca452dbd0702d369",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "1983px",
+                "1993px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(-992px, -997px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 0
+        }
+      ],
+      "metrics": "Native IoU at 0.5025.4%Display IoU at 0.5022.7%Native FP pixels220Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.45",
+      "referenceOpacity": "1",
+      "selectedRun": "GTM_Model6_mapper_r5_portable",
+      "selectedScene": "MARS_35027778-4dc9-494b-b876-fb8391c69a61",
+      "threshold": "0.5",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_35027778-4dc9-494b-b876-fb8391c69a61&nlat=31.39116&nlon=-103.62305&nz=4.00#national",
+      "view": "national",
+      "warning": ""
+    },
+    {
+      "step": "Queued verification publication, no scenes exported yet",
+      "time": "2026-10-02T17:32:30.637Z",
+      "assetStatus": "No scene selected",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [],
+          "width": 452
+        }
+      ],
+      "metrics": "Display IoU—Predicted area—Ground-truth area—Scene decisionNot recorded",
+      "observations": "(15)",
+      "opacity": "0.45",
+      "referenceOpacity": "1",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "",
+      "threshold": "0.5",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "first scene and running state arrive without reloading",
+      "time": "2026-10-02T17:37:21.575Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/c288e2d0f5084d34bd35586e1d1c5447/0000_rgb.png?v=07b3ffb6e660d390df9d",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/c288e2d0f5084d34bd35586e1d1c5447/0000_rgb.png?v=07b3ffb6e660d390df9d",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/c288e2d0f5084d34bd35586e1d1c5447/0000_rgb.png?v=07b3ffb6e660d390df9d",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5038.1%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.45",
+      "referenceOpacity": "1",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.5",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "controls and zoom before next publication",
+      "time": "2026-10-02T17:37:43.899Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/c288e2d0f5084d34bd35586e1d1c5447/0000_rgb.png?v=07b3ffb6e660d390df9d",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/c288e2d0f5084d34bd35586e1d1c5447/0000_rgb.png?v=07b3ffb6e660d390df9d",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/c288e2d0f5084d34bd35586e1d1c5447/0000_rgb.png?v=07b3ffb6e660d390df9d",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "second scene and completed state arrive without reload",
+      "time": "2026-10-02T17:37:57.756Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "malformed replacement retains saved scene with warning",
+      "time": "2026-10-02T17:38:47.496Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": "GTM_Model0_live_replay: Expecting property name enclosed in double quotes: line 1 column 2 (char 1) · GTM_Model0_live_replay: showing last valid publication"
+    },
+    {
+      "step": "backend offline retains imagery and controls",
+      "time": "2026-10-02T17:39:24.439Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Backend unavailable · saved view retained",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": "Reconnect to the backend to see new results. Retrying automatically."
+    },
+    {
+      "step": "automatic reconnection retains selected evidence",
+      "time": "2026-10-02T17:39:59.387Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "invalid pixel grid shows error instead of zero metrics",
+      "time": "2026-10-02T17:41:21.941Z",
+      "assetStatus": "Pixel data unavailable (Expected property name or '}' in JSON at position 1 (line 1 column 2)). Saved images may still be visible; interactive pixel scores are unavailable.",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=5e08d47bd3cad6ee38ac",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_prediction.png?v=5e08d47bd3cad6ee38ac",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_truth.png?v=5e08d47bd3cad6ee38ac",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=5e08d47bd3cad6ee38ac",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=5e08d47bd3cad6ee38ac",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_truth.png?v=5e08d47bd3cad6ee38ac",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.51—Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "invalid image bytes visibly reported",
+      "time": "2026-10-02T17:42:17.520Z",
+      "assetStatus": "4 image layer(s) could not load. Refresh to retry.",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": false,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=e0b76542ecc59b1c3451",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 0
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": false,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=e0b76542ecc59b1c3451",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 0
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": false,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=e0b76542ecc59b1c3451",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 0
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "repaired assets recover automatically",
+      "time": "2026-10-02T17:42:51.356Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "http://127.0.0.1:64037/bundle-assets/GTM_Model0_live_replay/_versions/b8c7fc2b58de4634ad10cad5ae42f494/0000_rgb.png?v=773c04825f285b1f0d68",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "352px",
+                "354px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(50px, -22px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.5038.8%Display IoU at 0.5136.9%Native FP pixels192Native evaluated pixels7,744",
+      "observations": "(15)",
+      "opacity": "0.5",
+      "referenceOpacity": "0.95",
+      "selectedRun": "GTM_Model0_live_replay",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.51",
+      "url": "http://127.0.0.1:64037/?experiment=GTM_Model0_live_replay&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "satellite outside-US mask and acquisition timeline",
+      "count": "76 saved acquisitions",
+      "date": "01 Nov 2023",
+      "mask": [
+        {
+          "fillRule": "evenodd",
+          "opacity": "0.72"
+        }
+      ],
+      "selectedPreview": true,
+      "stateFills": [
+        "0"
+      ],
+      "stateLabels": 49,
+      "tileCount": 16
+    },
+    {
+      "step": "complete catalog S16 branch preserves scene",
+      "time": "2026-10-02T17:46:21.039Z",
+      "assetStatus": "Scene imagery loaded",
+      "connection": "Connected · watching results",
+      "filter": "all",
+      "layout": "triple",
+      "maps": [
+        {
+          "height": 310,
+          "id": "prediction-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:8766/bundle-assets/GTM_Model6_mapper_mars_pilot_20260922_r5_S16/0000_rgb.png?v=c6c400566bdc8e1dda09",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "original-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:8766/bundle-assets/GTM_Model6_mapper_mars_pilot_20260922_r5_S16/0000_rgb.png?v=c6c400566bdc8e1dda09",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        },
+        {
+          "height": 310,
+          "id": "truth-map",
+          "images": [
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "http://127.0.0.1:8766/bundle-assets/GTM_Model6_mapper_mars_pilot_20260922_r5_S16/0000_rgb.png?v=c6c400566bdc8e1dda09",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            },
+            {
+              "loaded": true,
+              "size": [
+                "249px",
+                "250px"
+              ],
+              "src": "generated overlay",
+              "transform": "translate3d(102px, 30px, 0px)",
+              "width": 160
+            }
+          ],
+          "width": 452
+        }
+      ],
+      "metrics": "Native IoU at 0.505.4%Display IoU at 0.506.1%Native FP pixels308Native evaluated pixels7,744",
+      "observations": "(215)",
+      "opacity": "0.45",
+      "referenceOpacity": "1",
+      "selectedRun": "GTM_Model6_mapper_mars_pilot_20260922_r5_S16",
+      "selectedScene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "threshold": "0.5",
+      "url": "http://127.0.0.1:8766/?experiment=GTM_Model6_mapper_mars_pilot_20260922_r5_S16&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b&nlat=38.51379&nlon=-97.99805&nz=4.00&nb=satellite#compare",
+      "view": "compare",
+      "warning": ""
+    },
+    {
+      "step": "phone filter selection and input-only comparison",
+      "maps": [
+        {
+          "height": 270,
+          "width": 345
+        },
+        {
+          "height": 270,
+          "width": 345
+        },
+        {
+          "height": 270,
+          "width": 345
+        }
+      ],
+      "metrics": "Display IoU—Predicted area—Ground-truth area—Scene decisionNot recorded",
+      "notice": "No prediction imagery exported for this experiment yet. Its saved metrics are under Experiments.",
+      "pageWidth": 375,
+      "predictionDisabled": true,
+      "selected": "56217",
+      "view": "compare",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "step": "linked crosshair and actual pixel inspection",
+      "cursors": 3,
+      "readout": "Pixel 79, 79 · p 0.6298 · reference negative"
+    },
+    {
+      "step": "same-scene link opens comparison in new tab",
+      "images": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "selected": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "url": "http://127.0.0.1:8766/?experiment=GTM_Model6_mapper_mars_pilot_20260922_r5_mean&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b&nlat=38.51379&nlon=-97.99805&nz=4.00&nb=satellite#compare",
+      "view": "compare"
+    },
+    {
+      "step": "found navigation history defect before repair",
+      "selected": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "view": "national",
+      "expectedView": "compare"
+    },
+    {
+      "step": "navigation retry ran before startup completed, inconclusive",
+      "scene": ""
+    },
+    {
+      "step": "navigation repair verified after initialization",
+      "scene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "url": "http://127.0.0.1:8766/?experiment=GTM_Model6_mapper_mars_pilot_20260922_r5_mean&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b&nb=satellite&nlat=38.50000&nlon=-98.00000&nz=4.00#compare",
+      "view": "compare"
+    },
+    {
+      "step": "original archive rendered without invented truth or scores",
+      "loaded": true,
+      "metrics": "Archive dateMarch 27, 2026Acquisition dateUnknownRaw scores / referenceUnavailable",
+      "truthDisabled": true
+    },
+    {
+      "step": "full Mean remains available with all 65 scenes",
+      "count": 65,
+      "meanTarget": "GTM_Model6_mapper_mars_pilot_20260922_r5_mean",
+      "run": "GTM_Model6_mapper_mars_pilot_20260922_r5_mean",
+      "scene": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b"
+    },
+    {
+      "step": "distinct model branches survive shared cache hashes",
+      "filterOptions": [
+        "all",
+        "GTM_Model6_native_nearest",
+        "GTM_Model6_native_pred128",
+        "GTM_Model6_native_pred16",
+        "GTM_Model6_native_pred32",
+        "GTM_Model6_native_pred64",
+        "GTM_Model6_native_uniform_mean",
+        "GTM_Model0",
+        "GTM_Model6_emit_only_f1",
+        "GTM_Model6_emit_only_f2",
+        "GTM_Model6_emit_only_f3",
+        "GTM_Model6_emit_only_f4",
+        "GTM_Model6_sentinel_emit_f1",
+        "GTM_Model6_sentinel_emit_f2",
+        "GTM_Model6_sentinel_emit_f3",
+        "GTM_Model6_sentinel_emit_f4",
+        "GTM_Model6_plume_01_mean",
+        "GTM_Model6_plume_01_S128",
+        "GTM_Model6_plume_01_S16",
+        "GTM_Model6_plume_01_S32",
+        "GTM_Model6_plume_01_S64",
+        "GTM_Model6_plume_01_spatial_prior",
+        "GTM_Model6_plume_evidence_02_mean",
+        "GTM_Model6_plume_evidence_02_S128",
+        "GTM_Model6_plume_evidence_02_S16",
+        "GTM_Model6_plume_evidence_02_S32",
+        "GTM_Model6_plume_evidence_02_S64",
+        "GTM_Model6_plume_evidence_02_spatial_prior",
+        "GTM_Model6_plume_evidence_02_spectral_baseline",
+        "GTM_Model6_emit_only_f0",
+        "GTM_Model6_sentinel_emit_f0",
+        "GTM_Model6_mapper_mars_pilot_20260922_r2_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r3_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r4_checked_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r4_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S128",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S16",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S32",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S64",
+        "GTM_Model6_mapper_training_sanity_20260922_mean",
+        "GTM_Model1",
+        "GTM_Model5",
+        "GTM_Model4",
+        "GTM_Model0_capstone_archive_20260327"
+      ],
+      "observations": "(215)",
+      "variants": [
+        "GTM_Model6_plume_01_mean",
+        "GTM_Model6_plume_01_S128",
+        "GTM_Model6_plume_01_S16",
+        "GTM_Model6_plume_01_S32",
+        "GTM_Model6_plume_01_S64",
+        "GTM_Model6_plume_01_spatial_prior",
+        "GTM_Model6_plume_evidence_02_mean",
+        "GTM_Model6_plume_evidence_02_S128",
+        "GTM_Model6_plume_evidence_02_S16",
+        "GTM_Model6_plume_evidence_02_S32",
+        "GTM_Model6_plume_evidence_02_S64",
+        "GTM_Model6_plume_evidence_02_spatial_prior",
+        "GTM_Model6_plume_evidence_02_spectral_baseline",
+        "GTM_Model6_mapper_mars_pilot_20260922_r2_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r3_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r4_checked_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r4_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_mean",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S128",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S16",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S32",
+        "GTM_Model6_mapper_mars_pilot_20260922_r5_S64"
+      ],
+      "view": "national"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "result": "passed",
+  "checks": [
+    {
+      "name": "legacy health app",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "fresh portable scenes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "live metadata and no-store",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "conditional catalog",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "first scene arrives",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "run state passed through",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "published asset serves",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "expanded revision arrives",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "old version remains readable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "malformed update retains last good",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "missing asset retains last good",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same-name asset changes revision",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "asset response no-store",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "traversal blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "symlink blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "invalid new scene isolated",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "unsafe manifest path rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "remote host CLI documented",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "backend": "temporary stdlib HTTP child",
+  "publisher": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\tools\\GTM_Model0_publish_viewer.py",
+  "viewer": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\tools\\GTM_Model0_local_viewer.py"
+}
