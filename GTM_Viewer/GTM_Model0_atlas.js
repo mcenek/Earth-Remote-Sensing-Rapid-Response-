@@ -71,7 +71,7 @@ const atlas = {
   rebuild() {
     const grouped = new Map();
     // Prefer complete exports over portable copies when both contain identical outputs.
-    const entries = [...registry.experiments].sort((a, b) =>
+    const entries = [...catalogExperiments()].sort((a, b) =>
       Number(a.id.includes('portable')) - Number(b.id.includes('portable')) || b.scenes.length - a.scenes.length);
     for (const entry of entries) for (const item of entry.scenes) {
       const point = this.point(item);
@@ -89,7 +89,7 @@ const atlas = {
     const available = new Map();
     for (const record of this.records) for (const variant of record.variants) available.set(variant.experiment.id, variant.experiment);
     $('atlas-experiment').innerHTML = '<option value="all">All saved experiments</option>' + [...available.values()]
-      .map(entry => '<option value="' + esc(entry.id) + '">' + esc(entry.name) + '</option>').join('');
+      .map(entry => '<option value="' + esc(entry.id) + '">' + esc(experimentLabel(entry)) + '</option>').join('');
     if (available.has(filterValue)) $('atlas-experiment').value = filterValue;
     this.filter(false);
   },
@@ -245,11 +245,12 @@ const atlas = {
   },
 
   supportImage() {
-    if (!grid?.probability || !scene) return null;
+    const values = isReconstruction() ? grid?.prediction : grid?.probability;
+    if (!values || !scene) return null;
     const canvas = document.createElement('canvas'); canvas.width = grid.width; canvas.height = grid.height;
     const context = canvas.getContext('2d'), pixels = context.createImageData(grid.width, grid.height);
     for (let i = 0; i < grid.width * grid.height; i++) {
-      if ((!grid.valid || grid.valid[i]) && grid.probability[i] != null) continue;
+      if ((!grid.valid || grid.valid[i]) && values[i] != null) continue;
       const stripe = (i % grid.width + Math.floor(i / grid.width)) % 7 < 2;
       pixels.data.set(stripe ? [151, 168, 180, 120] : [7, 20, 28, 85], i * 4);
     }
@@ -263,20 +264,36 @@ const atlas = {
     if (!scene || scene.coordinateSystem === 'pixel') return;
     if (!this.visible.some(r => r.variants.some(v => v.scene.id === scene.id && v.scene.date === scene.date))) return;
     if ($('atlas-footprint').checked) L.rectangle(scene.bounds, {color: '#56d9de', weight: 1.5, fillOpacity: .025}).addTo(this.overlays);
-    if (this.map.getZoom() < 10) return;
+    if (this.map.getZoom() < 10) {
+      text('atlas-overlay-hint', 'Zoom in or select Fit scene to see the saved prediction.');
+      return;
+    }
+    text('atlas-overlay-hint', isReconstruction() ? 'Continuous reconstruction; colors use the saved value range.' :
+      'Orange: model prediction. Cyan: reference. Unmarked areas have no result.');
     const add = (url, opacity = 1) => {
       if (url) L.imageOverlay(assetUrl(url), scene.bounds, {opacity, interactive: false}).on('error', () =>
         text('atlas-map-status', 'A saved layer is unavailable. Open the scene for details.')).addTo(this.overlays);
     };
-    add(scene.rgb);
-    if ($('atlas-prediction').checked) add(grid?.probability ? makeLayer('prediction') : scene.predictionImage, .65);
-    if ($('atlas-reference').checked) add(grid?.truth ? makeLayer('truth') : scene.truthImage, 1);
+    add(scene.rgb || scene.observedImage);
+    if (isReconstruction() && $('atlas-reference').checked) add(this.referenceImage(), .35);
+    if ($('atlas-prediction').checked) add(this.predictionImage(), .65);
+    if (!isReconstruction() && $('atlas-reference').checked) add(this.referenceImage(), 1);
     if ($('atlas-support').checked) add(this.supportImage());
+  },
+
+  predictionImage() {
+    return isReconstruction() ? makeReconstructionLayer('prediction') || scene?.predictionImage :
+      grid?.probability ? makeLayer('prediction') : scene?.predictionImage;
+  },
+  referenceImage() {
+    return isReconstruction() ? makeReconstructionLayer('observed') || scene?.observedImage :
+      grid?.truth ? makeLayer('truth') : scene?.truthImage;
   },
 
   renderSelected() {
     if (!this.map) return;
     const changedSelection = this.lastScene !== scene?.id;
+    if (changedSelection && this.lastScene && view !== 'national') this.needsInitialFit = true;
     this.lastScene = scene?.id;
     this.selected = this.records.find(r => r.variants.some(v => v.scene.id === scene?.id && v.scene.date === scene?.date));
     $('atlas-selection-note').hidden = !scene || this.visible.includes(this.selected);
@@ -285,31 +302,33 @@ const atlas = {
     text('atlas-location', point ? point.map((value, i) => Math.abs(value).toFixed(3) + '° ' + (i ? value < 0 ? 'W' : 'E' : value < 0 ? 'S' : 'N')).join(', ') : 'Geographic footprint unavailable');
     text('atlas-acquired', this.date(scene?.date));
     const variants = this.selected?.variants || [];
-    $('atlas-model').innerHTML = variants.map(v => '<option value="' + esc(v.experiment.id) + '">' + esc(v.experiment.name) + '</option>').join('');
+    $('atlas-model').innerHTML = variants.map(v => '<option value="' + esc(v.experiment.id) + '">' + esc(experimentLabel(v.experiment)) + '</option>').join('');
     if (!variants.some(v => v.experiment.id === experiment.id) && scene) {
       const option = document.createElement('option'); option.value = experiment.id; option.textContent = experiment.name;
       $('atlas-model').append(option);
     }
     $('atlas-model').value = experiment.id;
     $('atlas-model').disabled = !scene;
-    const prediction = grid?.probability ? makeLayer('prediction') : scene?.predictionImage;
-    const truth = grid?.truth ? makeLayer('truth') : scene?.truthImage;
+    const prediction = this.predictionImage();
+    const truth = this.referenceImage();
     const support = this.supportImage();
     const image = (url, label, opacity = 1) => url ? '<img src="' + esc(assetUrl(url)) + '" alt="' + esc(label) + '" style="opacity:' + opacity + '">' : '';
     $('atlas-preview').innerHTML = scene && (scene.rgb || scene.observedImage || prediction) ?
       image(scene.rgb || scene.observedImage, 'Saved observed scene') +
       ($('atlas-prediction').checked ? image(prediction, 'Saved prediction', .65) : '') +
-      ($('atlas-reference').checked ? image(truth, 'Reference annotation') : '') +
+      ($('atlas-reference').checked ? image(truth, isReconstruction() ? 'Observed reference' : 'Reference annotation', isReconstruction() ? .35 : 1) : '') +
       ($('atlas-support').checked ? image(support, 'Hatched pixels have no model output') : '') +
-      '<span class="preview-caption">Saved data · ' + (scene.outputKind === 'rendered_archive' ? 'original red rendering; no matched reference' : prediction ? 'orange prediction / cyan reference' : 'no model prediction') + '</span>' :
+      '<span class="preview-caption">Saved data · ' + (isReconstruction() ? 'reconstruction in ' + esc(grid?.units || scene.units || 'unverified units') : scene.outputKind === 'rendered_archive' ? 'original red rendering; no matched reference' : prediction ? 'orange prediction / cyan reference' : 'no model prediction') + '</span>' :
       '<div class="preview-empty">No image exported for this selection.</div>';
     $('atlas-preview').querySelectorAll('img').forEach(img => img.onerror = () => {
       img.dataset.state = 'error';
       const caption = $('atlas-preview').querySelector('.preview-caption');
       if (caption) caption.textContent = 'An image layer could not load';
     });
-    $('atlas-metrics').innerHTML = this.metrics([['Scene IoU', this.percent(n?.iou)], ['Evaluated area', this.percent(n?.support_fraction, 2)],
-      ['Run IoU', this.percent(experiment.nativeAggregate?.iou, 2)]]);
+    $('atlas-metrics').innerHTML = this.metrics(scene?.positiveOnlyReference ?
+      [['EMIT support recall', this.percent(n?.recall)], ['Outside outline', 'Unknown'], ['Precision / IoU', 'Not measured']] :
+      isReconstruction() ? [['Output', 'Continuous'], ['Plume mask', 'Not this task'], ['Units', grid?.units || scene.units || 'Unverified']] :
+      [['Scene IoU', this.percent(n?.iou)], ['Evaluated area', this.percent(n?.support_fraction, 2)], ['Run IoU', this.percent(experiment.nativeAggregate?.iou, 2)]]);
     text('atlas-run-status', experiment.status || 'Run status not recorded');
     const entries = {Scene: scene?.id, Center: point?.map(v => v.toFixed(4)).join(', '), Acquired: this.date(scene?.date),
       Reference: scene?.referenceDate ? this.date(scene.referenceDate) : 'Unavailable',
@@ -340,12 +359,13 @@ const atlas = {
     return values.map(([label, value]) => '<div><span>' + esc(label) + '</span><strong>' + esc(value) + '</strong></div>').join('');
   },
   renderComparison() {
-    $('comparison-experiment').innerHTML = registry.experiments.map(entry => '<option value="' + esc(entry.id) + '">' + esc(entry.name) + '</option>').join('');
+    $('comparison-branches').hidden = $('comparison-branch-label').hidden = !showArchive;
+    $('comparison-experiment').innerHTML = catalogExperiments().map(entry => '<option value="' + esc(entry.id) + '">' + esc(experimentLabel(entry)) + '</option>').join('');
     $('comparison-experiment').value = experiment.id;
     $('comparison-scene').innerHTML = experiment.scenes.map(item => '<option value="' + esc(item.id) + '">' + esc(item.name) + '</option>').join('');
     $('comparison-scene').value = scene?.id || '';
     $('comparison-scene').disabled = !scene;
-    const candidates = registry.experiments.filter(e => this.family(e) === this.family(experiment)).sort((a, b) =>
+    const candidates = catalogExperiments().filter(e => this.family(e) === this.family(experiment)).sort((a, b) =>
       Number(a.id.includes('portable')) - Number(b.id.includes('portable')) || b.scenes.length - a.scenes.length);
     $('comparison-branches').innerHTML = ['mean', 's16', 's32', 's64', 's128'].map(branch => {
       const match = candidates.find(e => this.branch(e) === branch && e.scenes.some(s => s.id === scene?.id));
@@ -359,8 +379,9 @@ const atlas = {
     });
     const n = scene?.nativeMetrics;
     const reference = scene?.truthLabel || 'Unavailable';
-    $('native-scene-summary').innerHTML = '<div class="atlas-metrics">' + this.metrics([
-      ['IoU', this.percent(n?.iou)], ['Precision', this.percent(n?.precision)], ['Recall', this.percent(n?.recall)]]) +
+    $('native-scene-summary').innerHTML = '<div class="atlas-metrics">' + this.metrics(scene?.positiveOnlyReference ?
+      [['EMIT support recall', this.percent(n?.recall)], ['Precision / IoU', 'Not measured'], ['Outside outline', 'Unknown']] :
+      [['IoU', this.percent(n?.iou)], ['Precision', this.percent(n?.precision)], ['Recall', this.percent(n?.recall)]]) +
       '</div><dl><dt>Evaluated area</dt><dd>' + esc(this.percent(n?.support_fraction, 2)) + '</dd><dt>Reference</dt><dd>' +
       esc(reference) + '</dd><dt>Acquired</dt><dd>' + esc(this.date(scene?.date)) + '</dd></dl>';
     const aggregate = experiment.nativeAggregate;
@@ -441,7 +462,14 @@ const atlas = {
     this.resizing = true;
     if (view === 'national') {
       this.map.invalidateSize({pan: false});
-      this.map.setView(this.camera.center, this.camera.zoom, {animate: false});
+      if (this.needsInitialFit && scene?.bounds && scene.coordinateSystem !== 'pixel') {
+        this.map.fitBounds(scene.bounds, {padding: [35, 35], maxZoom: 17, animate: false});
+        this.camera = {center: this.map.getCenter(), zoom: this.map.getZoom()};
+        this.needsInitialFit = false;
+      } else this.map.setView(this.camera.center, this.camera.zoom, {animate: false});
+      this.drawMarkers();
+      this.updateStateLabels();
+      this.drawSelectedLayers();
     }
     if (view === 'compare') {
       this.locator.invalidateSize({pan: false});
@@ -449,6 +477,7 @@ const atlas = {
       this.locator.setView(point || [39, -98], point ? 6 : 3, {animate: false});
     }
     this.resizing = false;
+    if (view === 'national') this.saveState();
   },
 
   async start() {
@@ -456,6 +485,8 @@ const atlas = {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.map = L.map('atlas-map', {zoomControl: false, trackResize: false, zoomSnap: .25, minZoom: 2, maxZoom: 19, zoomAnimation: !reduced, fadeAnimation: !reduced})
       .setView([38.5, -98], 4);
+    // Keep state fills and the outside-US mask above basemap tiles but below saved imagery.
+    this.map.createPane('atlas-context').style.zIndex = '250';
     L.control.zoom({position: 'topright'}).addTo(this.map);
     L.control.scale({position: 'bottomright', imperial: false}).addTo(this.map);
     this.map.attributionControl.addAttribution('Boundaries: <a href="https://github.com/topojson/us-atlas">US Census / us-atlas</a>');
@@ -465,6 +496,7 @@ const atlas = {
     this.overlays = L.layerGroup().addTo(this.map);
     this.locatorLayers = L.layerGroup().addTo(this.locator);
     const query = new URLSearchParams(location.search);
+    this.needsInitialFit = !query.has('nz');
     for (const [id, key] of [['atlas-search', 'nq'], ['atlas-filter', 'nf'], ['atlas-from', 'from'], ['atlas-to', 'to']])
       if (query.has(key)) $(id).value = query.get(key);
     this.rebuild();
@@ -535,7 +567,7 @@ const atlas = {
       const topology = await response.json();
       this.states = topojson.feature(topology, topology.objects.states);
       this.stateLayer = L.geoJSON(this.states, {
-        style: {color: '#47606e', weight: .8, fillColor: '#223744', fillOpacity: .72}, interactive: false
+        pane: 'atlas-context', style: {color: '#47606e', weight: .8, fillColor: '#223744', fillOpacity: .72}, interactive: false
       }).addTo(this.map).bringToBack();
       L.geoJSON(this.states, {style: {color: '#47606e', weight: .8, fillColor: '#223744', fillOpacity: .72},
         interactive: false}).addTo(this.locator);
@@ -546,7 +578,7 @@ const atlas = {
         feature.geometry.coordinates : [feature.geometry.coordinates]);
       const rings = [[[-85, -180], [-85, 180], [85, 180], [85, -180]],
         ...polygons.map(polygon => polygon[0].map(([lon, lat]) => [lat, lon]))];
-      this.outsideMask = L.polygon(rings, {stroke: false, fillColor: '#18242d', fillOpacity: .72,
+      this.outsideMask = L.polygon(rings, {pane: 'atlas-context', stroke: false, fillColor: '#18242d', fillOpacity: .72,
         fillRule: 'evenodd', interactive: false});
       this.updateBasemapStyle();
       for (const feature of this.states.features) {

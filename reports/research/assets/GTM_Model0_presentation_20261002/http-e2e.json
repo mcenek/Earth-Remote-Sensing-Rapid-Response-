@@ -1,0 +1,348 @@
+{
+  "result": "passed",
+  "checks": [
+    {
+      "name": "legacy health app",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "fresh portable scenes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "prediction-first default",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "two portable presentation collections",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities MARS_2d64f495-fd6b-491c-8614-69f7d303fa1d",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2c6ef011-0729-42e2-b64f-10ff8207778b rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2c6ef011-0729-42e2-b64f-10ff8207778b truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2c6ef011-0729-42e2-b64f-10ff8207778b predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2c6ef011-0729-42e2-b64f-10ff8207778b grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities MARS_2c6ef011-0729-42e2-b64f-10ff8207778b",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "opening prediction has visible pixels GTM_Model6_mapper_r5_portable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_35027778-4dc9-494b-b876-fb8391c69a61 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_35027778-4dc9-494b-b876-fb8391c69a61 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_35027778-4dc9-494b-b876-fb8391c69a61 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_35027778-4dc9-494b-b876-fb8391c69a61 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities MARS_35027778-4dc9-494b-b876-fb8391c69a61",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_dac5deb4-0c1c-4040-9c12-c059c692bd04 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_dac5deb4-0c1c-4040-9c12-c059c692bd04 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_dac5deb4-0c1c-4040-9c12-c059c692bd04 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_dac5deb4-0c1c-4040-9c12-c059c692bd04 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities MARS_dac5deb4-0c1c-4040-9c12-c059c692bd04",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities MARS_2a0831e4-fde7-40ea-8c39-eb0ea8675c89",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_b2453f15-531e-4377-8576-f46fbd2234f7 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_b2453f15-531e-4377-8576-f46fbd2234f7 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_b2453f15-531e-4377-8576-f46fbd2234f7 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset MARS_b2453f15-531e-4377-8576-f46fbd2234f7 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities MARS_b2453f15-531e-4377-8576-f46fbd2234f7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0024 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0024 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0024 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0024 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities emit25km-0024",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0049 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0049 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0049 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0049 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities emit25km-0049",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "opening prediction has visible pixels GTM_Model6_emit_evidence_portable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0069 rgb",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0069 truthImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0069 predictionImage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation asset emit25km-0069 grid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "saved probabilities emit25km-0069",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "nine presentation scenes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "live metadata and no-store",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "conditional catalog",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "first scene arrives",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "run state passed through",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "published asset serves",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "expanded revision arrives",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "old version remains readable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "malformed update retains last good",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "missing asset retains last good",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same-name asset changes revision",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "asset response no-store",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "traversal blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "symlink blocked",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "invalid new scene isolated",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "unsafe manifest path rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "remote host CLI documented",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "backend": "temporary stdlib HTTP child",
+  "publisher": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\tools\\GTM_Model0_publish_viewer.py",
+  "viewer": "C:\\Users\\joshu\\PROJECTS\\REMOTE-SENSING\\ersrr-ordinal-win\\tools\\GTM_Model0_local_viewer.py"
+}

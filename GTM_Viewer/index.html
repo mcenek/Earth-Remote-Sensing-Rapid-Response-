@@ -20,6 +20,12 @@
     <button id="refresh-experiments" class="text-button">Refresh now</button>
     <button id="new-results" hidden>New results available</button><span id="message" role="status"></span>
   </div>
+  <div class="catalog-bar">
+    <div><strong id="catalog-title">Presentation examples</strong><span id="catalog-note">Loading saved predictions</span></div>
+    <button id="start-presentation" class="quiet-button">Start presentation</button>
+    <label for="catalog-mode" class="visually-hidden">Experiment collection</label>
+    <select id="catalog-mode" aria-label="Experiment collection"><option value="presentation">Presentation examples</option><option value="all">Full research archive</option></select>
+  </div>
   <div class="layout">
     <aside class="sidebar" aria-label="Experiment and scene browser">
       <button id="scene-browser-toggle" class="scene-browser-toggle" aria-expanded="false">Browse runs and scenes</button>
@@ -56,7 +62,7 @@
             <div class="atlas-canvas"><div id="atlas-map" aria-label="US saved observations map"></div>
               <div class="atlas-map-switch"><button id="atlas-offline" aria-pressed="true">Map</button><button id="atlas-satellite" aria-pressed="false">Satellite</button></div>
               <div class="atlas-region-controls"><button id="atlas-home" title="Contiguous United States">US</button><button id="atlas-alaska">AK</button><button id="atlas-hawaii">HI</button><button id="atlas-fit">Fit scene</button></div>
-              <div class="atlas-map-note"><span id="atlas-map-status">Local boundaries · no tile download</span><span>Saved observations · unmarked areas have no result</span></div>
+              <div class="atlas-map-note"><span id="atlas-map-status">Local boundaries · no tile download</span><span id="atlas-overlay-hint">Saved observations · unmarked areas have no result</span></div>
               <div class="atlas-map-key"><span><i class="pred"></i>Plume overlap</span><span><i class="miss"></i>Miss / false alarm</span><span><i class="neutral"></i>Input or unscored</span></div>
             </div>
             <div class="atlas-timeline"><div><span>Acquisition date</span><strong id="atlas-date-label">No date selected</strong><div><button id="atlas-previous" aria-label="Previous acquisition">‹</button><button id="atlas-next" aria-label="Next acquisition">›</button></div></div><div class="acquisition-axis"><div class="acquisition-track"></div><div id="atlas-date-marks" role="group" aria-label="Saved acquisition dates"></div><input id="atlas-date" class="timeline-scrubber" type="range" min="0" max="0" value="0" aria-label="Acquisition date navigation" title="Use arrow keys to move between saved acquisitions"><div id="atlas-date-range"></div></div><div class="timeline-caption"><span id="atlas-date-count"></span><span>Dates reflect image acquisition</span></div></div>
@@ -81,12 +87,12 @@
         <aside class="evidence" aria-label="Selected scene evidence"><div class="eyebrow">SELECTED SCENE</div><h2>Evidence and source</h2><div id="asset-status" role="status" class="asset-status"></div><div id="source-cards"></div><h3>Provenance</h3><dl id="provenance"></dl><p id="pixel-inspector" class="pixel-inspector">Hover a scene pixel to inspect values. Click to move the cross-section.</p><div id="map-diagnostics" class="note"></div><div id="limitations" class="note"></div><h3>Cross-section</h3><canvas id="profile" width="360" height="140" aria-label="Prediction and reference across the middle row"></canvas><p class="micro">Selected row: amber probability, cyan binary reference. Not a methane concentration or flux estimate.</p></aside>
       </section>
       <section id="compare-view" class="view compare-view" hidden>
-        <div class="compare-toolbar"><div><button class="text-button" data-view="national">← Back to US map</button><h1>Prediction and reference</h1><p id="compare-scene-label" class="micro"></p></div><div class="workspace-actions"><button id="layout-overlay" aria-pressed="false">Overlay</button><button id="layout-panels" aria-pressed="true">Side by side</button><button id="fit">Fit scene</button></div></div>
-        <div class="model-controls"><label for="comparison-experiment">Model</label><select id="comparison-experiment"></select><span>Branch</span><div id="comparison-branches" class="branch-controls"></div><label for="comparison-scene">Scene</label><select id="comparison-scene"></select></div>
+        <div class="compare-toolbar"><div><button class="text-button" data-view="national">← Back to US map</button><h1>Prediction and reference</h1><p id="compare-scene-label" class="micro"></p></div><div class="workspace-actions"><button id="layout-overlay" aria-pressed="true">Overlay</button><button id="layout-panels" aria-pressed="false">Side by side</button><button id="fit">Fit scene</button></div></div>
+        <div class="model-controls"><label for="comparison-experiment">Model</label><select id="comparison-experiment"></select><span id="comparison-branch-label">Branch</span><div id="comparison-branches" class="branch-controls"></div><label for="comparison-scene">Scene</label><select id="comparison-scene"></select></div>
         <div class="overlay-controls"><label><input id="compare-pred" type="checkbox" checked><i class="pred"></i>Prediction</label><label><input id="compare-truth" type="checkbox" checked><i class="truth"></i>Reference outline</label><label><input id="compare-errors" type="checkbox"> Disagreement</label><label>Display <select id="prediction-mode-compare"><option value="mask">Thresholded mask</option><option value="probability">Model score heatmap</option></select></label><label>Opacity <input id="compare-opacity" type="range" min="0" max="1" step="0.05" value="0.45"><output id="compare-opacity-value">45%</output></label><label><input id="linked" type="checkbox" checked> Link zoom</label></div>
         <div class="comparison-stats" id="comparison-stats"></div>
         <div class="reference-controls"><label>Reference opacity <input id="reference-opacity" type="range" min="0" max="1" step="0.05" value="1"><output id="reference-opacity-value">100%</output></label><label><input id="comparison-support" type="checkbox" checked><i class="no-output-key"></i> Hatch pixels without model output</label></div>
-        <div class="triple" id="comparison-layout">
+        <div class="triple overlay-layout" id="comparison-layout">
           <article class="prediction-panel"><div class="panel-heading"><h3>Prediction + reference</h3><span class="panel-badge">SAME PIXELS</span></div><p id="prediction-status" class="layer-status"></p><div class="canvas-wrap"><div id="prediction-map" class="compare-map"></div><div class="overlay-key"><span><i class="pred"></i>Model prediction</span><span><i class="truth"></i>Reference boundary</span></div><div id="compare-empty" class="empty-map" hidden></div></div></article>
           <article class="observation-panel"><h3>Original Sentinel-2</h3><p class="layer-status">Observed input · contrast stretched</p><div id="original-map" class="compare-map"></div></article>
           <article class="truth-panel"><h3>Reference</h3><p id="reference-status" class="layer-status"></p><div id="truth-map" class="compare-map"></div></article>

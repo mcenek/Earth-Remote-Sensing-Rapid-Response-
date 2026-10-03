@@ -18,7 +18,9 @@ On Windows, `GTM_Model0_OpenViewer.cmd` starts or reuses the viewer. It reads sa
 | Original team vs Model6 | http://127.0.0.1:8766/GTM_Model0_team_comparison.html |
 | Volusia EMIT/Sentinel input | http://127.0.0.1:8766/GTM_Model6_emit_2025_intake.html |
 
-Start with the research review. Select each case, zoom or drag an image to move all three panels together, then reset. Cyan marks the reference; warm colors mark the saved prediction. Gray stripes mean no model output. Volusia has no prediction. Scroll down for the architecture and open the PDF for the meeting handout.
+The root address opens a saved prediction and reference in Compare. **Presentation examples** contains six plume-mapper cases and three predictions compared with EMIT positive references. The opening R5 scene has partial plume overlap. Missed plumes and false detections remain in the scene list. **Start presentation** restores this selection from an old bookmark or archive view. See [Sean's setup instructions](SEAN_SETUP.md) for the branch and update commands.
+
+Cyan marks the reference; orange marks the saved prediction. Gray stripes mean no model output. **Full research archive** exposes older folds, diagnostics, and report-only runs. The research review under **More** includes the diagram and PDF. Volusia is an input review with no prediction.
 
 For exploration, open the US map. Search and filter saved observations, select a map marker or acquisition date, then choose **Compare here**. Dates are placed at their actual position on the timeline; the arrow buttons and keyboard arrows move through saved acquisitions. The inspector links to the same scene in a new tab. The map's camera, filters and selected scene are kept in its URL. Unmarked areas have no saved result.
 
@@ -30,7 +32,7 @@ The saved R5 model failed its quality gate. A selected good-looking example is n
 
 `portable_bundles/` contains selected real outputs and their provenance. The comparison and intake pages work with these files on a fresh clone. The Volusia receipt preserves the September 25 acquisition snapshot; B11/B12 were added on September 30, as described in the Friday review. The provider's native EMIT annotation is 60 m even when displayed on a finer grid.
 
-Complete local experiments are read from `outputs/GTM_viewer_bundles/*/experiment.json`. Keep each experiment ID unique. The viewer checks for new publications automatically, preserves the scene being inspected, and offers a **Refresh now** control. Its connection indicator distinguishes an available backend from a retained view during an outage. See [live publication and backend setup](../docs/GTM_Model0_live_viewer.md) to publish complete exports safely from another machine.
+Complete local experiments are read from `outputs/GTM_viewer_bundles/*/experiment.json`. Keep each experiment ID unique. The viewer checks for new publications automatically, preserves the scene being inspected, and offers a **Refresh now** control. The new-results button opens the full catalog so newly published runs can be inspected without changing the presentation selection. Its connection indicator distinguishes an available backend from a retained view during an outage. See [live publication and backend setup](../docs/GTM_Model0_live_viewer.md) to publish complete exports safely from another machine.
 
 All review assets, Leaflet scripts and US boundaries are local. Satellite mode in the main viewer contacts Esri only when enabled; surrounding countries are dimmed while US imagery, borders and labels remain visible. Some older review pages offer OpenStreetMap context. Raw training imagery and checkpoints are not required to view the checked-in sample. Geography attribution is recorded in [assets/README.md](assets/README.md).
 

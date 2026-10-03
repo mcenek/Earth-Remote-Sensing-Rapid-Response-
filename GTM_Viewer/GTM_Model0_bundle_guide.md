@@ -16,6 +16,8 @@ Use the Experiment selector to switch saved runs. Map explorer and Compare resul
 
 ## Add a future experiment
 
+New publications appear in **Full research archive**. The new-results button opens that collection. To include a visually checked run in the default presentation, add its `id`, display `label`, and opening `sceneId` to `presentation.experiments` in `GTM_Model0_registry.json`. Set `activeExperimentId` to the desired opening run. Include its complete portable assets when sharing through Git. Presentation selection does not change scientific status or scores.
+
 Use Open experiment bundle to inspect a JSON file locally. Nothing is uploaded; the bundle lasts until reload. For portable local imports, embed PNG/JPEG/WebP image data URLs and inline the grid. For a persistent local experiment, prepare an `experiment.json` with image/grid assets beside it, then use the [atomic publisher](../docs/GTM_Model0_live_viewer.md). It writes to `outputs/GTM_viewer_bundles/<run>/experiment.json` only after the referenced assets are ready. The viewer picks up new results automatically or through **Refresh now**. Each run needs a unique experiment ID. A bundle may replace a built-in summary with the same ID; duplicate bundle IDs are rejected with a warning. Opening the viewer never starts inference or imagery acquisition.
 
 Minimal structure (placeholders below describe the format, not measured research data):

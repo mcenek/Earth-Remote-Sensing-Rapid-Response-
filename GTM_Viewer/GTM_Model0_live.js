@@ -115,7 +115,14 @@ const viewerLive = {
       }
     };
     $('refresh-experiments').onclick = () => this.refresh(true);
-    $('new-results').onclick = () => { $('new-results').hidden = true; switchView('experiments', true); };
+    $('new-results').onclick = () => {
+      $('new-results').hidden = true;
+      showArchive = true;
+      populateExperiments();
+      drawExperimentCards();
+      atlas.refresh();
+      switchView('experiments', true);
+    };
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden && $('auto-refresh').checked) this.refresh();
       else clearTimeout(this.timer);

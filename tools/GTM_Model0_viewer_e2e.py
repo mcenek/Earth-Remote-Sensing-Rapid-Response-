@@ -74,7 +74,7 @@ def main():
         process = subprocess.Popen([sys.executable, '-u', str(VIEWER), '--host', '127.0.0.1',
                                     '--port', str(port), '--bundles-dir', str(bundles),
                                     '--poll-seconds', '2', '--name', 'E2E backend'],
-                                   stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, text=True)
         base = f'http://127.0.0.1:{port}'
         try:
             for _ in range(60):
@@ -92,6 +92,30 @@ def main():
             registry = json.loads(body)
             check('fresh portable scenes', status == 200 and any(
                 e['id'] == 'GTM_Model6_mapper_r5_portable' and e['scenes'] for e in registry['experiments']))
+            presentation = registry.get('presentation', {})
+            check('prediction-first default', registry.get('activeExperimentId') == 'GTM_Model6_mapper_r5_portable'
+                  and presentation.get('defaultView') == 'compare')
+            cases = presentation.get('experiments', [])
+            check('two portable presentation collections', [case['id'] for case in cases] == [
+                'GTM_Model6_mapper_r5_portable', 'GTM_Model6_emit_evidence_portable'])
+            inspected = 0
+            for case in cases:
+                saved = next(e for e in registry['experiments'] if e['id'] == case['id'])
+                opening = next(s for s in saved['scenes'] if s['id'] == case['sceneId'])
+                for item in saved['scenes']:
+                    for key in ('rgb', 'truthImage', 'predictionImage', 'grid'):
+                        asset_status, _, payload = request(base + '/' + item[key])
+                        check('presentation asset ' + item['id'] + ' ' + key, asset_status == 200 and bool(payload))
+                    numeric = json.loads(payload)
+                    check('saved probabilities ' + item['id'], any(
+                        value is not None for value in numeric.get('probability', [])))
+                    if item['id'] == opening['id']:
+                        cutoff = item.get('decisionThreshold', saved.get('decisionThreshold', .5))
+                        check('opening prediction has visible pixels ' + saved['id'], any(
+                            value is not None and value >= cutoff and (not numeric.get('valid') or numeric['valid'][index])
+                            for index, value in enumerate(numeric['probability'])))
+                    inspected += 1
+            check('nine presentation scenes', inspected == 9)
             check('live metadata and no-store', registry['live']['serverName'] == 'E2E backend'
                   and headers.get('Cache-Control') == 'no-store')
             etag = headers.get('ETag')

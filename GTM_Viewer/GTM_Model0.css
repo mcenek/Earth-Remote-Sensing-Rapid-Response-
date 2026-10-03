@@ -53,6 +53,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 #message { flex-basis: 100%; color: #e5b471; line-height: 1.4; max-height: 44px; overflow: auto; }
 #message:empty { display: none; }
 .layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); flex: 1; min-height: 0; }
+.catalog-bar { display: flex; align-items: center; gap: 14px; padding: 9px 24px; border-bottom: 1px solid var(--line); background: #14272d; }
+.catalog-bar>div { flex: 1; min-width: 0; font-size: 12px; }
+.catalog-bar strong { color: #b1ece6; font-weight: 600; margin-right: 14px; }
+.catalog-bar span { color: var(--muted); font-size: 11px; }
+.catalog-bar select { width: 185px; padding: 6px 8px; }
+.catalog-bar button { white-space: nowrap; }
+@media (max-width: 760px) { .catalog-bar { padding: 8px 14px; gap: 8px; flex-wrap: wrap; }.catalog-bar>div { flex-basis: 100%; }.catalog-bar span { display: block; }.catalog-bar select { flex: 1; } }
 .sidebar { display: flex; flex-direction: column; background: #101c22; border-right: 1px solid var(--line); min-height: 0; }
 .sidebar-content { padding: 21px 18px 14px; display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 9px; }
 .section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1px; }

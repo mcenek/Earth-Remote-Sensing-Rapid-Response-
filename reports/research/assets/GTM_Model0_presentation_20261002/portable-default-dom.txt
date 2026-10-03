@@ -1,0 +1,160 @@
+- banner:
+  - link "ERSRR Research, open US map":
+    - /url: "#national"
+    - strong: ERSRR
+    - generic: Research
+  - navigation "Views":
+    - button "Map"
+    - button "Compare" [pressed]
+    - button "Imagery"
+    - button "Experiments"
+  - link "Open experiment viewer ↗":
+    - /url: http://127.0.0.1:8770/?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare
+  - generic "More⌄"
+- generic: Portable handoff check
+- status: Connected · watching results
+- text: Checked
+- time: 09:16:26 PM
+- checkbox "Auto refresh" [checked]
+- text: Auto refresh
+- button "Refresh now"
+- strong: Presentation examples
+- text: 9 saved prediction scenes. Selected overlaps, misses and false alarms; models remain experimental.
+- button "Start presentation"
+- generic: Experiment collection
+- combobox "Experiment collection":
+  - option "Presentation examples" [selected]
+  - option "Full research archive"
+- main:
+  - generic: Sentinel plume mapper | 6 saved cases · FAILED QUALITY GATE · Run-wide IoU 2.15%, precision 2.25% (65 scenes)
+  - status: PIXEL CHECK · 6.9% positive at threshold 0.50
+  - button "← Back to US map"
+  - heading "Prediction and reference" [level=1]
+  - paragraph: Sentinel plume mapper | 6 saved cases / MARS | Reviewed plume | 2023-11-01 | 8207778b
+  - button "Overlay" [pressed]
+  - button "Side by side"
+  - button "Fit scene"
+  - generic: Model
+  - combobox "Model":
+    - option "Sentinel plume mapper | 6 saved cases" [selected]
+    - option "Sentinel predictions vs EMIT | 3 saved cases"
+  - generic: Scene
+  - combobox "Scene":
+    - option "MARS | Reviewed plume | 2023-06-04 | d303fa1d"
+    - option "MARS | Reviewed plume | 2023-11-01 | 8207778b" [selected]
+    - option "MARS | Reviewed plume | 2023-11-21 | 91c69a61"
+    - option "MARS | Reviewed no plume | 2022-12-16 | c692bd04"
+    - option "MARS | Reviewed no plume | 2023-01-25 | a8675c89"
+    - option "MARS | Reviewed no plume | 2023-10-27 | bd2234f7"
+  - checkbox "Prediction" [checked]
+  - text: Prediction
+  - checkbox "Reference outline" [checked]
+  - generic: Reference outline
+  - checkbox "Disagreement"
+  - generic: Disagreement
+  - text: Display
+  - combobox "Display":
+    - option "Thresholded mask" [selected]
+    - option "Model score heatmap"
+  - text: Opacity
+  - slider "Opacity": "0.45"
+  - status: 45%
+  - checkbox "Link zoom" [checked]
+  - text: Link zoom
+  - generic "Frozen native scores use original prediction support at the saved cutoff. Display scores may change with resampling or the exploratory threshold.":
+    - generic: Native IoU at 0.50
+    - strong: 38.8%
+    - generic: Display IoU at 0.50
+    - strong: 38.1%
+    - generic: Native FP pixels
+    - strong: "192"
+    - generic: Native evaluated pixels
+    - strong: 7,744
+  - text: Reference opacity
+  - slider "Reference opacity": "1"
+  - status: 100%
+  - checkbox "Hatch pixels without model output" [checked]
+  - text: Hatch pixels without model output
+  - article:
+    - heading "Prediction + reference" [level=3]
+    - generic: SAME PIXELS
+    - paragraph: Mask ≥ 0.50
+    - button "Zoom in": +
+    - button "Zoom out": −
+    - generic: 300 m
+    - link "Leaflet":
+      - /url: https://leafletjs.com
+      - text: Leaflet
+    - generic: Model prediction
+    - generic: Reference boundary
+  - article:
+    - heading "Original Sentinel-2" [level=3]
+    - paragraph: Observed input · contrast stretched
+    - button "Zoom in": +
+    - button "Zoom out": −
+    - generic: 1 km
+    - link "Leaflet":
+      - /url: https://leafletjs.com
+      - text: Leaflet
+  - article:
+    - heading "Reference" [level=3]
+    - paragraph: MARS reviewed plume mask
+    - button "Zoom in": +
+    - button "Zoom out": −
+    - generic: 1 km
+    - link "Leaflet":
+      - /url: https://leafletjs.com
+      - text: Leaflet
+  - generic: Prediction / correct overlap
+  - generic: Reference
+  - generic: False-positive pixels
+  - generic: Missed plume pixels
+  - generic: "Heatmap: purple 0 → teal 0.5 → yellow 1"
+  - generic: Hover over imagery to inspect a pixel.
+  - generic: Georeferenced display · native scores cover 7,744 / 40,000 source-valid pixels; other pixels are unscored
+  - heading "Location" [level=3]
+  - button "Show on US map ↗"
+  - generic "Selected scene geographic locator":
+  - paragraph: 32.1336, -103.9823 · image center, not an emission source
+  - heading "This scene · saved native scores" [level=3]
+  - generic: IoU
+  - strong: 38.8%
+  - generic: Precision
+  - strong: 64.4%
+  - generic: Recall
+  - strong: 49.3%
+  - term: Evaluated area
+  - definition: 19.36%
+  - term: Reference
+  - definition: MARS reviewed plume mask
+  - term: Acquired
+  - definition: 01 Nov 2023
+  - heading "Whole experiment" [level=3]
+  - paragraph: 65 evaluated scenes
+  - paragraph:
+    - text: Pooled native IoU
+    - strong: 2.15%
+  - paragraph: FAILED QUALITY GATE
+  - paragraph: Reused development data. Selected examples do not establish generalization.
+  - link "Open experiment viewer ↗":
+    - /url: http://127.0.0.1:8770/?experiment=GTM_Model6_mapper_r5_portable&scene=MARS_2c6ef011-0729-42e2-b64f-10ff8207778b#compare
+  - article:
+    - heading "Mask threshold" [level=3]
+    - text: Threshold
+    - slider "Threshold": "0.5"
+    - status: "0.50"
+    - button "Reset to artifact threshold"
+    - paragraph: Exploratory display only; the frozen benchmark stays unchanged.
+    - generic "Prediction probability histogram"
+  - article:
+    - heading "Pixel agreement with reference" [level=3]
+    - generic: TP
+    - strong: "214"
+    - generic: FP
+    - strong: "124"
+    - generic: FN
+    - strong: "223"
+    - generic: TN
+    - strong: "4339"
+    - paragraph: 4,900 jointly valid display pixels. IoU 0.381. Selected-crop agreement; not the aggregate held-out benchmark.
+  - generic "Provenance and diagnostic details"

@@ -3,6 +3,38 @@ const $=id=>document.getElementById(id), esc=v=>String(v??'—').replace(/[&<>"'
 const registry=window.GTM_DATA;let experiment,scene,grid=null,view='map',loadToken=0,syncing=false,profileRow=null,mapMode='geo';const maps={},layers={},markers=[],basemaps={},homeZoom={};
 let gridRequest, gridLoading = false, gridError = '', renderGeneration = 0;
 let assetStates = new Map();
+let showArchive = new URLSearchParams(location.search).get('catalog') === 'all';
+function presentationCase(entry) {
+  return registry.presentation?.experiments?.find(item => item.id === entry?.id);
+}
+function experimentLabel(entry) { return presentationCase(entry)?.label || entry.name; }
+function catalogExperiments() {
+  if (showArchive) return registry.experiments;
+  const selected = (registry.presentation?.experiments || []).map(item =>
+    registry.experiments.find(entry => entry.id === item.id)).filter(entry => entry?.scenes.some(hasPred));
+  return selected.length ? selected : registry.experiments.filter(entry => entry.scenes.some(hasPred));
+}
+function updateCatalogSummary() {
+  const entries = catalogExperiments();
+  $('catalog-mode').value = showArchive ? 'all' : 'presentation';
+  text('catalog-title', showArchive ? 'Full research archive' : 'Presentation examples');
+  text('catalog-note', showArchive ? entries.length + ' runs, including diagnostics and input-only records' :
+    entries.reduce((n, entry) => n + entry.scenes.length, 0) + ' saved prediction scenes. Selected overlaps, misses and false alarms; models remain experimental.');
+}
+function startPresentation() {
+  showArchive = false;
+  for (const id of ['atlas-search', 'atlas-from', 'atlas-to']) $(id).value = '';
+  $('atlas-filter').value = $('atlas-experiment').value = 'all';
+  for (const id of ['pred-toggle', 'truth-toggle', 'atlas-prediction', 'atlas-reference']) $(id).checked = true;
+  $('error-toggle').checked = false;
+  const entry = catalogExperiments().find(item => item.id === registry.activeExperimentId) || catalogExperiments()[0];
+  populateExperiments();
+  selectExperiment(entry.id, presentationCase(entry)?.sceneId);
+  atlas.refresh();
+  if (atlas.map) { atlas.filter(); atlas.needsInitialFit = true; }
+  switchView('compare');
+  $('layout-overlay').click();
+}
 const cursors = {};
 function updateCursors(latlng) {
   for (const id of ['original-map', 'prediction-map', 'truth-map']) {
@@ -130,7 +162,7 @@ function clearLayers() {
   showAssetStatus();
 }
 function fit(){if(!scene)return;syncing=true;try{for(const [id,m] of Object.entries(maps)){m.fitBounds(scene.bounds,{padding:[16,16],maxZoom:mapMode==='pixel'?8:17,animate:false});homeZoom[id]=m.getZoom();}}finally{syncing=false;}}
-function updateURL(){const u=new URL(location.href);if(experiment)u.searchParams.set('experiment',experiment.id);if(scene)u.searchParams.set('scene',scene.id);else u.searchParams.delete('scene');u.hash=view;history.replaceState(null,'',u);}
+function updateURL(){const u=new URL(location.href);if(experiment)u.searchParams.set('experiment',experiment.id);if(scene)u.searchParams.set('scene',scene.id);else u.searchParams.delete('scene');if(showArchive)u.searchParams.set('catalog','all');else u.searchParams.delete('catalog');u.hash=view;history.replaceState(null,'',u);}
 function switchView(next, push = false) {
   const previous = location.href;
   const names = ['national', 'map', 'compare', 'imagery', 'experiments'];
@@ -153,7 +185,7 @@ function switchView(next, push = false) {
     atlas.resize();
   }, 0);
 }
-function experimentContext(e){const a=e.nativeAggregate;return e.name+' · '+e.status+(a&&e.metricScope==='reused_development_fold'?' · Run-wide IoU '+(a.iou*100).toFixed(2)+'%, precision '+(a.precision*100).toFixed(2)+'% ('+a.scenes+' scenes)':'');}
+function experimentContext(e){const a=e.nativeAggregate;return experimentLabel(e)+' · '+e.status+(a&&e.metricScope==='reused_development_fold'?' · Run-wide IoU '+(a.iou*100).toFixed(2)+'%, precision '+(a.precision*100).toFixed(2)+'% ('+a.scenes+' scenes)':'');}
 
 function updateRunSummary() {
   const run = experiment.run;
@@ -172,19 +204,24 @@ function updateRunSummary() {
 }
 
 function populateExperiments() {
-  $('experiment').innerHTML = registry.experiments.map(e => '<option value="' + esc(e.id) + '">' +
-    (e.lifecycle === 'archived' ? '[Archived] ' : '') + esc(e.name) + '</option>').join('');
+  $('experiment').innerHTML = catalogExperiments().map(e => '<option value="' + esc(e.id) + '">' +
+    (e.lifecycle === 'archived' ? '[Archived] ' : '') + esc(experimentLabel(e)) + '</option>').join('');
   if (experiment) $('experiment').value = experiment.id;
+  updateCatalogSummary();
 }
 
 function selectExperiment(id, requestedScene) {
   const previousScene = requestedScene || scene?.id;
-  experiment = registry.experiments.find(e => e.id === id) || registry.experiments[0];
+  experiment = registry.experiments.find(e => e.id === id) ||
+    catalogExperiments().find(e => e.id === registry.activeExperimentId) || catalogExperiments()[0] || registry.experiments[0];
+  if (!catalogExperiments().some(e => e.id === experiment.id)) { showArchive = true; populateExperiments(); }
   $('experiment').value = experiment.id;
   $('search').value = '';
   $('filter').value = 'all';
   updateRunSummary();
-  selectScene(experiment.scenes.find(s => s.id === previousScene)?.id || experiment.scenes[0]?.id);
+  selectScene(experiment.scenes.find(s => s.id === previousScene)?.id ||
+    experiment.scenes.find(s => s.id === presentationCase(experiment)?.sceneId)?.id ||
+    experiment.scenes.find(hasPred)?.id || experiment.scenes[0]?.id);
   drawExperimentCards();
 }
 
@@ -358,7 +395,7 @@ function renderReconstruction(){
 }
  function drawPlots(){if(isReconstruction()){drawReconstructionPlots();return;}for(const id of ['histogram','profile']){const c=$(id),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#69808e';ctx.font='13px Segoe UI';if(!grid?.probability){ctx.fillText('Prediction raster not available',16,35);continue;}ctx.strokeStyle='#d4e0e6';ctx.beginPath();ctx.moveTo(30,10);ctx.lineTo(30,c.height-25);ctx.lineTo(c.width-12,c.height-25);ctx.stroke();if(id==='histogram'){const bins=Array(20).fill(0);grid.probability.forEach((p,i)=>{if(p!=null&&(!grid.valid||grid.valid[i]))bins[Math.min(19,Math.floor(p*20))]++;});const max=Math.max(...bins,1);ctx.fillStyle='#e99d3c';bins.forEach((v,i)=>ctx.fillRect(35+i*(c.width-55)/20,c.height-26-v/max*(c.height-45),(c.width-55)/20-3,v/max*(c.height-45)));ctx.fillStyle='#69808e';ctx.fillText('0',30,c.height-7);ctx.fillText('1 probability',c.width-92,c.height-7);}else{const y=profileRow??Math.floor(grid.height/2);for(const [key,color] of [['probability','#e99632'],['truth','#009eaf']]){if(!grid[key])continue;ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();let started=false;for(let x=0;x<grid.width;x++){const i=y*grid.width+x,v=grid[key][i];if(v==null||grid.valid&&!grid.valid[i]){started=false;continue;}const px=30+x/(grid.width-1)*(c.width-45),py=c.height-25-v*(c.height-40);if(!started)ctx.moveTo(px,py);else ctx.lineTo(px,py);started=true;}ctx.stroke();}ctx.fillStyle='#69808e';ctx.fillText('0',12,c.height-25);ctx.fillText('1',12,17);ctx.fillText('Pixel position →',c.width-115,c.height-5);}}}
 function drawReconstructionPlots(){for(const id of ['histogram','profile']){const c=$(id),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#69808e';ctx.font='13px Segoe UI';if(!grid){ctx.fillText('Reconstruction raster not available',16,35);continue;}const y=profileRow??Math.floor(grid.height/2),keys=id==='histogram'?['observed','coarse','prediction','residual']:['observed','coarse','prediction','residual'],colors=['#3c83c7','#e99d3c','#00a39e','#d64f66'];if(id==='histogram'){const all=[];keys.forEach(k=>(grid[k]||[]).forEach((v,i)=>{if(v!=null&&(!grid.valid||grid.valid[i]))all.push(v);}));const [lo,hi]=reconstructionScale();const bins=Array(20).fill(0);all.forEach(v=>bins[Math.min(19,Math.max(0,Math.floor((v-lo)/(hi-lo)*20)))]++);const max=Math.max(...bins,1);ctx.fillStyle='#6b9fb0';bins.forEach((v,i)=>ctx.fillRect(35+i*(c.width-55)/20,c.height-26-v/max*(c.height-45),(c.width-55)/20-3,v/max*(c.height-45)));ctx.fillText(lo.toFixed(2),30,c.height-7);ctx.fillText(hi.toFixed(2)+' '+(grid.units||''),c.width-120,c.height-7);}else{const [lo,hi]=reconstructionScale();keys.forEach((key,j)=>{if(!grid[key])return;ctx.strokeStyle=colors[j];ctx.lineWidth=2;ctx.beginPath();let started=false;for(let x=0;x<grid.width;x++){const i=y*grid.width+x,v=grid[key][i];if(v==null||grid.valid&&!grid.valid[i]){started=false;continue;}const px=30+x/(grid.width-1)*(c.width-45),py=c.height-25-(v-lo)/(hi-lo)*(c.height-40);if(!started)ctx.moveTo(px,py);else ctx.lineTo(px,py);started=true;}ctx.stroke();});ctx.fillStyle='#69808e';ctx.fillText(lo.toFixed(2),12,c.height-25);ctx.fillText(hi.toFixed(2),12,17);ctx.fillText('Continuous value · '+(grid.units||'units unknown'),c.width-190,c.height-5);}}}
-function drawExperimentCards(){$('experiments').innerHTML=registry.experiments.map(e=>`<article class="experiment-card"><div class="eyebrow">${esc(e.status)}</div><h2>${esc(e.name)}</h2><p>${esc(e.description||'')}</p>${e.metrics?`<table><thead><tr>${Object.keys(e.metrics).map(k=>`<th>${esc(k)}</th>`).join('')}</tr></thead><tbody><tr>${Object.values(e.metrics).map(v=>`<td>${esc(v)}</td>`).join('')}</tr></tbody></table>`:''}<p>${esc(e.notes)}</p><p class="readonly">${e.scenes.length} inspection scenes available · ${e.reportUrl?`<a href="${esc(allowedAsset(e.reportUrl))}">Evidence report ↗</a>`:esc(e.report||'Local export')}</p><button data-experiment="${esc(e.id)}">Open experiment</button></article>`).join('');document.querySelectorAll('[data-experiment]').forEach(b=>b.onclick=()=>{selectExperiment(b.dataset.experiment);switchView('map');});}
+function drawExperimentCards(){$('experiments').innerHTML=catalogExperiments().map(e=>`<article class="experiment-card"><div class="eyebrow">${esc(e.status)}</div><h2>${esc(experimentLabel(e))}</h2><p>${esc(e.description||'')}</p>${e.metrics?`<table><thead><tr>${Object.keys(e.metrics).map(k=>`<th>${esc(k)}</th>`).join('')}</tr></thead><tbody><tr>${Object.values(e.metrics).map(v=>`<td>${esc(v)}</td>`).join('')}</tr></tbody></table>`:''}<p>${esc(e.notes)}</p><p class="readonly">${e.scenes.length} inspection scenes available · ${e.reportUrl?`<a href="${esc(allowedAsset(e.reportUrl))}">Evidence report ↗</a>`:esc(e.report||'Local export')}</p><button data-experiment="${esc(e.id)}">Open experiment</button></article>`).join('');document.querySelectorAll('[data-experiment]').forEach(b=>b.onclick=()=>{selectExperiment(b.dataset.experiment);switchView('map');});}
 
 function drawDiagnostics() {
   if (scene?.outputKind === 'rendered_archive') { drawArchiveStatus(); return; }
@@ -416,7 +453,7 @@ function drawComparisonSummary({tp,fp,fn,tn,n}){
  const frozenIoU=native&&Number.isFinite(native.iou)&&native.tp+native.fp+native.fn>0?(native.iou*100).toFixed(1)+'%':'—';
  const stats=scene?.positiveOnlyReference?[['EMIT support covered',tp+fn?((tp/(tp+fn))*100).toFixed(1)+'%':'—'],['Outside reference','Unknown'],['Precision / IoU','Not measured'],['Emission origin','Unverified']]:native&&Number.isInteger(native.evaluated_pixels)?[['Native IoU at '+Number(frozenThreshold).toFixed(2),frozenIoU],['Display IoU at '+(+$('threshold').value).toFixed(2),n?iou:'—'],['Native FP pixels',native.fp?.toLocaleString() ?? '—'],['Native evaluated pixels',native.evaluated_pixels.toLocaleString()]]:[['Display IoU',n?iou:'—'],['Predicted area',n?((tp+fp)/n*100).toFixed(1)+'%':'—'],['Ground-truth area',n?((tp+fn)/n*100).toFixed(1)+'%':'—'],['Scene decision',scene?.outcome||'Not recorded']];
  $('comparison-stats').innerHTML=stats.map(([k,v])=>'<div><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('');
- text('compare-scene-label',scene?experiment.name+' / '+scene.name:experiment.name+' / no spatial export');
+ text('compare-scene-label',scene?experimentLabel(experiment)+' / '+scene.name:experimentLabel(experiment)+' / no spatial export');
  text('coordinate-note',scene?.coordinateSystem==='pixel'?'Native '+(grid?.width||32)+' × '+(grid?.height||32)+' pixels · geographic footprint unavailable':native?.evaluated_pixels!=null?'Georeferenced display · native scores cover '+native.evaluated_pixels.toLocaleString()+' / '+(native.source_valid_pixels?.toLocaleString() ?? 'unknown')+' source-valid pixels; other pixels are unscored':'Georeferenced imagery · shared display grid');
  text('compare-pixel-inspector','Hover over imagery to inspect a pixel.');
  $('compare-empty').hidden=!!scene;
@@ -478,6 +515,15 @@ try {
   populateExperiments();
   document.querySelector('.brand').onclick = event => { event.preventDefault(); switchView('national', true); };
   $('experiment').onchange = () => selectExperiment($('experiment').value);
+  $('catalog-mode').onchange = () => {
+    showArchive = $('catalog-mode').value === 'all';
+    populateExperiments();
+    if (!catalogExperiments().some(entry => entry.id === experiment.id)) selectExperiment(registry.activeExperimentId);
+    drawExperimentCards();
+    atlas.refresh();
+    updateURL();
+  };
+  $('start-presentation').onclick = startPresentation;
   $('search').oninput = drawList;
   $('filter').onchange = drawList;
   document.querySelectorAll('[data-view]').forEach(button => button.onclick = () => switchView(button.dataset.view, true));
@@ -510,7 +556,7 @@ try {
     for (const [id, layer] of Object.entries(basemaps))
       $('online-basemap').checked ? layer.addTo(maps[id]) : maps[id].removeLayer(layer);
   };
-  const query = new URLSearchParams(location.search), initialView = location.hash.slice(1) || 'national';
+  const query = new URLSearchParams(location.search), initialView = location.hash.slice(1) || registry.presentation?.defaultView || 'compare';
   text('local-folder', registry.local?.bundleDirectory || 'outputs/GTM_viewer_bundles');
   text('message', registry.local?.warnings?.join(' · ') || '');
   selectExperiment(query.get('experiment') || registry.activeExperimentId || registry.experiments[0].id, query.get('scene'));
@@ -519,9 +565,12 @@ try {
   viewerLive.start();
   window.addEventListener('popstate', () => {
     const state = new URLSearchParams(location.search), previousView = location.hash.slice(1);
+    showArchive = state.get('catalog') === 'all';
+    populateExperiments();
     if (state.get('experiment') !== experiment.id || state.get('scene') !== scene?.id)
       selectExperiment(state.get('experiment'), state.get('scene'));
     switchView(previousView);
+    atlas.refresh();
   });
 } catch (error) {
   document.body.dataset.connection = 'offline';

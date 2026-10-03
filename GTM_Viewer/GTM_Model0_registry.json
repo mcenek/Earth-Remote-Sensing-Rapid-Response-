@@ -1,6 +1,21 @@
 {
   "schemaVersion": 1,
-  "activeExperimentId": "GTM_Model6_mapper_mars_pilot_20260922_r5_mean",
+  "activeExperimentId": "GTM_Model6_mapper_r5_portable",
+  "presentation": {
+    "defaultView": "compare",
+    "experiments": [
+      {
+        "id": "GTM_Model6_mapper_r5_portable",
+        "label": "Sentinel plume mapper | 6 saved cases",
+        "sceneId": "MARS_2c6ef011-0729-42e2-b64f-10ff8207778b"
+      },
+      {
+        "id": "GTM_Model6_emit_evidence_portable",
+        "label": "Sentinel predictions vs EMIT | 3 saved cases",
+        "sceneId": "emit25km-0049"
+      }
+    ]
+  },
   "experiments": [
     {
       "id": "GTM_Model6",
