@@ -1,0 +1,23 @@
+# Expanded-data training diagnosis and correction
+
+Written before new diagnostic fits. Existing model files, manifests, frozen results and the original sealed regression TEST stay unchanged.
+
+Failure cases: changing several factors and claiming a single cause; silently reducing US training exposure; training on a different spatial extent from deployment; fitting normalization on DEV/TEST; deleting difficult scenes after viewing outputs; tuning on the 55 consumed external cases; promoting models on loss or a few attractive overlays; GPU versus CPU replay differences; unbounded runs.
+
+Measured audit: old US positive crop draws fell from 9,600 to 2,043, while 7,557 of the expanded positive draws went to the new international sites. Both models also regress on the unchanged US TRAIN subset. The expanded train-only normalizer changes, and crop-size dependent outputs exist for both models. These facts establish changed exposure and behavior, not that an individual new label is incorrect.
+
+Use only the existing TRAIN and DEV arrays for diagnosis and selection. Keep the original 86 DEV observations as an exposed development/regression set, never call them a fresh test. Keep all labels, architecture widths, optimizer, learning rate, D4 and binary loss unchanged in the first four arms. Use identical initial seeds and original 48x48 crops:
+
+0. `us_original_norm`: reproduce the original 19,200 US crop draws and original train-only normalizer for 2,400 updates on the same GPU runtime used below. This controls for CPU/GPU optimizer trajectory differences. Compare with the preserved CPU baseline, but do not assume bit-identical training across devices.
+1. `us_combined_norm`: original 19,200 US crop draws, 2,400 updates, but the combined train-only normalizer. Compare to arm 0 on the same runtime to isolate normalization.
+2. `expanded_long`: original combined site/class sampler, 4,800 updates, combined normalizer. Compare its 2,400 checkpoint to the failed expanded run and its 4,800 endpoint to isolate budget.
+3. `balanced_domains`: 4,800 updates, combined normalizer, four original-US and four auxiliary-international draws in each batch of eight, with two plume and two no-plume draws per domain. Preserve the baseline US draw sequence exactly, interleaved with a separately seeded auxiliary sequence. This restores 9,600 US positive draws while adding 9,600 auxiliary positive draws. Compare at the same 4,800 updates with arm 2 to measure domain allocation.
+4. `balanced_full_scene`: same scene, class, domain and D4 draws as arm 3, but use full 100x100 scenes in both training and inference. Retain unchanged per-pixel objective. Compare with arm 3 to measure removal of the crop/full-scene mismatch. A lower full-scene label fraction is disclosed, not silently compensated.
+
+All arms use versioned scripts and fresh output folders. Benchmark the available RTX 5070 first, use float32 without AMP/TF32, deterministic kernels where supported. Save CPU checkpoints and compute saved evaluation outputs in the same CPU path used by replay and the viewer. Record actual device/runtime, updates and draw-domain counts. Milestones 1,200/2,400/3,600/4,800 where applicable; at most 4,800 updates per arm/model, with a recorded runtime cap. Do not launch concurrent GPU fits.
+
+End-to-end evidence: verify source/array identities, exact domain/class counts and preserved US draw sequence; save native probabilities and native confusion; replay selected checkpoints in a fresh process; publish every DEV scene for both final models, including failures. Inspect real plume and no-plume predictions, error maps and learning curves. Use the existing strict DEV precision/recall/false-alarm criteria; if none qualifies, label the results diagnostic. No statewide application.
+
+The already-consumed 55 external cases may only be a clearly labeled regression check after training and selection are frozen. They must not choose features, checkpoints or cutoffs. A new geographic test would need a separately frozen cohort and is not a substitute for fixing a failed development run.
+
+Before correction fits finish, a bounded TRAIN-only reference counterfactual will use up to eight plume and eight no-plume scenes per original/auxiliary domain, chosen by ID hash. Save original scores, scores with current copied into reference, and scores with the dates exchanged. These deliberately altered inputs are sensitivity diagnostics, not real-world accuracy tests or grounds to relabel data. Save pixel-weighted probability changes and output panels. A near-identical prediction does not alone prove a model has ignored methane; a changed prediction does not prove it has learned methane.

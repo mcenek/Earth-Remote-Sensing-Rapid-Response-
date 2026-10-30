@@ -1,0 +1,17 @@
+# Orientation stability diagnostic
+
+Written before implementation or new predictions. Continue Joshua's local research request using only the existing broader development set and frozen v7 early-fusion update1200 weights.
+
+## Failure modes and controls
+
+- Reusing final observations to select another method invalidates their test status. This diagnostic opens only the combined TRAIN/DEV manifest's DEV rows. No final arrays, original TEST, fresh-clear test, training, new imagery, or downloads. All DEV locations were exposed before this pass. Do not claim new-site generalization.
+- Incorrect inverse rotations can silently move a plume. Use all eight existing D4 input transforms. Undo rotation, then reflection, on the output. Before model inference, check coordinate permutation uniqueness and exact round trips for real current/reference images, labels and support. Independently undo output permutations by coordinate-index scatter and require exact agreement with the analytic inverse.
+- Transforming images but not recomputing derived features would change the experiment. Transform all 24 already prepared channels together; preprocessing must commute with D4 on the two real preflight examples. Do not change radiometry, bands, normalizer, weights or crop.
+- Score averaging is not training or new evidence of methane sensing. Average inverse-transformed probabilities, never thresholded masks or logits. Keep all eight member scores and their standard deviation. Invalid support cannot enter metrics. Native20m scores are repeated to the existing10m label grid, not learned super-resolution.
+- A large pooled score can hide failed sites or excessive alarms. Compare identity and eight-view mean on all198DEV observations. Primary comparison uses the existing0.70 cutoff for both. Secondary cutoff selection is limited to the same22 predeclared v7 cutoffs and eligibility gates, ranked by mean positive-site recall, mean positive-scene recall, IoU, lower clear FPR, earlier update, cutoff. Promotion within DEV additionally requires strictly greater mean positive-site recall, nondecreasing IoU and clear FPR no greater than the identity comparator. Otherwise retain v7 and publish the orientation result as a diagnostic only. No second method or adaptive hyperparameter sweep.
+- Reproducing only aggregate metrics can hide map bugs. Require identity member to match every existing saved v7 DEV probability within1e-6, all source-array identities/support to match, finite bounded probabilities, independent inverse checks and native recounts. A separate CPU process must replay every member and average with maximum error at most1e-6. Record same-workload inference times and memory; eight-view evaluation will cost more.
+- Preserve the original model and viewer publications. Publish actual masks/scores/errors for the mean and identity with clear DEV labels, including failures. Root personally inspects all positive cases, representative negative cases and largest changes in the browser, with screenshots and repeatable E2E receipts. No unit tests added after implementation.
+
+## Data-quality audit
+
+In parallel, inspect TRAIN/DEV coverage and reference provenance using cached metadata or their arrays only. Distinguish measured defects from hypotheses. This is read-only and does not authorize another fit. Any next fit requires a new bounded protocol before code and cannot use consumed final outcomes for selection.

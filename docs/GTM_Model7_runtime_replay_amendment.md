@@ -1,0 +1,5 @@
+# Inference runtime correction after configuration freeze
+
+After the sealed confirmation inference, review found that the stable residual agent used the repo PyTorch 2.11 runtime, while the original runs, Siamese recovery and parent inference used PyTorch 2.4. The stable checkpoint and model configuration were frozen before confirmation access and remain unchanged. This difference does not justify any change to training, cutoff, scene selection or model selection.
+
+Before correcting inference, the failure checks are fixed: infer the stable checkpoint using its training runtime, reproduce saved stable train/dev outputs first, preserve all first inference outputs, retain the four other models' original-runtime outputs byte for byte, then replace only the stable model's inference in a separately versioned evidence folder. Record both runtimes and compare native probabilities and counts. Exact within-runtime replay is required. Report the runtime correction as a post-freeze engineering amendment, not an independent new test. No architecture-only attribution may be based on training comparisons across different runtimes.

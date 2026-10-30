@@ -1,0 +1,12 @@
+# Preserve the existing CUDA venv. These distributions must not be installed into
+# the isolated overlay; they are constraints for resolving its dependencies only.
+numpy==2.4.4
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+fsspec==2026.7.0
+matplotlib==3.11.2
+rasterio==1.4.4
+scikit-image==0.26.0
+scikit-learn==1.9.0
+scipy==1.17.1
+timm==1.0.28

@@ -1,0 +1,53 @@
+{
+  "catalogs": {
+    "final_candidate": {
+      "bytes": 3767788,
+      "file": "final_candidate_ch4_asset_catalog.jsonl",
+      "missing_local_paths": [],
+      "paths": 20,
+      "sha256": "fc2ca04226db581a944320e7c5fc197f9eebeeb234ee82771ea867f59b756342",
+      "size_mismatch_paths": []
+    },
+    "full_official_train": {
+      "bytes": 598187239,
+      "file": "full_official_train_ch4_asset_catalog.jsonl",
+      "missing_local_paths": [],
+      "paths": 3512,
+      "sha256": "00277d5082cb9146d67b466589227f6cbe0cdaf576c8f023f516105a941befad",
+      "size_mismatch_paths": []
+    },
+    "model_fit_select": {
+      "bytes": 407838163,
+      "file": "model_fit_select_ch4_asset_catalog.jsonl",
+      "missing_local_paths": [],
+      "paths": 2363,
+      "sha256": "c459fbde8b03b7243ad59ff43855dd6d798e293d0680fc5537dabdfc4b8d15aa",
+      "size_mismatch_paths": []
+    }
+  },
+  "correction": "Earlier claim that positive plumepath was empty was incorrect. Positive rows have _label.tif in plumepath and _ch4.tif in ch4path. Frozen role manifests contain label TIFFs; their asset lists omit CH4 TIFFs, supplied by this explicit amendment. Role IDs and plan hash are unchanged.",
+  "label_and_ch4_paths_present_for_all_positive_images": true,
+  "plan_sha256": "3b29c62bb250dd9155b1c2af90637b605f2709f7ec6c64b18662a0c9ed2a6345",
+  "plume_csv_sha256": "30cb278b9a7fca62e030d6efb7d362c28192f84421672203902ccd87eaaa2b5b",
+  "plume_metadata_coverage": {
+    "missing_by_role": {
+      "final_candidate": 0,
+      "fit": 53,
+      "select": 8
+    },
+    "missing_images": 109,
+    "missing_official_train": 101,
+    "multiple_records": 33,
+    "note": "The image-level isplume label and label TIFF remain available when validated_images_plumes.csv lacks an image row; investigate before using per-plume flux metadata.",
+    "positive_images_checked": 3649
+  },
+  "positive_images": {
+    "final_candidate": 20,
+    "fit": 2246,
+    "official_train": 3512,
+    "select": 117
+  },
+  "remote_catalog_sha256": "363616a38f8e78e89a7b0f355d5697d9b07a1c27ead6eac687e22175ebeec292",
+  "schema_version": 1,
+  "status": "metadata_and_size_verified; content_hash_pending"
+}

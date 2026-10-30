@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import argparse
 import copy
+import gzip
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import logging
 import mimetypes
 import os
 from pathlib import Path, PurePosixPath
@@ -97,7 +99,7 @@ def load_bundle(manifest: Path, route_prefix: str):
     scenes = experiment.get('scenes')
     if not isinstance(identifier, str) or not ID_PATTERN.fullmatch(identifier) or not isinstance(scenes, list):
         raise ValueError('Need valid experiment id and scenes')
-    if len(scenes) > 1000:
+    if len(scenes) > 5000:
         raise ValueError('Too many scenes')
     if not isinstance(experiment.get('name'), str) or not experiment['name'].strip():
         raise ValueError('Need experiment name')
@@ -168,12 +170,39 @@ class ViewerState:
         self.next_check = 0.0
         self.cached = {}
         self.snapshot = None
+        self.snapshot_json = None
+        self.snapshot_gzip = None
+        self.refreshing = False
+
+    def _current_snapshot(self):
+        with self.lock:
+            if self.snapshot is None:
+                self._refresh()
+            elif time.monotonic() >= self.next_check and not self.refreshing:
+                # Serve the last fully validated publication while checking new assets.
+                self.refreshing = True
+                threading.Thread(target=self._refresh_background,
+                                 name='viewer-registry-refresh', daemon=True).start()
+            return self.snapshot
 
     def registry(self):
+        return copy.deepcopy(self._current_snapshot())
+
+    def response_payload(self, accepts_gzip):
+        self._current_snapshot()
         with self.lock:
-            if self.snapshot is None or time.monotonic() >= self.next_check:
-                self._refresh()
-            return copy.deepcopy(self.snapshot)
+            return (self.snapshot_gzip if accepts_gzip else self.snapshot_json,
+                    '"' + self.snapshot['live']['revision'] + '"')
+
+    def _refresh_background(self):
+        try:
+            self._refresh()
+        except Exception:
+            logging.exception('Viewer refresh failed; retaining last validated registry')
+        finally:
+            with self.lock:
+                self.refreshing = False
+                self.next_check = time.monotonic() + self.poll_seconds
 
     def _refresh(self):
         base = json.loads((UI / 'GTM_Model0_registry.json').read_text(encoding='utf-8'))
@@ -223,12 +252,18 @@ class ViewerState:
         revision = hashlib.sha256(json.dumps(base, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:20]
         base['live'] = {'revision': revision, 'checkedAt': utc_now(),
                         'pollSeconds': self.poll_seconds, 'serverName': self.server_name}
-        self.snapshot = base
-        self.next_check = time.monotonic() + self.poll_seconds
+        payload = json.dumps(base).encode('utf-8')
+        compressed = gzip.compress(payload, compresslevel=5)
+        with self.lock:
+            self.snapshot = base
+            self.snapshot_json = payload
+            self.snapshot_gzip = compressed
+            self.next_check = time.monotonic() + self.poll_seconds
 
 
 class ViewerHTTPServer(ThreadingHTTPServer):
     allow_reuse_address = os.name != 'nt'
+    request_queue_size = 128
 
     def server_bind(self):
         if os.name == 'nt':
@@ -241,15 +276,17 @@ class Handler(BaseHTTPRequestHandler):
         route = unquote(urlsplit(self.path).path)
         if route == '/api/experiments':
             try:
-                registry = self.server.viewer.registry()
-                etag = '"' + registry['live']['revision'] + '"'
+                accepts_gzip = 'gzip' in (self.headers.get('Accept-Encoding') or '').lower().split(',')
+                payload, etag = self.server.viewer.response_payload(accepts_gzip)
                 if self.headers.get('If-None-Match') == etag:
                     self.send_response(304)
                     self.send_header('ETag', etag)
                     self.send_header('Cache-Control', 'no-store')
+                    self.send_header('Vary', 'Accept-Encoding')
                     self.end_headers()
                     return
-                return self.send_bytes(json.dumps(registry).encode(), 'application/json; charset=utf-8', etag)
+                return self.send_bytes(payload, 'application/json; charset=utf-8', etag,
+                                       'gzip' if accepts_gzip else None, vary='Accept-Encoding')
             except Exception as error:
                 return self.send_error(500, str(error))
         if route == '/api/health':
@@ -271,7 +308,7 @@ class Handler(BaseHTTPRequestHandler):
         except (ValueError, OSError):
             return self.send_error(404)
 
-    def send_bytes(self, content, content_type, etag=None):
+    def send_bytes(self, content, content_type, etag=None, content_encoding=None, vary=None):
         self.send_response(200)
         self.send_header('Content-Type', content_type)
         self.send_header('Content-Length', str(len(content)))
@@ -279,6 +316,10 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('X-Content-Type-Options', 'nosniff')
         if etag:
             self.send_header('ETag', etag)
+        if content_encoding:
+            self.send_header('Content-Encoding', content_encoding)
+        if vary:
+            self.send_header('Vary', vary)
         self.end_headers()
         try:
             self.wfile.write(content)

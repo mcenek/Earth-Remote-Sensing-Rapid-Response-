@@ -1,5 +1,7 @@
 # GTM_Model6: A new plan for mapping methane plumes across the United States
 
+> October 21 update: the [three-CNN training workflow](GTM_Model6_three_cnn_runbook.md) is implemented for local software checks and later measured-data training. It follows the [October 2 implementation plan](GTM_Model6_three_cnn_implementation_plan_20261002.md). Synthetic checks do not establish methane accuracy. The four-scale design below is retained as the historical proposal and context for existing experiments.
+
 This is the design I want to test next. The goal is to use Sentinel-2 images to flag possible methane plumes anywhere in the United States. EMIT's measured methane plumes will teach and check the model where the two satellites have suitable observations of the same place and time. At national scale, the model must work from Sentinel alone because EMIT does not cover every place and date. Known CAFOs and oil facilities are useful checks on the resulting candidates, but a facility location by itself is not proof of a plume.
 
 ## What the output should look like
@@ -38,7 +40,9 @@ TESSERA is a useful later comparison. I would test whether its time-aware Sentin
 
 I have a working local viewer that places predictions over the source imagery and available labels. The most recent bounded mask pilot used 65 reused development scenes, including three labeled plume scenes. Its four-scale *average* detected part of some visible plumes, but it missed another plume and made many detections on surface features. Across those scenes, its overlap with the labeled plume pixels was only about 2.1%, with about 2.2% pixel precision. This is **not a successful methane detector**, an upscaling result, or a national validation. The selected good-looking example does not represent the overall result.
 
-The visual review is why I am resetting the model plan. I have also located one near-time Georgia Sentinel crop around a native EMIT observation and checked that the two images overlap. That is useful preparation, but I still need to resolve the correct Sentinel reflectance conversion and verify the EMIT plume outline before training from that pair. The current viewer also shows older experiments for comparison; their scores use different data and should not be ranked as if they were one test.
+The visual review is why I am resetting the model plan. I have a near-time Georgia Sentinel crop around a native EMIT observation, and now a clearer data example from Volusia landfill on June 1, 2025. Volusia has an actual provider plume annotation over Sentinel imagery taken 12.7 minutes later. The complete annotation fits inside the crop. As of September 30, the five target bands are downloaded and their geometry is checked. This is an input/reference example, not a new model result.
+
+Before training from Volusia, I still need to verify what zero means in the provider mask, what units the retrieval values use, and the correct Sentinel reflectance conversion. The provider RGB files contain only constant values, so the photograph in the viewer comes from the separately acquired Sentinel crop. A reference-date image and a paired reviewed negative are also missing. One positive pair would not establish generalization even if we could fit it perfectly. The older experiment scores use different data and should not be ranked as if they were one test.
 
 ## What will count as progress
 
@@ -53,3 +57,9 @@ The local viewer and portable sample instructions are in `GTM_Viewer/` on the re
 https://github.com/mcenek/Earth-Remote-Sensing-Rapid-Response-/tree/research/gtm-model6-restart-2026-09-22/reports/research/assets/GTM_Model6_20260922
 
 The detailed experiment and data notes remain in `docs/GTM_Model6_technical_appendix.md` and `reports/research/GTM_Model6_followup_verification_2026-09-22.md` for anyone who wants to inspect the methods and numbers.
+
+The October 2 meeting demo is in `GTM_Viewer/friday_20261002/index.html`. It puts the new data example beside actual saved successes, misses and false positives, and includes a diagram of the four models and proposed learned combiner. Its PDF and portable ZIP can be shared without giving access to the full research cache. Preparation does not constitute a new model result or a claim of successful upscaling.
+
+The [October 1 data-contract review](../reports/research/GTM_Model6_data_contract_brief_20261001.md) records the exact remaining provider questions and a repeatable offline check of the cached Volusia/Black Oak examples. The saved files and old R5 results are intact. The review did not resolve the Sentinel correction, EMIT background labels, or quantitative units/QA, so I have not changed the pixel values or started another training run.
+
+I also completed a [small artificial-data rehearsal of the four-model and combiner workflow](../reports/research/GTM_Model6_combiner_contract_review_20261001.md). It checks that the combiner receives predictions from models that did not train on that site, that all four predictions cover the same area, and that no files are missing or changed. All 43 command checks passed, including deliberately broken examples. This prepares the training bookkeeping; it does not demonstrate better methane predictions. The current real model still uses an average, and the proposed learned combiner still needs valid paired data and integration with the real training runner.

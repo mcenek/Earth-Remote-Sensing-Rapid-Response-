@@ -1,0 +1,8 @@
+# Check Martin's existing tf-env first. Preserve its working CUDA setup.
+# Local acceptance used TensorFlow 2.21.0 and Keras 3.
+tensorflow>=2.21,<2.22
+numpy>=1.26,<3
+h5py>=3.11,<4
+Pillow>=10,<13
+# Only required for measured georeferenced viewer exports:
+rasterio>=1.4,<2

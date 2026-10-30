@@ -1,0 +1,57 @@
+{
+  "asset_catalog_sha256": "3402760e2e028c0eeb60e4c78e61270f753ff666007d4d5bf69a4268d7e8007e",
+  "overlaps": {
+    "fit_vs_final_candidate": {
+      "acquisition_ids_current_or_reference": 0,
+      "connected_25km_components": 0,
+      "exact_sites": 0,
+      "minimum_site_center_km": 50.27177801639708,
+      "sample_ids": 0
+    },
+    "fit_vs_select": {
+      "acquisition_ids_current_or_reference": 0,
+      "connected_25km_components": 0,
+      "exact_sites": 0,
+      "minimum_site_center_km": 56.59098039268046,
+      "sample_ids": 0
+    },
+    "select_vs_final_candidate": {
+      "acquisition_ids_current_or_reference": 0,
+      "connected_25km_components": 0,
+      "exact_sites": 0,
+      "minimum_site_center_km": 49.68807053424869,
+      "sample_ids": 0
+    }
+  },
+  "plan_sha256": "3b29c62bb250dd9155b1c2af90637b605f2709f7ec6c64b18662a0c9ed2a6345",
+  "role_counts": {
+    "final_candidate": {
+      "components": 10,
+      "landsat": 0,
+      "negative": 40,
+      "positive": 20,
+      "rows": 60,
+      "sentinel": 60,
+      "sites": 36
+    },
+    "fit": {
+      "components": 132,
+      "landsat": 5253,
+      "negative": 28058,
+      "positive": 2246,
+      "rows": 30304,
+      "sentinel": 25051,
+      "sites": 447
+    },
+    "select": {
+      "components": 5,
+      "landsat": 42,
+      "negative": 985,
+      "positive": 117,
+      "rows": 1102,
+      "sentinel": 1060,
+      "sites": 21
+    }
+  },
+  "status": "metadata_invariants_passed; raster_content_unverified"
+}

@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import argparse
 import base64
+from concurrent.futures import ThreadPoolExecutor
+import gzip
 import json
 import os
 from pathlib import Path
@@ -20,13 +22,26 @@ PUBLISHER = ROOT / 'tools/GTM_Model0_publish_viewer.py'
 PNG = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9p3gAAAABJRU5ErkJggg==')
 
 
-def request(url, etag=None):
+def request(url, etag=None, accept_encoding=None):
     headers = {'If-None-Match': etag} if etag else {}
+    if accept_encoding:
+        headers['Accept-Encoding'] = accept_encoding
     try:
         with urlopen(Request(url, headers=headers), timeout=8) as response:
             return response.status, dict(response.headers), response.read()
     except HTTPError as error:
         return error.code, dict(error.headers), error.read()
+
+
+def refreshed_registry(base, previous):
+    """Wait for the next completed validation without assuming a blocking refresh."""
+    deadline = time.monotonic() + 20
+    while time.monotonic() < deadline:
+        result = request(base + '/api/experiments')
+        if result[0] == 200 and json.loads(result[2])['live']['checkedAt'] != previous:
+            return result
+        time.sleep(0.1)
+    raise AssertionError('Registry did not finish background validation')
 
 
 def prepare(folder, scene_count, label='first'):
@@ -120,10 +135,23 @@ def main():
                   and headers.get('Cache-Control') == 'no-store')
             etag = headers.get('ETag')
             check('conditional catalog', request(base + '/api/experiments', etag)[0] == 304)
+            compressed_status, compressed_headers, compressed = request(
+                base + '/api/experiments', accept_encoding='gzip')
+            check('gzip catalog matches identity', compressed_status == 200
+                  and gzip.decompress(compressed) == body
+                  and compressed_headers.get('Content-Encoding') == 'gzip'
+                  and int(compressed_headers['Content-Length']) == len(compressed)
+                  and compressed_headers.get('ETag') == etag
+                  and compressed_headers.get('Vary') == 'Accept-Encoding')
+            check('conditional gzip catalog', request(base + '/api/experiments', etag, 'gzip')[0] == 304)
+            check('gzip reduces catalog transfer', len(compressed) < len(body))
+            with ThreadPoolExecutor(max_workers=32) as pool:
+                burst = list(pool.map(lambda _: request(base + '/GTM_Model0.js'), range(32)))
+            check('concurrent asset burst', all(status == 200 and payload for status, _, payload in burst))
             prepare(prepared, 1)
             first = publish(prepared, bundles)
             time.sleep(2.1)
-            status, headers, body = request(base + '/api/experiments', etag)
+            status, headers, body = refreshed_registry(base, registry['live']['checkedAt'])
             registry = json.loads(body)
             experiment = next(e for e in registry['experiments'] if e['id'] == 'live_e2e')
             first_revision = experiment['live']['revision']
@@ -134,7 +162,7 @@ def main():
             prepare(prepared, 2, 'expanded')
             second = publish(prepared, bundles)
             time.sleep(2.1)
-            _, headers, body = request(base + '/api/experiments', headers['ETag'])
+            _, headers, body = refreshed_registry(base, registry['live']['checkedAt'])
             registry = json.loads(body)
             experiment = next(e for e in registry['experiments'] if e['id'] == 'live_e2e')
             check('expanded revision arrives', len(experiment['scenes']) == 2
@@ -145,7 +173,7 @@ def main():
             saved = manifest.read_bytes()
             manifest.write_text('{bad json', encoding='utf-8')
             time.sleep(2.1)
-            _, _, body = request(base + '/api/experiments')
+            _, _, body = refreshed_registry(base, registry['live']['checkedAt'])
             registry = json.loads(body)
             check('malformed update retains last good', any(
                 e['id'] == 'live_e2e' and len(e['scenes']) == 2 for e in registry['experiments'])
@@ -153,7 +181,7 @@ def main():
             manifest.write_text(json.dumps({'id': 'live_e2e', 'name': 'Missing',
                                             'scenes': [{'id': 'x', 'name': 'X', 'bounds': [[30, -100], [31, -99]], 'rgb': 'gone.png'}]}), encoding='utf-8')
             time.sleep(2.1)
-            _, _, body = request(base + '/api/experiments')
+            _, _, body = refreshed_registry(base, registry['live']['checkedAt'])
             registry = json.loads(body)
             check('missing asset retains last good', any(
                 e['id'] == 'live_e2e' and len(e['scenes']) == 2 for e in registry['experiments'])
@@ -162,7 +190,7 @@ def main():
             current_asset = bundles / 'live_e2e' / '_versions' / second['version'] / 'scene0.png'
             current_asset.write_bytes(PNG + b'changed')
             time.sleep(2.1)
-            _, _, body = request(base + '/api/experiments')
+            _, _, body = refreshed_registry(base, registry['live']['checkedAt'])
             registry = json.loads(body)
             changed = next(e for e in registry['experiments'] if e['id'] == 'live_e2e')
             check('same-name asset changes revision', changed['live']['revision'] != experiment['live']['revision'])
@@ -182,7 +210,7 @@ def main():
             invalid.mkdir()
             (invalid / 'experiment.json').write_text('{"id":"invalid","name":"Bad","scenes":[{"id":"x"}]}', encoding='utf-8')
             time.sleep(2.1)
-            _, _, body = request(base + '/api/experiments')
+            _, _, body = refreshed_registry(base, registry['live']['checkedAt'])
             registry = json.loads(body)
             check('invalid new scene isolated', not any(e['id'] == 'invalid' for e in registry['experiments'])
                   and any(e['id'] == 'live_e2e' for e in registry['experiments']))

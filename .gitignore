@@ -42,6 +42,9 @@ Thumbs.db
 reports/dataset_audit/
 /output/
 outputs/
+# Retained originals from the verified D: storage cutover.
+/outputs.before-D-20261026/
+/EarthRemoteSensingRapidResponse/Data Collection/s2_emit_pairs.before-D-20261026/
 logs/
 /tmp/
 *.log

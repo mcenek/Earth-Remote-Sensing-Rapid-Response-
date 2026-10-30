@@ -26,10 +26,12 @@ const atlas = {
     return new Date(value + 'T12:00:00Z').toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC'});
   },
   branch(entry) {
+    if (entry.architectureFamily === 'GTM_Model6_three_cnn') return entry.stage;
     const match = (entry.name + ' ' + entry.id).match(/(?:\|\s*|_)(mean|s16|s32|s64|s128)(?:\s*\||\s|$)/i);
     return match ? match[1].toLowerCase() : null;
   },
   family(entry) {
+    if (entry.architectureFamily === 'GTM_Model6_three_cnn') return entry.architectureFamily + ':' + entry.runGroup;
     return entry.name.toLowerCase().split('|').map(s => s.trim()).filter(s =>
       !['mean', 's16', 's32', 's64', 's128'].includes(s) && !s.includes('portable')).join('|');
   },
@@ -359,19 +361,26 @@ const atlas = {
     return values.map(([label, value]) => '<div><span>' + esc(label) + '</span><strong>' + esc(value) + '</strong></div>').join('');
   },
   renderComparison() {
-    $('comparison-branches').hidden = $('comparison-branch-label').hidden = !showArchive;
+    const threeCNNs = experiment.architectureFamily === 'GTM_Model6_three_cnn';
+    $('comparison-branches').hidden = $('comparison-branch-label').hidden =
+      experiment.architectureFamily === 'early_fusion_unet' || !showArchive && !threeCNNs;
+    text('comparison-branch-label', threeCNNs ? 'Network' : 'Branch');
     $('comparison-experiment').innerHTML = catalogExperiments().map(entry => '<option value="' + esc(entry.id) + '">' + esc(experimentLabel(entry)) + '</option>').join('');
     $('comparison-experiment').value = experiment.id;
-    $('comparison-scene').innerHTML = experiment.scenes.map(item => '<option value="' + esc(item.id) + '">' + esc(item.name) + '</option>').join('');
+    const reviewScenes = window.GTMSceneReview?.list(experiment) || experiment.scenes;
+    $('comparison-scene').innerHTML = reviewScenes.map(item => '<option value="' + esc(item.id) + '">' + esc(item.name) + '</option>').join('');
     $('comparison-scene').value = scene?.id || '';
     $('comparison-scene').disabled = !scene;
+    window.GTMSceneReview?.refresh(experiment, scene);
     const candidates = catalogExperiments().filter(e => this.family(e) === this.family(experiment)).sort((a, b) =>
       Number(a.id.includes('portable')) - Number(b.id.includes('portable')) || b.scenes.length - a.scenes.length);
-    $('comparison-branches').innerHTML = ['mean', 's16', 's32', 's64', 's128'].map(branch => {
+    const branches = threeCNNs ? [['airborne', 'CNN 1'], ['emit', 'CNN 2'], ['fusion', 'CNN 3']] :
+      [['mean', 'Mean'], ['s16', '16'], ['s32', '32'], ['s64', '64'], ['s128', '128']];
+    $('comparison-branches').innerHTML = branches.map(([branch, label]) => {
       const match = candidates.find(e => this.branch(e) === branch && e.scenes.some(s => s.id === scene?.id));
       return '<button data-branch="' + esc(match?.id || '') + '" aria-pressed="' + (this.branch(experiment) === branch) +
         '" ' + (match ? '' : 'disabled') + ' title="' + (match ? esc(match.name) : 'No saved output for this scene') + '">' +
-        (branch === 'mean' ? 'Mean' : branch.slice(1)) + '</button>';
+        label + '</button>';
     }).join('');
     $('comparison-branches').querySelectorAll('[data-branch]').forEach(button => button.onclick = () => {
       experiment = registry.experiments.find(e => e.id === button.dataset.branch);

@@ -1,0 +1,309 @@
+{
+  "algorithm": {
+    "minimum_site_distance_km": 25.0,
+    "seed": 20261030,
+    "selection": "two positive and four clear S2 observations per 25 km connected component at ten lowest fit+select cost eligible components; remove entire selected components from official fit/select; choose bounded official-val components with >=20 positives, >=500 rows, >=3 components, remove those components from fit; unused official-val components remain excluded"
+  },
+  "assets": {
+    "locally_present_bytes": 31847796999,
+    "locally_present_paths": 65315,
+    "missing_paths": 0,
+    "missing_remote_bytes": "unknown_without_HF_catalog",
+    "unique_paths": 65315
+  },
+  "candidate_components": [
+    {
+      "clear_candidates": 401,
+      "component": "09d77315-68cd-4bed-92d0-1f548489d7b0",
+      "countries": [
+        "Libya"
+      ],
+      "fit_rows_lost": 18,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 3,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 61,
+      "component": "02c7a343-9d17-4da9-bb87-82fbdd0d3b89",
+      "countries": [
+        "Iran (Islamic Republic of)"
+      ],
+      "fit_rows_lost": 24,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 3,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 289,
+      "component": "00bbe0bd-a119-4442-b981-8f641e021408",
+      "countries": [
+        "Egypt"
+      ],
+      "fit_rows_lost": 44,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 11,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 200,
+      "component": "15e66c2e-e69d-4d1d-8e2a-70538b0adb9b",
+      "countries": [
+        "Turkmenistan"
+      ],
+      "fit_rows_lost": 147,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 6,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 269,
+      "component": "0797d1f7-776a-4c9d-95da-4cb36a50944e",
+      "countries": [
+        "Uzbekistan"
+      ],
+      "fit_rows_lost": 163,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 5,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 254,
+      "component": "086d3d86-a987-4e49-ae14-d4f89e874e31",
+      "countries": [
+        "Bahrain"
+      ],
+      "fit_rows_lost": 200,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 3,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 52,
+      "component": "00c09ea8-886a-46ac-85f2-712b094334d7",
+      "countries": [
+        "Libya"
+      ],
+      "fit_rows_lost": 268,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 3,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 250,
+      "component": "01a3953a-3eb8-4e89-b04c-14766a3152bf",
+      "countries": [
+        "Libya"
+      ],
+      "fit_rows_lost": 267,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 4,
+      "val_rows_lost": 60
+    },
+    {
+      "clear_candidates": 77,
+      "component": "031fdd40-8099-4e3c-af30-122c6aee4de4",
+      "countries": [
+        "Turkmenistan"
+      ],
+      "fit_rows_lost": 596,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 2,
+      "val_rows_lost": 93
+    },
+    {
+      "clear_candidates": 1517,
+      "component": "0116bbd2-b79b-40e4-b1cb-f4091c7f1ad8",
+      "countries": [
+        "Offshore",
+        "United States of America"
+      ],
+      "fit_rows_lost": 766,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 36,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 1726,
+      "component": "03bcbe82-32d9-475e-9288-c10db69b6192",
+      "countries": [
+        "United States of America"
+      ],
+      "fit_rows_lost": 788,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 6,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 607,
+      "component": "07f06b02-2a1b-4c65-ad07-6c2458716841",
+      "countries": [
+        "Turkmenistan"
+      ],
+      "fit_rows_lost": 1608,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 6,
+      "val_rows_lost": 0
+    },
+    {
+      "clear_candidates": 332,
+      "component": "16334937-2904-4281-b5ff-50a5e5c1cb9e",
+      "countries": [
+        "Kazakhstan"
+      ],
+      "fit_rows_lost": 1635,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 19,
+      "val_rows_lost": 316
+    },
+    {
+      "clear_candidates": 214,
+      "component": "13f5822e-65b0-434f-843d-cc3e6e3bbdaf",
+      "countries": [
+        "Turkmenistan"
+      ],
+      "fit_rows_lost": 1859,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 7,
+      "val_rows_lost": 227
+    },
+    {
+      "clear_candidates": 519,
+      "component": "13e89593-6871-4233-875c-ed35ecc501f4",
+      "countries": [
+        "Turkmenistan"
+      ],
+      "fit_rows_lost": 2717,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 97,
+      "val_rows_lost": 460
+    },
+    {
+      "clear_candidates": 903,
+      "component": "0410c8ee-58bd-419b-92b5-55039dd93255",
+      "countries": [
+        "Algeria"
+      ],
+      "fit_rows_lost": 4167,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 12,
+      "val_rows_lost": 675
+    },
+    {
+      "clear_candidates": 242,
+      "component": "0553d33c-829c-496b-bc4a-c2a986f8bf7e",
+      "countries": [
+        "Algeria"
+      ],
+      "fit_rows_lost": 6026,
+      "historical_assessment_nearby": true,
+      "positive_candidates": 24,
+      "val_rows_lost": 1413
+    }
+  ],
+  "caveats": [
+    "This is a documented site-held-out adaptation of the official train/validation split, not exact official training.",
+    "Previously individually assessed exact sites are excluded, but some selected connected components lie within 25 km of earlier assessments; this is NOT a project-unexposed positive test.",
+    "Remaining official train and validation share sites; selection is not site-independent from fit.",
+    "Metadata QA does not confirm readable imagery, raster identity, true clear reference, pixel annotation quality, or physical site independence beyond center distance.",
+    "No threshold, architecture, or model choice may use final_candidate labels or predictions.",
+    "All official public test labels were previously represented in the project paper benchmark; independent external validation needs newly acquired observations."
+  ],
+  "counts": {
+    "eligible_both_class_components": 17,
+    "final_candidate": 60,
+    "final_clear": 40,
+    "final_components": 10,
+    "final_countries": [
+      "Bahrain",
+      "Egypt",
+      "Iran (Islamic Republic of)",
+      "Libya",
+      "Offshore",
+      "Turkmenistan",
+      "United States of America",
+      "Uzbekistan"
+    ],
+    "final_positive": 20,
+    "final_sites": 36,
+    "fit": 30304,
+    "fit_select_shared_sites": 0,
+    "official": {
+      "test": {
+        "positive": 1832,
+        "rows": 43524,
+        "sites": 1289
+      },
+      "train": {
+        "positive": 3512,
+        "rows": 38345,
+        "sites": 618
+      },
+      "val": {
+        "positive": 299,
+        "rows": 6018,
+        "sites": 89
+      }
+    },
+    "rejected": {
+      "historically_assessed_exact_site": 22743,
+      "missing_or_same_reference": 746,
+      "sensor_or_quality": 10405
+    },
+    "removed_official_train_for_final": 2493,
+    "removed_official_train_for_select_disjointness": 5548,
+    "removed_official_val_for_final": 153,
+    "select": 1102,
+    "select_components": 5,
+    "unused_official_val": 4763
+  },
+  "exposure": {
+    "claim": "Public-test holdout for this newly fitted local baseline; not pristine project-unexposed or independent external validation",
+    "final_rows_within_25km_connected_component_of_prior_assessment": 60,
+    "individually_exposed_prior_ids": 5553,
+    "paper_v3_sealed_public_test_covers_all_test_ids": true,
+    "prior_exposed_sites": 640
+  },
+  "files": {
+    "final_candidate.jsonl": {
+      "rows": 60,
+      "sha256": "ff34faf3f1fa35f92311530aebf314a9c96b2d4c8229788d1802ecb8c698062f"
+    },
+    "fit.jsonl": {
+      "rows": 30304,
+      "sha256": "ef832843998eb7743337ec4f17d2b5078131f091777f5d4dddec51cd7223daa5"
+    },
+    "missing_assets.jsonl": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "removed_official_rows.jsonl": {
+      "rows": 12957,
+      "sha256": "0d6a3a1f36e7e2146e0fd6cf03b42fbcbe3093044715ef25b7f01b8b6cb2cf87"
+    },
+    "select.jsonl": {
+      "rows": 1102,
+      "sha256": "abd027e05361eee6a57e5e5c8a0c369746dbe157a0886f3df9e9c2fefc90763c"
+    }
+  },
+  "id_lists": {
+    "final_candidate_ids.json": "2ac32b0e8091c696f7ea50deb9a303ce630f9ea63efa733613f4c1a2b8671e09",
+    "fit_ids.json": "959975be448b3499e9ae96f40e03273f09d3af9543d5c614a30035d5498db45b",
+    "select_ids.json": "b89116d9c1116cf3a31655fb04912ca141fb5435d1754ece93c6e878841337f7"
+  },
+  "planner_sha256": "927460d62dfcd3ec74d3504808c288e5a8a72cf45de2dc129b2f3fc758e18614",
+  "schema_version": 1,
+  "source": {
+    "repository": "UNEP-IMEO/MARS-S2L",
+    "revision": "c26b1d7e31a0c5241fa37c9140802622c215eb32",
+    "sha256": {
+      "paper_v3_sealed_test_samples.jsonl": "685937eb599ce4612116dc5c16edc74c4c0c6273f2fa864e651cfee73d1f4f6d",
+      "publication_dev_samples.jsonl": "e59985b592a4bd1cf0561717c680116242266bf19b86069160a00debd72de3d3",
+      "publication_v3_strict_samples.jsonl": "6e959ae0af50c5a309247cbe674fe01b31a36f8b149f9be3292acebed3e5f906",
+      "publication_v3_training_samples.jsonl": "edd3c1da3d706b109798dcf86bc3db284f639d401d4953f3ced175c27b27d566",
+      "test.csv": "add125547e0e0066216070ed61a8544e76e84f062f636390be5d2ef1808dbfaa",
+      "train.csv": "f163f3986d46875270014fb958c7a5931c5c661ec650ab26391b3e7bde7f9053",
+      "val.csv": "be11301ce4d9668d7c707883598794e37bec7d5523b1061a5defd3b3e5dc96db"
+    }
+  }
+}

@@ -69,7 +69,7 @@ function validateExperiment(e) {
   if (!e || typeof e.id !== 'string' || typeof e.name !== 'string' || !Array.isArray(e.scenes))
     throw Error('Need experiment id, name and scenes');
   if (e.reportUrl) allowedAsset(e.reportUrl);
-  if (e.scenes.length > 1000) throw Error('Bundle exceeds 1,000 scenes');
+  if (e.scenes.length > 5000) throw Error('Bundle exceeds 5,000 scenes');
   const ids = new Set();
   for (const s of e.scenes) {
     if (!s || typeof s.id !== 'string' || typeof s.name !== 'string') throw Error('Invalid scene');
@@ -309,8 +309,8 @@ async function selectScene(id, {preserveView = false} = {}) {
     renderGrid();
     return;
   }
-  $('source-cards').innerHTML = sourceCard('Target Sentinel-2', scene.rgb, scene.rgbNote || 'Observed input; display contrast only') +
-    (scene.reference90Rgb ? sourceCard('Temporal reference −90d', scene.reference90Rgb, 'Reference window, not methane truth') : '') +
+  $('source-cards').innerHTML = sourceCard(scene.dataKind === 'synthetic' ? 'Synthetic input' : 'Target Sentinel-2', scene.rgb, scene.rgbNote || 'Observed input; display contrast only') +
+    (scene.reference90Rgb ? sourceCard(scene.reference90Label || 'Temporal reference −90d', scene.reference90Rgb, 'Reference observation, not methane truth') : '') +
     (scene.reference365Rgb ? sourceCard('Temporal reference −365d', scene.reference365Rgb, 'Reference window, not methane truth') : '') +
     (scene.emit ? sourceCard(scene.emitLabel || 'EMIT reference', scene.emit, scene.emitNote || 'Paired observation') : '') +
     '<div id="reference-card">' + sourceCard(scene.truthLabel || 'Reference mask', scene.truthImage,
@@ -354,7 +354,10 @@ async function selectScene(id, {preserveView = false} = {}) {
   showAssetStatus();
 }
 function makeLayer(kind){if(!grid)return null;const c=document.createElement('canvas');c.width=grid.width;c.height=grid.height;const ctx=c.getContext('2d'),im=ctx.createImageData(c.width,c.height),threshold=+$('threshold').value;for(let i=0;i<c.width*c.height;i++){if(grid.valid&&!grid.valid[i])continue;const p=grid.probability?.[i],t=grid.truth?.[i];let rgb=null,a=0;if(kind==='prediction'&&p!=null){if($('prediction-mode').value==='probability'){rgb=probabilityColor(p);a=240;}else if(p>=threshold){rgb=[255,135,35];a=230;}}if(kind==='truth'&&t===1){rgb=[0,225,230];const x=i%c.width,y=Math.floor(i/c.width);const edge=x===0||y===0||x===c.width-1||y===c.height-1||[i-1,i+1,i-c.width,i+c.width].some(j=>grid.truth[j]!==1);a=edge?240:30;}if(kind==='error'&&p!=null&&t!=null){if(p>=threshold&&t===1){rgb=[240,179,55];a=180;}else if(p>=threshold&&t===0){rgb=[247,71,122];a=215;}else if(p<threshold&&t===1){rgb=[152,121,240];a=215;}}if(rgb){im.data.set([...rgb,a],i*4);}}ctx.putImageData(im,0,0);return c.toDataURL();}
-function renderGrid(){clearLayers();updateTaskUI();if(isReconstruction()){renderReconstruction();return;}const pred=grid?.probability?makeLayer('prediction'):scene?.predictionImage,truth=grid?.truth?makeLayer('truth'):(scene?.truthImage||scene?.emit),errors=grid?.probability&&grid?.truth?makeLayer('error'):scene?.disagreementImage;if($('reference-card'))$('reference-card').innerHTML=sourceCard(scene?.truthLabel||'Reference mask',truth,scene?.truthNote||'No reference annotation available');const alpha=+$('opacity').value,referenceAlpha=+$('reference-opacity').value;text('reference-opacity-value',Math.round(referenceAlpha*100)+'%');$('reference-opacity').disabled=!truth;syncComparisonControls();$('prediction-mode-compare').value=$('prediction-mode').value;text('prediction-status',pred?($('prediction-mode').value==='probability'?'Model score 0–1 · uncalibrated':'Mask ≥ '+(+$('threshold').value).toFixed(2)):'Prediction unavailable');text('reference-status',truth?(scene?.truthLabel||'Paired reference · not independent truth'):'Reference unavailable');for(const id of Object.keys(maps))if(scene)overlay(id,scene.rgb);
+function renderGrid(){clearLayers();updateTaskUI();if(isReconstruction()){renderReconstruction();return;}const pred=grid?.probability?makeLayer('prediction'):scene?.predictionImage,truth=grid?.truth?makeLayer('truth'):(scene?.truthImage||scene?.emit),errors=grid?.probability&&grid?.truth?makeLayer('error'):scene?.disagreementImage;if($('reference-card'))$('reference-card').innerHTML=sourceCard(scene?.truthLabel||'Reference mask',truth,scene?.truthNote||'No reference annotation available');const alpha=+$('opacity').value,referenceAlpha=+$('reference-opacity').value;text('reference-opacity-value',Math.round(referenceAlpha*100)+'%');$('reference-opacity').disabled=!truth;syncComparisonControls();$('prediction-mode-compare').value=$('prediction-mode').value;text('prediction-status',pred?($('prediction-mode').value==='probability'?'Model score 0–1 · uncalibrated':'Mask ≥ '+(+$('threshold').value).toFixed(2)):'Prediction unavailable');
+const temporalOnly=!truth&&!!scene?.reference90Rgb;
+text('reference-status',truth?(scene?.truthLabel||'Paired reference · not independent truth'):temporalOnly?(scene.reference90Label||'Earlier observation')+' · imagery, not methane truth':'Reference unavailable');
+for(const id of Object.keys(maps))if(scene)overlay(id,id==='truth-map'&&temporalOnly?scene.reference90Rgb:scene.rgb);
 if(scene){
  for(const id of ['main-map','prediction-map']){
   if($('pred-toggle').checked)overlay(id,pred,alpha);
@@ -451,7 +454,10 @@ function drawComparisonSummary({tp,fp,fn,tn,n}){
  const iou=tp+fp+fn?((tp/(tp+fp+fn))*100).toFixed(1)+'%':'—';
  const native=scene?.nativeMetrics, frozenThreshold=scene?.decisionThreshold??experiment.decisionThreshold??0.5;
  const frozenIoU=native&&Number.isFinite(native.iou)&&native.tp+native.fp+native.fn>0?(native.iou*100).toFixed(1)+'%':'—';
- const stats=scene?.positiveOnlyReference?[['EMIT support covered',tp+fn?((tp/(tp+fn))*100).toFixed(1)+'%':'—'],['Outside reference','Unknown'],['Precision / IoU','Not measured'],['Emission origin','Unverified']]:native&&Number.isInteger(native.evaluated_pixels)?[['Native IoU at '+Number(frozenThreshold).toFixed(2),frozenIoU],['Display IoU at '+(+$('threshold').value).toFixed(2),n?iou:'—'],['Native FP pixels',native.fp?.toLocaleString() ?? '—'],['Native evaluated pixels',native.evaluated_pixels.toLocaleString()]]:[['Display IoU',n?iou:'—'],['Predicted area',n?((tp+fp)/n*100).toFixed(1)+'%':'—'],['Ground-truth area',n?((tp+fn)/n*100).toFixed(1)+'%':'—'],['Scene decision',scene?.outcome||'Not recorded']];
+ const unlabeled=!!grid?.probability&&!grid?.truth&&!scene?.truthImage&&!scene?.emit;
+ let scored=0,marked=0;
+ if(unlabeled)for(let i=0;i<grid.probability.length;i++)if(grid.valid?.[i]!==0&&grid.probability[i]!=null){scored++;if(grid.probability[i]>=+$('threshold').value)marked++;}
+ const stats=unlabeled?[['Display score cutoff',(+$('threshold').value).toFixed(2)],['Marked display area',scored?(marked/scored*100).toFixed(1)+'%':'—'],['Methane label','Unavailable'],['Accuracy','Not measured']]:scene?.positiveOnlyReference?[['EMIT support covered',tp+fn?((tp/(tp+fn))*100).toFixed(1)+'%':'—'],['Outside reference','Unknown'],['Precision / IoU','Not measured'],['Emission origin','Unverified']]:native&&Number.isInteger(native.evaluated_pixels)?[['Native IoU at '+Number(frozenThreshold).toFixed(2),frozenIoU],['Display IoU at '+(+$('threshold').value).toFixed(2),n?iou:'—'],['Native FP pixels',native.fp?.toLocaleString() ?? '—'],['Native evaluated pixels',native.evaluated_pixels.toLocaleString()]]:[['Display IoU',n?iou:'—'],['Predicted area',n?((tp+fp)/n*100).toFixed(1)+'%':'—'],['Ground-truth area',n?((tp+fn)/n*100).toFixed(1)+'%':'—'],['Scene decision',scene?.outcome||'Not recorded']];
  $('comparison-stats').innerHTML=stats.map(([k,v])=>'<div><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join('');
  text('compare-scene-label',scene?experimentLabel(experiment)+' / '+scene.name:experimentLabel(experiment)+' / no spatial export');
  text('coordinate-note',scene?.coordinateSystem==='pixel'?'Native '+(grid?.width||32)+' × '+(grid?.height||32)+' pixels · geographic footprint unavailable':native?.evaluated_pixels!=null?'Georeferenced display · native scores cover '+native.evaluated_pixels.toLocaleString()+' / '+(native.source_valid_pixels?.toLocaleString() ?? 'unknown')+' source-valid pixels; other pixels are unscored':'Georeferenced imagery · shared display grid');
@@ -467,6 +473,7 @@ function initComparisonControls(){
  for(const mode of ['overlay','panels'])$('layout-'+mode).onclick=()=>{
   $('comparison-layout').classList.toggle('overlay-layout',mode==='overlay');
   for(const m of ['overlay','panels'])$('layout-'+m).setAttribute('aria-pressed',String(m===mode));
+  const layoutURL = new URL(location.href); layoutURL.searchParams.set('layout', mode); history.replaceState(null, '', layoutURL);
   renderGrid();setTimeout(()=>{Object.values(maps).forEach(m=>m.invalidateSize());fit();},0);
  };
  $('scene-browser-toggle').onclick=()=>{const open=document.body.classList.toggle('scene-browser-open');$('scene-browser-toggle').setAttribute('aria-expanded',String(open));};
@@ -498,6 +505,10 @@ function updateTaskUI(){
  $('threshold').disabled=on;$('reset-threshold').disabled=on;
  const positiveOnly=scene?.positiveOnlyReference&&!on;
  taskText('.compare-toolbar h1',on?'Methane reconstruction':'Prediction over EMIT positive support',on||positiveOnly);taskText('.observation-panel h3','Observed target',on);taskText('.observation-panel .layer-status',scene?.truthLabel||'Observed reference grid',on);
+ if (!on && scene?.dataKind === 'synthetic') {
+  taskText('.observation-panel h3','Synthetic input',true);
+  taskText('.observation-panel .layer-status','Engineering fixture; no measured satellite image',true);
+ }
  taskText('.truth-panel h3',on?'Coarse input / baseline':'EMIT positive outline',on||positiveOnly);taskText('.prediction-panel h3',on?scene?.predictionLabel||'Actual reconstruction':'Prediction + EMIT positive outline',on||positiveOnly);taskText('.analysis article:nth-child(2) h3',on?'Reconstruction error':'EMIT support coverage',on||positiveOnly);
  taskText('.evidence .micro','Cross-section: blue observed, orange coarse, teal prediction, red residual.',on);
  taskText('.overlay-key',on?'Colored footprint is observed coverage, not a learned outline.':'Model prediction + EMIT positive boundary',on||positiveOnly);
@@ -505,6 +516,14 @@ function updateTaskUI(){
  if(positiveOnly)taskLabel('compare-truth','EMIT positive outline',true);
  for(const selector of ['.compare-legend','.map-legend']){const el=document.querySelector(selector);if(el){if(!el.dataset.originalHtml)el.dataset.originalHtml=el.innerHTML;if(!on)el.innerHTML=el.dataset.originalHtml;}}
  if(positiveOnly){const labels=document.querySelectorAll('.compare-legend span');labels[1].lastChild.textContent=' EMIT positive support';labels[2].lastChild.textContent=' Outside outline: unknown';labels[3].lastChild.textContent=' Missed positive support';}
+ const unlabeled=!on&&!positiveOnly&&!grid?.truth&&!scene?.truthImage&&!scene?.emit&&scene?.predictionAvailable===true;
+ if(unlabeled){
+  taskText('.compare-toolbar h1','Unverified plume candidates',true);
+  taskText('.prediction-panel h3','Prediction over current Sentinel-2',true);
+  taskText('.truth-panel h3',scene.reference90Rgb?'Earlier Sentinel-2 reference':'Methane annotation unavailable',true);
+  taskText('.overlay-key','Model prediction · methane label unavailable',true);
+  document.querySelector('.compare-legend').textContent='Orange: model candidate mask. Heatmap: purple 0 → teal 0.5 → yellow 1. No methane annotation: accuracy and emission origin are unverified.';
+ }
 }
 
 
@@ -527,13 +546,14 @@ try {
   $('search').oninput = drawList;
   $('filter').onchange = drawList;
   document.querySelectorAll('[data-view]').forEach(button => button.onclick = () => switchView(button.dataset.view, true));
-  for (const id of ['pred-toggle', 'truth-toggle', 'error-toggle', 'bounds-toggle', 'opacity', 'threshold', 'prediction-mode', 'reference-opacity', 'comparison-support'])
+  for (const id of ['pred-toggle', 'truth-toggle', 'error-toggle', 'bounds-toggle', 'opacity', 'threshold', 'reference-opacity', 'comparison-support'])
     $(id).oninput = renderGrid;
+  $('prediction-mode').onchange = renderGrid;
   $('reset-threshold').onclick = () => {
     $('threshold').value = scene?.decisionThreshold ?? experiment.decisionThreshold ?? 0.5;
     renderGrid();
   };
-  $('prediction-mode-compare').oninput = () => { $('prediction-mode').value = $('prediction-mode-compare').value; renderGrid(); };
+  $('prediction-mode-compare').onchange = () => { $('prediction-mode').value = $('prediction-mode-compare').value; renderGrid(); };
   $('fit').onclick = fit;
   initComparisonControls();
   $('overview').onclick = () => { switchView('map'); setTimeout(() => maps['main-map'].setView([39, -98], 4), 25); };
@@ -556,11 +576,13 @@ try {
     for (const [id, layer] of Object.entries(basemaps))
       $('online-basemap').checked ? layer.addTo(maps[id]) : maps[id].removeLayer(layer);
   };
+  window.GTMSceneReview?.start({getExperiment: () => experiment, getScene: () => scene, selectScene});
   const query = new URLSearchParams(location.search), initialView = location.hash.slice(1) || registry.presentation?.defaultView || 'compare';
   text('local-folder', registry.local?.bundleDirectory || 'outputs/GTM_viewer_bundles');
   text('message', registry.local?.warnings?.join(' · ') || '');
   selectExperiment(query.get('experiment') || registry.activeExperimentId || registry.experiments[0].id, query.get('scene'));
   switchView(initialView);
+  if (query.get('layout') === 'panels') $('layout-panels').click();
   atlas.start();
   viewerLive.start();
   window.addEventListener('popstate', () => {

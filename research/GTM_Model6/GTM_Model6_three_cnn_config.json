@@ -1,0 +1,11 @@
+{
+  "seed": 41,
+  "epochs": 30,
+  "batch_size": 2,
+  "base_channels": 16,
+  "learning_rate": 0.0003,
+  "max_minutes": 30,
+  "tile_size": 128,
+  "halo": 32,
+  "threshold": 0.5
+}

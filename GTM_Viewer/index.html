@@ -5,6 +5,7 @@
   <title>ERSRR | Methane Research</title>
   <meta name="description" content="Inspect methane model runs, predictions, imagery, and their limits.">
   <link rel="stylesheet" href="assets/leaflet.css"><link rel="stylesheet" href="GTM_Model0.css"><link rel="stylesheet" href="GTM_Model0_atlas.css"><link rel="icon" href="GTM_Model0.svg">
+  <link rel="stylesheet" href="GTM_Model0_scene_review.css?v=20261030c">
 </head>
 <body>
   <header class="app-header">
@@ -88,6 +89,11 @@
       </section>
       <section id="compare-view" class="view compare-view" hidden>
         <div class="compare-toolbar"><div><button class="text-button" data-view="national">← Back to US map</button><h1>Prediction and reference</h1><p id="compare-scene-label" class="micro"></p></div><div class="workspace-actions"><button id="layout-overlay" aria-pressed="true">Overlay</button><button id="layout-panels" aria-pressed="false">Side by side</button><button id="fit">Fit scene</button></div></div>
+        <div id="review-browser" class="review-browser" hidden>
+          <div class="review-heading"><strong>V11 / ALL SAVED PREDICTIONS</strong><span id="review-badge" class="review-badge"></span><a id="review-inventory-link" href="https://ersrr-architecture-experiments.joshuakrasn.chatgpt.site/progress.html#v11">Complete list and outcome counts ↗</a></div>
+          <div class="review-controls"><label for="review-outcome">Outcome<select id="review-outcome"><option value="all">All predictions</option></select></label><label for="review-search">Find a scene<input id="review-search" type="search" placeholder="Country, date or scene ID"></label><button id="review-reset" type="button">Reset filters</button><div class="review-navigation"><button id="review-prev" type="button">← Previous</button><span id="review-position" role="status"></span><button id="review-next" type="button">Next →</button></div></div>
+          <p id="review-rule" class="review-rule"></p>
+        </div>
         <div class="model-controls"><label for="comparison-experiment">Model</label><select id="comparison-experiment"></select><span id="comparison-branch-label">Branch</span><div id="comparison-branches" class="branch-controls"></div><label for="comparison-scene">Scene</label><select id="comparison-scene"></select></div>
         <div class="overlay-controls"><label><input id="compare-pred" type="checkbox" checked><i class="pred"></i>Prediction</label><label><input id="compare-truth" type="checkbox" checked><i class="truth"></i>Reference outline</label><label><input id="compare-errors" type="checkbox"> Disagreement</label><label>Display <select id="prediction-mode-compare"><option value="mask">Thresholded mask</option><option value="probability">Model score heatmap</option></select></label><label>Opacity <input id="compare-opacity" type="range" min="0" max="1" step="0.05" value="0.45"><output id="compare-opacity-value">45%</output></label><label><input id="linked" type="checkbox" checked> Link zoom</label></div>
         <div class="comparison-stats" id="comparison-stats"></div>
@@ -107,6 +113,6 @@
       <section id="experiments-view" class="view experiments-view" hidden><div class="page-title"><div class="eyebrow">EXPERIMENT REGISTRY</div><h1>Run results</h1><p>Historical aggregate results and scene overlays are separate evidence.</p></div><div id="experiments"></div><div class="note">An EMIT-derived target is not automatically independent ground truth. A matching facility coordinate is not proof of methane emissions. Global benchmarks do not establish US performance.</div></section>
     </main>
   </div>
-  <script src="assets/leaflet.js"></script><script src="assets/topojson-client.min.js"></script><script src="GTM_Model0_live.js"></script><script src="GTM_Model0_atlas.js"></script><script src="GTM_Model0_bootstrap.js"></script>
+  <script src="GTM_Model0_scene_review.js?v=20261030c"></script><script src="assets/leaflet.js"></script><script src="assets/topojson-client.min.js"></script><script src="GTM_Model0_live.js"></script><script src="GTM_Model0_atlas.js"></script><script src="GTM_Model0_bootstrap.js"></script>
 </body>
 </html>

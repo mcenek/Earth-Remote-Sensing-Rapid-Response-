@@ -33,3 +33,6 @@
 *.pdf         binary
 *.zip         binary
 *.gz          binary
+
+# Frozen manifests retain their recorded raw-byte hashes across platforms.
+/tool-diagnostics/mars-baseline-20261030/** -text !eol whitespace=cr-at-eol

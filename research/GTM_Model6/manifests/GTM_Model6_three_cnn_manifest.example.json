@@ -1,0 +1,43 @@
+{
+  "schema": "GTM_Model6_three_cnn_manifest_v1",
+  "data_kind": "measured",
+  "bands": ["B2", "B3", "B4", "B11", "B12"],
+  "observations": [
+    {
+      "id": "REPLACE_WITH_OBSERVATION_ID",
+      "parent_id": "REPLACE_WITH_ORIGINAL_PARENT",
+      "site": "REPLACE_WITH_VERIFIED_SITE",
+      "group": "REPLACE_WITH_CONNECTED_SITE_GROUP",
+      "source_ids": ["REPLACE_WITH_SENTINEL_ID", "REPLACE_WITH_EMIT_ID"],
+      "role": "branch_fit",
+      "target_kind": "emit",
+      "input": {
+        "path": "arrays/REPLACE_WITH_PREPARED_ARRAY.npz",
+        "sha256": "REPLACE_WITH_FILE_SHA256",
+        "sensor": "Sentinel-2",
+        "product_level": "L2A",
+        "units": "reflectance",
+        "radiometry_verified": false,
+        "acquired_at": "REPLACE_WITH_UTC_TIME",
+        "grid": {"shape": [192, 192], "crs": "EPSG:5070", "affine": [20, 0, 0, 0, -20, 3840]}
+      },
+      "target": {
+        "kind": "plume_mask",
+        "units": "binary",
+        "acquired_at": "REPLACE_WITH_UTC_TIME",
+        "support_reviewed": false,
+        "reviewer": "REPLACE_WITH_REVIEWER",
+        "source": "REPLACE_WITH_PRODUCT_AND_MASK_DEFINITION",
+        "grid": {"shape": [64, 64], "crs": "EPSG:5070", "affine": [60, 0, 0, 0, -60, 3840]}
+      },
+      "review": {
+        "status": "pending",
+        "alignment_verified": false,
+        "timing_verified": false,
+        "independence_verified": false,
+        "reviewer": "REPLACE_WITH_REVIEWER",
+        "notes": "Incomplete example. Replace coordinates and metadata from verified products. Add independent fitting, combination, validation, and test scenes."
+      }
+    }
+  ]
+}

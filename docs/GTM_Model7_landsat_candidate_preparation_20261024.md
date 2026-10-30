@@ -1,0 +1,13 @@
+# Separate New Mexico Landsat candidates
+
+This protocol precedes the candidate exporter. The metadata audit found two official-training plume observations at New Mexico site PB_30 with earlier source-complete clear no-plume references, each 384 hours earlier. Source targets are `0f41981f-2751-4bba-ab02-3035ef8df2c8` and `18e171df-18a2-4316-aee8-8064a2221042`; references are `204a3ea0-15ec-45c1-8436-ba2cada2708b` and `fb5870e5-7e4e-470e-89b9-c535ed9ab27c` respectively.
+
+Failures to prevent:
+
+1. Landsat bands are mislabeled as Sentinel. Preserve B02/B03/B04/B05/B06/B07 and sensor/product metadata. This is a separate candidate package, excluded from the combined Sentinel training manifest. The delivered 10 m raster grid does not make Landsat measurements native 10 m.
+2. Raw assets, chronology, review class, hashes, CRS, transform, shape or cloud masks are assumed. Verify exact official TRAIN rows against the pinned mixed source manifest, verify upstream asset identities, read target and reference own first six channels and own cloud masks, check all grids and declared descriptions, and accept only explicit reviewed producer classes.
+3. An unobservable pixel becomes a negative. Keep only cloud-code-zero, finite, positive/nonnodata support at both dates. Require at least 90 percent strict support; retain the original binary producer annotation and validity. Use the existing fixed green/NIR/SWIR snow-like rule with Landsat's corresponding channels. Exclude on QA failure without relaxing thresholds.
+4. A previous US evaluation site is repurposed. Require no shared site, target/reference acquisition, source spectral hash or location within 25 km of any old MARS DEV/TEST scene. If PB_30 lies near one of those groups, retain the metadata diagnostic and source evidence but mark it blocked from fitting; do not export a fitting-ready array.
+5. Having two observations is called an independent new-region test. Both belong to one physical Permian-region site. Report them as source candidates and earlier project exposure unknown. Do not create new model scores or claim national diversity from this one site.
+
+Save a versioned candidate manifest with source hashes, reference dates, exact sensor/bands/grid/validity and exclusion results. When QA and split checks pass, save native-grid target/reference/annotation/validity arrays with a separate Landsat schema. Independently reconstruct the arrays from source TIFFs and preserve an E2E receipt. The parent agent will inspect actual input/reference/annotation images. No training, model changes, downloads or changes to previous artifacts.

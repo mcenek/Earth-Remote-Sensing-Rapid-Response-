@@ -1,0 +1,23 @@
+{
+  "correction": "plan.counts.final_countries describes all eligible rows in selected components; actual reserved 60-row country set is below",
+  "final_manifest_sha256": "ff34faf3f1fa35f92311530aebf314a9c96b2d4c8229788d1802ecb8c698062f",
+  "plan_sha256": "3b29c62bb250dd9155b1c2af90637b605f2709f7ec6c64b18662a0c9ed2a6345",
+  "reserved_country_counts": {
+    "Bahrain": 6,
+    "Egypt": 6,
+    "Iran (Islamic Republic of)": 6,
+    "Libya": 18,
+    "Turkmenistan": 12,
+    "United States of America": 6,
+    "Uzbekistan": 6
+  },
+  "reserved_positive_country_counts": {
+    "Bahrain": 2,
+    "Egypt": 2,
+    "Iran (Islamic Republic of)": 2,
+    "Libya": 6,
+    "Turkmenistan": 4,
+    "United States of America": 2,
+    "Uzbekistan": 2
+  }
+}

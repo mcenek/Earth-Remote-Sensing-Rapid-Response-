@@ -1,4 +1,8 @@
-# GTM_Model6 — active Sentinel-to-EMIT plume detection study
+# GTM_Model6: Sentinel-to-EMIT plume detection study
+
+**October 21 implementation:** the three-CNN model, staged training, saved-checkpoint replay, and viewer exporter are now implemented. Use the [training and viewer runbook](../../docs/GTM_Model6_three_cnn_runbook.md), [acceptance contract](../../docs/GTM_Model6_three_cnn_acceptance_20261021.md), and [verified outputs and screenshots](../../reports/research/GTM_Model6_three_cnn_acceptance_20261021.md). Local synthetic runs check the software, not methane accuracy. Real training still requires approved measured data and machine access. This first release predicts plume probability; quantitative methane reconstruction remains a separate task.
+
+**Architecture decision, October 2:** [three-CNN implementation plan](../../docs/GTM_Model6_three_cnn_implementation_plan_20261002.md). Train independent airborne and EMIT branches, freeze their spatial features, and test a learned combiner. Keep reviewed CAFO appearances separate from methane labels. [Pretrained-model survey](../../reports/research/GTM_Model0_pretrained_model_survey_20261002.md). The sections below retain the earlier implementation history.
 
 The product objective is nationwide US Sentinel-only inference supervised by valid EMIT observations: plume extent and ranked candidate source locations. CAFO and oil inventories are corroboration context, not labels. [Design](../../docs/GTM_Model6_multiscale_reconstruction_design.md).
 

@@ -1,0 +1,18 @@
+# Official marss2l f7d264c2c845dfba1cb27f76ef6026275f8d8758 training import graph.
+# Exact versions are from its environment/requirements-test.lock (Python 3.12),
+# subject to a Python 3.11 compatibility resolution. Do not install marss2l itself:
+# its pyproject requires Python >=3.12. Use the pinned source directory on PYTHONPATH.
+adlfs==2026.5.0
+cloudsen12-models==1.0.1
+earthengine-api==1.7.29
+geopandas==1.1.3
+georeader-spaceml==2.3.2
+huggingface-hub==1.18.0
+loguru==0.7.3
+marshsi==0.1.4  # last release with Python 3.11 metadata
+netCDF4==1.7.4
+pandas==3.0.3
+satalign==0.1.1
+segmentation-models-pytorch==0.5.0
+shapely==2.1.2
+xarray==2026.4.0
