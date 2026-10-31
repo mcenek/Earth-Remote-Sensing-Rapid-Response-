@@ -12,6 +12,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 import shutil
 import sys
 import threading
@@ -20,7 +21,7 @@ import uuid
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path, PurePosixPath
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlsplit
 from urllib.request import Request, urlopen
 
 
@@ -30,6 +31,7 @@ CHUNK = 1024 * 1024
 MARGIN = 5 * 1024**3
 DEFAULT_CATALOG = Path(__file__).resolve().parents[1] / "handoff/catalogs/GTM_Model8_mars_required_20261030.jsonl.gz"
 DEFAULT_CATALOG_SHA256 = "b20d27dd58f2fe765e12b72f35d87803a75b3199e0db7bea284441a5432fe77d"
+PROFILE_PATTERN = re.compile(r"[a-z0-9][a-z0-9_-]{0,63}\Z")
 
 
 def sha256(path: Path) -> str:
@@ -48,6 +50,39 @@ def atomic_json(path: Path, payload: dict) -> None:
         os.replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def profile_paths(root: Path, profile: str | None) -> dict[str, Path]:
+    if profile is not None and not PROFILE_PATTERN.fullmatch(profile):
+        raise ValueError("Profile must be a lowercase alphanumeric, underscore, or hyphen slug of 1..64 characters")
+    prefix = ".gtm_model8_fetch" if profile is None else f".gtm_model8_fetch_profile-{profile}"
+    return {"receipt": root / f"{prefix}_receipt.json",
+            "audit": root / f"{prefix}_audit.jsonl",
+            "transfer": root / f"{prefix}_transfer.jsonl",
+            "progress": root / f"{prefix}_progress.json"}
+
+
+def acquire_claim(path: Path, wait_seconds: int) -> None:
+    """Wait only for the shared cache claim; never delete or adopt its owner."""
+    deadline = time.monotonic() + wait_seconds
+    while True:
+        try:
+            descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            break
+        except FileExistsError as error:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise RuntimeError(f"Existing cache operation; inspect its PID before retrying: {path}") from error
+            print(json.dumps({"phase": "waiting_for_cache", "claim": str(path),
+                              "seconds_remaining": round(remaining)}), flush=True)
+            time.sleep(min(30, remaining))
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as claim:
+            json.dump({"pid": os.getpid(), "started_unix": time.time()}, claim)
+    except BaseException:
+        # This process created the claim but could not record ownership.
+        path.unlink(missing_ok=True)
+        raise
 
 
 def checked_path(value: str) -> PurePosixPath:
@@ -74,7 +109,7 @@ def validate_item(item: dict) -> dict:
         raise ValueError(f"Invalid object hash for {path}")
     url = urlsplit(item["source_url"])
     if (url.scheme != "https" or url.netloc != "huggingface.co" or
-            url.path != URL_PREFIX + str(path) or url.query not in ("", "download=true") or
+            url.path != URL_PREFIX + quote(str(path), safe="/") or url.query not in ("", "download=true") or
             url.fragment):
         raise ValueError(f"Unpinned or mismatched source URL for {path}")
     return item
@@ -275,6 +310,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", required=True, type=Path)
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
+    parser.add_argument("--profile", help="Separate receipt and budget namespace for a supplemental catalog")
+    parser.add_argument("--wait-for-cache", type=int, default=0,
+                        help="Seconds to wait for the shared cache claim; default is fail fast")
     parser.add_argument("--download", action="store_true")
     parser.add_argument("--max-network-bytes", type=int)
     parser.add_argument("--workers", type=int, default=4)
@@ -282,6 +320,10 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if not 1 <= args.workers <= 8 or args.max_errors < 1:
         parser.error("workers must be 1..8 and max-errors positive")
+    if args.wait_for_cache < 0:
+        parser.error("wait-for-cache must be nonnegative")
+    if args.profile is not None and not PROFILE_PATTERN.fullmatch(args.profile):
+        parser.error("profile must be a lowercase slug of 1..64 letters, digits, underscores, or hyphens")
     if args.download and (args.max_network_bytes is None or args.max_network_bytes < 1):
         parser.error("--download requires a positive cumulative --max-network-bytes")
     if not args.download and args.max_network_bytes is not None:
@@ -292,18 +334,16 @@ def main(argv: list[str] | None = None) -> int:
     claim_path = root / ".gtm_model8_fetch.claim"
     own_claim = False
     try:
-        try:
-            descriptor = os.open(claim_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-        except FileExistsError as error:
-            raise RuntimeError(f"Existing cache operation; inspect its PID before retrying: {claim_path}") from error
+        acquire_claim(claim_path, args.wait_for_cache)
         own_claim = True
-        with os.fdopen(descriptor, "w", encoding="utf-8") as claim:
-            json.dump({"pid": os.getpid(), "started_unix": time.time()}, claim)
         items, catalog_hash = load_catalog(args.catalog)
         identity = {"data_root": str(root), "catalog_sha256": catalog_hash}
-        receipt_path = root / ".gtm_model8_fetch_receipt.json"
-        audit_path = root / ".gtm_model8_fetch_audit.jsonl"
-        ledger_path = root / ".gtm_model8_fetch_transfer.jsonl"
+        if args.profile is not None:
+            identity["profile"] = args.profile
+        paths = profile_paths(root, args.profile)
+        receipt_path = paths["receipt"]
+        audit_path = paths["audit"]
+        ledger_path = paths["transfer"]
         audit_run_id = f"{time.time_ns()}-{os.getpid()}"
         previous = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
         if previous and previous.get("identity") != identity:
@@ -352,7 +392,7 @@ def main(argv: list[str] | None = None) -> int:
             raise RuntimeError(f"Insufficient free disk: {free} < missing {receipt['missing_bytes']} + 5 GiB")
         budget = TransferBudget(ledger_path, identity, args.max_network_bytes,
                                 receipt["network_response_bytes"],
-                                root / ".gtm_model8_fetch_progress.json")
+                                paths["progress"])
         try:
             if budget.used >= budget.cap:
                 receipt.update(state="incomplete_budget", network_response_bytes=budget.used,
