@@ -36,6 +36,14 @@ python3 tools/GTM_Model8_server_bootstrap.py --data-root ~/gtm-model8/data/MARS-
 
 Setup creates or checks the separate Python 3.12 venv, installs the upstream Linux candidate lock there, verifies source and data paths, checks for other GPU work, and runs the frozen preflight. Successful preflight is required before a fresh training controller is launched in `tmux` as `gtm-model8-linux`. Logs and status are kept under `~/gtm-model8/outputs/GTM_Model8_mars_baseline_20261030/`. A live tmux session alone does not prove training is progressing. Check the trainer's `run_status.json`, epoch logs, and GPU use.
 
+If the acquisition is already running in `gtm-model8-data` and the private runtime is installed, queue setup and training without starting another download:
+
+```bash
+tmux new-session -d -s gtm-model8-launch -c "$PWD" 'exec python3 -u tools/GTM_Model8_server_bootstrap.py --data-root ~/gtm-model8/data/MARS-S2L --execute --wait-for-assets --start-training --batch-size 96 > ~/gtm-model8/launch.log 2>&1'
+```
+
+The wait step checks the pinned catalog, the acquisition receipt, and all 67,687 object counts. It stops if the download fails, its session disappears, or six hours pass without completion. It does not restart acquisition or reset its byte limit. Setup then runs the same data and GPU checks. The requested native batch of 96 matches the released training size and must pass real-data preflight, which checks memory and measures speed, before fitting. The Windows adaptation uses batch 32. Keep that difference in any comparison. `--wait-for-assets` alone does not authorize training; include `--start-training` for a training launch. Read `~/gtm-model8/launch.log` and `~/gtm-model8/outputs/GTM_Model8_server_bootstrap.json` to distinguish waiting, setup, failure, and a launched trainer.
+
 The controller publishes the first and final saved predictions after fitting. To inspect the predeclared first-epoch snapshot sooner, run its `publish` action from another shell after `epoch_000.pt` exists. This must use the same roots and runtime lock as the fit. The status command and logs distinguish a fit failure from a prediction-export failure. Keep the original split, checkpoint rule, pixel cutoff, and exposure caveats below.
 
 ## Required layout
@@ -66,6 +74,8 @@ The frozen plan is `tool-diagnostics/mars-baseline-20261030/plan.json` with SHA-
 ## Proposed Linux environment
 
 Use Python 3.12 in a new venv. The upstream source declares Python 3.12 or newer. Its own `environment/requirements-test.lock` pins the Linux candidate environment, including Torch 2.12.0, torchvision 0.27.0, and marshsi 0.1.6. That full lock was generated on Python 3.12; it is not the tested Windows Python 3.11 overlay. The local `requirements-minimal-locked.txt` includes Windows-only `win32-setctime` and should not be treated as a tested Linux install recipe. Confirm the GPU driver and the Torch CUDA wheel on the destination. The doctor checks that `nvidia-smi -L` sees a GPU, and trainer preflight must establish actual CUDA support, BF16, source parity, data controls, and available memory.
+
+On October 30, the pinned lock installed in the campus account's private Python 3.12 venv. `pip check` found no broken requirements. Torch reported `2.12.0+cu130`, CUDA `13.0`, and a Blackwell device with compute capability `12.0`. A small BF16 matrix calculation returned the expected value. These are runtime checks. They do not prove that the dataset preflight or training has passed. No system Python, GPU driver, or TensorFlow environment was changed.
 
 ```bash
 cd "$GTM_CODE"

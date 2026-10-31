@@ -14,11 +14,16 @@ import shlex
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 import GTM_Model8_server as server
 import GTM_Model8_server_prepare as prepare
+import GTM_Model8_fetch_assets as assets
+
+
+EXPECTED_ASSET_OBJECTS = 67687
 
 
 def stamp() -> str:
@@ -140,8 +145,10 @@ def plan(args: argparse.Namespace) -> dict:
             "output_root": str(args.output_root), "venv": str(args.venv),
             "python3_12": str(args.python3_12) if args.python3_12 else shutil.which("python3.12"),
             "install_runtime": args.install_runtime, "start_training": args.start_training,
+            "wait_for_assets": args.wait_for_assets,
             "tmux_session": args.tmux_session,
-            "steps": ["validate data", "verify/extract pinned source", "prepare links",
+            "steps": (["wait for pinned asset acquisition"] if args.wait_for_assets else []) +
+                     ["validate data", "verify/extract pinned source", "prepare links",
                       "create or verify private Python 3.12 venv"] +
                      (["pip install pinned lock"] if args.install_runtime else []) +
                      ["doctor", "frozen preflight"] +
@@ -223,6 +230,81 @@ def write_receipt(path: Path, payload: dict) -> None:
         temporary.unlink(missing_ok=True)
 
 
+def complete_assets(state: dict, expected: int) -> None:
+    """A complete label is insufficient without matching every frozen object."""
+    try:
+        verified = state["verified_existing"]
+        missing = state["missing"]
+        downloaded = state.get("downloaded", 0)
+        remaining = state.get("remaining", 0)
+        if not all(type(value) is int and value >= 0 for value in
+                   (verified, missing, downloaded, remaining)):
+            raise ValueError("Asset counts must be nonnegative integers")
+        if (verified + downloaded != expected or verified + missing != expected or
+                downloaded != missing or remaining != 0 or
+                state.get("failed") or state.get("corrupt") or state.get("corrupt_count", 0)):
+            raise ValueError("Complete acquisition receipt has inconsistent counts or errors")
+    except KeyError as error:
+        raise ValueError(f"Complete acquisition receipt lacks {error.args[0]}") from error
+
+
+def wait_for_assets(args: argparse.Namespace, receipt: dict, receipt_path: Path) -> dict:
+    catalog = args.code_root / "handoff/catalogs/GTM_Model8_mars_required_20261030.jsonl.gz"
+    objects, catalog_hash = assets.load_catalog(catalog)
+    if catalog_hash != assets.DEFAULT_CATALOG_SHA256 or len(objects) != EXPECTED_ASSET_OBJECTS:
+        raise RuntimeError("Bundled acquisition catalog hash or object count differs from the pinned handoff")
+    identity = {"data_root": str(args.data_root.resolve()), "catalog_sha256": catalog_hash}
+    source_receipt = args.data_root / ".gtm_model8_fetch_receipt.json"
+    deadline = time.monotonic() + args.asset_wait_timeout
+    receipt["status"] = "waiting_for_assets"
+    receipt["asset_wait"] = {"catalog_sha256": catalog_hash,
+                             "expected_objects": EXPECTED_ASSET_OBJECTS,
+                             "acquisition_session": args.acquisition_tmux_session,
+                             "receipt": str(source_receipt)}
+    write_receipt(receipt_path, receipt)
+    while True:
+        try:
+            state = json.loads(source_receipt.read_text(encoding="utf-8")) if source_receipt.is_file() else None
+        except (OSError, ValueError) as error:
+            raise RuntimeError(f"Acquisition receipt is unreadable: {error}") from error
+        if state is not None:
+            if state.get("identity") != identity:
+                raise RuntimeError("Acquisition receipt has a different data root or catalog SHA-256")
+            asset_state = state.get("state")
+            if asset_state == "complete":
+                complete_assets(state, EXPECTED_ASSET_OBJECTS)
+                receipt["asset_wait"].update(state="complete", verified_existing=state["verified_existing"],
+                                             downloaded=state.get("downloaded", 0),
+                                             network_response_bytes=state.get("network_response_bytes"))
+                write_receipt(receipt_path, receipt)
+                print(json.dumps({"phase": "assets_complete", **receipt["asset_wait"]}), flush=True)
+                return receipt
+            if asset_state not in {"inventory", "downloading"}:
+                raise RuntimeError(f"Acquisition stopped in state {asset_state!r}")
+        else:
+            asset_state = "receipt_missing"
+        if time.monotonic() >= deadline:
+            raise RuntimeError(f"Timed out waiting for acquisition after {args.asset_wait_timeout} seconds")
+        session = run_command(["tmux", "has-session", "-t", args.acquisition_tmux_session])
+        if session["exit_code"] != 0:
+            # The fetcher can finish between the receipt read and this query.
+            # Re-enter the full identity/count checks before reporting a lost job.
+            if source_receipt.is_file():
+                latest = json.loads(source_receipt.read_text(encoding="utf-8"))
+                if latest.get("state") == "complete":
+                    continue
+            raise RuntimeError(f"Acquisition tmux session disappeared before completion: {args.acquisition_tmux_session}")
+        progress = {"phase": "waiting_for_assets", "acquisition_state": asset_state,
+                    "verified_existing": state.get("verified_existing") if state else None,
+                    "downloaded": state.get("downloaded") if state else None,
+                    "missing": state.get("missing") if state else None,
+                    "network_response_bytes": state.get("network_response_bytes") if state else None}
+        receipt["asset_wait"].update(progress)
+        write_receipt(receipt_path, receipt)
+        print(json.dumps(progress), flush=True)
+        time.sleep(min(args.asset_poll_seconds, max(0, deadline - time.monotonic())))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     home = Path.home()
@@ -240,6 +322,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--install-runtime", action="store_true")
     parser.add_argument("--start-training", action="store_true")
+    parser.add_argument("--wait-for-assets", action="store_true",
+                        help="Wait for the pinned acquisition receipt before setup; training still requires --start-training")
+    parser.add_argument("--acquisition-tmux-session", default="gtm-model8-data")
+    parser.add_argument("--asset-wait-timeout", type=int, default=21600)
+    parser.add_argument("--asset-poll-seconds", type=int, default=30)
     parser.add_argument("--tmux-session", default="gtm-model8-linux")
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--validation-batch-size", type=int, default=8)
@@ -251,6 +338,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if min(args.batch_size, args.validation_batch_size, args.draws, args.epochs, args.patience) < 1:
         parser.error("Batch sizes, draws, epochs, and patience must be positive")
+    if args.asset_wait_timeout < 1 or args.asset_poll_seconds < 1:
+        parser.error("Asset wait timeout and poll seconds must be positive")
     args.code_root = args.code_root.resolve()
     args.data_root = args.data_root.resolve()
     args.source_root = args.source_root.absolute()
@@ -261,22 +350,26 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("The private venv path must not be a symlink")
     if args.venv.resolve() != (home / "gtm-model8/venv").resolve():
         parser.error("The private venv must be ~/gtm-model8/venv")
-    if args.install_runtime or args.start_training:
+    if args.install_runtime or args.start_training or args.wait_for_assets:
         if not args.execute:
-            parser.error("--install-runtime and --start-training require --execute")
+            parser.error("--install-runtime, --start-training, and --wait-for-assets require --execute")
     receipt = plan(args)
     if not args.execute:
         print(json.dumps(receipt, indent=2))
         return 0
+    destination = args.receipt or args.output_root / "GTM_Model8_server_bootstrap.json"
     try:
+        if args.wait_for_assets:
+            wait_for_assets(args, receipt, destination)
+            receipt["data"] = data_report(args.data_root)
+            receipt["status"] = "preparing"
+            write_receipt(destination, receipt)
         receipt = execute(args, receipt)
     except Exception as error:
         receipt.update(status="failed", error=str(error))
         print(json.dumps(receipt, indent=2), file=sys.stderr)
-        destination = args.receipt or args.output_root / "GTM_Model8_server_bootstrap.json"
         write_receipt(destination, receipt)
         return 1
-    destination = args.receipt or args.output_root / "GTM_Model8_server_bootstrap.json"
     write_receipt(destination, receipt)
     receipt["receipt"] = str(destination)
     print(json.dumps(receipt, indent=2))
