@@ -2,6 +2,14 @@
 
 This is a proposed next evaluation stage. It does not replace real plume labels or change the frozen Model8 test.
 
+## CAFO validation cohort
+
+Use facilities common to both inventories as the primary CAFO validation list: the recent Hoque et al. [CAFOSat resource (2026)](https://arxiv.org/abs/2606.00548) and the older Handan-Nader and Ho study, [Deep learning to map concentrated animal feeding operations (2019)](https://www.nature.com/articles/s41893-019-0246-x). Martin proposed this intersection in the October 30 meeting, and Joshua clarified it afterward. The older paper was published on April 8, 2019; the dates of its underlying inventory records are separate.
+
+Match the same physical facility using coordinates, available facility information and imagery checks. Do not require identical coordinate decimals. Record and justify the matching tolerance before evaluating predictions, resolve ambiguous matches, and remove duplicate facilities. Retain both original coordinates, source versions and observation dates. Report the resulting count and geographic coverage; the intersection may cover only part of the United States.
+
+Keep locations appearing in only one inventory in a separate group, outside this primary cohort. Agreement supports facility persistence. It does not establish methane emission at the satellite acquisition time or supply a pixel-level plume label.
+
 ## Required observations
 
 Retain UTC acquisition time, footprint, valid-pixel support, current and reference dates, CRS, pixel transform, raw probabilities, fixed-cutoff mask, model version and checkpoint hash. Store ground-truth identity, time and mask where available. Keep each facility's coordinate, inventory source, observation year and verification status.

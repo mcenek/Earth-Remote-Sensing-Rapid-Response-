@@ -4,6 +4,40 @@ This launches the same frozen MARS-S2L baseline from new random weights on a Lin
 
 The server launcher is `tools/GTM_Model8_server.py`. It does not change the active Windows controller or its model fingerprint. Its `doctor` and `commands` actions use only the Python standard library and do not import Torch. `doctor` reports missing files and packages; a passing doctor means the heavy trainer preflight is still required.
 
+## Campus server launch
+
+The campus login is now working through Horizon, the Engineering Linux desktop, and SSH to the GPU host. The October 30 inventory found a roughly 48 GB RTX PRO 5000 Blackwell GPU, about 184 GiB RAM, 24 CPUs, and `/usr/bin/python3.12`. System `python3` is 3.14.4. Keep the system Python, driver, shared packages, and Martin's TensorFlow helper unchanged. This experiment uses PyTorch in its own `~/gtm-model8/venv` environment. Do not install this runtime into `~/tf-env`.
+
+Use the existing clone and research branch. Code is edited and checked on the development machine, pushed to this branch, then fetched on the server:
+
+```bash
+cd ~/Earth-Remote-Sensing-Rapid-Response-
+git switch research/gtm-model6-restart-2026-09-22
+git pull --ff-only
+python3 tools/GTM_Model8_server_prepare.py probe
+```
+
+First check whether a verified MARS cache is already available. Use its actual path if so. The new account initially contained only the clone, and no shared dataset directory was visible under `/data`. The small bundled catalog describes only the existing frozen experiment's required assets. It contains 67,687 objects totaling 32,607,815,901 bytes. It includes input rasters, the FIT methane patterns used by the released augmentation, provider metadata, and the released reference checkpoint. It does not request the entire public release. Downloading requires an explicit byte limit:
+
+```bash
+mkdir -p ~/gtm-model8/data/MARS-S2L
+python3 tools/GTM_Model8_fetch_assets.py --data-root ~/gtm-model8/data/MARS-S2L
+python3 tools/GTM_Model8_fetch_assets.py --data-root ~/gtm-model8/data/MARS-S2L --download --max-network-bytes 35000000000
+```
+
+The first command is a local inventory. The second transfers missing objects from the immutable provider revision and verifies each object's size and hash. Check its completion receipt before setup. Keep the acquisition process in `tmux` if the connection may close. The 35 GB limit applies to this acquisition tool, including retry body bytes. Python package downloads are separate. The tool must stop on repeated failures rather than repeatedly downloading the release.
+
+The source archive under `handoff/vendor/` preserves the frozen upstream source bytes and its license. It avoids a fresh checkout changing recorded line endings. The setup script is dry by default. After the asset inventory is complete, inspect the plan, then execute:
+
+```bash
+python3 tools/GTM_Model8_server_bootstrap.py --data-root ~/gtm-model8/data/MARS-S2L
+python3 tools/GTM_Model8_server_bootstrap.py --data-root ~/gtm-model8/data/MARS-S2L --execute --install-runtime --start-training
+```
+
+Setup creates or checks the separate Python 3.12 venv, installs the upstream Linux candidate lock there, verifies source and data paths, checks for other GPU work, and runs the frozen preflight. Successful preflight is required before a fresh training controller is launched in `tmux` as `gtm-model8-linux`. Logs and status are kept under `~/gtm-model8/outputs/GTM_Model8_mars_baseline_20261030/`. A live tmux session alone does not prove training is progressing. Check the trainer's `run_status.json`, epoch logs, and GPU use.
+
+The controller publishes the first and final saved predictions after fitting. To inspect the predeclared first-epoch snapshot sooner, run its `publish` action from another shell after `epoch_000.pt` exists. This must use the same roots and runtime lock as the fit. The status command and logs distinguish a fit failure from a prediction-export failure. Keep the original split, checkpoint rule, pixel cutoff, and exposure caveats below.
+
 ## Required layout
 
 Unpack the private handoff without changing file bytes. It contains `ersrr-ordinal-win/` for project code, `source/marss2l-code/` for the pinned upstream source snapshot, and `preview-outputs/GTM_viewer_bundles/` for saved viewer examples. The full MARS-S2L raster cache is supplied separately. Choose a separate output root for the new Linux fit. The frozen trainer expects two local paths under the code checkout. Create links so those paths resolve to the explicit roots:

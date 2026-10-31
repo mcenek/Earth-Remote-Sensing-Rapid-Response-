@@ -1,0 +1,27 @@
+{
+  "repository": "UNEP-IMEO/MARS-S2L",
+  "revision": "c26b1d7e31a0c5241fa37c9140802622c215eb32",
+  "description": "Existing frozen FIT, validation and reserved evaluation raster objects, FIT simulation CH4 patterns, provider metadata and pinned released reference. No new scene selection.",
+  "license": "Provider dataset and released weights: CC BY-NC-SA 4.0; see downloaded README.md",
+  "catalog": "GTM_Model8_mars_required_20261030.jsonl.gz",
+  "catalog_sha256": "b20d27dd58f2fe765e12b72f35d87803a75b3199e0db7bea284441a5432fe77d",
+  "catalog_bytes": 3707069,
+  "objects": 67687,
+  "logical_asset_bytes": 32607815901,
+  "input_catalogs": [
+    {
+      "name": "required_asset_catalog.jsonl",
+      "sha256": "3402760e2e028c0eeb60e4c78e61270f753ff666007d4d5bf69a4268d7e8007e",
+      "objects": 65315,
+      "bytes": 31847796999
+    },
+    {
+      "name": "model_fit_select_ch4_asset_catalog.jsonl",
+      "sha256": "c459fbde8b03b7243ad59ff43855dd6d798e293d0680fc5537dabdfc4b8d15aa",
+      "objects": 2363,
+      "bytes": 407838163
+    }
+  ],
+  "metadata_manifest_sha256": "883078d5ab799dd2372cd8f85824e7f3a172c4a1d82400c61d96a4e36992b533",
+  "hash_provenance": "Raster hashes preserve prior immutable-release catalogs. Metadata content SHA-256 matches the verified provider metadata receipt. Reference hashes match evaluate_released_marss2l.RELEASE_SPECS."
+}

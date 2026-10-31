@@ -1,0 +1,218 @@
+{
+  "repository": "https://github.com/UNEP-IMEO-MARS/marss2l",
+  "revision": "f7d264c2c845dfba1cb27f76ef6026275f8d8758",
+  "license": "LGPL-3.0-or-later; upstream LICENCE retained",
+  "description": "Byte-preserving library source and Linux candidate dependency lock for the frozen baseline, including verified Windows-checkout CRLF bytes. No images or weights.",
+  "archive_sha256": "c0308478824a8ed57b64658bedcc84bd0a3ddf759e831426d4f98542544a7f75",
+  "archive_bytes": 176662,
+  "files": {
+    "CITATION.cff": {
+      "bytes": 2784,
+      "sha256": "35fd2df5b24968fe2d8ffb66af483e7b86ba2db7678364267964cbcb010560c8"
+    },
+    "environment/requirements-test.lock": {
+      "bytes": 13732,
+      "sha256": "88682b8cb2bbc91fd0c5e98c8fdde920c630ec64fd5fd5d6e8602176a6dbd63a"
+    },
+    "LICENCE": {
+      "bytes": 7819,
+      "sha256": "f9ce4700304355f221141421dea1f24fae2f6fb305d9940ef20f86b874c3620a"
+    },
+    "marss2l/__init__.py": {
+      "bytes": 23,
+      "sha256": "499ff1cc968d81936f4af34ed9bbced1de09bfe1134890a3c868d7977e657f0c"
+    },
+    "marss2l/config.py": {
+      "bytes": 7774,
+      "sha256": "8a3009ccbce369ca636af94b2060ea3e9afa364dcedecef2ddfb54e911b9915f"
+    },
+    "marss2l/dataframe_image_plumes.py": {
+      "bytes": 47526,
+      "sha256": "17e6a7dd216509141cd401c4cc2dfbadce529e64f6ecd93cd900bb37e603af80"
+    },
+    "marss2l/eval_baseline.py": {
+      "bytes": 5287,
+      "sha256": "d92ddf4fe601d8e5c69fe7c6ab7081b9d2e2aa18844494e76aa16b511f765e3b"
+    },
+    "marss2l/eval_final.py": {
+      "bytes": 12047,
+      "sha256": "0d3a0c5f1acbc06190a1c9ca90bebfe4dbb63c50cec2cebb88578019038d25a2"
+    },
+    "marss2l/huggingface.py": {
+      "bytes": 8241,
+      "sha256": "19f7fefc5b19683d4d009cc81600165d7fbf3142836fe9dec919e2f1f1bdffc7"
+    },
+    "marss2l/loaders.py": {
+      "bytes": 87683,
+      "sha256": "db760531edd9b70c6c5b2679fb5a99dc0e492a2c766b83bc8eca37b0d5952b51"
+    },
+    "marss2l/locations_case_studies.py": {
+      "bytes": 7028,
+      "sha256": "4af44928433cde330503b5ad34024bf815404b14392efc4b3947471fe4f33161"
+    },
+    "marss2l/loss.py": {
+      "bytes": 11533,
+      "sha256": "fb662921052d55ac5fee0b207304cc74e9ea78da72c7a9456b4095197d464433"
+    },
+    "marss2l/mars_sentinel2/__init__.py": {
+      "bytes": 482,
+      "sha256": "47a21aecae1b0fbdfbae11450573fc556c80359684b32867c60019a42dfbaba6"
+    },
+    "marss2l/mars_sentinel2/background.py": {
+      "bytes": 31564,
+      "sha256": "834a3513a517b4982504e232f6666da160bc5ed697040bc2b4eece1b738d1624"
+    },
+    "marss2l/mars_sentinel2/countries.py": {
+      "bytes": 2387,
+      "sha256": "b52ed70b1294734d50f6e85085c7b2e9d1acdc3e60e3c9dc2fe20ce138c877c8"
+    },
+    "marss2l/mars_sentinel2/ee.py": {
+      "bytes": 1085,
+      "sha256": "68df3110aa8e76c00168e10e8344ecf5cb60ba838091060a1ac236507fddd5bb"
+    },
+    "marss2l/mars_sentinel2/integrated_transmittances.json": {
+      "bytes": 27926,
+      "sha256": "50d7ef83b1f2d3f8a659421a313c595acc4dfa7e7c18495bb6c5d0ae3ca1cd67"
+    },
+    "marss2l/mars_sentinel2/location_image.py": {
+      "bytes": 8950,
+      "sha256": "d4d469e7da047c457c96c981d49824eb21392e80c5d0f2daa077234930b5b523"
+    },
+    "marss2l/mars_sentinel2/mixing_ratio_methane.py": {
+      "bytes": 32241,
+      "sha256": "f3c0535c939fba2882761096bed852e4cb24e6b5c759d43d012f137442015b41"
+    },
+    "marss2l/mars_sentinel2/plume_detection.py": {
+      "bytes": 4621,
+      "sha256": "9c8c8387eabaf249bc5ad701dafa73cf3097a11557504f4b885ef116c14a36eb"
+    },
+    "marss2l/mars_sentinel2/plume_detection_model.py": {
+      "bytes": 29381,
+      "sha256": "664608e391044f5349984161512a0937eb98be053bbfc0dc8731e22b4cefdca1"
+    },
+    "marss2l/mars_sentinel2/plumesimulation.py": {
+      "bytes": 33726,
+      "sha256": "cf42119999c7676fdf7756b6e6532cbff8208d85c96a0de3fad3422102a338ca"
+    },
+    "marss2l/mars_sentinel2/quantification.py": {
+      "bytes": 455,
+      "sha256": "ac4afe76b65d2719ed120cecb6ac84944c15258ccf454d4839dc4cdc9a17553f"
+    },
+    "marss2l/mars_sentinel2/query_images.py": {
+      "bytes": 17371,
+      "sha256": "f8511e2b55bb974ae92573dccfd4649c6375a0b0767494f4a61d7c6c0defef0c"
+    },
+    "marss2l/mars_sentinel2/s2lutils.py": {
+      "bytes": 15271,
+      "sha256": "7dda68facddb0abe4cb9d0c041e3399c8027087be8096ef0ac3f1c6ef296f392"
+    },
+    "marss2l/mars_sentinel2/transmittance_to_ch4.py": {
+      "bytes": 31742,
+      "sha256": "b00fc2ec02faba82df870604c554c08b9911de25d0f137d55ae58a772aee65c8"
+    },
+    "marss2l/mars_sentinel2/utils.py": {
+      "bytes": 6255,
+      "sha256": "f9b2e36205a254555971c471459032fbf982e97574782fc4f67050f5f7f3d6c1"
+    },
+    "marss2l/mars_sentinel2/utils_torch.py": {
+      "bytes": 1767,
+      "sha256": "ebeaaec331cc2e38de6a144965892b0e967a079564d412d9f4c875b5ccad8ebf"
+    },
+    "marss2l/mars_sentinel2/wind.py": {
+      "bytes": 15280,
+      "sha256": "056f526054baf3971c232a6fa06e05ead22b8fd4861a7fb3c9eec0327e8c7a22"
+    },
+    "marss2l/mbmp_torch.py": {
+      "bytes": 2272,
+      "sha256": "afb573abe5f2227f47ef69eaf60bf156ce72f7c1eacb3f2a6b45842d7db560e8"
+    },
+    "marss2l/metrics.py": {
+      "bytes": 4397,
+      "sha256": "d81ab8970afbcb4ab4e7765c6894710134a810ccf797e969e5e8930073153e10"
+    },
+    "marss2l/models.py": {
+      "bytes": 17640,
+      "sha256": "8845fdd1db083271e25c55ea7896355ca631e94e6898903bb6be0ddc4c2b7f8b"
+    },
+    "marss2l/plot/__init__.py": {
+      "bytes": 625,
+      "sha256": "08f98a1fc64fe8a5a47898e9bb4ffbf789d8610ae24db702bc565af7939ad312"
+    },
+    "marss2l/plot/colors.py": {
+      "bytes": 118,
+      "sha256": "04938a9a67e7361c8418fed083eaa0eb8f447bbc3289b37445c738fd397f7348"
+    },
+    "marss2l/plot/geographical_location.py": {
+      "bytes": 2541,
+      "sha256": "24b2e854ebe8e110bab67f3b238e4fa3f262ef3ac061a897ff39fe2864f4aae1"
+    },
+    "marss2l/plot/images_by_month.py": {
+      "bytes": 9720,
+      "sha256": "71dcfee8bf9eb0340dc83d4dc2f1da83de1af315a0d91850be15d1fe92e46748"
+    },
+    "marss2l/plot/inference.py": {
+      "bytes": 765,
+      "sha256": "d9525d260b1b206b395ff0de28ea3e6a67c931bfc7c9d4cf4a69868e777dc147"
+    },
+    "marss2l/plot/plot_histograms_predictions.py": {
+      "bytes": 4309,
+      "sha256": "43acf79a6a93f604a590c80dc75d3cecc80eb68d8b5e1ccefc5b6cb016246048"
+    },
+    "marss2l/plot/plot_location_for_inference.py": {
+      "bytes": 7618,
+      "sha256": "f6ddc22f185d6a2047a14f4b53114a0479e1301bf7652d4d7d48840b9b4a5894"
+    },
+    "marss2l/plot/prob_vs_emission_rate.py": {
+      "bytes": 4537,
+      "sha256": "bb3fc2de9e2a7455e21cea765e0869e591729773dd5be6014c44078f630eb21d"
+    },
+    "marss2l/plot/recall_fluxrate_plot.py": {
+      "bytes": 10219,
+      "sha256": "f4fcb6438cef3b7d65e3a9a42d1b795f0eada233d8d7e8f0a7285733caffa678"
+    },
+    "marss2l/plot/time_series.py": {
+      "bytes": 6047,
+      "sha256": "43885717026b093e0e9927465027cfb4689cbe7c0acc2b9c161f637bd9bc754b"
+    },
+    "marss2l/reproduce_training.py": {
+      "bytes": 9612,
+      "sha256": "81fd371e57cb8163af1f40aea660795bdbc6d452a3eccd3d8909dd17b2d42f35"
+    },
+    "marss2l/sampling.py": {
+      "bytes": 3692,
+      "sha256": "fd7cc827feb99b7f8b57604d222591cebdf649076ee5f50843a759335d9879db"
+    },
+    "marss2l/seed.py": {
+      "bytes": 1423,
+      "sha256": "049e5fe57a6367fbab8710e17fc3605b109113bfcbb505f5b8cf28596259d7dd"
+    },
+    "marss2l/stats_dataset.py": {
+      "bytes": 11750,
+      "sha256": "b0493076c221351fd8c71f410962d7212b9f050299bb189e9f7543109f34ce25"
+    },
+    "marss2l/train_final.py": {
+      "bytes": 24791,
+      "sha256": "9f62c76bf33df3b822db016d0d7b98208525f66e8b10c42af2d057de8ad04e94"
+    },
+    "marss2l/trainer.py": {
+      "bytes": 19500,
+      "sha256": "479e13c0ff76f25d52af1bda9757581c0f7cb23cc792c612a921432917a55718"
+    },
+    "marss2l/utils.py": {
+      "bytes": 9375,
+      "sha256": "2cd407e36009bd79d9bc984855e1934c762ae518e1bc994376de44ac4f61d439"
+    },
+    "marss2l/validation_utils.py": {
+      "bytes": 4726,
+      "sha256": "afeec171b867e95f5de1d879bdafa3ead932b97c3e2025a2e3841129e3bf063f"
+    },
+    "pyproject.toml": {
+      "bytes": 3249,
+      "sha256": "a38aa373fede3a39c7f86909a54a9fd57e6a41266746e6b17f870af5cef677c5"
+    },
+    "README.md": {
+      "bytes": 15305,
+      "sha256": "c8f7f74b1de2d7227b2f76272419ab5669c7815c68956858a7d714af897c1579"
+    }
+  }
+}
