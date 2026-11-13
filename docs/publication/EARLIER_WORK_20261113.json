@@ -1,0 +1,886 @@
+{
+  "schema_version": 1,
+  "publication_date": "2026-11-13",
+  "base_commit": "4f1e9fa83381061c8397f693e0bc78b8a02502c5",
+  "branch": "research/earlier-work-publication-2026-11-13",
+  "scope": "Earlier source code, viewer implementations and sanitized research reports; recent Task0016 fine-tuning excluded",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 2183,
+      "sha256": "ead44072052321ffde389e57d9b27621f0100dac3c106577d9e6686d49aa09af"
+    },
+    {
+      "path": "EarthRemoteSensingRapidResponse/temporal_attention_candidate.py",
+      "bytes": 13076,
+      "sha256": "2a6490993b1be97986eb2ed880eb1aba3e4214716316299bb5440cbdfe962f55"
+    },
+    {
+      "path": "EarthRemoteSensingRapidResponse/temporal_attention_evaluation.py",
+      "bytes": 11750,
+      "sha256": "ffa7f712ad6379faa057753982ad33dcba37ffddda8def65eb8a510f4e91c3e7"
+    },
+    {
+      "path": "EarthRemoteSensingRapidResponse/temporal_attention_experiment.py",
+      "bytes": 14799,
+      "sha256": "f4e7b615b2ad43da67472d2e365d9c95e9031801f89d5fe68e5885f8ab52c4a4"
+    },
+    {
+      "path": "EarthRemoteSensingRapidResponse/temporal_attention_training.py",
+      "bytes": 4469,
+      "sha256": "faddff38cdc9ae87cefded92f1780e13c6f0d32c9fd19c5cb89561d678a8aa8f"
+    },
+    {
+      "path": "GTM_Viewer/GTM_same_scene.css",
+      "bytes": 2208,
+      "sha256": "8c461f1a004519b2e9d4a5cff62418b7467c0fcf397ed41538b3eeb196b10056"
+    },
+    {
+      "path": "GTM_Viewer/GTM_same_scene.html",
+      "bytes": 1937,
+      "sha256": "583760f89af3ae2d19049f0919882fc235cbfeeb385f4608a4270989f57b12a6"
+    },
+    {
+      "path": "GTM_Viewer/GTM_same_scene.js",
+      "bytes": 8157,
+      "sha256": "c1d6259b2582eff489e0ec0739a52e8e50f50d995edd508b5ebf093fa62a8b3e"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/README.md",
+      "bytes": 1809,
+      "sha256": "5b42e13a923fe4d7316a1fd6812b6b96d116d53503339695b87376bfb2897662"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0.css",
+      "bytes": 24689,
+      "sha256": "747a9c9e49fef2fc6ef22cbe1534d2324eac2599c81cfa1457c7d039b5619477"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0.js",
+      "bytes": 52844,
+      "sha256": "2c6e9f5a7c5ff0dcd4e4a01aff0f02a92b1b6641d53bbaebeda89cc101da505d"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0.svg",
+      "bytes": 266,
+      "sha256": "28993dd9f8198610be1c50a748ac998bddbb342756bc67a55699b37950ccdea2"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_atlas.css",
+      "bytes": 19411,
+      "sha256": "5e80b05fefecaa11042051a1fb0870ab9de5fcc3ff2470a06afeba1a6bb4c33d"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_atlas.js",
+      "bytes": 38934,
+      "sha256": "533e689e30fd23cdf9ff5317bed97778545a01d4a4ce7d7a2f0e97043a5afced"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_bootstrap.js",
+      "bytes": 735,
+      "sha256": "ee8d7149c4135acadc3f3434f4399ec7617dc37db81619b409d9c80964c046fc"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_bundle_guide.md",
+      "bytes": 7011,
+      "sha256": "681b3e4e37c47a7f43781cb33748618d2638f0a2e5ef594e0cf4e7815ab5ae7b"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_data.js",
+      "bytes": 15234,
+      "sha256": "1b688ae2145220132fb1362255aa55dc0274a27c714bd41cf583e172e373b61d"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_experiment_history.html",
+      "bytes": 77319,
+      "sha256": "43d0f8878b66f45b4228a1e67dfe776588514b2e1cc1c62be00ec33b140f89d5"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_legacy.css",
+      "bytes": 10417,
+      "sha256": "91417028c3283dc06e31f5edaf02c798fe7f7f1f83b344810b495df5787479d4"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_legacy.js",
+      "bytes": 16344,
+      "sha256": "41f170033ba79dcc5a958a81cbe65a82832e69803980e16b24f120d3b31d7b85"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_legacy_viewer.html",
+      "bytes": 5679,
+      "sha256": "a795943eb5e18ea1ef3fabb589638c5fa478d6fef75a475b8ab445bc0fc9798d"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_live.js",
+      "bytes": 5889,
+      "sha256": "7c3584c5e342ad8a99a2685525b3756be0df1abaa8e516cc2cfdcb896286159e"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_scene_review.css",
+      "bytes": 1740,
+      "sha256": "73063bb68333e3acc327e790aada7d18c3f1405933d7f7b27f56397a8770077a"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_scene_review.js",
+      "bytes": 5498,
+      "sha256": "5aa0694e35f3e17d9588d0f999e5e0c093a18ec660b24f0439e82880b015b8a2"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_static.js",
+      "bytes": 240,
+      "sha256": "832fa1543bd23e1fee299e4a7b58cd09f6dfedc294627f8d151aec8ae18fbb02"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/GTM_Model0_visual_review.md",
+      "bytes": 3928,
+      "sha256": "20ed88867b1752064f1f9f5b9449a30b214f3312f5a42be31341eda866a2fbfc"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/MARTIN_VISUAL_REVIEW.md",
+      "bytes": 2403,
+      "sha256": "1ba75a880e64ce7c5a832e68cd693b040d9846b2064b93d1328759b6d889c392"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/index.html",
+      "bytes": 19466,
+      "sha256": "26970a5b21b4938115e1f7dfae52651878c9cb29a7d5a80554b86760185d29f7"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/progress.css",
+      "bytes": 11716,
+      "sha256": "8edd697218075f92170e92f465333fedbae69fd913f5b15b0eb72b552e3fbdef"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/progress.html",
+      "bytes": 13476,
+      "sha256": "a287608de3b6c85313f4d6653bfcd95942e7e44a78557b138385e13c899748e9"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/progress.js",
+      "bytes": 2440,
+      "sha256": "9e45df348979c41db944b069df06caf5f28ab74c8401da775fc82e6bc595f61d"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/v11-inventory.css",
+      "bytes": 4338,
+      "sha256": "6862d286d6083c57902f1349f59fb4380fa066161ddd11940f49ec0eccef1556"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/dist/v11-inventory.js",
+      "bytes": 3964,
+      "sha256": "fc84198d2f26b75f74a64625d24b5d1f29e0b3e296c09e7801eaf1f2f9f050b9"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/tools/GTM_Model0_verify.cjs",
+      "bytes": 2219,
+      "sha256": "aa31f36ab528bf7654e481b86a506049d1fc47968512926ac9a16f5125b30537"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/tools/GTM_Model1_package_exports.py",
+      "bytes": 5409,
+      "sha256": "db5f1f3ea987072c83f958a76a88504c87fcef40356998f42ade49ff4aa46f6a"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/tools/export_recent_results.py",
+      "bytes": 6688,
+      "sha256": "a7236dd9f37d72590e192936a05450ae6628247f35758802eb2fe12a273dd787"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/tools/export_v11_inventory.py",
+      "bytes": 4888,
+      "sha256": "1f9910090457cae3b2405828093b200d8e45b5fd1199c475c4f3d5447f0501e0"
+    },
+    {
+      "path": "GTM_Viewer/architecture_experiment_site/tools/verify_v11_review.cjs",
+      "bytes": 2704,
+      "sha256": "c078902d10f92ceedad84c160936ce3891a34c21483f5ed87e1cafe5784d5a67"
+    },
+    {
+      "path": "configs/temporal_attention_comparison_draft.json",
+      "bytes": 2555,
+      "sha256": "3c5cdce79b4d7a11d2caeaa69ded77c55d63670170de71775a4f25587c4eefb4"
+    },
+    {
+      "path": "configs/temporal_manifest_example.json",
+      "bytes": 1237,
+      "sha256": "0967f94479c12035f360e4ec10bea36f356ded9d90620acf514199c4af30d61e"
+    },
+    {
+      "path": "docs/GTM_Model7_broader_dev_runbook_20261024.md",
+      "bytes": 10092,
+      "sha256": "4fbafa421a141d1a259e20ac6af6e4d8d74d7028a7cfe8c5efda719f92aad0b0"
+    },
+    {
+      "path": "docs/GTM_Model7_cached_diversity_runbook_20261024.md",
+      "bytes": 8178,
+      "sha256": "fb1a1949cc59dc200dd492ea8b3f8dcd8043120eea0a8883f43ab6279939b4d3"
+    },
+    {
+      "path": "docs/GTM_Model7_context_v10_runbook_20261025.md",
+      "bytes": 7435,
+      "sha256": "b63ac86e9c05585072cf3869121be04f19d1ee1547fcb2be7897c40519c83581"
+    },
+    {
+      "path": "docs/GTM_Model7_hard_negative_v11_runbook_20261025.md",
+      "bytes": 9548,
+      "sha256": "41ae97eecbe54aac086b533e8c55165edd5df3baa0bafcf1c38a0c5eb88bab0f"
+    },
+    {
+      "path": "docs/GTM_Model7_scene_dice_v9_runbook_20261025.md",
+      "bytes": 9061,
+      "sha256": "61fee0c68420dc5c0ee59b6edd51eef442e8c9ff2b98858bc22e860c9b7b4a2c"
+    },
+    {
+      "path": "docs/GTM_Model7_unet_recall_runbook_20261024.md",
+      "bytes": 11436,
+      "sha256": "e0d3b49e3b5141292831c36f48b10e0a907d8c4e6a756d820e540ee34f49d77a"
+    },
+    {
+      "path": "docs/GTM_Model7_us_transfer_runbook_20261026.md",
+      "bytes": 17429,
+      "sha256": "5d1632864ce995af1df29a351748790da735e22b51b4ee6c9a556cb51d4e9d26"
+    },
+    {
+      "path": "docs/GTM_Model7_v8_followup_runbook_20261024.md",
+      "bytes": 7829,
+      "sha256": "893618fd579ea2e6c1c8f5dbcd9596e99b47930aa85a5bf987b00093a1f3e7fc"
+    },
+    {
+      "path": "docs/GTM_Model7_validation_v12_runbook_20261026.md",
+      "bytes": 13911,
+      "sha256": "4a3329eebe4cc24a04200283dd16eb33f45e8741d730a74b8b1c11a8e349b931"
+    },
+    {
+      "path": "reports/acquisition/methaneunion_one_member_probe.json",
+      "bytes": 516,
+      "sha256": "419ff228911b9e96c7df81fb02bf4cfa9416113f41e8737e71cc77890e487c68"
+    },
+    {
+      "path": "reports/acquisition/methaneunion_original_mapping.json",
+      "bytes": 7503,
+      "sha256": "0884a769b6df3de0b24d560cb20a5f3e75eb4f576d08c1ff2cc1e9400a36af87"
+    },
+    {
+      "path": "reports/acquisition/methaneunion_original_mapping.md",
+      "bytes": 2521,
+      "sha256": "9b43fbfe5ea5390231130c68fd89322c575ee3e31b2bee65ee26f95c1e6bb7af"
+    },
+    {
+      "path": "reports/experiments/temporal_attention_synthetic_smoke.json",
+      "bytes": 1663,
+      "sha256": "6d8e8afdde55bde49c5dc2d86630d3b91782ea0856d8695a40ceaf8a889576ba"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07/calibration.json",
+      "bytes": 1561,
+      "sha256": "05349fd766151d7d392b08096158255fda694e97947e974b0ccbf94f30648444"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07/configuration.json",
+      "bytes": 546,
+      "sha256": "f0b656a7a882bed41710ea65e4f920a593c20babad2ce8ac266428630f766c32"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07/dense.json",
+      "bytes": 181,
+      "sha256": "212b36f677c97d0a0a4341e02a9a6ed743688310994de66c8c20c9a17f60cf65"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07/evaluation.json",
+      "bytes": 1326,
+      "sha256": "8b533980626060799d8cab88459a7659caeb395c1b21b5a5bdf2c6dc7819ba0a"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07/status.json",
+      "bytes": 59,
+      "sha256": "050c17df2ad1bf31b51622a505b8722f803300e0b260612ce4984ea8a548978e"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07_validated/calibration.json",
+      "bytes": 1561,
+      "sha256": "05349fd766151d7d392b08096158255fda694e97947e974b0ccbf94f30648444"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07_validated/configuration.json",
+      "bytes": 546,
+      "sha256": "0bd619ea3cfa7e36ea6804f0ae381a90efd5f01af611119258df0679cec567ab"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07_validated/dense.json",
+      "bytes": 181,
+      "sha256": "212b36f677c97d0a0a4341e02a9a6ed743688310994de66c8c20c9a17f60cf65"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07_validated/evaluation.json",
+      "bytes": 1326,
+      "sha256": "8b533980626060799d8cab88459a7659caeb395c1b21b5a5bdf2c6dc7819ba0a"
+    },
+    {
+      "path": "reports/experiments/temporal_evaluation_rehearsal_2026-09-07_validated/status.json",
+      "bytes": 59,
+      "sha256": "050c17df2ad1bf31b51622a505b8722f803300e0b260612ce4984ea8a548978e"
+    },
+    {
+      "path": "reports/experiments/temporal_rehearsal_2026-09-07/cnn.json",
+      "bytes": 1479,
+      "sha256": "6670f43633acbaa4bb9d5ba143afdf01617623fa5c78df844d568dff31901723"
+    },
+    {
+      "path": "reports/experiments/temporal_rehearsal_2026-09-07/configuration.json",
+      "bytes": 834,
+      "sha256": "bb198fe356f048e8906e134c23bf4fc54c2a12bbd64c9470c1ac0430458a181a"
+    },
+    {
+      "path": "reports/experiments/temporal_rehearsal_2026-09-07/status.json",
+      "bytes": 168,
+      "sha256": "4dbb4505d717a767d8d14e2c8a0fa1e1deb774c1dada227bb4dc556c5f25b504"
+    },
+    {
+      "path": "reports/experiments/temporal_rehearsal_2026-09-07/temporal_attention.json",
+      "bytes": 1482,
+      "sha256": "4fbbc4f8eaebee0cddd697bbfde9df4c041a38179319ff69dd9adb7178d82b90"
+    },
+    {
+      "path": "reports/research/ARCHITECTURE_PROPOSAL.md",
+      "bytes": 17797,
+      "sha256": "914c5a157b8fdf2e7653d110b3258b6223d58f646ab8b5d5c5456c53b5ed5b4a"
+    },
+    {
+      "path": "reports/research/ARCHITECTURE_RECOMMENDATION_2026-09-04.md",
+      "bytes": 21058,
+      "sha256": "e8a1a00f769e424e964250f9d5c278ab70dad16676d8754e4fa1c6e3c0671dc1"
+    },
+    {
+      "path": "reports/research/GTM_Model0_hf_download_plan_20260925.md",
+      "bytes": 3250,
+      "sha256": "8372561768d278ed2753662fd957a1ab5f65e2bfe87c40a85e97099269b15f64"
+    },
+    {
+      "path": "reports/research/GTM_Model0_hf_pilot_review_20260925.md",
+      "bytes": 8675,
+      "sha256": "f250d8023295a80870b019851fd3439d525d949432261dab206d32d484a12a3c"
+    },
+    {
+      "path": "reports/research/GTM_Model0_pretrained_model_survey_20261002.md",
+      "bytes": 14172,
+      "sha256": "8ff1927876c0394fd2ea8ae7471dda0b2a017d28c1a411660b3161120d16c7c7"
+    },
+    {
+      "path": "reports/research/GTM_Model6_cached_readiness_acceptance_20261001.md",
+      "bytes": 3667,
+      "sha256": "2efe59ecd4f45d478cca4e5d29364d0027f450286d16d83cd1e145f3726d41e1"
+    },
+    {
+      "path": "reports/research/GTM_Model6_combiner_contract_acceptance_20261001.md",
+      "bytes": 5414,
+      "sha256": "ba17ea1d0463f95a4abb2398ac553c30f60304522560da51824f52e5ae8bd8ac"
+    },
+    {
+      "path": "reports/research/GTM_Model6_combiner_contract_review_20261001.md",
+      "bytes": 6790,
+      "sha256": "a337889d94ee9043eea42d4159a246e9600080933c7933e61ac27d9ddc2cd37c"
+    },
+    {
+      "path": "reports/research/GTM_Model6_data_contract_brief_20261001.md",
+      "bytes": 7697,
+      "sha256": "b865690344986a7a3cb9e4bc9470474305fc7ab668c685f6196ef08bade5a980"
+    },
+    {
+      "path": "reports/research/GTM_Model6_emit_2025_pilot_plan_20260925.md",
+      "bytes": 2626,
+      "sha256": "3cabecdc37ac9d2378c4c7c0fd7ddddf47a7b2f800e3f05a8f21a2168aaa073c"
+    },
+    {
+      "path": "reports/research/GTM_Model6_emit_2025_pilot_review_20260925.md",
+      "bytes": 9127,
+      "sha256": "c02fccef6cb59e00fad885a37c6dc05939df329a5fe2549fa0facdb42a77a0f6"
+    },
+    {
+      "path": "reports/research/GTM_Model6_local_comparison_20261003.md",
+      "bytes": 8257,
+      "sha256": "bb568f4ddc9cb6584571596f52c2a2ca9e2938d1f8775dc48095f34f53e525b4"
+    },
+    {
+      "path": "reports/research/GTM_Model6_local_comparison_protocol_20261003.md",
+      "bytes": 4305,
+      "sha256": "38013951636562db4ef537ecbcc20f2bf61a30faa200e7c93039593aabbd6d36"
+    },
+    {
+      "path": "reports/research/GTM_Model6_real_data_recovery_20261023.md",
+      "bytes": 7220,
+      "sha256": "ee07a1e042df6ce16b8c443598027851cf6c9588aa9e49f2a4a404e87693a14c"
+    },
+    {
+      "path": "reports/research/GTM_Model6_three_cnn_acceptance_20261021.md",
+      "bytes": 5341,
+      "sha256": "0ce26647e56dd19ad8dc43c98cb1fbda943d9f4c5d612e7ca488dfee8b687474"
+    },
+    {
+      "path": "reports/research/GTM_Model6_unseen_evaluation_20261023.md",
+      "bytes": 7972,
+      "sha256": "36020e6ef2d72615ee61b917f0cf68214da80bbab1533f839175ee11cc35299d"
+    },
+    {
+      "path": "reports/research/RESEARCH_REPORT.md",
+      "bytes": 17074,
+      "sha256": "0b537b3df1d937aabc258db29b3b98db00f7366036fe1bfbec3e0924c5adfbdf"
+    },
+    {
+      "path": "reports/research/TEMPORAL_ATTENTION_PROGRESS_2026-09-05.md",
+      "bytes": 7260,
+      "sha256": "71f1e2bbbb1971815639cda9729760bdb287e3f7593533cbe7d0f6f4a118be19"
+    },
+    {
+      "path": "reports/research/TEMPORAL_EVALUATION_PREPARATION_2026-09-07.md",
+      "bytes": 5379,
+      "sha256": "283d8ecb7c74bebdc69f8a9a6c76306b23d4f8fc2b1fc20d26700fccc0b6368d"
+    },
+    {
+      "path": "reports/research/TEMPORAL_PREPARATION_2026-09-07.md",
+      "bytes": 5044,
+      "sha256": "5704d5e8acfca2703c2b6af0a460d2af86ebc262b1e5e53fa1705fa0559f4426"
+    },
+    {
+      "path": "research/GTM_Model6/GTM_Model6_journal.md",
+      "bytes": 21453,
+      "sha256": "2117dee5527e64bfd3eae4fca91db9aa4333b48048b4f3a34819ae890d09dabb"
+    },
+    {
+      "path": "research/tessera_scaffold/.gitignore",
+      "bytes": 13,
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "research/tessera_scaffold/README.md",
+      "bytes": 3087,
+      "sha256": "ddf53f6e85a83c4d9c9294f1206f5b4a9aa2de2491e351dbdcf2a03581050e7c"
+    },
+    {
+      "path": "research/tessera_scaffold/cli.py",
+      "bytes": 5560,
+      "sha256": "7aafad1d32b5240e1821118da41e3bb6ca15af5e626834d2eb48fe292e27bd5d"
+    },
+    {
+      "path": "research/tessera_scaffold/engineering_checks/.gitignore",
+      "bytes": 12,
+      "sha256": "c3d1550c6689bee84de1ee8fca5a25ad7b3f3e90717d61e597cb00a562f02064"
+    },
+    {
+      "path": "research/tessera_scaffold/engineering_checks/README.md",
+      "bytes": 1402,
+      "sha256": "c9d6a9e496e799ab027ffeb43d491128464a51466ea91b886c7979dab0586e2e"
+    },
+    {
+      "path": "research/tessera_scaffold/engineering_checks/cambridge_live/check.py",
+      "bytes": 9146,
+      "sha256": "53fd8866eb2a8e13df4896ce8044e1d190d68dc95bf4dc2f64c6ecaf3cea40b2"
+    },
+    {
+      "path": "research/tessera_scaffold/engineering_checks/cambridge_live/fetch.py",
+      "bytes": 4124,
+      "sha256": "3042784861ab2677385023a66dea87d7132c6d9840970f887a1ea2330bd6cde0"
+    },
+    {
+      "path": "research/tessera_scaffold/engineering_checks/controller_verify_scaffold.py",
+      "bytes": 4835,
+      "sha256": "7160bb2b28757666bc400815a30a540831c8c206a003330fdeb4e5d82639d220"
+    },
+    {
+      "path": "research/tessera_scaffold/engineering_checks/smoke.py",
+      "bytes": 8457,
+      "sha256": "2593225c27c9dbac1070ba91e733821919b2f64d6448c12ef0437583ddefa838"
+    },
+    {
+      "path": "research/tessera_scaffold/scaffold.py",
+      "bytes": 12888,
+      "sha256": "b76e92d2b4010313b8c48ceae28a814f29cce4d730a7f0902b60b19a3a817518"
+    },
+    {
+      "path": "research/tessera_scaffold/tests/test_scaffold.py",
+      "bytes": 10929,
+      "sha256": "a791190d4c69215a6eb288c9cddc4a5a39940b413ca720c66c4b012954ae4303"
+    },
+    {
+      "path": "tests/test_methaneunion_original_mapping.py",
+      "bytes": 2844,
+      "sha256": "7af1f8577a87741181e84d95d0a8c4bbeeb6adadca5dfd8c2fdf018a148e66de"
+    },
+    {
+      "path": "tests/test_probe_methaneunion_training_member.py",
+      "bytes": 1206,
+      "sha256": "d2d5ae532a106dfb91e51b3b4fe375c572312a435486f278d07b7a4c171019f3"
+    },
+    {
+      "path": "tests/test_temporal_attention_candidate.py",
+      "bytes": 4962,
+      "sha256": "7a5cb9cccd473199c13bcf61ef395ca6be6825b6f0717530ddc1a7784db266be"
+    },
+    {
+      "path": "tests/test_temporal_attention_evaluation.py",
+      "bytes": 6117,
+      "sha256": "b3a0946efca1409068ad131889b5b086abd42474b5788f3284202b99123bcc28"
+    },
+    {
+      "path": "tests/test_temporal_attention_experiment.py",
+      "bytes": 5222,
+      "sha256": "24fe5528a9a1f2d3dca48b217258bcb3598bc192c6ce5a90d4a093bb27e7e462"
+    },
+    {
+      "path": "tests/test_temporal_attention_training.py",
+      "bytes": 2703,
+      "sha256": "847b3278e42f0842c34066ce4cede1cec1d1eb09f88c0de9b5043f5f395f41b2"
+    },
+    {
+      "path": "tests/test_temporal_manifest.py",
+      "bytes": 4836,
+      "sha256": "75f0efefcc54bffc988cd9a98e9a5d0d37da31d352e4b1d40cc995f361e0d104"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/audit_first_publication.py",
+      "bytes": 4584,
+      "sha256": "bf385fd352f0845efd68d54fb7d87c2092bbc74c847839ace4d8c517fe5f276a"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/audit_installed.py",
+      "bytes": 1513,
+      "sha256": "a991e5c849d608d6f7554246fdabd03cf3df10e875afe017d4c6cd9c74c805f7"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/check_pypi_compat.py",
+      "bytes": 2540,
+      "sha256": "01a990ad36e67825cbda13c23befa6703b3034b95049d0d6e24db09b3636e3c8"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/compare_marshsi_physics.py",
+      "bytes": 2282,
+      "sha256": "5b04295776d267cf5030d63edb4672f56b0d28b88ea04f97e780964c55229bce"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/fetch_marshsi_016.py",
+      "bytes": 878,
+      "sha256": "42d67631d33703db07cae56cfc9705ea9ff69051465a08ffa0f9f6273797bbe1"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/freeze_overlay.py",
+      "bytes": 3260,
+      "sha256": "95eeb3ff5f81782e4160d24f093495f0891ffcbdb0473c8305ed3b6483713fe7"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/probe_export_io.py",
+      "bytes": 3694,
+      "sha256": "913a2bef1132740135cae73862a2646056a150037f677607f43146166d8bedae"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/probe_runtime.py",
+      "bytes": 5058,
+      "sha256": "c11b2f935a06facba60077be2f74aa1dfc866a0d3c86989269d0065c583c9bff"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/refresh_review_reports.py",
+      "bytes": 1723,
+      "sha256": "82fbb6364f7e591c69f1281a7b4ddf1f19ae25c6aac8a4107bfa2fde787eb387"
+    },
+    {
+      "path": "tool-diagnostics/server-data-mirror-20261030/build_full_catalog.py",
+      "bytes": 5037,
+      "sha256": "22b3987148ba69eff37be126bceded895dbe80f74231b8b4951793169e18ac32"
+    },
+    {
+      "path": "tool-diagnostics/server-data-mirror-20261030/inventory_pc.py",
+      "bytes": 2454,
+      "sha256": "be9e200bc24d199bbcb6f18c90df3b85c6ebb5a2ece416af3547b6b79263486d"
+    },
+    {
+      "path": "tool-diagnostics/server-launch-20261030/build_catalog.py",
+      "bytes": 4012,
+      "sha256": "eb8df286f8b9dd93e9c17b1559506ac2943c7498c24ea24cfda2139cf4c0a255"
+    },
+    {
+      "path": "tools/GTM_Model0_review_cafosat_pilot.py",
+      "bytes": 8739,
+      "sha256": "3d0ee74d1cd629f46fe271b040406fc8b31d0b8266fa9be451ea7a35d7eecc14"
+    },
+    {
+      "path": "tools/audit_methaneunion_original_mapping.py",
+      "bytes": 11179,
+      "sha256": "99e12ef986b7c0ec99d051da34b7687a707e562ce17c512a2a7bbcfa4a71b071"
+    },
+    {
+      "path": "tools/download_full_mars_dataset.py",
+      "bytes": 2436,
+      "sha256": "99c6ca9703ae910a96380bea1c2dedf88a90e4787e4f5db4bd77a7ff6c2d1b52"
+    },
+    {
+      "path": "tools/probe_methaneunion_training_member.py",
+      "bytes": 4220,
+      "sha256": "f274b0a8614f05510c437003daba5b90ac929d378d5ff8e559e6f9707ef08659"
+    },
+    {
+      "path": "tools/rehearse_temporal_evaluation.py",
+      "bytes": 3538,
+      "sha256": "f6f0aafcb7e8445b5a63d1cf9cb4e9ea22bd08a0ab63f0a3d775e055ce1539e4"
+    },
+    {
+      "path": "tools/rehearse_temporal_experiment.py",
+      "bytes": 4937,
+      "sha256": "cb7ea9da13d2d346da24eeb528e318adc5ea9144421e2a8bea3a55bd94a8b3b1"
+    },
+    {
+      "path": "tools/run_temporal_attention_synthetic_smoke.py",
+      "bytes": 5862,
+      "sha256": "2b0e1a338e883ea6ab0429dc8b5a205775e595f717221a7d9deee31cdf5321b6"
+    },
+    {
+      "path": "tools/validate_temporal_manifest.py",
+      "bytes": 10210,
+      "sha256": "7779c309467f0cabc1920e98e384f013ba8094854b274badb7660cb972a24125"
+    }
+  ],
+  "excluded_categories": [
+    "Recent fine-tuning Task0016 and its configs/results",
+    "Raw and large datasets, image/grid bundles, generated prediction catalogs, checkpoints and model weights",
+    "Private meeting minutes, correspondence, transfer receipts, private source/facility inventories, machine configuration and credentials",
+    "Standalone viewer repository Git history and hosting configuration"
+  ],
+  "excluded_local_untracked": [
+    {
+      "path": "reports/research/assets/GTM_Model6_data_contract_20261001/input_pins.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/e2e.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/negative_20230125.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/negative_20231027.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/negative_20231126.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/positive_20230604.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/positive_20231101.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/positive_20231121.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/verification.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/viewer_cpu_baseline.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_local_comparison_20261003/viewer_cpu_overlay.jpg",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/browser_review.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/emit_heatmap.png",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/fusion_mask.png",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/input_only_rejections.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/live_viewer_e2e.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/negative.png",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/training_e2e.json",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "reports/research/assets/GTM_Model6_three_cnn_20261021/unlabeled.png",
+      "reason": "generated asset or runtime receipt"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/manifest.json",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/matches.csv",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/matches.geojson",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/reloaded/matches.csv",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/reloaded/matches.geojson",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/reloaded/result.json",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/result.json",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/demo_output/synthetic_region.npz",
+      "reason": "generated demo output or NPZ"
+    },
+    {
+      "path": "research/tessera_scaffold/test_log.txt",
+      "reason": "runtime log"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/asset_catalog_receipt.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/audit_installed_result.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/full_official_train_inventory.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/marshsi-0.1.6-py3-none-any.whl",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/marshsi_physics_comparison.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/probe_runtime_result.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/pypi_compat.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/report-gallery.png",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/runtime-probe.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/viewer-first-pass-partial.png",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/viewer-first-us-miss.png",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/mars-baseline-20261030/viewer-released-comparison.png",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/server-data-mirror-20261030/pc_full_release_inventory.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "tool-diagnostics/server-data-mirror-20261030/pc_inventory.json",
+      "reason": "diagnostic/runtime receipt, inventory, wheel, or image"
+    },
+    {
+      "path": "docs/GTM_Model0_meeting_actions_20261002.md",
+      "reason": "private timestamped meeting interpretation and action minutes; local file preserved"
+    },
+    {
+      "path": "tools/GTM_verify_storage_migration.py",
+      "reason": "machine-specific D: storage migration and directory-junction script; embeds private path and is not portable publication code"
+    }
+  ],
+  "already_published_elsewhere": [
+    {
+      "path": "docs/RESEARCH_IMPROVEMENT_PLAN.md",
+      "branch": "research/ersrr-complete-2026-09-04",
+      "commit": "65e190e98edaeaa696e2545446d408b0adf2ca1d",
+      "reason": "Other checkout bytes match this published branch; research baseline retains its existing version."
+    },
+    {
+      "path": "reports/research/LEARNED_SWIR_SUPER_RESOLUTION_PROPOSAL.md",
+      "branch": "research/ersrr-complete-2026-09-04",
+      "commit": "65e190e98edaeaa696e2545446d408b0adf2ca1d",
+      "reason": "Other checkout bytes match this published branch; research baseline retains its existing version."
+    }
+  ],
+  "source_provenance": {
+    "main_research": "Existing research checkout at base_commit plus earlier untracked work",
+    "viewer_snapshot": "Separate architecture-experiment-chart-site commit df77a01; only reviewed source copied",
+    "workspace_reports": "Three historical architecture/research reports copied with portable links"
+  },
+  "sanitization": "Private originals preserved outside the Git checkout; private host/Drive identifiers and machine-specific paths removed. Referenced omitted generated assets are explicitly noted. Snapshot verifier adjusted for current browser primitives and source-only checks.",
+  "verification": [
+    {
+      "command": "python -m pytest -q tests/test_temporal_manifest.py",
+      "result": "11 passed"
+    },
+    {
+      "command": "python -m pytest -q tests/test_methaneunion_original_mapping.py tests/test_probe_methaneunion_training_member.py",
+      "result": "7 passed"
+    },
+    {
+      "command": "python -X utf8 -m unittest discover -s tests -v (research/tessera_scaffold)",
+      "result": "10 passed"
+    },
+    {
+      "command": "python -m pytest -q tests/test_temporal_attention_candidate.py tests/test_temporal_attention_evaluation.py tests/test_temporal_attention_experiment.py tests/test_temporal_attention_training.py tests/test_temporal_manifest.py",
+      "result": "collection blocked: default Python lacks torch and sklearn; hyworld2 lacks pytest and sklearn and Torch has NumPy ABI warning"
+    },
+    {
+      "command": "AST parse of newly included Python helpers",
+      "result": "13 newly included Python helpers parsed successfully; sensitive-literal scan had no remaining hits in the allowlist"
+    },
+    {
+      "command": "AST parse of four copied Tessera engineering checks",
+      "result": "4 parsed successfully; no live request or data access"
+    },
+    {
+      "command": "node --check on 13 viewer JavaScript/CommonJS files",
+      "result": "passed"
+    },
+    {
+      "command": "node tools/GTM_Model0_verify.cjs --source-only",
+      "exit": 0,
+      "stdout": "PASS: source-only import contract, path validation, and no-data handling; omitted asset bundles were not checked\n",
+      "scope": "path/import/no-data contract only; full visual/bundle acceptance not run"
+    }
+  ],
+  "limitations": [
+    "Torch temporal tests could not collect with installed dependencies; no dependency changes made.",
+    "No new browser/desktop/mobile acceptance performed for the archived viewer snapshot; data/assets are deliberately omitted.",
+    "No new scientific evaluation, training, inference, acquisition or accuracy claim.",
+    "Campus publication is separate and pending its own independently verified commit/receipt."
+  ],
+  "manifest_note": "This manifest lists payload hashes before Git newline normalization. It and the accompanying narrative are publication metadata and are not self-hashed."
+}

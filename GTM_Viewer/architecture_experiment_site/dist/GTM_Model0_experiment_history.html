@@ -1,0 +1,1921 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>architecture-experiment-chart.html</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe id="codex-visualization" sandbox="allow-scripts" scrolling="no" referrerpolicy="no-referrer" title="architecture-experiment-chart.html" data-srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en-US&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#39;none&#39;; script-src &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; &#39;wasm-unsafe-eval&#39; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#39;unsafe-inline&#39; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#39;none&#39;; object-src &#39;none&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;&quot;&gt;
+&lt;title&gt;architecture-experiment-chart.html&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script&gt;(() =&gt; {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia(&quot;(prefers-color-scheme: dark)&quot;);
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const parentWindow = globalThis.parent;
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) =&gt; {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, &quot;data&quot;);
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, &quot;ports&quot;);
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, &quot;source&quot;);
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) =&gt; {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;open-external&quot;, { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;follow-up&quot;, { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  const syncTheme = () =&gt; {
+    const theme = mediaQuery.matches ? &quot;dark&quot; : &quot;light&quot;;
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      openExternal,
+      sendFollowUpMessage,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () =&gt; {
+    postToHost(&quot;height&quot;, {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    &quot;message&quot;,
+    (event) =&gt; {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        source !== parentWindow ||
+        typeof data !== &quot;object&quot; ||
+        data?.type !== &quot;codex-visualization-initialize&quot; ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          &quot;message&quot;,
+          (event) =&gt; {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === &quot;object&quot; &amp;&amp; data?.type === &quot;measure&quot;) {
+              sendHeight();
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener(&quot;change&quot;, syncTheme);
+  globalThis.addEventListener(&quot;click&quot;, (event) =&gt; {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest(&quot;a[href]&quot;);
+    const href = link?.getAttribute(&quot;href&quot;);
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith(&quot;#&quot;)) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost(&quot;scroll-to&quot;, {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+&lt;/script&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 17 17&#39;%3E%3Cpath d=&#39;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#39;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;script&gt;
+(() =&gt; {
+  const root = document.documentElement;
+  const initialGlobals =
+    globalThis.__codexVisualizationInitialGlobals ?? globalThis.openai;
+  delete globalThis.__codexVisualizationInitialGlobals;
+  let appliedProperties = [];
+
+  const applyHostStyleVariables = (styleVariables) =&gt; {
+    if (styleVariables == null || typeof styleVariables !== &quot;object&quot;) {
+      return;
+    }
+    for (const property of appliedProperties) {
+      root.style.removeProperty(property);
+    }
+    appliedProperties = [];
+    for (const [property, value] of Object.entries(styleVariables)) {
+      if (property.startsWith(&quot;--&quot;) &amp;&amp; typeof value === &quot;string&quot;) {
+        root.style.setProperty(property, value);
+        appliedProperties.push(property);
+      }
+    }
+  };
+
+  const syncHostStyles = (globals) =&gt; {
+    applyHostStyleVariables(globals?.visualizationStyleVariables);
+    const sandboxDocument = globalThis.frameElement?.ownerDocument;
+    if (sandboxDocument != null &amp;&amp; globals?.visualizationTheme != null) {
+      let colorSchemeMeta = sandboxDocument.querySelector(
+        &#39;meta[name=&quot;color-scheme&quot;]&#39;,
+      );
+      if (colorSchemeMeta == null) {
+        colorSchemeMeta = sandboxDocument.createElement(&quot;meta&quot;);
+        colorSchemeMeta.name = &quot;color-scheme&quot;;
+        sandboxDocument.head.appendChild(colorSchemeMeta);
+      }
+      colorSchemeMeta.content = globals.visualizationTheme;
+      sandboxDocument.documentElement.style.colorScheme =
+        globals.visualizationTheme;
+      // Paint the host surface behind transparent saved visualization documents.
+      sandboxDocument.documentElement.style.backgroundColor =
+        root.style.getPropertyValue(&quot;--background&quot;);
+    }
+  };
+
+  syncHostStyles(initialGlobals);
+  globalThis.addEventListener(&quot;openai:set_globals&quot;, (event) =&gt; {
+    syncHostStyles(event.detail?.globals);
+  });
+})();
+&lt;/script&gt;
+
+
+&lt;div id=&quot;ersrr-architecture-chart&quot;&gt;
+  &lt;header class=&quot;ersrr-header&quot;&gt;
+    &lt;div&gt;
+      &lt;p class=&quot;ersrr-kicker&quot;&gt;Evidence-adjusted research ranking&lt;/p&gt;
+      &lt;h2&gt;ERSRR architecture experiments&lt;/h2&gt;
+      &lt;p class=&quot;ersrr-deck&quot;&gt;Ranked by performance, validation strength, repeatability, and usefulness to the next architecture.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;ersrr-method&quot; data-tooltip=&quot;Editorial research-priority score, not a benchmark metric. It combines promotion-gate results, held-out evidence, repeatability, and retained scientific value.&quot;&gt;
+      &lt;span&gt;0–100&lt;/span&gt;&lt;small&gt;promise score&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  &lt;section class=&quot;ersrr-leaders&quot; id=&quot;ersrr-leaders&quot; aria-label=&quot;Top-ranked experiments&quot;&gt;&lt;/section&gt;
+  &lt;div class=&quot;viz-controls ersrr-controls&quot;&gt;
+    &lt;label class=&quot;form-label&quot; for=&quot;ersrr-view&quot;&gt;Order
+      &lt;select class=&quot;form-select&quot; id=&quot;ersrr-view&quot;&gt;
+        &lt;option value=&quot;rank&quot;&gt;Best evidence first&lt;/option&gt;
+        &lt;option value=&quot;chronology&quot;&gt;Experiment chronology&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/label&gt;
+    &lt;label class=&quot;form-label&quot; for=&quot;ersrr-family-filter&quot;&gt;Architecture family
+      &lt;select class=&quot;form-select&quot; id=&quot;ersrr-family-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;All families&lt;/option&gt;&lt;/select&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;ersrr-legend&quot; aria-label=&quot;Outcome legend&quot;&gt;
+    &lt;span&gt;&lt;i data-status=&quot;development&quot;&gt;&lt;/i&gt;Development leader&lt;/span&gt;
+    &lt;span&gt;&lt;i data-status=&quot;baseline&quot;&gt;&lt;/i&gt;Retained / benchmark&lt;/span&gt;
+    &lt;span&gt;&lt;i data-status=&quot;diagnostic&quot;&gt;&lt;/i&gt;Useful lead&lt;/span&gt;
+    &lt;span&gt;&lt;i data-status=&quot;rejected&quot;&gt;&lt;/i&gt;Rejected&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;p id=&quot;ersrr-chart-summary&quot; class=&quot;text-small text-muted&quot;&gt;&lt;/p&gt;
+  &lt;div id=&quot;ersrr-chart-host&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;ersrr-selection&quot; class=&quot;ersrr-selection&quot; aria-live=&quot;polite&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;Select a row to inspect the evidence.&lt;/span&gt;&lt;/div&gt;
+  &lt;p class=&quot;ersrr-footnote&quot;&gt;Scores are an editorial synthesis, not reported model metrics. A promising diagnostic cannot outrank a held-out or retained result merely because its point estimate looked good.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  #ersrr-architecture-chart{width:100%;color:var(--foreground)}
+  #ersrr-architecture-chart .ersrr-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+  #ersrr-architecture-chart h2{margin:.12rem 0 .25rem;font-size:clamp(1.45rem,4vw,2rem);letter-spacing:-.03em}
+  #ersrr-architecture-chart .ersrr-kicker{color:var(--primary);font-size:12px;font-weight:650;letter-spacing:.09em;text-transform:uppercase}
+  #ersrr-architecture-chart .ersrr-deck{max-width:34rem;color:var(--muted-foreground);font-size:14px;line-height:1.45}
+  #ersrr-architecture-chart .ersrr-method{flex:0 0 auto;min-width:88px;padding:.65rem .8rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);text-align:right;cursor:help}
+  #ersrr-architecture-chart .ersrr-method span{display:block;font-size:20px;font-weight:700;line-height:1}
+  #ersrr-architecture-chart .ersrr-method small{color:var(--muted-foreground)}
+  #ersrr-architecture-chart .ersrr-leaders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin:.85rem 0}
+  #ersrr-architecture-chart .ersrr-leader{min-width:0;padding:.75rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card)}
+  #ersrr-architecture-chart .ersrr-leader-rank{color:var(--primary);font-size:12px;font-weight:700}
+  #ersrr-architecture-chart .ersrr-leader-name{display:block;min-height:2.5em;margin:.25rem 0 .4rem;font-size:14px;font-weight:620;line-height:1.25}
+  #ersrr-architecture-chart .ersrr-leader-score{font-size:22px;font-weight:720;font-variant-numeric:tabular-nums}
+  #ersrr-architecture-chart .ersrr-leader-score small{color:var(--muted-foreground);font-size:11px;font-weight:500}
+  #ersrr-architecture-chart .ersrr-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;margin:.85rem 0 .6rem}
+  #ersrr-architecture-chart .ersrr-controls label{margin:0}
+  #ersrr-architecture-chart .ersrr-legend{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:.35rem 0 .5rem;font-size:12px;color:var(--muted-foreground)}
+  #ersrr-architecture-chart .ersrr-legend span{display:inline-flex;align-items:center;gap:.35rem}
+  #ersrr-architecture-chart .ersrr-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  #ersrr-architecture-chart [data-status=&quot;baseline&quot;]{background:var(--purple);fill:var(--purple)}
+  #ersrr-architecture-chart [data-status=&quot;development&quot;]{background:var(--blue);fill:var(--blue)}
+  #ersrr-architecture-chart [data-status=&quot;diagnostic&quot;]{background:var(--yellow);fill:var(--yellow)}
+  #ersrr-architecture-chart [data-status=&quot;rejected&quot;]{background:var(--red);fill:var(--red)}
+  #ersrr-chart-host{width:100%;margin-top:.25rem}
+  #ersrr-chart-host svg{display:block;width:100%;overflow:visible}
+  #ersrr-chart-host text{fill:var(--foreground);font-size:12px}
+  #ersrr-chart-host .grid line{stroke:var(--border);stroke-width:1}
+  #ersrr-chart-host .axis path,#ersrr-chart-host .axis line{stroke:var(--border)}
+  #ersrr-chart-host .rank-row{cursor:pointer;outline:none}
+  #ersrr-chart-host .rank-row .row-bg{fill:transparent}
+  #ersrr-chart-host .rank-row:hover .row-bg,#ersrr-chart-host .rank-row:focus-visible .row-bg,#ersrr-chart-host .rank-row.is-selected .row-bg{fill:var(--muted)}
+  #ersrr-chart-host .rank-number{fill:var(--muted-foreground);font-size:11px;font-weight:650}
+  #ersrr-chart-host .experiment-name{font-size:12px;font-weight:540}
+  #ersrr-chart-host .score-track{fill:var(--muted)}
+  #ersrr-chart-host .score-bar{opacity:.82}
+  #ersrr-chart-host .score-label{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums}
+  #ersrr-chart-host .tier-label{fill:var(--muted-foreground);font-size:10px}
+  #ersrr-architecture-chart .ersrr-selection{min-height:5.2rem;margin-top:.65rem;padding:.75rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);font-size:13px;line-height:1.45}
+  #ersrr-architecture-chart .ersrr-selection strong{display:block;margin-bottom:.2rem;font-size:14px}
+  #ersrr-architecture-chart .ersrr-selection .meta{display:block;margin-top:.35rem;color:var(--muted-foreground);font-size:12px}
+  #ersrr-architecture-chart .ersrr-footnote{margin-top:.65rem;color:var(--muted-foreground);font-size:11px;line-height:1.45}
+  @media(max-width:560px){
+    #ersrr-architecture-chart .ersrr-header{display:block}
+    #ersrr-architecture-chart .ersrr-method{display:inline-flex;align-items:baseline;gap:.35rem;margin-top:.65rem;text-align:left}
+    #ersrr-architecture-chart .ersrr-method span{font-size:16px}
+    #ersrr-architecture-chart .ersrr-leaders{grid-template-columns:1fr}
+    #ersrr-architecture-chart .ersrr-leader{display:grid;grid-template-columns:2rem 1fr auto;align-items:center;gap:.45rem}
+    #ersrr-architecture-chart .ersrr-leader-name{min-height:0;margin:0}
+    #ersrr-architecture-chart .ersrr-controls{grid-template-columns:1fr}
+  }
+&lt;/style&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(()=&gt;{
+  const host=document.getElementById(&#39;ersrr-chart-host&#39;),familyFilter=document.getElementById(&#39;ersrr-family-filter&#39;),viewSelect=document.getElementById(&#39;ersrr-view&#39;),summary=document.getElementById(&#39;ersrr-chart-summary&#39;),selection=document.getElementById(&#39;ersrr-selection&#39;),leaders=document.getElementById(&#39;ersrr-leaders&#39;);
+  const rows=[
+    [&#39;Legacy multitask ViT&#39;,&#39;Serving baselines&#39;,&#39;baseline&#39;,&#39;Original 256&#215;256&#215;5 ViT encoder-decoder with segmentation and regression heads.&#39;],
+    [&#39;Compact residual U-Net&#39;,&#39;Serving baselines&#39;,&#39;baseline&#39;,&#39;Retained for shared backend plumbing rather than accuracy.&#39;],
+    [&#39;MARS released U-Net comparator&#39;,&#39;Serving baselines&#39;,&#39;baseline&#39;,&#39;Exact reconstructed MARS-S2L v3 comparator and dense checkpoint.&#39;],
+    [&#39;Tri-temporal context U-Net v5.1&#39;,&#39;Serving baselines&#39;,&#39;diagnostic&#39;,&#39;Strong MethaneS2CM ranking and localization; calibration degraded on geographic transfer.&#39;],
+    [&#39;Frozen primary correction&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Residual correction improved retrieval but failed joint segmentation superiority.&#39;],
+    [&#39;Source-aligned residual&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Source-aligned scene correction did not clear promotion gates.&#39;],
+    [&#39;Scene-ranking MLP head&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Cross-fitted scene-head search did not generalize.&#39;],
+    [&#39;Hard-example scene head&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Hard-example training failed held confirmation.&#39;],
+    [&#39;Site-context scene head&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Site context did not supply a stable unseen-site ranking gain.&#39;],
+    [&#39;Cross-fitted scene stack&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Stacked scene scores were negative in post-test development.&#39;],
+    [&#39;Sensor-specific mask calibration&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;diagnostic&#39;,&#39;Useful calibration diagnosis, but not a new architecture promotion.&#39;],
+    [&#39;ExtraTrees scene refit&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;All-development tree refit was a negative diagnostic.&#39;],
+    [&#39;XGBoost scene head&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Regularized and target-adapted variants failed confirmation.&#39;],
+    [&#39;Conformal-risk calibration&#39;,&#39;Scene heads &amp; calibration&#39;,&#39;rejected&#39;,&#39;Honest group conformal-risk transfer failed under geographic shift.&#39;],
+    [&#39;Temporal site prior&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Deterministic site history prior degraded the detector.&#39;],
+    [&#39;Cross-site risk prior&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Learned neighboring-site risk failed held evaluation.&#39;],
+    [&#39;Large-history temporal router&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Longer site history did not improve ranking.&#39;],
+    [&#39;One-sided temporal suppression&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Suppression removed useful positives along with false alarms.&#39;],
+    [&#39;Low-prevalence set-context head&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Permutation-equivariant site context failed.&#39;],
+    [&#39;Temporal-spatial ensemble&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Combined site-relative and spatial evidence failed unseen-site gates.&#39;],
+    [&#39;Robust site-template ranker&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Robust temporal templates added no stable AP improvement.&#39;],
+    [&#39;Prior-reference set model&#39;,&#39;Temporal &amp; site context&#39;,&#39;rejected&#39;,&#39;Multiple prior-reference aggregations reduced AP; transformer retired before fitting.&#39;],
+    [&#39;Multi-scale encoder probe&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Increasing encoder scale alone did not improve the task.&#39;],
+    [&#39;Prithvi tiny temporal transfer&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Temporal Prithvi transfer did not pass promotion.&#39;],
+    [&#39;Spatial-Prithvi ensemble&#39;,&#39;Foundation encoders&#39;,&#39;development&#39;,&#39;Official aggregate AP 0.676102 versus MARS 0.641020, but test-only AP and recall intervals crossed zero.&#39;],
+    [&#39;Robust Prithvi hard-pair ranker&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Hard-pair ranking failed.&#39;],
+    [&#39;Patch-supervised Prithvi LoRA&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;LoRA scene pilot failed despite domain-matched pretraining.&#39;],
+    [&#39;Physical-radiometry Prithvi&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Radiometry-aware correction did not improve the champion.&#39;],
+    [&#39;DOFA-v2 representation&#39;,&#39;Foundation encoders&#39;,&#39;diagnostic&#39;,&#39;Small development signal; projection, recall, and fold-2 confirmation failed.&#39;],
+    [&#39;DINOv3 methane fusion&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Dense spatial signal repeated, but scene ranking failed across objectives and seeds.&#39;],
+    [&#39;Prithvi product-aware v6&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Dual product adapters failed the scene-viability pilot.&#39;],
+    [&#39;Prithvi-100M probe&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;20&#215; larger nominal encoder did not improve AP or matched recall.&#39;],
+    [&#39;Spectral-temporal domain-adaptive Prithvi&#39;,&#39;Foundation encoders&#39;,&#39;rejected&#39;,&#39;Extended pretraining and domain adaptation failed the seed-one gate.&#39;],
+    [&#39;Physics morphology classifier&#39;,&#39;Dense &amp; segmentation&#39;,&#39;rejected&#39;,&#39;Handcrafted plume morphology did not produce stable scene ranking.&#39;],
+    [&#39;Scene-conditioned mask suppression&#39;,&#39;Dense &amp; segmentation&#39;,&#39;rejected&#39;,&#39;Dense suppression hurt the joint objective.&#39;],
+    [&#39;Physics-guided U-Net adapter v1&#39;,&#39;Dense &amp; segmentation&#39;,&#39;diagnostic&#39;,&#39;Positive point scene signal, but IoU regressed and gates failed.&#39;],
+    [&#39;Balanced U-Net adapter v2&#39;,&#39;Dense &amp; segmentation&#39;,&#39;rejected&#39;,&#39;Balanced requests did not rescue the adapter.&#39;],
+    [&#39;Instance-guided teacher&#39;,&#39;Dense &amp; segmentation&#39;,&#39;diagnostic&#39;,&#39;Ranking rejected; some dense evidence retained.&#39;],
+    [&#39;Dense Prithvi/U-Net fusion&#39;,&#39;Dense &amp; segmentation&#39;,&#39;diagnostic&#39;,&#39;Mask preservation passed; scene residuals failed representation holdout.&#39;],
+    [&#39;Invariant sparse dense ensemble&#39;,&#39;Dense &amp; segmentation&#39;,&#39;rejected&#39;,&#39;Sparse transferable signals existed individually but failed as an ensemble.&#39;],
+    [&#39;Complementary dense residual pair&#39;,&#39;Dense &amp; segmentation&#39;,&#39;rejected&#39;,&#39;Passed development, then failed the one-shot fold-2 confirmation.&#39;],
+    [&#39;NDMI bi-temporal U-Net&#39;,&#39;Dense &amp; segmentation&#39;,&#39;diagnostic&#39;,&#39;Scene heads failed; dense mask improvement replicated.&#39;],
+    [&#39;Anchored released-U-Net transfer&#39;,&#39;Dense &amp; segmentation&#39;,&#39;rejected&#39;,&#39;Full released-U-Net transfer did not improve overall ranking.&#39;],
+    [&#39;Counterfactual temporal physics&#39;,&#39;Physics &amp; causal&#39;,&#39;rejected&#39;,&#39;Observational counterfactual representation failed.&#39;],
+    [&#39;Same-background interventions&#39;,&#39;Physics &amp; causal&#39;,&#39;diagnostic&#39;,&#39;Causal perturbations were learnable, but scene classifiers failed.&#39;],
+    [&#39;Gaussian-pretrained ViT-U-Net&#39;,&#39;Physics &amp; causal&#39;,&#39;rejected&#39;,&#39;Short-exposure and raw-input variants failed scene promotion.&#39;],
+    [&#39;Gaussian contrast dense pretraining&#39;,&#39;Physics &amp; causal&#39;,&#39;diagnostic&#39;,&#39;Synthetic bank strongly learned dense evidence; real-data scene cross-fit was not complementary.&#39;],
+    [&#39;Scene-aligned Gaussian ViT&#39;,&#39;Physics &amp; causal&#39;,&#39;diagnostic&#39;,&#39;Improved ranking slightly but missed the required promotion floor.&#39;],
+    [&#39;Dual-teacher rescue&#39;,&#39;Physics &amp; causal&#39;,&#39;rejected&#39;,&#39;Released-detector plus auxiliary-teacher rescue failed.&#39;],
+    [&#39;Proposal-verifier transformer&#39;,&#39;Physics &amp; causal&#39;,&#39;rejected&#39;,&#39;Selective proposal verification did not improve recall-safe ranking.&#39;],
+    [&#39;MethaneS2CM context transfer&#39;,&#39;Cross-domain &amp; scale&#39;,&#39;rejected&#39;,&#39;L2A context transfer failed on MARS-domain generalization.&#39;],
+    [&#39;MethaneS2CM end-to-end transfer&#39;,&#39;Cross-domain &amp; scale&#39;,&#39;rejected&#39;,&#39;End-to-end external-domain pilot failed.&#39;],
+    [&#39;UNEP-positive augmented head&#39;,&#39;Cross-domain &amp; scale&#39;,&#39;rejected&#39;,&#39;Extra positive supervision did not create a stable ranker.&#39;],
+    [&#39;CloudSEN hard-negative augmentation&#39;,&#39;Cross-domain &amp; scale&#39;,&#39;diagnostic&#39;,&#39;Useful fresh-negative safety evidence; joint exact-paper head still failed.&#39;],
+    [&#39;Physical-scale cross-domain detector&#39;,&#39;Cross-domain &amp; scale&#39;,&#39;rejected&#39;,&#39;AP −0.000172; IoU +0.000284 with confidence interval crossing zero.&#39;],
+    [&#39;Expanded-real-data protected transfer&#39;,&#39;Cross-domain &amp; scale&#39;,&#39;rejected&#39;,&#39;Additional external real data did not clear promotion gates.&#39;],
+    [&#39;Target-mixture transport&#39;,&#39;Fusion &amp; routing&#39;,&#39;rejected&#39;,&#39;Simulated target mixtures did not transfer.&#39;],
+    [&#39;Gated temporal-spatial boost&#39;,&#39;Fusion &amp; routing&#39;,&#39;rejected&#39;,&#39;Gating could not protect recall while lifting AP.&#39;],
+    [&#39;Conservative instance-scene ensemble&#39;,&#39;Fusion &amp; routing&#39;,&#39;rejected&#39;,&#39;Two-output instance fusion failed.&#39;],
+    [&#39;Hard/smooth unseen-site routers&#39;,&#39;Fusion &amp; routing&#39;,&#39;rejected&#39;,&#39;Hard routing, smooth trust, and global shrinkage failed later confirmation.&#39;],
+    [&#39;Recall-protected DOFA fusion&#39;,&#39;Fusion &amp; routing&#39;,&#39;rejected&#39;,&#39;Passed development and normalization, then failed one-shot fold 2.&#39;],
+    [&#39;Protected bi-sensor routing&#39;,&#39;Fusion &amp; routing&#39;,&#39;diagnostic&#39;,&#39;Small stable signal, below the preregistered promotion floor.&#39;],
+    [&#39;DOFA + anchored U-Net ensemble&#39;,&#39;Fusion &amp; routing&#39;,&#39;rejected&#39;,&#39;Passed folds 3/4, then failed fold-2 confirmation.&#39;],
+    [&#39;Gaussian-ViT + DOFA champion&#39;,&#39;Fusion &amp; routing&#39;,&#39;development&#39;,&#39;Frozen development champion: AP 0.906525 on folds 3/4; official superiority remains unvalidated.&#39;],
+    [&#39;Sensor-aware ordinal U-Net&#39;,&#39;Latest successor&#39;,&#39;rejected&#39;,&#39;All seven gates failed: AP delta −0.786371 and dense IoU delta −0.636630.&#39;],
+    [&#39;Learned SWIR super-resolution&#39;,&#39;Latest successor&#39;,&#39;diagnostic&#39;,&#39;Proposed SEN2SR/VegiSR-style experiment; not yet implemented or evaluated.&#39;]
+  ];
+  const base={development:88,baseline:55,diagnostic:52,rejected:18};
+  const overrides=new Map([
+    [&#39;Gaussian-ViT + DOFA champion&#39;,98],[&#39;Spatial-Prithvi ensemble&#39;,92],[&#39;MARS released U-Net comparator&#39;,84],
+    [&#39;Tri-temporal context U-Net v5.1&#39;,80],[&#39;Gaussian contrast dense pretraining&#39;,78],[&#39;NDMI bi-temporal U-Net&#39;,75],
+    [&#39;Protected bi-sensor routing&#39;,73],[&#39;Dense Prithvi/U-Net fusion&#39;,71],[&#39;Scene-aligned Gaussian ViT&#39;,69],
+    [&#39;DOFA-v2 representation&#39;,67],[&#39;CloudSEN hard-negative augmentation&#39;,65],[&#39;Same-background interventions&#39;,62],
+    [&#39;Instance-guided teacher&#39;,60],[&#39;Physics-guided U-Net adapter v1&#39;,58],[&#39;Sensor-specific mask calibration&#39;,56],
+    [&#39;Learned SWIR super-resolution&#39;,52],[&#39;Compact residual U-Net&#39;,50],[&#39;DOFA + anchored U-Net ensemble&#39;,48],
+    [&#39;Complementary dense residual pair&#39;,47],[&#39;Legacy multitask ViT&#39;,45],[&#39;Recall-protected DOFA fusion&#39;,44],
+    [&#39;Frozen primary correction&#39;,42],[&#39;DINOv3 methane fusion&#39;,40],[&#39;Physical-scale cross-domain detector&#39;,38],
+    [&#39;Invariant sparse dense ensemble&#39;,36],[&#39;Anchored released-U-Net transfer&#39;,34],[&#39;Expanded-real-data protected transfer&#39;,33],
+    [&#39;Physical-radiometry Prithvi&#39;,32],[&#39;Prithvi product-aware v6&#39;,30],[&#39;Spectral-temporal domain-adaptive Prithvi&#39;,28],
+    [&#39;Prithvi-100M probe&#39;,26],[&#39;Sensor-aware ordinal U-Net&#39;,2]
+  ]);
+  const experiments=rows.map(([name,family,status,note],order)=&gt;({name,family,status,note,order:order+1,score:overrides.get(name)??base[status]}));
+  const ranked=[...experiments].sort((a,b)=&gt;d3.descending(a.score,b.score)||d3.ascending(a.order,b.order));
+  ranked.forEach((d,i)=&gt;d.rank=i+1);
+  const tier=s=&gt;s&gt;=90?&#39;Leading candidate&#39;:s&gt;=80?&#39;Strong benchmark&#39;:s&gt;=65?&#39;Promising lead&#39;:s&gt;=45?&#39;Useful evidence&#39;:s&gt;=25?&#39;Weak / unconfirmed&#39;:&#39;Retired path&#39;;
+  [...new Set(experiments.map(d=&gt;d.family))].forEach(family=&gt;{const option=document.createElement(&#39;option&#39;);option.value=family;option.textContent=family;familyFilter.appendChild(option)});
+  ranked.slice(0,3).forEach((d,i)=&gt;{const card=document.createElement(&#39;article&#39;);card.className=&#39;ersrr-leader&#39;;card.innerHTML=`&lt;span class=&quot;ersrr-leader-rank&quot;&gt;#${i+1}&lt;/span&gt;&lt;strong class=&quot;ersrr-leader-name&quot;&gt;${d.name}&lt;/strong&gt;&lt;span class=&quot;ersrr-leader-score&quot;&gt;${d.score}&lt;small&gt;/100&lt;/small&gt;&lt;/span&gt;`;leaders.appendChild(card)});
+  let selectedName=null;
+  function selectExperiment(d){selectedName=d.name;selection.innerHTML=`&lt;strong&gt;#${d.rank} &#183; ${d.name}&lt;/strong&gt;${d.note}&lt;span class=&quot;meta&quot;&gt;${d.score}/100 &#183; ${tier(d.score)} &#183; ${d.status===&#39;development&#39;?&#39;development-only evidence&#39;:d.status} &#183; ${d.family}&lt;/span&gt;`;draw()}
+  function draw(){
+    const selectedFamily=familyFilter.value,isRanked=viewSelect.value===&#39;rank&#39;,source=isRanked?ranked:experiments,data=source.filter(d=&gt;selectedFamily===&#39;all&#39;||d.family===selectedFamily);
+    const width=Math.max(320,host.getBoundingClientRect().width||736),mobile=width&lt;560,rowHeight=mobile?42:34,margin={top:38,right:44,bottom:12,left:mobile?174:262},height=margin.top+margin.bottom+data.length*rowHeight,innerWidth=Math.max(90,width-margin.left-margin.right);
+    host.replaceChildren();
+    const svg=d3.select(host).append(&#39;svg&#39;).attr(&#39;viewBox&#39;,`0 0 ${width} ${height}`).attr(&#39;role&#39;,&#39;img&#39;).attr(&#39;aria-label&#39;,`${data.length} ERSRR experiments ordered by ${isRanked?&#39;evidence-adjusted promise&#39;:&#39;chronology&#39;}.`);
+    svg.append(&#39;title&#39;).text(isRanked?&#39;ERSRR experiment ranking&#39;:&#39;ERSRR experiment chronology&#39;);
+    svg.append(&#39;desc&#39;).text(&#39;Horizontal bars show an editorial promise score from zero to one hundred. Color shows formal experiment outcome.&#39;);
+    const x=d3.scaleLinear().domain([0,100]).range([margin.left,width-margin.right]),y=d3.scaleBand().domain(data.map(d=&gt;d.name)).range([margin.top,height-margin.bottom]).padding(.18),ticks=mobile?[0,50,100]:[0,25,50,75,100];
+    svg.append(&#39;g&#39;).attr(&#39;class&#39;,&#39;grid&#39;).selectAll(&#39;line&#39;).data(ticks).join(&#39;line&#39;).attr(&#39;x1&#39;,x).attr(&#39;x2&#39;,x).attr(&#39;y1&#39;,margin.top-8).attr(&#39;y2&#39;,height-margin.bottom);
+    svg.append(&#39;g&#39;).attr(&#39;class&#39;,&#39;axis&#39;).attr(&#39;transform&#39;,`translate(0,${margin.top-8})`).call(d3.axisTop(x).tickValues(ticks).tickSize(0).tickPadding(7));
+    svg.append(&#39;text&#39;).attr(&#39;class&#39;,&#39;tier-label&#39;).attr(&#39;x&#39;,x(0)).attr(&#39;y&#39;,10).text(&#39;Retired&#39;);
+    svg.append(&#39;text&#39;).attr(&#39;class&#39;,&#39;tier-label&#39;).attr(&#39;x&#39;,x(100)).attr(&#39;y&#39;,10).attr(&#39;text-anchor&#39;,&#39;end&#39;).text(&#39;Most promising&#39;);
+    const groups=svg.append(&#39;g&#39;).selectAll(&#39;g.rank-row&#39;).data(data).join(&#39;g&#39;).attr(&#39;class&#39;,d=&gt;`rank-row${d.name===selectedName?&#39; is-selected&#39;:&#39;&#39;}`).attr(&#39;transform&#39;,d=&gt;`translate(0,${y(d.name)})`).attr(&#39;tabindex&#39;,0).attr(&#39;role&#39;,&#39;button&#39;).attr(&#39;aria-label&#39;,d=&gt;`Rank ${d.rank}, ${d.name}, score ${d.score} out of 100. ${d.note}`).attr(&#39;data-tooltip&#39;,d=&gt;`#${d.rank} &#183; ${d.score}/100 &#183; ${d.name}`).on(&#39;click&#39;,(_,d)=&gt;selectExperiment(d)).on(&#39;keydown&#39;,(event,d)=&gt;{if(event.key===&#39;Enter&#39;||event.key===&#39; &#39;){event.preventDefault();selectExperiment(d)}});
+    groups.append(&#39;rect&#39;).attr(&#39;class&#39;,&#39;row-bg&#39;).attr(&#39;x&#39;,0).attr(&#39;y&#39;,-2).attr(&#39;width&#39;,width).attr(&#39;height&#39;,y.bandwidth()+4).attr(&#39;rx&#39;,5);
+    groups.append(&#39;text&#39;).attr(&#39;class&#39;,&#39;rank-number&#39;).attr(&#39;x&#39;,4).attr(&#39;y&#39;,y.bandwidth()/2).attr(&#39;dominant-baseline&#39;,&#39;middle&#39;).text(d=&gt;`#${d.rank}`);
+    groups.append(&#39;text&#39;).attr(&#39;class&#39;,&#39;experiment-name&#39;).attr(&#39;x&#39;,36).attr(&#39;y&#39;,y.bandwidth()/2).attr(&#39;dominant-baseline&#39;,&#39;middle&#39;).text(d=&gt;{const limit=mobile?22:34;return d.name.length&gt;limit?`${d.name.slice(0,limit-1)}…`:d.name});
+    groups.append(&#39;rect&#39;).attr(&#39;class&#39;,&#39;score-track&#39;).attr(&#39;x&#39;,x(0)).attr(&#39;y&#39;,y.bandwidth()/2-4).attr(&#39;width&#39;,innerWidth).attr(&#39;height&#39;,8).attr(&#39;rx&#39;,4);
+    groups.append(&#39;rect&#39;).attr(&#39;class&#39;,&#39;score-bar&#39;).attr(&#39;data-status&#39;,d=&gt;d.status).attr(&#39;x&#39;,x(0)).attr(&#39;y&#39;,y.bandwidth()/2-4).attr(&#39;width&#39;,d=&gt;Math.max(2,x(d.score)-x(0))).attr(&#39;height&#39;,8).attr(&#39;rx&#39;,4);
+    groups.append(&#39;circle&#39;).attr(&#39;data-status&#39;,d=&gt;d.status).attr(&#39;cx&#39;,d=&gt;x(d.score)).attr(&#39;cy&#39;,y.bandwidth()/2).attr(&#39;r&#39;,5);
+    groups.append(&#39;text&#39;).attr(&#39;class&#39;,&#39;score-label&#39;).attr(&#39;x&#39;,d=&gt;Math.min(width-4,x(d.score)+9)).attr(&#39;y&#39;,y.bandwidth()/2).attr(&#39;dominant-baseline&#39;,&#39;middle&#39;).text(d=&gt;d.score);
+    const counts=d3.rollup(data,v=&gt;v.length,d=&gt;d.status);
+    summary.textContent=`${data.length} experiments &#183; ${counts.get(&#39;development&#39;)||0} development leaders &#183; ${counts.get(&#39;baseline&#39;)||0} retained/benchmarks &#183; ${counts.get(&#39;diagnostic&#39;)||0} useful leads &#183; ${counts.get(&#39;rejected&#39;)||0} rejected. Global rank is preserved when filtering.`;
+  }
+  familyFilter.addEventListener(&#39;change&#39;,()=&gt;{selectedName=null;draw()});
+  viewSelect.addEventListener(&#39;change&#39;,()=&gt;{selectedName=null;draw()});
+  new ResizeObserver(draw).observe(host);draw();
+})();
+&lt;/script&gt;
+
+
+&lt;style id=&quot;codex-visualization-document-scrollbar&quot;&gt;html,body{scrollbar-width:none!important}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important}&lt;/style&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#39;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#39;;
+  const disabled = &#39;:disabled,[aria-disabled=&quot;true&quot;]&#39;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#39;[role=&quot;tablist&quot;]&#39;).querySelectorAll(&#39;[role=&quot;tab&quot;]&#39;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#39;[role=&quot;tablist&quot;]&#39;).querySelectorAll(&#39;[role=&quot;tab&quot;]&#39;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#39;.nav[role=&quot;tablist&quot;]&#39;)) {
+    const selected =
+      list.querySelector(&#39;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#39;) ??
+      list.querySelector(&#39;[role=&quot;tab&quot;].active&#39;) ??
+      list.querySelector(&#39;[role=&quot;tab&quot;]&#39;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<script>(() => {
+  const frame = document.getElementById("codex-visualization");
+  if (!(frame instanceof HTMLIFrameElement)) {
+    return;
+  }
+  let viewportHeight = globalThis.innerHeight;
+
+  const channel = new MessageChannel();
+  channel.port1.addEventListener("message", (event) => {
+    const data = event.data;
+    if (typeof data !== "object" || data == null) {
+      return;
+    }
+    if (data.type === "height") {
+      const height = data.height;
+      if (
+        typeof height === "number" &&
+        Number.isFinite(height) &&
+        height >= 0 &&
+        height <= 10_000
+      ) {
+        frame.style.height = Math.ceil(height) + "px";
+      }
+      return;
+    }
+    if (data.type === "scroll-to") {
+      const top = data.top;
+      if (
+        typeof top === "number" &&
+        Number.isFinite(top) &&
+        top >= 0 &&
+        globalThis.navigator.userActivation?.isActive === true
+      ) {
+        globalThis.scrollTo({
+          top: Math.ceil(
+            globalThis.scrollY + frame.getBoundingClientRect().top + top,
+          ),
+        });
+      }
+      return;
+    }
+    if (data.type === "open-external") {
+      const rawHref = data.href;
+      if (typeof rawHref !== "string") {
+        return;
+      }
+      let href;
+      try {
+        const url = new URL(rawHref, document.baseURI);
+        if (url.protocol !== "https:") {
+          return;
+        }
+        href = url.href;
+      } catch {
+        return;
+      }
+      if (globalThis.navigator.userActivation?.isActive === true) {
+        const anchor = document.createElement("a");
+        anchor.href = href;
+        anchor.rel = "noopener noreferrer";
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+      }
+      return;
+    }
+    if (data.type === "follow-up") {
+      const prompt = data.prompt;
+      if (
+        typeof prompt !== "string" ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      const title = data.title;
+      globalThis.prompt(typeof title === "string" ? title : prompt, prompt);
+    }
+  });
+  channel.port1.start();
+  const srcdoc = frame.dataset.srcdoc;
+  if (srcdoc == null) {
+    return;
+  }
+  globalThis.addEventListener("resize", () => {
+    const height = Number.parseFloat(frame.style.height);
+    if (!Number.isFinite(height) || height <= viewportHeight) {
+      frame.style.removeProperty("height");
+    }
+    viewportHeight = globalThis.innerHeight;
+    channel.port1.postMessage({ type: "measure" });
+  });
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.contentWindow?.postMessage(
+        { type: "codex-visualization-initialize" },
+        "*",
+        [channel.port2],
+      );
+    },
+    { once: true },
+  );
+  frame.srcdoc = srcdoc;
+  delete frame.dataset.srcdoc;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "schema_version": "temporal-manifest/v1",
+  "samples": [
+    {
+      "sample_id": "EXAMPLE-ONLY-train-001",
+      "split": "train",
+      "site_id": "EXAMPLE-ONLY-site-a",
+      "event_id": "EXAMPLE-ONLY-event-a",
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "target": {
+        "path": "EXAMPLE-NOT-DATA/train-target.tif",
+        "provenance": "EXAMPLE-ONLY:observation-train-target",
+        "annotation_available": true,
+        "mask_path": "EXAMPLE-NOT-DATA/train-mask.tif"
+      },
+      "reference": {
+        "available": true,
+        "path": "EXAMPLE-NOT-DATA/train-reference.tif",
+        "provenance": "EXAMPLE-ONLY:observation-train-reference"
+      }
+    },
+    {
+      "sample_id": "EXAMPLE-ONLY-validation-001",
+      "split": "validation",
+      "site_id": "EXAMPLE-ONLY-site-b",
+      "event_id": "EXAMPLE-ONLY-event-b",
+      "latitude": 10.0,
+      "longitude": 10.0,
+      "target": {
+        "path": "EXAMPLE-NOT-DATA/validation-target.tif",
+        "provenance": "EXAMPLE-ONLY:observation-validation-target",
+        "annotation_available": false,
+        "mask_path": null
+      },
+      "reference": {
+        "available": false,
+        "path": null,
+        "provenance": null
+      }
+    }
+  ]
+}

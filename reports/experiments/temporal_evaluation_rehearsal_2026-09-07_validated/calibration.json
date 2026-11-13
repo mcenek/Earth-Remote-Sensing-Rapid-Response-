@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "fit_split": "validation",
+  "max_empirical_fpr": 0,
+  "validation_sha256": "4aeeebc8de69870cc32995310c85a21f53ec3530bcd271cc0d8e108e8bbf3e9a",
+  "validation_ids": [
+    "SYNTHETIC-validation-0-0",
+    "SYNTHETIC-validation-0-1",
+    "SYNTHETIC-validation-1-0",
+    "SYNTHETIC-validation-1-1",
+    "SYNTHETIC-validation-2-0",
+    "SYNTHETIC-validation-2-1",
+    "SYNTHETIC-validation-3-0",
+    "SYNTHETIC-validation-3-1",
+    "SYNTHETIC-validation-invalid"
+  ],
+  "validation_groups": [
+    "SYNTHETIC-validation-invalid-site",
+    "SYNTHETIC-validation-site-0",
+    "SYNTHETIC-validation-site-1",
+    "SYNTHETIC-validation-site-2",
+    "SYNTHETIC-validation-site-3"
+  ],
+  "valid_scenes": 8,
+  "abstained_scenes": 1,
+  "negative_scenes": 4,
+  "fpr_step_per_negative_scene": 0.25,
+  "population_risk_guarantee": false,
+  "models": {
+    "cnn": {
+      "rule": {
+        "kind": "threshold",
+        "threshold": 0.7,
+        "comparator": ">="
+      },
+      "validation": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4,
+        "recall": 1.0,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      }
+    },
+    "temporal_attention": {
+      "rule": {
+        "kind": "threshold",
+        "threshold": 0.7,
+        "comparator": ">="
+      },
+      "validation": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4,
+        "recall": 1.0,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      }
+    }
+  }
+}

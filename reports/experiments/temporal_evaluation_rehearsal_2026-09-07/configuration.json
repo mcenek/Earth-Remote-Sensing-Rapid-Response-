@@ -1,0 +1,13 @@
+{
+  "scope": "fabricated score fixtures only; no accuracy claim",
+  "real_data_opened": false,
+  "real_test_outcomes_opened": false,
+  "numpy_version": "2.4.4",
+  "sklearn_version": "1.9.0",
+  "source_sha256": {
+    "tools\\rehearse_temporal_evaluation.py": "f6f0aafcb7e8445b5a63d1cf9cb4e9ea22bd08a0ab63f0a3d775e055ce1539e4",
+    "EarthRemoteSensingRapidResponse\\temporal_attention_evaluation.py": "ce5cfcaea40ae53b76b09e328384a1ffcaeef86be381da41b046446289f32408"
+  },
+  "bootstrap_replicates": 200,
+  "bootstrap_seed": 20260907
+}

@@ -1,0 +1,48 @@
+{
+  "scope": "synthetic fitting-only wiring diagnostic; no real accuracy claim",
+  "seed": 20260905,
+  "device": "cpu",
+  "threads": 2,
+  "torch_version": "2.11.0+cu128",
+  "examples": 4,
+  "image_shape": [
+    32,
+    32
+  ],
+  "dense_steps": 24,
+  "scene_steps": 24,
+  "learning_rate": 0.001,
+  "shared_initial_weights_equal": true,
+  "real_data_opened": false,
+  "holdouts_opened": false,
+  "models": {
+    "cnn": {
+      "parameters": 4095682,
+      "dense_initial_loss": 0.6999238133430481,
+      "dense_final_loss": 0.2637103199958801,
+      "scene_initial_loss": 0.6572633981704712,
+      "scene_final_loss": 0.3643072247505188,
+      "training_only_iou": 0.4392523467540741,
+      "dense_learns": true,
+      "scene_learns": true,
+      "elapsed_seconds": 2.364
+    },
+    "temporal_attention": {
+      "parameters": 5414850,
+      "dense_initial_loss": 0.6927961111068726,
+      "dense_final_loss": 0.07660079002380371,
+      "scene_initial_loss": 0.6528562903404236,
+      "scene_final_loss": 0.05197212100028992,
+      "training_only_iou": 0.7735849022865295,
+      "dense_learns": true,
+      "scene_learns": true,
+      "elapsed_seconds": 2.96
+    }
+  },
+  "passed": true,
+  "source_sha256": {
+    "tools\\run_temporal_attention_synthetic_smoke.py": "2b0e1a338e883ea6ab0429dc8b5a205775e595f717221a7d9deee31cdf5321b6",
+    "EarthRemoteSensingRapidResponse\\temporal_attention_candidate.py": "2a6490993b1be97986eb2ed880eb1aba3e4214716316299bb5440cbdfe962f55",
+    "EarthRemoteSensingRapidResponse\\temporal_attention_training.py": "cccd3bc6eeac1062ad97af21d69d0001d603ac97abfa3770b31c8f7296f334cc"
+  }
+}

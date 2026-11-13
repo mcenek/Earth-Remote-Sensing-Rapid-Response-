@@ -1,0 +1,12 @@
+{
+  "revision": "e654cd777f85d701a4aff2894f513dcdf6981531",
+  "archive": "dataset_part_139.tar.gz",
+  "member": "data/original/geo/train/s2/254920/s2_pre.tif",
+  "network_bytes": 1048576,
+  "network_cap": 1048576,
+  "whole_archive_hash_verified": false,
+  "training_eligible": false,
+  "scope": "new original-scale mapping feasibility only; no model or held evaluation",
+  "status": "bounded_probe_failed",
+  "reason": "Complete member is not present within capped prefix; do not extend automatically"
+}

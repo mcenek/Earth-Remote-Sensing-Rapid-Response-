@@ -82,6 +82,32 @@ The mapper contract was repaired after review. `GTM_Model6_mapper.py` now requir
 
 The repaired one-fold MARS mask diagnostic `GTM_Model6_mapper_mars_pilot_20260922_r4` trained with the eight Martin transforms and exact context tiling, then evaluated a held partition with a fixed 0.50 threshold. It produced no positive pixels (held-fold IoU 0.0) and is retained as failed engineering evidence. The outer 64-pixel band is explicitly unsupported because S128 context is unavailable; no threshold tuning or EMIT upscaling claim was made.
 
+## October 2 architecture update
+
+The next proposed experiment is the three-CNN approach. Train one satellite-image branch against airborne methane measurements and a second against EMIT. Freeze the two branches, combine their spatial features, and train CNN 3 against EMIT. The separate four-context-model approach is set aside for this next experiment. Existing Model6 code and outputs remain historical evidence; no new three-CNN model has been implemented or trained.
+
+The proposed architecture still needs confirmation. The satellite sensor remains open because Landsat was proposed while current data use Sentinel-2. Both feature-fed CNN 3 and standalone CNN 3 are under consideration. A feature-fed model needs both frozen branches at inference; standalone operation requires a defined knowledge-transfer step. These questions remain open. Identify the actual airborne product and paired data before training. The external research journal remains read-only.
+
+The new viewer is already on the research branch at `e039e051`. The [local setup guide](../../GTM_Viewer/SEAN_SETUP.md) uses saved outputs with Python standard library only. The current portable sample loads from a clean Git-only extraction; presentation curation and a three-panel map inspector remain planned. Current R5 failure status is unchanged.
+
+## October 2 follow-up: CAFO review and machine implementation plan
+
+The follow-up considered whether visually checked CAFOs could become methane-source labels, a new-machine implementation plan, and pretrained satellite/methane models. The [plan](../../docs/GTM_Model6_three_cnn_implementation_plan_20261002.md) keeps potential facility sources separate from date-specific methane observations. The source-label idea remains provisional because plume shapes are unknown; the measured-airborne training proposal and two-branch/third-CNN recap remain the architectural basis.
+
+The cached CAFOSat contact sheet and full samples 03, 08, and 11 were inspected. Sample 03 clearly shows cattle in divided pens; 08 has parallel sheds and silos consistent with animal housing; 11 remains an uncertain farmstead. These are provisional review notes, not training labels, regulatory determinations, or methane measurements. The earlier coordinate conflicts and duplicate-image findings remain unresolved.
+
+Primary-source discovery checked the principal recommendations and corrected an initial TerraMind availability concern against its public HF weight listing. The [survey](../../reports/research/GTM_Model0_pretrained_model_survey_20261002.md) covers small CNN initialization, DOFA/Prithvi and other EO transformers, MAPL-EMIT, MARS-S2L/CH4Net, STARCOP, MethaneMapper, plume-hunter, TESSERA, and embedding/data products. Public weight availability does not establish local runtime compatibility or methane performance.
+
+Cached evidence replay passed with `training_ready=false`: `output/GTM_Model6_plan_readiness_20261002.json`. The imagery ledger is unchanged at 101,089,414 charged bytes of 104,857,600. The legacy raster audit could not execute because the current interpreter lacks rasterio and the previous virtual environment's Python path is unavailable. No dependency install, new imagery/weights transfer, relabeling, training, external journal edit, commit, or push occurred in this planning pass.
+
+## October 21: three-CNN implementation and local acceptance
+
+The independent airborne and EMIT branches, frozen-feature CNN 3, bounded trainer, checkpoint replay, Sentinel-only deployment, and viewer export are implemented. See the [runbook](../../docs/GTM_Model6_three_cnn_runbook.md) and [acceptance report with actual viewer screenshots](../../reports/research/GTM_Model6_three_cnn_acceptance_20261021.md).
+
+The fresh local rehearsal passed 79 checks. Five additional public CLI refusal checks and 68 existing viewer checks passed. Six held-out synthetic predictions replayed exactly, and both branch weight hashes stayed unchanged during CNN 3 fitting. Target-free inference succeeded while the original training arrays and manifest were unavailable. The browser review checked the saved mask, probability heatmap, reference, negative control, network switching, reload, and unscored inference. It caught and fixed a display selector issue.
+
+These are engineering results from artificial signals, not measured methane performance. The synthetic combiner did not improve on CNN 2. The first implementation predicts plume probability, not quantitative enhancement or a verified source point. No real approved paired cohort, fine-resolution validation, VM GPU run, or national inference is established. Sentinel-2 remains the explicit provisional input sensor; no Landsat files were relabeled. Real training still needs VM access, the identified airborne product, reviewed matching observations, radiometry, and independent controls. No imagery, weights, or packages were downloaded. No external journal write, commit, or push occurred in this implementation pass.
+
 ## Run-entry requirements
 
-For each real run, record its ID and purpose, parent cohort, code/config/data identities, grouped split manifest, 0°/15°/30°/45° transform definition, actual outputs, frozen thresholds, quantitative baselines, native visual review link, failures and next decision. Preserve actual float predictions, masks, georeferencing and unknown support. Distinguish measured evidence, diagnostic behavior, hypotheses and implementation status. A failed run is retained with its failure reason.
+For each real run, record its ID and purpose, parent cohort, code/config/data identities, grouped split manifest, exact augmentation transforms and valid cropping, actual outputs, frozen thresholds, quantitative baselines, native visual review link, failures and next decision. Preserve actual float predictions, masks, georeferencing and unknown support. Distinguish measured evidence, diagnostic behavior, hypotheses and implementation status. A failed run is retained with its failure reason.

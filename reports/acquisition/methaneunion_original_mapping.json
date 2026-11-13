@@ -1,0 +1,202 @@
+{
+  "access": {
+    "model_outcomes": false,
+    "network": false,
+    "raster_payload": false,
+    "released_test_manifest": false
+  },
+  "alias_hypothesis": {
+    "archive": "data/original/geo/train/s2/",
+    "globally_verified": false,
+    "manifest": "data/original_scale/train/s2/"
+  },
+  "changed_group_counts": [
+    {
+      "frozen_rows": 7,
+      "label": 0,
+      "latitude": -34.181570161029235,
+      "longitude": 150.72058206853478,
+      "original_rows": 5
+    },
+    {
+      "frozen_rows": 9,
+      "label": 0,
+      "latitude": -25.328329430183658,
+      "longitude": -57.643574035142805,
+      "original_rows": 11
+    },
+    {
+      "frozen_rows": 4,
+      "label": 0,
+      "latitude": 18.002931121572942,
+      "longitude": -93.08790731479309,
+      "original_rows": 6
+    },
+    {
+      "frozen_rows": 10,
+      "label": 1,
+      "latitude": 18.002931121572942,
+      "longitude": -93.08790731479309,
+      "original_rows": 13
+    },
+    {
+      "frozen_rows": 5,
+      "label": 0,
+      "latitude": 36.709719,
+      "longitude": -121.761387,
+      "original_rows": 7
+    },
+    {
+      "frozen_rows": 6,
+      "label": 0,
+      "latitude": 38.85323109621069,
+      "longitude": -76.78842082709161,
+      "original_rows": 4
+    },
+    {
+      "frozen_rows": 14,
+      "label": 0,
+      "latitude": 39.05407071129795,
+      "longitude": 111.07452032393206,
+      "original_rows": 15
+    },
+    {
+      "frozen_rows": 11,
+      "label": 0,
+      "latitude": 50.19572552191116,
+      "longitude": 19.090964034225863,
+      "original_rows": 9
+    },
+    {
+      "frozen_rows": 14,
+      "label": 0,
+      "latitude": 67.54739511781582,
+      "longitude": 63.80481907350895,
+      "original_rows": 11
+    }
+  ],
+  "deterministic_pilot": {
+    "archive": "dataset_part_139.tar.gz",
+    "archive_bytes": 5036600848,
+    "expected_members_under_alias_hypothesis": {
+      "S2_plume_label_path": "data/original/geo/train/s2/254920/s2_plume.tif",
+      "S2_pre_path": "data/original/geo/train/s2/254920/s2_pre.tif",
+      "S2_pre_pre_path": "data/original/geo/train/s2/254920/s2_pre_pre.tif",
+      "S2_t0_path": "data/original/geo/train/s2/254920/s2.tif"
+    },
+    "first_member": "data/original/geo/train/s2/254920/s2_pre.tif",
+    "label": 0,
+    "latitude": 32.78162975844313,
+    "longitude": 116.46945926782598,
+    "original_id": 254920,
+    "payload_or_quality_verified": false,
+    "proven_members": [
+      "data/original/geo/train/s2/254920/s2_pre.tif"
+    ]
+  },
+  "existing_probe_metadata": {
+    "archive": "dataset_part_139.tar.gz",
+    "member": "data/original/geo/train/s2/254920/s2_pre.tif",
+    "network_bytes": 1048576,
+    "network_cap": 1048576,
+    "reason": "Complete member is not present within capped prefix; do not extend automatically",
+    "revision": "e654cd777f85d701a4aff2894f513dcdf6981531",
+    "scope": "new original-scale mapping feasibility only; no model or held evaluation",
+    "status": "bounded_probe_failed",
+    "training_eligible": false,
+    "whole_archive_hash_verified": false
+  },
+  "first_member_matches": [
+    {
+      "archive": "dataset_part_139.tar.gz",
+      "archive_bytes": 5036600848,
+      "expected_members_under_alias_hypothesis": {
+        "S2_plume_label_path": "data/original/geo/train/s2/254920/s2_plume.tif",
+        "S2_pre_path": "data/original/geo/train/s2/254920/s2_pre.tif",
+        "S2_pre_pre_path": "data/original/geo/train/s2/254920/s2_pre_pre.tif",
+        "S2_t0_path": "data/original/geo/train/s2/254920/s2.tif"
+      },
+      "first_member": "data/original/geo/train/s2/254920/s2_pre.tif",
+      "label": 0,
+      "latitude": 32.78162975844313,
+      "longitude": 116.46945926782598,
+      "original_id": 254920,
+      "payload_or_quality_verified": false,
+      "proven_members": [
+        "data/original/geo/train/s2/254920/s2_pre.tif"
+      ]
+    }
+  ],
+  "frozen": {
+    "coordinate_label_groups": 108,
+    "distinct_spatial_coordinates": 56,
+    "labels": {
+      "0": 806,
+      "1": 826
+    },
+    "rows": 1632
+  },
+  "inputs": {
+    "candidates": {
+      "bytes": 60349,
+      "path": "reports/acquisition/methaneunion_novel_s2_candidates.json",
+      "sha256": "75de61872080ed2d6182aaa2e863f8ec7caf41fb28a6009bb077106693795439"
+    },
+    "existing_probe_metadata": {
+      "bytes": 516,
+      "path": "reports/acquisition/methaneunion_one_member_probe.json",
+      "sha256": "419ff228911b9e96c7df81fb02bf4cfa9416113f41e8737e71cc77890e487c68"
+    },
+    "frozen_manifest": {
+      "bytes": 5656552,
+      "path": ".research/external/MethaneUnion-release/datasets/geo_split/480m_GSD/train.csv",
+      "sha256": "4333a0edb9ff49bb19cdedf0e77489816daf3bc3a568725146301a8619132d46"
+    },
+    "original_manifest": {
+      "bytes": 36865195,
+      "path": ".research/external/MethaneUnion-release/datasets/geo_split/original_scale/train.csv",
+      "sha256": "93749525e8e5af088832491096423c21e8cd34c5da0f3f13541a59560c5d1c94"
+    },
+    "prefix_survey": {
+      "bytes": 16780,
+      "path": "reports/acquisition/methaneunion_remaining_archive_prefix_survey.json",
+      "sha256": "e98fa6f59d166ddd01f77692286836653a9d0306ecccd7a03b9afe8a255a39ff"
+    }
+  },
+  "limitations": [
+    "This defines a new original-scale cohort, not recovery of the frozen cross-scale sample identities.",
+    "Coordinate and label do not establish acquisition date, plume event identity, crop offset, or one-to-one sample correspondence.",
+    "A first TAR member confirms one path only. Other temporal members and masks may be anywhere or absent, including beyond the release tail.",
+    "Manifests contain no shape, dtype, band order, radiometric units, geotransform, or payload size; those remain unverified.",
+    "Original-scale name does not prove native pixel scale. Local legacy crop source uses S2 32 px crops resized to 224 and claims 10 m GSD, while raw acquisition uses 20 m products; neither proves these release TIFFs.",
+    "Binary scene labels and plume paths are supplied; mask semantics, co-registration, temporal observability, and independent geographic grouping require separate adjudication."
+  ],
+  "mapping_rule": "Exact finite float64 latitude + longitude + binary label, within original_scale geo train S2; IDs are not cross-scale identifiers.",
+  "missing_groups": [],
+  "original": {
+    "cross_sensor_excess_id_rows": 8013,
+    "labels": {
+      "0": 804,
+      "1": 829
+    },
+    "manifest_rows": 132006,
+    "mapped_coordinate_label_groups": 108,
+    "mapped_rows": 1633,
+    "rows_with_four_nonempty_paths": 1633,
+    "s2_rows": 52537
+  },
+  "pilot_bounds": {
+    "first_member_compressed_size_known": false,
+    "first_member_uncompressed_size_known": false,
+    "rule": "One first-member header/payload pilot only; start at existing 256 KiB prefix size and expand under hard bounds. Stop if limits fail; never fall back to full archive. These caps are proposed, not size estimates or authorization.",
+    "suggested_maximum_decompressed_bytes": 67108864,
+    "suggested_maximum_network_bytes": 16777216
+  },
+  "schema_version": "ersrr.methaneunion.original-mapping.v1",
+  "status": "feasible_new_metadata_cohort_only_not_acquisition_authorization",
+  "unsafe_id_join": {
+    "coordinate_or_label_disagreements": 1348,
+    "matching_coordinate_and_label": 3,
+    "overlapping_ids": 1351
+  }
+}

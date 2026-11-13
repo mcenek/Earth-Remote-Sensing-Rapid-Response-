@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "scope": "synthetic workflow diagnostic only",
+  "models": [
+    "cnn",
+    "temporal_attention"
+  ],
+  "accuracy_claim": false
+}

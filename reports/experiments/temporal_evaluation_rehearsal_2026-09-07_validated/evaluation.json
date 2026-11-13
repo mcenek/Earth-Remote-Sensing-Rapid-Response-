@@ -1,0 +1,56 @@
+{
+  "scope": "fixed-rule paired evaluation; no threshold fitting",
+  "valid_scenes": 8,
+  "abstained_scenes": 1,
+  "positive_scenes_abstained": 1,
+  "negative_scenes_abstained": 0,
+  "models": {
+    "cnn": {
+      "average_precision": 1.0,
+      "fixed_operating_point": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4,
+        "recall": 1.0,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      }
+    },
+    "temporal_attention": {
+      "average_precision": 1.0,
+      "fixed_operating_point": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4,
+        "recall": 1.0,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      }
+    }
+  },
+  "paired_delta_bootstrap": {
+    "unit": "geographic group",
+    "groups": 4,
+    "seed": 20260907,
+    "replicates": 200,
+    "confidence": 0.95,
+    "intervals": {
+      "average_precision": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "recall": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "false_positive_rate": {
+        "lower": 0.0,
+        "upper": 0.0
+      }
+    },
+    "degenerate_replicates": 0,
+    "scope": "conditional on fitted models, frozen rules and observed groups; excludes training/calibration uncertainty"
+  }
+}

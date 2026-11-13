@@ -1,0 +1,61 @@
+{
+  "dense": [
+    {
+      "epoch": 1,
+      "train_loss": 0.8636597990989685,
+      "validation_loss": 0.5078516006469727
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.5078685283660889,
+      "validation_loss": 0.43101704120635986
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.43100705742836,
+      "validation_loss": 0.4208256006240845
+    }
+  ],
+  "scene": [
+    {
+      "epoch": 1,
+      "train_loss": 0.7005976637204488,
+      "validation_loss": 0.5662328600883484
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.5660684506098429,
+      "validation_loss": 0.41663095355033875
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.4170709153016408,
+      "validation_loss": 0.2764442563056946
+    }
+  ],
+  "counters": {
+    "train_samples": 4,
+    "validation_samples": 4,
+    "dense_train_scenes": 2,
+    "dense_validation_scenes": 2,
+    "scene_train_scenes": 3,
+    "scene_validation_scenes": 3,
+    "train_missing_annotations": 1,
+    "validation_missing_annotations": 1,
+    "train_invalid_scenes": 1,
+    "validation_invalid_scenes": 1
+  },
+  "best_dense_epoch": 3,
+  "best_scene_epoch": 3,
+  "optimization": {
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "weight_decay": 0,
+    "gradient_clip_norm": 1.0,
+    "dense_epochs": 3,
+    "scene_epochs": 3,
+    "batch_order": "supplied order, repeated each epoch",
+    "selection_ties": "earliest epoch",
+    "bce_weight": 0.7
+  }
+}

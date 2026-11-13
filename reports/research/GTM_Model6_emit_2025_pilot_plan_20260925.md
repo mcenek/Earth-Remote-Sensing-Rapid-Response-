@@ -1,0 +1,13 @@
+# EMIT v2025 development pilot plan
+
+Joshua approved the next pass after the Hugging Face intake report. This is a new bounded data-readiness pilot, not a reopening or passing of the old hyperspectral transfer experiment's failed gates.
+
+1. Use the pinned training manifest only. Compare sample IDs and location identities with historical EMIT manifests and current Model6 inventories. Use only identifiers, coordinates and split membership from protected sources, never their methane labels, images, scores or outcomes.
+2. Exclude known evaluation locations and, conservatively, observations within 25 km of any existing MARS-S2L or MethaneS2CM location. Record overlap and unresolved identity limitations rather than calling distinct names independent sites.
+3. Pick a small deterministic set of clear US training observations at separated locations, with provider-declared positives and controls. Query Sentinel availability at no more than one hour offset; a match is metadata evidence, not a dense transferred label.
+4. Inspect exact pinned files and transfer sizes before acquisition. Download only small training-sample masks, context/metadata and retrievals that fit the remaining persistent budget. Verify native geometry and mask values visually. Only consider Sentinel crop transfer after a bounded byte estimate. Retain the historical 15-minute threshold for a potential dense cross-sensor target; larger offsets are exploratory scene comparisons only.
+5. Show actual acquired inputs and labels and report what is still missing. No retraining, altered labels, combined training manifest, or geographic correction is authorized by this data-readiness pass.
+
+Before implementing the audit/acquisition path, account for these failures: missing source manifests; changed checksums/revisions; CSV country spelling differences; invalid coordinates; sample ID duplicates; shared coordinates under different names; overlaps with protected or previously used locations; unresolved old coordinates; cloud/coverage mismatch; metadata labels differing from actual masks; per-row folders outside the training manifest; excessive or unbounded transfers; unsupported units, raster grids or mask codes; and accidental use of L2A as L1C. Any of these must become an explicit exclusion or limitation, not a fabricated negative or silent conversion. Do not relax distance/timing gates after seeing results.
+
+Initial remaining budget: 21,422,355 bytes (20.43 MiB). Use the existing ledger without resetting or raising it. Original files, selection reasons, hashes, API replies and actual-output previews are the repeatable artifacts.

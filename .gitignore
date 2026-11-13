@@ -73,3 +73,19 @@ EarthRemoteSensingRapidResponse/Data Collection/old_validation/
 EarthRemoteSensingRapidResponse/UnprocessedImages/
 EarthRemoteSensingRapidResponse/Data Collection/images_with_cafo/
 EarthRemoteSensingRapidResponse/Data Collection/images_non_cafo/
+
+# Source-only publication safeguards (2026-11-13)
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.npz
+*.npy
+*.hdf5
+*.tiff
+*.tif
+*.whl
+research/tessera_scaffold/demo_output/
+research/tessera_scaffold/test_log.txt
+# Preserve this reviewed source snapshot despite the generic dist rule above.
+!GTM_Viewer/architecture_experiment_site/dist/

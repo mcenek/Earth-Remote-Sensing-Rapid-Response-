@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Research progress | ERSRR</title>
+  <meta name="description" content="A visual account of recent methane plume research and its limits.">
+  <link rel="icon" href="GTM_Model0.svg"><link rel="stylesheet" href="progress.css?v=20261030d">
+  <link rel="stylesheet" href="v11-inventory.css?v=20261030d">
+</head>
+<body>
+  <header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html"><img src="GTM_Model0.svg" alt=""><strong>ERSRR</strong><span>Research</span></a>
+    <nav aria-label="Research pages"><a href="index.html#national">Map</a><a href="index.html#compare">Compare</a><a href="index.html#experiments">Experiments</a><a href="progress.html" aria-current="page">Progress</a></nav>
+    <a class="top-action" href="index.html#compare">Open viewer <span aria-hidden="true">↗</span></a>
+  </div></header>
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy"><div class="kicker"><span></span> RESEARCH UPDATE <b>20–30 OCT 2026</b></div>
+        <h1>From noisy maps<br>to <em>plume outlines.</em></h1>
+        <p>We repaired the training pipeline, improved how the U-Net handles clear scenes, and built a bigger baseline. Here is what the pictures and scores actually show.</p>
+        <div class="hero-actions"><a class="btn primary" href="#v11">All 198 V11 predictions <span>↓</span></a><a class="btn ghost" href="#evidence">See the examples <span>↓</span></a></div>
+      </div>
+      <div class="hero-card"><div class="card-top"><span>RESEARCH SNAPSHOT</span><span class="tag">DEVELOPMENT DATA</span></div>
+        <div class="hero-number">53.1<span>%</span></div><div class="hero-number-label">pooled plume F1 · retained U-Net v11</div>
+        <div class="hero-meter"><i></i></div><div class="hero-mini"><span>46 plume scenes</span><span>152 no-plume scenes</span></div>
+        <p>These scenes informed model selection. This is a development score, not an independent US accuracy result.</p>
+      </div>
+    </section>
+    <section class="scope-band"><div class="wrap scope-inner"><span class="scope-dot"></span><p><strong>What the output means</strong> The colored area is a predicted plume mask compared with a reviewed MARS annotation. It is not a methane concentration or emission-rate measurement.</p><a href="#limits">Read the limits ↓</a></div></section>
+
+    <section class="wrap section" id="evidence">
+      <div class="section-head"><div><div class="eyebrow">01 / ACTUAL PREDICTIONS</div><h2>Look at the outlines.</h2><p>These three examples illustrate different outcomes. The complete V11 list below includes every plume and clear scene.</p></div><a class="inline-link" href="#v11">All 198 predictions ↓</a></div>
+      <div class="legend"><span><i class="orange"></i> Model prediction</span><span><i class="cyan"></i> Reviewed plume annotation</span><span><i class="photo"></i> Sentinel image</span></div>
+      <div class="case-grid" id="cases"><div class="loading">Loading saved prediction images…</div></div>
+    </section>
+
+    <section class="wrap section inventory-section" id="v11">
+      <div class="section-head"><div><div class="eyebrow">V11 / COMPLETE SCENE REVIEW</div><h2>Every prediction. Every outcome.</h2><p>46 labeled plume scenes and 152 reviewed no-plume scenes. Open any row to see the original image, saved prediction and annotation in three connected panes.</p></div><a class="inline-link" href="index.html?experiment=GTM_Model7_hard_v11_20261025_candidate&amp;layout=panels#compare">Open three-pane viewer ↗</a></div>
+      <div id="v11-inventory">
+        <div class="inventory-groups" id="v11-groups" aria-label="Filter V11 predictions by outcome"></div>
+        <p class="inventory-rule" id="v11-group-rule">Groups use native pixel overlap at the saved cutoff, 0.65.</p>
+        <details class="inventory-definitions"><summary>How the groups work</summary><ul><li><strong>Strong match:</strong> plume IoU at least 50%.</li><li><strong>Partial match:</strong> plume IoU from 10% to below 50%.</li><li><strong>Weak trace:</strong> some correct plume pixels, but IoU below 10%.</li><li><strong>Missed plume:</strong> no correct plume pixels, even if there are marks elsewhere.</li><li><strong>False alarm:</strong> a reviewed no-plume scene with any marked pixel.</li><li><strong>Correct clear:</strong> a reviewed no-plume scene with no marked pixels.</li></ul><p>IoU measures the area shared by prediction and annotation, divided by their combined area. A partial match is not a measured distance-based near miss. A correct clear scene does not prove zero methane.</p></details>
+        <div class="inventory-toolbar"><label for="v11-search">Find a prediction<input id="v11-search" type="search" placeholder="Country, date, scene ID or outcome"></label><label for="v11-country">Location<select id="v11-country"><option value="all">All countries</option></select></label><button id="v11-reset" type="button">Reset filters</button><div class="inventory-downloads"><a href="data/v11-predictions.csv" download>Download all 198 · CSV ↓</a><a href="data/v11-predictions.json" download>JSON ↓</a></div></div>
+        <div class="inventory-status"><p id="v11-count" role="status">Loading the complete prediction list…</p><a id="v11-open-filter" href="index.html?experiment=GTM_Model7_hard_v11_20261025_candidate&amp;layout=panels#compare">Browse this group in three panes ↗</a></div>
+        <div class="inventory-table-wrap" tabindex="0" role="region" aria-label="All V11 predictions; scroll to see every row"><table class="inventory-table"><thead><tr><th>Scene / date / ID</th><th>Saved outcome</th><th>IoU</th><th>Precision</th><th>Recall</th><th>Correct pixels</th><th>Extra pixels</th><th>Missed pixels</th><th>Inspect</th></tr></thead><tbody id="v11-table-body"></tbody></table><p id="v11-empty" hidden>No predictions match these filters.</p></div>
+        <p class="inventory-footnote">Counts and scores use the original evaluation grid. A single false pixel is enough to put a clear scene in the false-alarm group. These are development observations used for selection, not independent validation. Interactive threshold grids are available for six examples; every scene includes its saved prediction, score heatmap and error image.</p>
+      </div>
+    </section>
+
+    <section class="wrap section" id="results">
+      <div class="section-head"><div><div class="eyebrow">02 / THE U-NET JUMPS</div><h2>Better, with trade-offs.</h2><p>The same 198 development scenes were scored for each run. Each model uses its own selected threshold.</p></div></div>
+      <div class="chart-grid">
+        <article class="panel chart-panel"><div class="panel-head"><div><div class="small-label">POOLED PIXEL F1</div><h3>Plume overlap, across the development set</h3></div><span class="unit">0–100%</span></div>
+          <div class="bar-chart" aria-label="Pooled pixel F1: v7 43.9%, v8 53.2%, v11 53.1%">
+            <div class="bar-row"><span>v7 <small>earlier</small></span><div class="bar-track"><i style="--size:43.9%"></i></div><strong>43.9%</strong></div>
+            <div class="bar-row"><span>v8 <small>uniform</small></span><div class="bar-track"><i style="--size:53.2%"></i></div><strong>53.2%</strong></div>
+            <div class="bar-row highlight"><span>v11 <small>retained</small></span><div class="bar-track"><i style="--size:53.1%"></i></div><strong>53.1%</strong></div>
+          </div><p class="chart-note">v11 is not the highest F1 of these three. It was retained because it reduced false alarms while meeting the project's development checks.</p>
+        </article>
+        <article class="panel chart-panel"><div class="panel-head"><div><div class="small-label">THE TRADE-OFF</div><h3>v8 → v11</h3></div><span class="unit">same scenes</span></div>
+          <div class="pair-row"><div><span>Precision</span><small>How much of the marked area matched a label</small></div><div class="pair-values"><b>66.5%</b><span>→</span><strong>71.5%</strong></div></div>
+          <div class="pair-row"><div><span>Recall</span><small>How much of the labeled plume was found</small></div><div class="pair-values"><b>44.3%</b><span>→</span><strong>42.2%</strong></div></div>
+          <div class="pair-row"><div><span>Clear scenes with a mark</span><small>Out of 152 reviewed no-plume scenes</small></div><div class="pair-values"><b>23</b><span>→</span><strong>18</strong></div></div>
+          <p class="chart-note">Fewer false marks came with lower recall. The two thresholds differ; this is a development comparison, not a controlled independent test.</p>
+        </article>
+      </div>
+      <div class="limits-strip"><span class="signal">!</span><p><strong>Still missing too much.</strong> v11 completely missed 19 of the 46 labeled plume scenes at its selected threshold. No model here is ready for a US-wide accuracy claim.</p></div>
+    </section>
+
+    <section class="section setup-section" id="next"><div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">03 / BIGGER BASELINE</div><h2>More real data. A stronger test.</h2><p>The new MARS-based U-Net uses a larger, mixed Sentinel-2 and Landsat training set. Its results are not yet included in this snapshot.</p></div><span class="status-pill"><span></span> Training started · 30 Oct</span></div>
+      <div class="setup-grid"><div class="panel data-panel"><div class="data-count"><strong>30,304</strong><span>training observations</span></div><div class="data-track"><i></i><b></b></div><div class="data-key"><span><i></i>2,246 plume</span><span><i></i>28,058 no-plume</span></div><p>25,051 Sentinel-2 + 5,253 Landsat observations. MARS plume labels provide the supervised masks.</p></div>
+        <div class="panel split-panel"><div class="split"><div class="split-icon">01</div><div><strong>Training</strong><p>30,304 observations used to fit the new model.</p></div></div><div class="split"><div class="split-icon">02</div><div><strong>Selection</strong><p>1,102 observations reserved for choosing a checkpoint.</p></div></div><div class="split"><div class="split-icon">03</div><div><strong>Location holdout</strong><p>60 observations: 20 plume and 40 no-plume, at locations held out from this model.</p></div></div></div></div>
+      <p class="scope-caption">The held-out regions have been involved in earlier project work. This will test the new model on held-out locations, but it is not a completely untouched project-wide test. Only two of the held-out plume observations are in the US.</p>
+    </div></section>
+
+    <section class="wrap section" id="work">
+      <div class="section-head"><div><div class="eyebrow">04 / RECENT WORK</div><h2>What changed.</h2><p>A visual timeline of the research and the tools supporting it.</p></div></div>
+      <div class="timeline">
+        <article><div class="timeline-mark"></div><span>OCT 23–24</span><h3>Rebuilt the data path</h3><p>Checked real pairs and labels, added clear scenes, and found that full-scene context and scene-centered inputs improved development traces.</p></article>
+        <article><div class="timeline-mark"></div><span>OCT 25</span><h3>Reduced false alarms</h3><p>Replayed difficult clear training sites. v11 improved precision and reduced clear-scene activations, while recall remained a problem.</p></article>
+        <article><div class="timeline-mark"></div><span>OCT 26</span><h3>Checked outside models</h3><p>Compared actual outputs from our U-Net and the released MARS model on the same reviewed scenes, including misses and false marks.</p></article>
+        <article><div class="timeline-mark current"></div><span>OCT 30</span><h3>Started a larger baseline</h3><p>Verified cached MARS files, moved large working data to D:, separated locations, and started a new 13.6M-parameter U-Net run.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap section last" id="limits"><div class="panel limits-panel"><div><div class="eyebrow">05 / READ THIS WITH THE RESULTS</div><h2>Progress is not deployment.</h2><p>The plots show exposed development evidence. Plume masks are not emission-rate estimates, and a CAFO or oil facility nearby is not proof that it caused a plume.</p></div><div class="limits-list"><div><b>01</b><span>Inspect both successful and failed predictions.</span></div><div><b>02</b><span>Check new locations and reviewed clear scenes.</span></div><div><b>03</b><span>Measure source location and methane amounts only when supported by suitable labels.</span></div></div></div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>ERSRR · Methane research <small>Snapshot: 30 October 2026</small></span><div><a href="index.html#compare">Prediction viewer</a><a href="GTM_Model0_experiment_history.html">Previous experiments</a><a href="https://huggingface.co/datasets/UNEP-IMEO/MARS-S2L">MARS-S2L dataset ↗</a></div></div><div class="wrap attribution">MARS-S2L data and released models are provided by UNEP IMEO and collaborators under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. Satellite basemaps are credited in the viewer. Metrics and examples are project research outputs.</div></footer>
+  <script src="GTM_Model0_scene_review.js?v=20261030d"></script><script src="progress.js?v=20261030d"></script><script src="v11-inventory.js?v=20261030d"></script>
+</body>
+</html>

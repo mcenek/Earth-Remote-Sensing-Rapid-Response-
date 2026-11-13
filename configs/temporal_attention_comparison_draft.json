@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "draft_not_frozen",
+  "real_data_ready": false,
+  "purpose": "Compare a temporal residual CNN with the same backbone plus coarse local temporal attention",
+  "variants": ["cnn", "temporal_attention"],
+  "seeds": [20260907, 20260908, 20260909],
+  "pairing": {
+    "common_initial_weights": "identical within each seed",
+    "data_order_and_augmentation": "identical within each seed",
+    "optimization_budget": "identical within each seed",
+    "parameter_count": "report unequal counts; this is an incremental-module comparison"
+  },
+  "dense_selection": {
+    "criterion": "minimum validation dense objective",
+    "bce_weight": 0.7,
+    "bce_aggregation": "equal weight per annotated scene with valid pixels",
+    "dice_aggregation": "equal weight per annotated positive scene with valid pixels",
+    "missing_annotation": "exclude from pixel loss; retain eligible scene label",
+    "tie_break": "earliest epoch"
+  },
+  "scene_selection": {
+    "start": "restore selected dense checkpoint and freeze dense parameters",
+    "criterion": "minimum validation scene BCE",
+    "all_invalid_target": "exclude and report count",
+    "tie_break": "earliest epoch"
+  },
+  "evaluation_plan": {
+    "test_policy": "single frozen evaluation after selection and operating threshold are fixed",
+    "report": ["scene AP", "recall at frozen false-positive operating constraint", "dense IoU", "dense precision and recall", "invalid-scene abstention counts", "inference time and peak memory"],
+    "uncertainty": "paired resampling of geographic groups; report each seed and between-seed spread",
+    "threshold_selection": "validation only; no test-set threshold optimization",
+    "acceptance_rule": "must be frozen with numeric margins before any test evaluation"
+  },
+  "unresolved_before_freeze": [
+    "verified source release and per-file hashes",
+    "observed band order, product reflectance conversion, georegistration and mask semantics",
+    "reference dates, temporal eligibility rule and physics-channel construction",
+    "geographic neighborhood grouping and event identities, including overlap with prior consumed evaluation sites",
+    "cohort and split manifest hashes",
+    "native resolution, crop size, augmentation and sampling policy",
+    "optimizer settings, dense/scene epoch budgets and batch size after training-only resource pilot",
+    "validation negative count sufficient for chosen false-positive operating constraint",
+    "numeric improvement/noninferiority margins and bootstrap settings"
+  ]
+}

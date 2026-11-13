@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Same scene comparison | ERSRR</title><link rel="stylesheet" href="GTM_same_scene.css"></head>
+<body><header><a href="index.html">ERSRR / Research</a><a href="index.html">Experiment viewer ↗</a></header><main>
+<div class="heading"><div><p class="eyebrow">SAVED VALIDATION OUTPUTS · 24 SCENES</p><h1>Same image, eight predictions</h1><p>Select any scene to inspect the seven completed local models and the official MARS-S2L released checkpoint on the same saved image.</p></div><div class="cutoff">Pixel cutoff <strong>0.50</strong><small>Fixed for every model</small></div></div>
+<div class="notice">These 24 validation scenes are exposed development evidence. Checkpoints were selected on a separate validation set. This is a visual review of saved outputs, not an independent test or matched training comparison. Missing evidence stays visible.</div>
+<section class="toolbar"><label for="scene">Scene <select id="scene" disabled><option>Loading saved scenes…</option></select></label><span id="scene-count"></span><button id="retry" type="button">Refresh catalog</button></section><p id="status" role="status">Connecting to the saved experiment catalog…</p>
+<section class="scene-info" aria-live="polite"><div><p class="eyebrow">SELECTED OBSERVATION</p><h2 id="scene-name">Waiting for scene</h2><p id="scene-detail"></p></div><span id="scene-type"></span></section>
+<section id="cards" class="cards" aria-label="Same-scene model outputs"></section>
+<footer>Every card uses the same scene ID. Predictions with a mismatched source image or grid are withheld. Orange shows the saved thresholded prediction; cyan shows the shared reference. The official checkpoint used different training and is shown as a released reference.</footer>
+</main><script src="GTM_same_scene.js"></script></body></html>

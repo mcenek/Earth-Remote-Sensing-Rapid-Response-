@@ -1,0 +1,12 @@
+{
+  "eligible": true,
+  "valid_pixels": 3,
+  "tp": 1,
+  "fp": 1,
+  "fn": 0,
+  "tn": 1,
+  "recall": 1.0,
+  "false_positive_rate": 0.5,
+  "precision": 0.5,
+  "iou": 0.5
+}

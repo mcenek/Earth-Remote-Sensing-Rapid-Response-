@@ -1,0 +1,18 @@
+{
+  "scope": "synthetic workflow diagnostic only",
+  "seed": 20260907,
+  "device": "cpu",
+  "threads": 2,
+  "dense_epochs": 3,
+  "scene_epochs": 3,
+  "lr": 0.001,
+  "real_data_opened": false,
+  "test_data_opened": false,
+  "torch_version": "2.11.0+cu128",
+  "source_sha256": {
+    "tools\\rehearse_temporal_experiment.py": "cb7ea9da13d2d346da24eeb528e318adc5ea9144421e2a8bea3a55bd94a8b3b1",
+    "EarthRemoteSensingRapidResponse\\temporal_attention_candidate.py": "2a6490993b1be97986eb2ed880eb1aba3e4214716316299bb5440cbdfe962f55",
+    "EarthRemoteSensingRapidResponse\\temporal_attention_training.py": "faddff38cdc9ae87cefded92f1780e13c6f0d32c9fd19c5cb89561d678a8aa8f",
+    "EarthRemoteSensingRapidResponse\\temporal_attention_experiment.py": "f4e7b615b2ad43da67472d2e365d9c95e9031801f89d5fe68e5885f8ab52c4a4"
+  }
+}
